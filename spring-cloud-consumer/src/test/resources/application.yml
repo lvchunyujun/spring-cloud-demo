@@ -1,0 +1,25 @@
+server:
+  port: 7010
+  tomcat:
+    uri-encoding: utf-8
+
+eureka:
+  client:
+    register-with-eureka: true
+    serviceUrl:
+      defaultZone: http://localhost:8686/eureka/
+  instance:
+    prefer-ip-address: true
+#    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+
+spring:
+  datasource:
+     driver-class-name: com.mysql.jdbc.Driver
+     type: com.alibaba.druid.pool.DruidDataSource
+     url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf-8
+     data-username: root
+     data-password:
+  freemarker:
+    enabled: false
+  application:
+    name: spring-cloud-consumer

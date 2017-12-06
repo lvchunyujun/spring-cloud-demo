@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/spring-boot-sample-redis/spring-boot-sample-redis.iml" filepath="$PROJECT_DIR$/spring-boot-sample-redis/spring-boot-sample-redis.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-cloud-consumer/spring-cloud-consumer.iml" filepath="$PROJECT_DIR$/spring-cloud-consumer/spring-cloud-consumer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/spring-cloud-demo.iml" filepath="$PROJECT_DIR$/.idea/spring-cloud-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-cloud-provider/spring-cloud-provider.iml" filepath="$PROJECT_DIR$/spring-cloud-provider/spring-cloud-provider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-config-server/spring-config-server.iml" filepath="$PROJECT_DIR$/spring-config-server/spring-config-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-eureka-server/spring-eureka-server.iml" filepath="$PROJECT_DIR$/spring-eureka-server/spring-eureka-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-feign-consumer/spring-feign-consumer.iml" filepath="$PROJECT_DIR$/spring-feign-consumer/spring-feign-consumer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-sleuth-server/spring-sleuth-server.iml" filepath="$PROJECT_DIR$/spring-sleuth-server/spring-sleuth-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-zipkin-server/spring-zipkin-server.iml" filepath="$PROJECT_DIR$/spring-zipkin-server/spring-zipkin-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-zuul-user/spring-zuul-user.iml" filepath="$PROJECT_DIR$/spring-zuul-user/spring-zuul-user.iml" />
+    </modules>
+  </component>
+</project>

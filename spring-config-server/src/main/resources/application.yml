@@ -1,0 +1,25 @@
+server:
+  port: 3000
+
+spring:
+  application:
+    name: spring-config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri:
+          search-paths:
+          username:
+          password:
+      label: master
+
+eureka:
+  instance:
+    hostname: spring-zuul-user
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8686/eureka/
+
+

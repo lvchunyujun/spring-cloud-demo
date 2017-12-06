@@ -1,0 +1,16 @@
+server:
+  port: 8686
+  tomcat:
+    uri-encoding: utf-8
+
+eureka:
+  instance:
+    hostname: localhost
+  server:
+    enable-self-preservation: false           #  自我保护模式（针对网络分区等问题时开启）
+    eviction-interval-timer-in-ms: 30000     #  清理间隔时间
+  client:
+    register-with-eureka: false            #  是否将自身注册到 eureka服务
+    fetch-registry: false                   #  是否从eureka服务器获取注册信息
+    serviceUrl:
+      defaultZone: http://localhost:${server.port}/eureka/

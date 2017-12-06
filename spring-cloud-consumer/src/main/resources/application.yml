@@ -1,0 +1,42 @@
+server:
+  port: 7010
+  tomcat:
+    uri-encoding: utf-8
+
+eureka:
+  client:
+    register-with-eureka: true
+    serviceUrl:
+      defaultZone: http://localhost:8686/eureka/
+  instance:
+    prefer-ip-address: true
+#    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+
+spring:
+  datasource:
+     driver-class-name: com.mysql.jdbc.Driver
+     type: com.alibaba.druid.pool.DruidDataSource
+     url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=false
+     username: 'root'
+     data-password: ''
+  freemarker:
+    enabled: false
+  application:
+    name: spring-cloud-consumer
+  zipkin:
+    base-url: http://localhost:4000
+
+# 断路器配置
+hystrix:
+  metrics:
+    enabled: true
+    polling-interval-ms: 500
+  command:
+      default:
+        execution:
+          isolation:
+            thread:
+              timeoutInMilliseconds: 3000  # 请求超时时长，缺省为1000
+  threadpool:
+      default:
+        coreSize: 2 # 请求最大线程数，缺省为10

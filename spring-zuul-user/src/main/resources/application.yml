@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: spring-zuul-user
+
+server:
+  port: 5000
+  tomcat:
+    uri-encoding: utf-8
+
+eureka:
+  instance:
+    hostname: spring-zuul-user
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8686/eureka/
+
+zuul:
+  routes:
+    users-api-0:                                   #自定义路由名称
+      path: /user/1000
+      serviceId: spring-feign-consumer
+    users-api-2:                                   #自定义路由名称
+      path: /user/1002
+      serviceId: spring-cloud-consumer
+
