@@ -3,20 +3,21 @@ server:
 
 spring:
   application:
-    name: spring-config-server
+    name: config-server
   cloud:
     config:
       server:
         git:
-          uri:
-          search-paths:
-          username:
-          password:
+          uri: https://github.com/lvchunyujun/spring-cloud-config.git
+          username: 1097957468@qq.com
+          password: xunyu159
       label: master
+      profile: dev
+      uri: http://localhost:3000
 
 eureka:
   instance:
-    hostname: spring-zuul-user
+    hostname: spring-config-server
     prefer-ip-address: true
   client:
     serviceUrl:
