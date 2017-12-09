@@ -11,16 +11,14 @@ spring:
           uri: https://github.com/lvchunyujun/spring-cloud-config.git
           username: 1097957468@qq.com
           password: xunyu159
-      label: master
-      profile: dev
-      uri: http://localhost:3000
 
 eureka:
-  instance:
-    hostname: spring-config-server
-    prefer-ip-address: true
   client:
+    register-with-eureka: true
     serviceUrl:
       defaultZone: http://localhost:8686/eureka/
+  instance:
+    hostname: config-server
+    prefer-ip-address: true
 
 

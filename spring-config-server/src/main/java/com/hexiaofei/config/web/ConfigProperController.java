@@ -1,6 +1,5 @@
 package com.hexiaofei.config.web;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -12,14 +11,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/config")
 public class ConfigProperController {
 
-    @Value("${userName}")
-    private String userName;
+
 
 
     @RequestMapping("/userName")
     @ResponseBody
     public String getUserName(){
-        return userName;
+        return null;
     }
 
 }

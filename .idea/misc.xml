@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="EntryPointsManager">
+    <entry_points version="2.0" />
+  </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/spring-boot-sample-redis/pom.xml" />
         <option value="$PROJECT_DIR$/spring-cloud-consumer/pom.xml" />
         <option value="$PROJECT_DIR$/spring-cloud-provider/pom.xml" />
-        <option value="$PROJECT_DIR$/spring-config-server/pom.xml" />
         <option value="$PROJECT_DIR$/spring-eureka-server/pom.xml" />
         <option value="$PROJECT_DIR$/spring-feign-consumer/pom.xml" />
         <option value="$PROJECT_DIR$/spring-sleuth-server/pom.xml" />
         <option value="$PROJECT_DIR$/spring-zipkin-server/pom.xml" />
         <option value="$PROJECT_DIR$/spring-zuul-user/pom.xml" />
+        <option value="$PROJECT_DIR$/config-client/pom.xml" />
+        <option value="$PROJECT_DIR$/demo-provider/pom.xml" />
       </list>
     </option>
   </component>
@@ -25,21 +29,5 @@
     <ConfirmationsSetting value="0" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_3" default="true" assert-keyword="false" jdk-15="false" />
-  <component name="masterDetails">
-    <states>
-      <state key="ProjectJDKs.UI">
-        <settings>
-          <last-edited>1.6</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-    </states>
-  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" default="true" assert-keyword="true" jdk-15="true" project-jdk-name="1.7" project-jdk-type="JavaSDK" />
 </project>
