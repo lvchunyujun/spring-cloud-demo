@@ -30,3 +30,9 @@ eureka:
 mybatis:
   type-aliases-package: org.spring.springboot.domain
   mapper-locations: classpath:mapper/*.xml
+
+# curl -X POST host:port/shutdown
+endpoints:
+  shutdown:
+    enabled: true                            # 启用shutdown
+    sensitive: false                         # 禁用密码验证
