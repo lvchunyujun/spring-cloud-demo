@@ -16,6 +16,7 @@
         <option value="$PROJECT_DIR$/spring-zuul-user/pom.xml" />
         <option value="$PROJECT_DIR$/config-client/pom.xml" />
         <option value="$PROJECT_DIR$/demo-provider/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-config-server/pom.xml" />
       </list>
     </option>
   </component>
