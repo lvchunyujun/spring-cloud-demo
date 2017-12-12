@@ -1,7 +1,7 @@
 eureka:
   client:
     healthcheck:
-      enabled: true
+      enabled: true                                                    # 开启心跳检测
   instance:
     prefer-ip-address: true
     lease-expiration-duration-in-seconds: 10
