@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 /**
  * Created by Administrator on 2017/11/20.
  */
-@FeignClient(value = "spring-cloud-provider-2")
+@FeignClient(value = "spring-cloud-provider-0")
 public interface UserService {
 
     @RequestMapping(value = "/user/{id}",method = RequestMethod.POST)

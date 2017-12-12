@@ -1,7 +1,3 @@
-spring:
-  application:
-    name: spring-zuul-user
-
 server:
   port: 5000
   tomcat:
@@ -15,10 +11,14 @@ eureka:
     serviceUrl:
       defaultZone: http://localhost:8686/eureka/
 
+spring:
+  application:
+    name: spring-zuul-user
+
 zuul:
   routes:
     users-api-0:                                   #自定义路由名称
-      path: /user/1000
+      path: /user/10000
       serviceId: spring-feign-consumer
     users-api-2:                                   #自定义路由名称
       path: /user/1002
