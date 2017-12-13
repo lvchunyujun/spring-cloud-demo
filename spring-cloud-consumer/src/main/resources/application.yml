@@ -5,11 +5,8 @@ server:
 
 eureka:
   client:
-    register-with-eureka: true
     serviceUrl:
       defaultZone: http://localhost:8686/eureka/
-  instance:
-    prefer-ip-address: true
 #    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
 
 spring:
@@ -19,8 +16,6 @@ spring:
      url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=false
      username: 'root'
      data-password: ''
-  freemarker:
-    enabled: false
   application:
     name: spring-cloud-consumer
   zipkin:
@@ -28,6 +23,10 @@ spring:
 
 # 断路器配置
 hystrix:
+  hystrix:
+    config:
+      stream:
+        maxConcurrentConnections: 50
   metrics:
     enabled: true
     polling-interval-ms: 500
