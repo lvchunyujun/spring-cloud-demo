@@ -14,11 +14,13 @@ eureka:
 spring:
   application:
     name: spring-zuul-user
+  zipkin:
+    base-url: http://localhost:4000
 
 zuul:
   routes:
     users-api-0:                                   #自定义路由名称
-      path: /user/10000
+      path: /user/13381
       serviceId: spring-feign-consumer
     users-api-2:                                   #自定义路由名称
       path: /user/1002
