@@ -1,0 +1,20 @@
+server:
+  port: 4100
+
+eureka:
+  instance:
+    hostname: hystrix-dashboard-server
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8686/eureka/
+
+spring:
+  application:
+    name: hystrix-dashboard-server
+
+turbine:
+  appConfig: demo-provider,  spring-cloud-provider-0, spring-feign-consumer
+  aggregator:
+    clusterConfig: default
+  clusterNameExpression: new String("default")

@@ -13,8 +13,6 @@ import org.springframework.web.client.RestTemplate;
 @EnableDiscoveryClient
 @SpringBootApplication
 @EnableHystrix
-@EnableHystrixDashboard
-@EnableCircuitBreaker
 public class SpringCloudConsumerApplication {
 
 	@Bean

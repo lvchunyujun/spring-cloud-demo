@@ -5,9 +5,9 @@ spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://192.168.2.88:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=false
-    username: 'lcyj'
-    password: '000000'
+    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: 'root'
+    password: ''
   client:
     register-with-eureka: true
     fetch-registry: false

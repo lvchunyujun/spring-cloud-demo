@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/demo-provider/demo-provider.iml" filepath="$PROJECT_DIR$/demo-provider/demo-provider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hystrix-dashboard-server/hystrix-dashboard-server.iml" filepath="$PROJECT_DIR$/hystrix-dashboard-server/hystrix-dashboard-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/spring-boot-sample-redis/spring-boot-sample-redis.iml" filepath="$PROJECT_DIR$/spring-boot-sample-redis/spring-boot-sample-redis.iml" />
       <module fileurl="file://$PROJECT_DIR$/spring-cloud-consumer/spring-cloud-consumer.iml" filepath="$PROJECT_DIR$/spring-cloud-consumer/spring-cloud-consumer.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/spring-cloud-demo.iml" filepath="$PROJECT_DIR$/.idea/spring-cloud-demo.iml" />

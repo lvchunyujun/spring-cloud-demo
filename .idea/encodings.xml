@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding" native2AsciiForPropertiesFiles="true" defaultCharsetForPropertiesFiles="UTF-8">
-    <file url="file://$PROJECT_DIR$/../SpringCloud-demo/spring-config-server" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/config-client" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/config-server" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/demo-provider" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/hystrix-dashboard-server" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/hystrix-demo" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/spring-boot-sample-redis" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/spring-cloud-consumer" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/spring-cloud-provider" charset="UTF-8" />

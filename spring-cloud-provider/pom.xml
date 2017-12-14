@@ -24,6 +24,7 @@
 		<java.version>1.7</java.version>
 		<spring-cloud.version>Dalston.SR4</spring-cloud.version>
 		<druid.version>1.0.2</druid.version>
+		<sharding-jdbc.version>2.0.0</sharding-jdbc.version>
 	</properties>
 
 	<dependencies>
@@ -51,6 +52,12 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		<!-- 引入sharding-jdbc核心模块 -->
+		<!--<dependency>
+			<groupId>io.shardingjdbc</groupId>
+			<artifactId>sharding-jdbc-core</artifactId>
+			<version>${sharding-jdbc.version}</version>
+		</dependency>-->
 		<!-- DAO -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -76,6 +83,10 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-sleuth</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-hystrix</artifactId>
 		</dependency>
 	</dependencies>
 
