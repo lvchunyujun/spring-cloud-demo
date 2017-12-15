@@ -14,7 +14,7 @@ spring:
     name: hystrix-dashboard-server
 
 turbine:
-  appConfig: demo-provider,  spring-cloud-provider-0, spring-feign-consumer
+  appConfig: demo-provider,  spring-cloud-provider-0, spring-feign-consumer ,spring-cloud-consumer
   aggregator:
     clusterConfig: default
   clusterNameExpression: new String("default")
