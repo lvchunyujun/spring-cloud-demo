@@ -8,4 +8,6 @@ import com.hexiaofei.springeurekaclient.domain.User;
 public interface IUserDao {
 
     User selectUserById(int id);
+
+    void inertObject();
 }

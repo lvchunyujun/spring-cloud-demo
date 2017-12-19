@@ -15,4 +15,9 @@ public class UserDaoImpl implements IUserDao{
 
         return null;
     }
+
+    @Override
+    public void inertObject() {
+
+    }
 }

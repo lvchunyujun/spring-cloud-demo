@@ -25,15 +25,15 @@ public class UserDaoShardingImpl extends BaseDao implements IUserDao{
 
     @Override
     public User selectUserById(int id) {
-        String sql = "SELECT i.* FROM t_order o JOIN t_order_item i ON o.order_id=i.order_id WHERE o.user_id=? ";
+        String sql = "SELECT i.*,o.order_name FROM t_order o JOIN t_order_item i ON o.order_id=i.order_id  where o.order_id > ? and o.order_id < ? order by o.order_id desc limit 0,2 ";
         try {
             Connection conn = getConnection();
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setInt(1, 10);
-          //  preparedStatement.setInt(2, 1001);
+            preparedStatement.setInt(1, 1000);
+            preparedStatement.setInt(2, 10003);
             try (ResultSet rs = preparedStatement.executeQuery()) {
                 while(rs.next()) {
-                    System.out.println("sharding-jdbc  查询成功：[item_id="+rs.getInt(1)+", order_id="+rs.getInt(2)+", user_id="+rs.getInt(3)+"]");
+                    System.out.println("sharding-jdbc  查询成功：[order_name="+rs.getString("order_name")+", item_id="+rs.getInt(1)+", order_id="+rs.getInt(2)+", user_id="+rs.getInt(3)+"]");
                 }
             }catch (Exception e){
                 logger.error("JDBC 异常！",e);
@@ -42,5 +42,10 @@ public class UserDaoShardingImpl extends BaseDao implements IUserDao{
             logger.error("JDBC 异常！",e);
         }
         return null;
+    }
+
+    @Override
+    public void inertObject() {
+
     }
 }
