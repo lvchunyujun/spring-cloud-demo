@@ -10,4 +10,6 @@ public interface IUserDao {
     User selectUserById(int id);
 
     void inertObject();
+
+    void inertObject(int user_id,int order_id);
 }

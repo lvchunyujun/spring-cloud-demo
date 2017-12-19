@@ -23,7 +23,13 @@ public class UserServiceImpl implements IUserService {
     @Override
     public User getUserById(Integer id) {
         User user = userMapper.selectUserById(id);
-        new UserDaoShardingImpl().selectUserById(id);
+        UserDaoShardingImpl userDaoSharding = new UserDaoShardingImpl();
+        userDaoSharding.selectUserById(id);
+        for(int i = 1000; i< 1010 ; i++ ){
+            for(int j = 310 ; j < 350 ; j++ ){
+                userDaoSharding.inertObject(i,j+(i%1000));
+            }
+        }
         return user;
     }
 }

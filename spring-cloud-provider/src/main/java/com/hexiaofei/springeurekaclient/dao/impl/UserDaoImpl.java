@@ -20,4 +20,9 @@ public class UserDaoImpl implements IUserDao{
     public void inertObject() {
 
     }
+
+    @Override
+    public void inertObject(int user_id, int order_id) {
+
+    }
 }
