@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 /**
  * Created by Administrator on 2017/12/1.
  */
-@Component
+
 public class UserDaoImpl implements IUserDao{
     @Override
     public User selectUserById(int id) {
