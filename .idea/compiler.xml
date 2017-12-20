@@ -25,7 +25,6 @@
         <module name="config-client" />
         <module name="demo-provider" />
         <module name="hystrix-dashboard-server" />
-        <module name="spring-boot-sample-redis" />
         <module name="spring-cloud-consumer" />
         <module name="spring-cloud-provider" />
         <module name="spring-config-server" />
@@ -37,11 +36,8 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.7">
-      <module name="config-client" target="1.7" />
-      <module name="configclient" target="1.7" />
       <module name="demo-provider" target="1.7" />
       <module name="hystrix-dashboard-server" target="1.7" />
-      <module name="hystrix-demo" target="1.7" />
       <module name="spring-boot-sample-redis" target="1.8" />
       <module name="spring-cloud-consumer" target="1.7" />
       <module name="spring-cloud-provider" target="1.7" />
