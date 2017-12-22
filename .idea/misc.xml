@@ -6,7 +6,6 @@
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
-        <option value="$PROJECT_DIR$/spring-boot-sample-redis/pom.xml" />
         <option value="$PROJECT_DIR$/spring-cloud-consumer/pom.xml" />
         <option value="$PROJECT_DIR$/spring-cloud-provider/pom.xml" />
         <option value="$PROJECT_DIR$/spring-eureka-server/pom.xml" />
