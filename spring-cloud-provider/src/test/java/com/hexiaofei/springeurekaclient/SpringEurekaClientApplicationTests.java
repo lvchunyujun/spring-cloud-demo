@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+/**
+ * 单元测试：  service接口
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class SpringEurekaClientApplicationTests {
