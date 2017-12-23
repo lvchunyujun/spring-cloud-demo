@@ -4,6 +4,6 @@ eureka:
       enabled: true                                                    # 开启心跳检测
   instance:
     prefer-ip-address: true
-    lease-expiration-duration-in-seconds: 10
-    lease-renewal-interval-in-seconds: 20
+    lease-expiration-duration-in-seconds: 100
+    lease-renewal-interval-in-seconds: 200
 #    instance-id: ${spring.cloud.client.ipAddress}:${server.port}

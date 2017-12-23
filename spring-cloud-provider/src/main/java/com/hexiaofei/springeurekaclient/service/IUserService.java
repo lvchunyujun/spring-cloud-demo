@@ -8,4 +8,6 @@ import com.hexiaofei.springeurekaclient.domain.User;
 public interface IUserService {
 
     User getUserById(Integer id);
+
+    void addUser(int userId,int orderId,String orderName);
 }

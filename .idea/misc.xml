@@ -10,7 +10,6 @@
         <option value="$PROJECT_DIR$/spring-cloud-provider/pom.xml" />
         <option value="$PROJECT_DIR$/spring-eureka-server/pom.xml" />
         <option value="$PROJECT_DIR$/spring-feign-consumer/pom.xml" />
-        <option value="$PROJECT_DIR$/spring-sleuth-server/pom.xml" />
         <option value="$PROJECT_DIR$/spring-zipkin-server/pom.xml" />
         <option value="$PROJECT_DIR$/spring-zuul-user/pom.xml" />
         <option value="$PROJECT_DIR$/config-client/pom.xml" />

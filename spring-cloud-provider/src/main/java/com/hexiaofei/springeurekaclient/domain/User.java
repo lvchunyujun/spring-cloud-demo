@@ -158,4 +158,27 @@ public class User {
     public void setUserTypes(Integer userTypes) {
         this.userTypes = userTypes;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", credit=" + credit +
+                ", lastLoginTime='" + lastLoginTime + '\'' +
+                ", loginTime='" + loginTime + '\'' +
+                ", lastLoginIp='" + lastLoginIp + '\'' +
+                ", ip='" + ip + '\'' +
+                ", email='" + email + '\'' +
+                ", mobilePhone='" + mobilePhone + '\'' +
+                ", status=" + status +
+                ", createTime='" + createTime + '\'' +
+                ", payPassword='" + payPassword + '\'' +
+                ", loginNum=" + loginNum +
+                ", source=" + source +
+                ", staff=" + staff +
+                ", userTypes=" + userTypes +
+                '}';
+    }
 }

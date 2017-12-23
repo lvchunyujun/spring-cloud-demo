@@ -41,6 +41,8 @@ public class BaseDao {
         return dataSource.getConnection();
     }
 
+
+
     /**
      * 3: 初始化分片规则：表规则
      */
@@ -92,9 +94,9 @@ public class BaseDao {
     private static DataSource createDataSource(final String dataSourceName) {
         DruidDataSource druidDataSource = new DruidDataSource();
         druidDataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        druidDataSource.setUrl(String.format("jdbc:mysql://127.0.0.1:3306/%s?useUnicode=true&characterEncoding=utf-8&useSSL=false",dataSourceName));
-        druidDataSource.setUsername("root");
-        druidDataSource.setPassword("");
+        druidDataSource.setUrl(String.format("jdbc:mysql://lcyj88:3306/%s?useUnicode=true&characterEncoding=utf-8&useSSL=false",dataSourceName));
+        druidDataSource.setUsername("lcyj");
+        druidDataSource.setPassword("000000");
         return druidDataSource;
     }
 }

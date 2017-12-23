@@ -11,5 +11,5 @@ public interface IUserDao {
 
     void inertObject();
 
-    void inertObject(int user_id,int order_id);
+    void inertObject(int user_id,int order_id,String order_name);
 }

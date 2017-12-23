@@ -27,8 +27,9 @@ public class UserDaoShardingImpl extends BaseDao implements IUserDao{
     @Override
     public User selectUserById(int id) {
         String sql = "SELECT i.*,o.order_name FROM t_order o JOIN t_order_item i ON o.order_id=i.order_id    order by o.order_id  desc";
+        Connection conn = null;
         try {
-            Connection conn = getConnection();
+             conn = getConnection();
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
 //            preparedStatement.setInt(1, 1000);
 //            preparedStatement.setInt(2, 10003);
@@ -41,6 +42,14 @@ public class UserDaoShardingImpl extends BaseDao implements IUserDao{
             }
         }catch (Exception e){
             logger.error("JDBC 异常！",e);
+        }finally{
+            try {
+                if(conn!=null &&  !conn.isClosed()){
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                logger.error("JDBC 异常！",e);
+            }
         }
         return null;
     }
@@ -64,7 +73,7 @@ public class UserDaoShardingImpl extends BaseDao implements IUserDao{
     }
 
     @Override
-    public void inertObject(int user_id, int order_id) {
+    public void inertObject(int user_id, int order_id,String order_name) {
         Connection conn = null;
         try {
             String sql = " INSERT INTO t_order(order_id,user_id,order_name) VALUES(?,?,?) ";
@@ -72,12 +81,18 @@ public class UserDaoShardingImpl extends BaseDao implements IUserDao{
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setInt(1,order_id);
             preparedStatement.setInt(2,user_id);
-            preparedStatement.setString(3,"ds_1_2002");
+            preparedStatement.setString(3,order_name);
             int resultId = preparedStatement.executeUpdate();
             System.out.println("sharding-jdbc  插入结果="+resultId);
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("【创建订单异常】",e);
+        }finally{
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                logger.error("【创建订单异常】",e);
+            }
         }
     }
 }

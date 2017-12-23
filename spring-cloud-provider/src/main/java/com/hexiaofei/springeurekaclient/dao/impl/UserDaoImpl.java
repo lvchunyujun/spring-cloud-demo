@@ -22,7 +22,7 @@ public class UserDaoImpl implements IUserDao{
     }
 
     @Override
-    public void inertObject(int user_id, int order_id) {
+    public void inertObject(int user_id, int order_id,String orderName) {
 
     }
 }

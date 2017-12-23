@@ -30,7 +30,6 @@
         <module name="spring-config-server" />
         <module name="spring-eureka-server" />
         <module name="spring-feign-consumer" />
-        <module name="spring-sleuth-server" />
         <module name="spring-zipkin-server" />
         <module name="spring-zuul-user" />
       </profile>

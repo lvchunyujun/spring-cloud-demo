@@ -10,7 +10,6 @@
       <module fileurl="file://$PROJECT_DIR$/spring-config-server/spring-config-server.iml" filepath="$PROJECT_DIR$/spring-config-server/spring-config-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/spring-eureka-server/spring-eureka-server.iml" filepath="$PROJECT_DIR$/spring-eureka-server/spring-eureka-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/spring-feign-consumer/spring-feign-consumer.iml" filepath="$PROJECT_DIR$/spring-feign-consumer/spring-feign-consumer.iml" />
-      <module fileurl="file://$PROJECT_DIR$/spring-sleuth-server/spring-sleuth-server.iml" filepath="$PROJECT_DIR$/spring-sleuth-server/spring-sleuth-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/spring-zipkin-server/spring-zipkin-server.iml" filepath="$PROJECT_DIR$/spring-zipkin-server/spring-zipkin-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/spring-zuul-user/spring-zuul-user.iml" filepath="$PROJECT_DIR$/spring-zuul-user/spring-zuul-user.iml" />
     </modules>
