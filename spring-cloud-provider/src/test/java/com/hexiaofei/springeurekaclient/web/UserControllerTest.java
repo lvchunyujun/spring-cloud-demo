@@ -12,7 +12,7 @@ import org.springframework.test.web.servlet.RequestBuilder;
  * Created by Administrator on 2017/12/15.
  */
 @SpringBootTest(classes = SpringCloudProviderApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class UserControllerTest extends BaseControllerTest{
+public class UserControllerTest  {
 
     @Autowired
     private TestRestTemplate testRestTemplate;

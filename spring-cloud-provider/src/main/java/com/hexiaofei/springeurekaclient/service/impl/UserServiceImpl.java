@@ -4,7 +4,6 @@ import com.hexiaofei.springeurekaclient.dao.mapper.UserMapper;
 import com.hexiaofei.springeurekaclient.dao.shardingImpl.UserDaoShardingImpl;
 import com.hexiaofei.springeurekaclient.domain.User;
 import com.hexiaofei.springeurekaclient.service.IUserService;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

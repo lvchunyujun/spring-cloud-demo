@@ -1,10 +1,13 @@
 package com.hexiaofei.springeurekaclient.web;
 
+import com.hexiaofei.springeurekaclient.domain.Order;
+import com.hexiaofei.springeurekaclient.service.IOrderService;
 import com.hexiaofei.springeurekaclient.service.IUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,6 +31,9 @@ public class OrderController {
     @Autowired
     private IUserService userService;
 
+    @Autowired
+    private IOrderService orderService;
+
     @RequestMapping("/add")
     @ResponseBody
     public String addUser(){
@@ -47,6 +53,24 @@ public class OrderController {
     @ResponseBody
     public List<Map> findList(){
         List<Map> list = userService.getListMap();
+        return list;
+    }
+
+    @RequestMapping("/byUserId/{userId}")
+    @ResponseBody
+    public List<Order> findOrderByUserId(@PathVariable("userId") Integer userId){
+
+        List<Order> list = orderService.getOrderByUserId(userId);
+
+        return list;
+    }
+
+    @RequestMapping("/all")
+    @ResponseBody
+    public List<Order> findAllOrderList(){
+
+        List<Order> list = orderService.getAllOrderList();
+
         return list;
     }
 }

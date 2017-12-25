@@ -24,7 +24,7 @@
 		<java.version>1.7</java.version>
 		<spring-cloud.version>Dalston.SR4</spring-cloud.version>
 		<druid.version>1.0.2</druid.version>
-		<sharding-core-jdbc.version>2.0.0</sharding-core-jdbc.version>
+		<sharding-core-jdbc.version>2.0.1</sharding-core-jdbc.version>
 	</properties>
 
 	<dependencies>
@@ -54,14 +54,29 @@
 		</dependency>
 		<!-- 引入sharding-jdbc核心模块 -->
 		<dependency>
+			<groupId>com.dangdang</groupId>
+			<artifactId>sharding-jdbc-core</artifactId>
+			<version>1.4.2</version>
+		</dependency>
+		<dependency>
 			<groupId>io.shardingjdbc</groupId>
 			<artifactId>sharding-jdbc-core</artifactId>
 			<version>${sharding-core-jdbc.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.dangdang</groupId>
-			<artifactId>sharding-jdbc-config-spring</artifactId>
-			<version>1.4.2</version>
+			<groupId>io.shardingjdbc</groupId>
+			<artifactId>sharding-jdbc-spring-boot-starter</artifactId>
+			<version>2.0.0.M3</version>
+		</dependency>
+		<dependency>
+			<groupId>com.zaxxer</groupId>
+			<artifactId>HikariCP-java7</artifactId>
+			<version>2.4.12</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis.spring.boot</groupId>
+			<artifactId>mybatis-spring-boot-starter</artifactId>
+			<version>1.3.0</version>
 		</dependency>
 		<!-- DAO -->
 		<dependency>
