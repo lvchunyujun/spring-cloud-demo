@@ -5,12 +5,13 @@
 		<result property="orderId" column="order_id" />
 		<result property="userId" column="user_id" />
 		<result property="orderName" column="order_name" />
+		<result property="createTime" column="create_time" />
 	</resultMap>
 
 	<parameterMap id="Order" type="com.hexiaofei.springeurekaclient.domain.Order"/>
 
 	<sql id="Base_Column_List">
-		`order_id`,`user_id`,`order_name`
+		`order_id`,`user_id`,`order_name`,`create_time`
 	</sql>
 
 	<select id="selectOrderByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
@@ -20,10 +21,37 @@
 		where user_id = #{userId}
 	</select>
 
-	<select id="selectAllOrderList" resultMap="BaseResultMap">
+	<select id="selectListByPage" resultMap="BaseResultMap" >
 		select
 		<include refid="Base_Column_List" />
 		from t_order
-		order by order_id desc
+		<where>
+			<if test="startTime!=null and startTime!=''">
+				<![CDATA[ and create_time <=#{startTime}]]>
+			</if>
+			<if test="endTime!=null and endTime!=''">
+				<![CDATA[ and create_time <=#{endTime}]]>
+			</if>
+		</where>
+		ORDER BY order_id DESC
+		LIMIT #{startNo},#{pageSize}
 	</select>
+
+	<select id="selectAllOrderCount" resultType="java.lang.Integer">
+		select count(1) from t_order
+	</select>
+
+	<insert id="insertObject" parameterMap="Order" >
+		INSERT  into t_order
+		(
+		<include refid="Base_Column_List" />
+		)
+		VALUES
+		(
+		#{orderId},
+		#{userId},
+		#{orderName},
+		#{createTime}
+		)
+	</insert>
 </mapper>

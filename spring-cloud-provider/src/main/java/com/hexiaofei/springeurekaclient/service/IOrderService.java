@@ -10,6 +10,4 @@ import java.util.List;
 public interface IOrderService extends IBaseService<Order>{
 
     List<Order> getOrderByUserId(int userId);
-
-    List<Order> getAllOrderList();
 }

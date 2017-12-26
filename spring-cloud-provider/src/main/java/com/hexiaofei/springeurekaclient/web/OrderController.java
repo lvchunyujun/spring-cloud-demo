@@ -1,6 +1,7 @@
 package com.hexiaofei.springeurekaclient.web;
 
 import com.hexiaofei.springeurekaclient.domain.Order;
+import com.hexiaofei.springeurekaclient.domain.PageVo;
 import com.hexiaofei.springeurekaclient.service.IOrderService;
 import com.hexiaofei.springeurekaclient.service.IUserService;
 import org.slf4j.Logger;
@@ -12,15 +13,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by hexiaofei on 2017/12/23.
  */
 @RestController
 @RequestMapping("/order")
-public class OrderController {
+public class OrderController extends BaseController{
 
     private final static Logger LOGGER = LoggerFactory.getLogger(OrderController.class);
 
@@ -38,12 +41,22 @@ public class OrderController {
     @ResponseBody
     public String addUser(){
 
-        int orderId = 500;
+        int orderId = 1005;
         for(int i = 1010; i< 1020; i++){
             do {
                 String orderName = "订单-"+i+"-"+orderId;
+                Order order = new Order();
+                order.setOrderId(orderId);
+                order.setUserId(i);
+                order.setOrderName(orderName);
+                order.setCreateTime(new Date());
+                orderService.addObject(order);
                 LOGGER.info("【插入订单】用户ID={}， 订单号={}， 订单名称={}",i,orderId,orderName);
-                userService.addUser(i, orderId, orderName);
+                try {
+                    TimeUnit.MILLISECONDS.sleep(300);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }while(++orderId % 10 > 0);
         }
         return "0000";
@@ -65,12 +78,22 @@ public class OrderController {
         return list;
     }
 
-    @RequestMapping("/all")
     @ResponseBody
-    public List<Order> findAllOrderList(){
-
-        List<Order> list = orderService.getAllOrderList();
-
-        return list;
+    @RequestMapping("/{pageNo}")
+    public ResultVo findAllOrderList(@PathVariable("pageNo") Integer pageNo,Integer pageSize){
+        PageVo pageVo = new PageVo();
+        if(pageSize!=null){
+            pageVo.setPageSize(pageSize);
+        }
+        pageVo.setPageNo(pageNo);
+        pageVo = orderService.getListByPageVo(pageVo);
+        ResultVo resultVo = new ResultVo();
+        resultVo.setResultCode("0000");
+        resultVo.setResultMsg("查询成功");
+        resultVo.setPageVo(pageVo);
+        return resultVo;
     }
+
+
+
 }

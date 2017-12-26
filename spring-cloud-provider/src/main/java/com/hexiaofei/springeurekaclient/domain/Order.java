@@ -1,5 +1,7 @@
 package com.hexiaofei.springeurekaclient.domain;
 
+import java.util.Date;
+
 /**
  * Created by Administrator on 2017/12/25.
  */
@@ -8,6 +10,7 @@ public class Order {
     private Integer orderId;
     private Integer userId;
     private String orderName;
+    private Date createTime;
 
     public Integer getOrderId() {
         return orderId;
@@ -31,5 +34,13 @@ public class Order {
 
     public void setOrderName(String orderName) {
         this.orderName = orderName;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }
