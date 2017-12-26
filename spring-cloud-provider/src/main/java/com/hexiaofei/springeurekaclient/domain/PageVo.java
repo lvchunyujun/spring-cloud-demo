@@ -5,12 +5,12 @@ import java.util.List;
 /**
  * Created by Administrator on 2017/12/26.
  */
-public class PageVo {
+public class PageVo<T> {
 
     private int pageNo ;
     private int pageSize = 10;
     private int pageTotal;
-    private List list;
+    private List<T> list;
 
     public int getPageNo() {
         return pageNo;
@@ -36,11 +36,11 @@ public class PageVo {
         this.pageTotal = pageTotal;
     }
 
-    public List getList() {
+    public List<T> getList() {
         return list;
     }
 
-    public void setList(List list) {
+    public void setList(List<T> list) {
         this.list = list;
     }
 }

@@ -27,7 +27,7 @@
 		from t_order
 		<where>
 			<if test="startTime!=null and startTime!=''">
-				<![CDATA[ and create_time <=#{startTime}]]>
+				<![CDATA[ and create_time >=#{startTime}]]>
 			</if>
 			<if test="endTime!=null and endTime!=''">
 				<![CDATA[ and create_time <=#{endTime}]]>

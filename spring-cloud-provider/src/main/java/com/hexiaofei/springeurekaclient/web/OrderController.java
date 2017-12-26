@@ -1,6 +1,7 @@
 package com.hexiaofei.springeurekaclient.web;
 
 import com.hexiaofei.springeurekaclient.domain.Order;
+import com.hexiaofei.springeurekaclient.domain.OrderVo;
 import com.hexiaofei.springeurekaclient.domain.PageVo;
 import com.hexiaofei.springeurekaclient.service.IOrderService;
 import com.hexiaofei.springeurekaclient.service.IUserService;
@@ -13,9 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -86,13 +86,22 @@ public class OrderController extends BaseController{
             pageVo.setPageSize(pageSize);
         }
         pageVo.setPageNo(pageNo);
-        pageVo = orderService.getListByPageVo(pageVo);
+
+        Map<String,Object> paraMap = new HashMap();
+        paraMap.put("startTime","2017-12-26 23:44:50");
+        paraMap.put("endTime","2017-12-26 23:45:00");
+
+        pageVo = orderService.getListByPageVo(pageVo,paraMap);
+
+        convertPageVo(pageVo);
         ResultVo resultVo = new ResultVo();
         resultVo.setResultCode("0000");
         resultVo.setResultMsg("查询成功");
         resultVo.setPageVo(pageVo);
         return resultVo;
     }
+
+
 
 
 
