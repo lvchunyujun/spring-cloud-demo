@@ -18,4 +18,6 @@ public interface OrderMapper {
     int selectAllOrderCount();
 
     int insertObject(Order order);
+
+    int updateByOrderId(Order order);
 }

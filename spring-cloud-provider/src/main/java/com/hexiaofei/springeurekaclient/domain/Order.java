@@ -11,6 +11,7 @@ public class Order {
     private Integer userId;
     private String orderName;
     private Date createTime;
+    private Short status;
 
     public Integer getOrderId() {
         return orderId;
@@ -42,5 +43,13 @@ public class Order {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public Short getStatus() {
+        return status;
+    }
+
+    public void setStatus(Short status) {
+        this.status = status;
     }
 }

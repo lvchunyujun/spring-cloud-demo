@@ -41,6 +41,12 @@
 		select count(1) from t_order
 	</select>
 
+	<update id="updateByOrderId"  parameterMap="Order" >
+		UPDATE t_order
+		   SET status = #{status}
+		 where order_id = #{orderId}
+	</update>
+
 	<insert id="insertObject" parameterMap="Order" >
 		INSERT  into t_order
 		(

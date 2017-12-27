@@ -61,4 +61,8 @@ public class OrderServiceImpl implements IOrderService{
         return pageVo;
     }
 
+    @Override
+    public int updateByOrderId(Order order) {
+        return orderMapper.updateByOrderId(order);
+    }
 }

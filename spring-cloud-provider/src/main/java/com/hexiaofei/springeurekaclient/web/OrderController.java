@@ -101,7 +101,24 @@ public class OrderController extends BaseController{
         return resultVo;
     }
 
-
+    @ResponseBody
+    @RequestMapping("/modify/{orderId}")
+    public ResultVo updateOrderByOrderId(@PathVariable("orderId") Integer orderId,Short status){
+        int resultId;
+        Order order = new Order();
+        order.setOrderId(orderId);
+        order.setStatus(status);
+        resultId = orderService.updateByOrderId(order);
+        ResultVo resultVo = new ResultVo();
+        if(resultId==1){
+            resultVo.setResultCode("0000");
+            resultVo.setResultMsg("修改成功");
+        }else{
+            resultVo.setResultCode("9999");
+            resultVo.setResultMsg("修改失败");
+        }
+        return resultVo;
+    }
 
 
 
