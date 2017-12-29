@@ -1,6 +1,6 @@
 package com.hexiaofei.springcloudconsumer.service;
 
-import com.hexiaofei.springcloudconsumer.entity.User;
+import com.hexiaofei.springcloudconsumer.domain.User;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

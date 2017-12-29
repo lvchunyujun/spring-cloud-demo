@@ -1,6 +1,6 @@
 package com.hexiaofei.springcloudconsumer.web;
 
-import com.hexiaofei.springcloudconsumer.entity.User;
+import com.hexiaofei.springcloudconsumer.domain.User;
 import com.hexiaofei.springcloudconsumer.service.ConsumerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Created by Administrator on 2017/11/17.
  */
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/cum")
 public class ConsumerController {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(ConsumerController.class);
