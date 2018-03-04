@@ -20,4 +20,8 @@ public interface OrderMapper {
     int insertObject(Order order);
 
     int updateByOrderId(Order order);
+
+    int deleteAll();
+
+    int deleteById(@Param("id") int id);
 }

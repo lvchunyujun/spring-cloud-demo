@@ -1,5 +1,5 @@
 server:
-  port: 7010
+  port: 7012
   tomcat:
     uri-encoding: utf-8
 
@@ -10,14 +10,12 @@ eureka:
 #    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
 
 spring:
-  profiles:
-    active: sharding
   datasource:
      driver-class-name: com.mysql.jdbc.Driver
      type: com.alibaba.druid.pool.DruidDataSource
-     url: jdbc:mysql://localhost:3306/minxindai_2?useUnicode=true&characterEncoding=utf-8&useSSL=false
-     username: 'root'
-     data-password: ''
+     url: jdbc:mysql://lcyj88:3306/minxindai_2?useUnicode=true&characterEncoding=utf-8&useSSL=false
+     username: 'lcyj_master'
+     password: '000000'
   application:
     name: spring-cloud-consumer
   zipkin:
@@ -31,7 +29,7 @@ hystrix:
         maxConcurrentConnections: 50
   metrics:
     enabled: true
-    polling-interval-ms: 500
+    polling-interval-ms: 5000
   command:
       default:
         execution:

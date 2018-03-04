@@ -52,4 +52,15 @@ public class Order {
     public void setStatus(Short status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "orderId=" + orderId +
+                ", userId=" + userId +
+                ", orderName='" + orderName + '\'' +
+                ", createTime=" + createTime +
+                ", status=" + status +
+                '}';
+    }
 }

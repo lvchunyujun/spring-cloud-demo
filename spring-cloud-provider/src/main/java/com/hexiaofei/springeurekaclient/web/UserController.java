@@ -19,7 +19,7 @@ public class UserController {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
-    @Value("${key}")
+//    @Value("${key}")
     private String servername;
 
     @Autowired
@@ -30,11 +30,12 @@ public class UserController {
     public User findUserById(@PathVariable Integer id){
         User user = userService.getUserById(id);
 
+        /*  熔断器测试
         try {
             TimeUnit.MILLISECONDS.sleep(100);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
+        }*/
         LOGGER.info("【{}】查询客户id={},详情{}",servername,id,user);
         return user;
     }

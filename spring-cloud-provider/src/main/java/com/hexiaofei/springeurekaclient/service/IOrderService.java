@@ -12,4 +12,6 @@ public interface IOrderService extends IBaseService<Order>{
     List<Order> getOrderByUserId(int userId);
 
     int updateByOrderId(Order order);
+
+    int deleteAllOrder();
 }

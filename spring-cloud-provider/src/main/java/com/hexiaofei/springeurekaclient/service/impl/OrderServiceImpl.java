@@ -14,7 +14,7 @@ import java.util.Map;
 /**
  * Created by Administrator on 2017/12/25.
  */
-@Service
+@Service("OrderService")
 public class OrderServiceImpl implements IOrderService{
 
     @Autowired
@@ -28,7 +28,7 @@ public class OrderServiceImpl implements IOrderService{
 
     @Override
     public int deleteObjectById(Integer id) {
-        return 0;
+        return orderMapper.deleteById(id);
     }
 
     @Override
@@ -64,5 +64,10 @@ public class OrderServiceImpl implements IOrderService{
     @Override
     public int updateByOrderId(Order order) {
         return orderMapper.updateByOrderId(order);
+    }
+
+    @Override
+    public int deleteAllOrder() {
+        return orderMapper.deleteAll();
     }
 }

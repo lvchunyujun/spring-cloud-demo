@@ -6,12 +6,13 @@
 		<result property="userId" column="user_id" />
 		<result property="orderName" column="order_name" />
 		<result property="createTime" column="create_time" />
+		<result property="status" column="status" />
 	</resultMap>
 
 	<parameterMap id="Order" type="com.hexiaofei.springeurekaclient.domain.Order"/>
 
 	<sql id="Base_Column_List">
-		`order_id`,`user_id`,`order_name`,`create_time`
+		`order_id`,`user_id`,`order_name`,`create_time`,`status`
 	</sql>
 
 	<select id="selectOrderByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
@@ -57,7 +58,16 @@
 		#{orderId},
 		#{userId},
 		#{orderName},
-		#{createTime}
+		#{createTime},
+		#{status}
 		)
 	</insert>
+
+	<delete id="deleteAll">
+		DELETE FROM t_order
+	</delete>
+
+	<delete id="deleteById" parameterType="java.lang.Integer">
+		DELETE FROM t_order ORDER o where o.id = #{id}
+	</delete>
 </mapper>

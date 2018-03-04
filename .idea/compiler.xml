@@ -37,13 +37,11 @@
     <bytecodeTargetLevel target="1.7">
       <module name="demo-provider" target="1.7" />
       <module name="hystrix-dashboard-server" target="1.7" />
-      <module name="spring-boot-sample-redis" target="1.8" />
       <module name="spring-cloud-consumer" target="1.7" />
       <module name="spring-cloud-provider" target="1.7" />
       <module name="spring-config-server" target="1.7" />
       <module name="spring-eureka-server" target="1.7" />
       <module name="spring-feign-consumer" target="1.7" />
-      <module name="spring-sleuth-server" target="1.7" />
       <module name="spring-zipkin-server" target="1.8" />
       <module name="spring-zuul-user" target="1.7" />
     </bytecodeTargetLevel>

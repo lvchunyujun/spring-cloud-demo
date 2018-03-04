@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 单元测试：  service接口
  */
@@ -20,6 +23,8 @@ public class SpringEurekaClientApplicationTests {
 
 	@Test
 	public void contextLoads() {
+		Map map = new HashMap();
+		System.out.println(1<30);
 	}
 
 	@Test

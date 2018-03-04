@@ -1,5 +1,9 @@
 package com.hexiaofei.springeurekaclient.domain;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * Created by Administrator on 2017/11/17.
  */
@@ -161,6 +165,10 @@ public class User {
 
     @Override
     public String toString() {
+        List<User> list = new LinkedList<>();
+        for(User user : list){
+            System.out.println(user.getId());
+        }
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
@@ -180,5 +188,7 @@ public class User {
                 ", staff=" + staff +
                 ", userTypes=" + userTypes +
                 '}';
+
+
     }
 }

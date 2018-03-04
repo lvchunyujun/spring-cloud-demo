@@ -3,16 +3,14 @@ package com.hexiaofei.springcloudconsumer.service.impl;
 import com.hexiaofei.springcloudconsumer.dao.mapper.UserMapper;
 import com.hexiaofei.springcloudconsumer.domain.PageVo;
 import com.hexiaofei.springcloudconsumer.domain.User;
+import com.hexiaofei.springcloudconsumer.service.IOrderService;
 import com.hexiaofei.springcloudconsumer.service.IUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.client.RestTemplate;
 
-import java.net.URI;
 import java.util.Map;
 
 /**
@@ -28,8 +26,9 @@ public class UserServiceImpl implements IUserService {
     @Autowired
     private UserMapper userMapper;
 
-    @Autowired
-    private RestTemplate restTemplate;
+
+//    @Autowired
+    private IOrderService orderService;
 
     @Override
     public User getUserById(Integer id) {
@@ -41,11 +40,14 @@ public class UserServiceImpl implements IUserService {
     @Transactional(rollbackFor = Exception.class)
     public int updateUserById(User user) {
         int resultId = userMapper.updateUserById(user);
-        LOGGER.info("【更新用户积分】   resultId = "+resultId);
-        if(true)
-        throw new RuntimeException("更新用户信用积分异常！");
+        LOGGER.info("【更新用户信息】   resultId = "+resultId);
+//        if(true)
+//        throw new RuntimeException("更新用户信用积分异常！");
 
-        restTemplate.execute(new URI("/user/modify/13385?credit=45"),HttpMethod.POST, null, String.class, user);
+        int orderId = 1;
+        short status = 4;
+        resultId = orderService.updateByOrderId(orderId,status);
+        LOGGER.info("【更新订单信息】   resultId = "+resultId);
         return resultId;
     }
 

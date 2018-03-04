@@ -7,3 +7,25 @@ eureka:
     lease-expiration-duration-in-seconds: 100
     lease-renewal-interval-in-seconds: 200
 #    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+
+
+# REDIS (RedisProperties)
+spring:
+  redis:
+    database: 0            # Redis数据库索引（默认为0）
+    host: 192.168.2.89     # Redis服务器地址
+    port: 6379             # Redis服务器连接端口
+    password: "000000"     # Redis服务器连接密码（默认为空）
+    timeout: 0             # 连接超时时间（毫秒）
+    sentinel:
+      master: mymaster
+      nodes: 192.168.2.88:6379
+
+    pool:
+      max-active: 20        # 连接池最大连接数（使用负值表示没有限制）
+      max-wait: -1          # 连接池最大阻塞等待时间（使用负值表示没有限制）
+      max-idle: 15          # 连接池中的最大空闲连接
+      min-idle: 5           # 连接池中的最小空闲连接
+
+
+

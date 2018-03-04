@@ -13,10 +13,15 @@ import java.util.List;
  */
 public abstract class BaseController {
 
+    ResultVo getResultVo(){
+        return new ResultVo();
+    }
+
     class ResultVo{
         private String resultCode;
         private String resultMsg;
         private PageVo pageVo;
+        private Object object;
 
         public String getResultCode() {
             return resultCode;
@@ -40,6 +45,14 @@ public abstract class BaseController {
 
         public void setPageVo(PageVo pageVo) {
             this.pageVo = pageVo;
+        }
+
+        public Object getObject() {
+            return object;
+        }
+
+        public void setObject(Object object) {
+            this.object = object;
         }
     }
 
