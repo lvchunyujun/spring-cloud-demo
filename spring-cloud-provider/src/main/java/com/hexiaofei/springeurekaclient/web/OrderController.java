@@ -2,20 +2,17 @@ package com.hexiaofei.springeurekaclient.web;
 
 import com.hexiaofei.springeurekaclient.common.redis.RedisUtil;
 import com.hexiaofei.springeurekaclient.domain.Order;
-import com.hexiaofei.springeurekaclient.domain.OrderVo;
 import com.hexiaofei.springeurekaclient.domain.PageVo;
 import com.hexiaofei.springeurekaclient.service.IOrderService;
 import com.hexiaofei.springeurekaclient.service.IUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -139,13 +136,16 @@ public class OrderController extends BaseController{
     @ResponseBody
     @RequestMapping("/addCach")
     public ResultVo addRedisCaching(String username){
+        UUID uuid = UUID.randomUUID();
+        LOGGER.info(uuid.toString()+"|接收请求        ");
         ResultVo resultVo = getResultVo();
         RedisUtil redisUtil = new RedisUtil();
         long count = redisUtil.incrLong("count");
-        LOGGER.info("       当前数量："+count);
+
+        LOGGER.info(uuid.toString()+"|       当前数量："+count);
         if(count>10){
             redisUtil.decrLong("count");
-            LOGGER.info("过载   当前数量："+count);
+            LOGGER.info(uuid.toString()+"|过载   当前数量："+count);
             resultVo.setResultCode("9999");
             resultVo.setResultMsg("服务过载！");
             return resultVo;
@@ -154,9 +154,10 @@ public class OrderController extends BaseController{
         redisUtil.set(key,key);
         resultVo.setObject(key);
         try {
-            LOGGER.info("睡眠："+key+"   当前数量："+count);
-            TimeUnit.SECONDS.sleep(10);
-            LOGGER.info("唤醒："+key+"   当前数量："+count);
+            LOGGER.info(uuid.toString()+"|睡眠："+key+"   当前数量："+count);
+            TimeUnit.SECONDS.sleep(3);
+            this.wait(30);
+            LOGGER.info(uuid.toString()+"|唤醒："+key+"   当前数量："+count);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
