@@ -139,30 +139,30 @@ public class OrderController extends BaseController{
         UUID uuid = UUID.randomUUID();
         LOGGER.info(uuid.toString()+"|接收请求        ");
         ResultVo resultVo = getResultVo();
-        RedisUtil redisUtil = new RedisUtil();
+        RedisUtil redisUtil = RedisUtil.getInstance();
         long count = redisUtil.incrLong("count");
 
         LOGGER.info(uuid.toString()+"|       当前数量："+count);
         if(count>10){
-            redisUtil.decrLong("count");
+
+            count = redisUtil.decrLong("count");
             LOGGER.info(uuid.toString()+"|过载   当前数量："+count);
             resultVo.setResultCode("9999");
             resultVo.setResultMsg("服务过载！");
             return resultVo;
         }
-        String key = "username"+count;
-        redisUtil.set(key,key);
-        resultVo.setObject(key);
         try {
+            String key = "username"+count;
+            redisUtil.set(key,key);
+            resultVo.setObject(key);
             LOGGER.info(uuid.toString()+"|睡眠："+key+"   当前数量："+count);
-            TimeUnit.SECONDS.sleep(3);
-            this.wait(30);
+            TimeUnit.SECONDS.sleep(2);
             LOGGER.info(uuid.toString()+"|唤醒："+key+"   当前数量："+count);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            LOGGER.error("【异常】",e);
+        }finally{
+            redisUtil.decrLong("count");
         }
-
-        redisUtil.decrLong("count");
         return resultVo;
     }
 
@@ -170,7 +170,7 @@ public class OrderController extends BaseController{
     @RequestMapping("/getCach")
     public ResultVo getRedisCaching(){
         ResultVo resultVo = getResultVo();
-        RedisUtil redisUtil = new RedisUtil();
+        RedisUtil redisUtil = RedisUtil.getInstance();
         String username = redisUtil.get("username");
         resultVo.setObject(username);
         return resultVo;

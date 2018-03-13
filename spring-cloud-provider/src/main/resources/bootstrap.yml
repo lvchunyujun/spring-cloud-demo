@@ -2,7 +2,8 @@ server:
   port: 6004
   tomcat:
     uri-encoding: utf-8
-
+  connection-timeout: 5000
+    #max-threads: 100
 eureka:
   client:
     register-with-eureka: true

@@ -11,7 +11,7 @@ import org.springframework.context.annotation.ImportResource;
 @MapperScan("com.hexiaofei.springeurekaclient.dao")
 @EnableHystrix
 @SpringBootApplication
-@ImportResource(locations={"classpath:application-bean.xml"})
+@ImportResource(locations={"classpath:spring-config/application-bean.xml"})
 public class SpringCloudProviderApplication {
 
 	public static void main(String[] args) {
