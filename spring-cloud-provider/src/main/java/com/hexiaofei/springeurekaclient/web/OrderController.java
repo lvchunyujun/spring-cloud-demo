@@ -1,5 +1,7 @@
 package com.hexiaofei.springeurekaclient.web;
 
+import com.hexiaofei.springeurekaclient.common.http.HttpClientUtil;
+import com.hexiaofei.springeurekaclient.common.http.HttpClientUtil2;
 import com.hexiaofei.springeurekaclient.common.redis.RedisUtil;
 import com.hexiaofei.springeurekaclient.domain.Order;
 import com.hexiaofei.springeurekaclient.domain.PageVo;
@@ -170,9 +172,13 @@ public class OrderController extends BaseController{
     @RequestMapping("/getCach")
     public ResultVo getRedisCaching(){
         ResultVo resultVo = getResultVo();
-        RedisUtil redisUtil = RedisUtil.getInstance();
-        String username = redisUtil.get("username");
-        resultVo.setObject(username);
+//        RedisUtil redisUtil = RedisUtil.getInstance();
+//        String username = redisUtil.get("username");
+//        resultVo.setObject(username);
+        HttpClientUtil.sendPost("https://www.jd.com", null);
+        HttpClientUtil2.getResposeBody("https://www.jd.com", new HashMap<String, String>());
         return resultVo;
     }
+
+
 }

@@ -274,7 +274,7 @@ public class RedisUtil<T extends Serializable> {
             jedisWriter.returnResourceObject(writer);
         }
     }
-    public boolean remove(String key) {
+    public boolean del(String key) {
         Jedis jedis = null;
         try {
             key = tagName + key;
@@ -334,6 +334,19 @@ public class RedisUtil<T extends Serializable> {
         return null;
     }
 
+    public Long setnx(String key,String val){
+        Jedis jedis = null;
+        try {
+            key = tagName+key;
+            jedis = jedisWriter.getResource();
+            return jedis.setnx(key, val);
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return null;
+        }finally{
+            jedisWriter.returnResource(jedis);
+        }
+    }
 
 
 //    /**
