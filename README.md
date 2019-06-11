@@ -1,2 +1,3 @@
 # spring-cloud-demo
-spring-cloud-demo 初始化
+spring-cloud 功能实例包括：
+   Euarka(注册中心)：
