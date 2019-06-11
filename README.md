@@ -1,3 +1,2 @@
-# spring-cloud-demo
-spring-cloud 功能实例包括：
-   Euarka(注册中心)：
+# spring-cloud Framework功能实例
+   1. Euarka(注册中心)：
