@@ -13,7 +13,7 @@ public class DemoTest extends B{
 //        System.out.println("DemoTst.static{}");
 //    }
 
-    public static void main(String[] args) {
+    public static void gmain(String[] args) {
         Integer a = 100;
         Integer b = 100;
         Integer c = 3;
@@ -36,6 +36,14 @@ public class DemoTest extends B{
         ApplicationContext context = new FileSystemXmlApplicationContext(s);
         context.getBean("");
         context.containsBean("");
+    }
+
+    public static void mian(String[] args){
+        byte b1 = 1,b2 = 2,b3,b4;
+        final byte b5 = 1,b6 = 2;
+        b3 = b5 + b6;
+
+
     }
 }
 //class A{

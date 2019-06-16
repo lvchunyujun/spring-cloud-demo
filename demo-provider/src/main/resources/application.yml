@@ -1,9 +1,29 @@
-eureka:
-  client:
-    healthcheck:
-      enabled: true
-  instance:
-    prefer-ip-address: true
-    lease-expiration-duration-in-seconds: 10
-    lease-renewal-interval-in-seconds: 20
-#    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+spring:
+  application:
+    name: demo-provider
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://51shijianzhou:3306/shijianzhou?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: 'lcyj'
+    password: '000000'
+    druid:
+      initial-size: 1
+      max-active: 20
+      min-idle: 3
+      max-wait: 60000
+      pool-prepared-statements: false
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 30000
+      max-pool-prepared-statement-per-connection-size: 20
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp
+      suffix: .jsp
+
+
+## Mybatis 配置
+mybatis:
+  type-aliases-package: com.hexiaofei.provider0.domain        # 指定POJO扫描包来让mybatis自动扫描到自定义POJO
+  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml

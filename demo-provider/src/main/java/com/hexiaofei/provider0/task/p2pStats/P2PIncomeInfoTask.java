@@ -1,9 +1,12 @@
 package com.hexiaofei.provider0.task.p2pStats;
 
+import com.hexiaofei.provider0.service.IP2PIncomeInfoService;
+import com.hexiaofei.provider0.service.IStatsIncomeInfoService;
+import com.hexiaofei.provider0.service.IStatsWdzjDataService;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import us.codecraft.webmagic.Spider;
-import us.codecraft.webmagic.processor.PageProcessor;
 
 /**
  * @author
@@ -17,6 +20,12 @@ public class P2PIncomeInfoTask {
 
     private static final int thread_c = 1;
 
+    @Autowired
+    private IStatsIncomeInfoService statsIncomeInfoService;
+    @Autowired
+    private IStatsWdzjDataService statsWdzjDataService;
+    @Autowired
+    private IP2PIncomeInfoService p2PIncomeInfoService;
 
     private static final String lu_domain = "https://list.lu.com/list/dingqi?currentPage=";                       // 陆金所
     private static final String lup2p_domain = "https://www.lup2p.com/lup2p/p2p";
@@ -43,6 +52,7 @@ public class P2PIncomeInfoTask {
     public void autoStatsIncomeInfo(){
         LOGGER.info("【统计民信贷历史收益率】-->");
         try {
+            statsIncomeInfoService.statsIncomeInfoForYesterday();
         } catch (Exception e) {
             LOGGER.error("【统计民信贷历史收益率】   异常！",e);
         }
@@ -58,11 +68,51 @@ public class P2PIncomeInfoTask {
         int p2pCount = 5;
 
         long st = System.currentTimeMillis();
+        // 1. 陆金所p2p
+        Spider spiderLU = Spider.create(new P2PPageProcessor("lup2p"));
+        spiderLU.addUrl(lup2p_domain).thread(thread_c).run();
+        // 2. 宜人贷
+        Spider spiderYRD = Spider.create(new P2PPageProcessor("yirendai"));
+        spiderYRD.addUrl(yirendai_domain).thread(thread_c).run();
+        // 3. 人人贷
+        Spider spiderRRD = Spider.create(new P2PPageProcessor("renrendai"));
+        spiderRRD.addUrl(renrendai_domain_1).thread(thread_c).run();
+        // 4. 翼龙贷
+        Spider spiderYLD = Spider.create(new P2PPageProcessor("eloancn"));
+        spiderYLD.addUrl(eloancn_domain_1).thread(thread_c).run();
+        // 5. 积木盒子
+        Spider spiderJM = Spider.create(new P2PPageProcessor("jimu"));
+        spiderJM.addUrl(jimu_domain).thread(thread_c).run();
 
+        // 6. 有利网
+//        Spider spiderYL = Spider.create(new P2PPageProcessor("yooli"));
+//        spiderYL.addUrl(yooli_domain).thread(thread_c).run();
+//        Spider.create(p2PPageProcessor).addUrl(yooli_domain).thread(thread_c).run();
+//        Spider.create(p2PPageProcessor).addUrl(eloancn_domain).thread(thread_c).run();
+//        Spider spiderWDW = Spider.create(new P2PPageProcessor("weidai"));
+//        spiderWDW.addUrl(weidai_domain_1).thread(thread_c).run();
+//        Spider.create(p2PPageProcessor).addUrl(xinhehui_domain).thread(thread_c).run();
+
+        if(Spider.Status.Stopped.equals(spiderLU.getStatus())){
+            p2pCount--;
+        }
+        if(Spider.Status.Stopped.equals(spiderYRD.getStatus())){
+            p2pCount--;
+        }
+        if(Spider.Status.Stopped.equals(spiderLU.getStatus())){
+            p2pCount--;
+        }
+        if(Spider.Status.Stopped.equals(spiderYRD.getStatus())){
+            p2pCount--;
+        }
+        if(Spider.Status.Stopped.equals(spiderJM.getStatus())){
+            p2pCount--;
+        }
         // 抓取完成，统计数据
         if(p2pCount == 0){
             long et = System.currentTimeMillis();
             LOGGER.info("【抓取P2P平台】    完成  耗时："+((et-st)/1000)+"S  ");
+            p2PIncomeInfoService.findP2PIncomeForStats();
         }else{
             LOGGER.info("【抓取P2P平台】  ");
         }
@@ -78,7 +128,16 @@ public class P2PIncomeInfoTask {
         long st = System.currentTimeMillis();
         LOGGER.info("【抓取网贷之家】-->   ");
         // step1 抓取数据
-
+        Spider spider = Spider.create(new P2PPageProcessor("wdzj"));
+        spider.addUrl(wdzj_domain).thread(thread_c).run();
+        if(Spider.Status.Stopped.equals(spider.getStatus())){
+            long et = System.currentTimeMillis();
+            LOGGER.info("【抓取网贷之家】  耗时："+((et-st)/1000)+"S  url="+wdzj_domain);
+            // step2 保存民信贷昨日发标数据
+            statsIncomeInfoService.saveYesterdayIncomeForBatchHandler();
+            // step3 统计指数信息
+            statsWdzjDataService.statsWdzjDataHandler();
+        }
         LOGGER.info("【抓取网贷之家】<-- ");
     }
 }
