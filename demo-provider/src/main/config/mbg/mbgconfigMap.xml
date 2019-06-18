@@ -42,11 +42,9 @@
 			<property name="enableSubPackages" value="true"/>
 		</javaClientGenerator>
 
-		<!--<table tableName="sjz_event_index" domainObjectName="SjzEventIndex">
-			<property name="useActualColumnNames" value="true"/>
-		</table>-->
-
-		<table tableName="sjz_event_content" domainObjectName="SjzEventContent">
+		<!--<table tableName="sjz_event_index" domainObjectName="SjzEventIndex"><property name="useActualColumnNames" value="true"/></table>-->
+		<!--<table tableName="sjz_event_content" domainObjectName="SjzEventContent"><property name="useActualColumnNames" value="true"/></table>-->
+		<table tableName="sjz_spider_website" domainObjectName="SjzSpiderWebsite">
 			<property name="useActualColumnNames" value="true"/>
 		</table>
 	</context>

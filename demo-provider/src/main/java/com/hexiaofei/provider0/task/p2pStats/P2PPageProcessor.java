@@ -42,8 +42,8 @@ public class P2PPageProcessor implements PageProcessor {
      */
     public P2PPageProcessor(String domain) {
         this.domain = domain;
-        p2PIncomeInfoService = SpringContextUtil.getBean("p2PIncomeInfoServiceImpl");
-        statsWdzjDataService = SpringContextUtil.getBean("statsWdzjDataServiceImpl");
+//        p2PIncomeInfoService = SpringContextUtil.getBean("p2PIncomeInfoServiceImpl");
+//        statsWdzjDataService = SpringContextUtil.getBean("statsWdzjDataServiceImpl");
     }
 
     public void process(Page page) {
@@ -634,7 +634,7 @@ public class P2PPageProcessor implements PageProcessor {
                 String periodType = regex(periodType_,"天|月|年");
                 p2PIncomeInfo.setPeriodType(regexPeriodType(periodType));
 
-                p2PIncomeInfoService.saveP2PIncomeInfoHandler(p2PIncomeInfo);
+//                p2PIncomeInfoService.saveP2PIncomeInfoHandler(p2PIncomeInfo);
                 logger.info("【抓取产品信息】    "+product+"   "+productNo+"   "+income+"   "+loanPeriod+"   "+periodType);
             }catch(Exception e){
                 logger.info("【抓取产品信息】",e);

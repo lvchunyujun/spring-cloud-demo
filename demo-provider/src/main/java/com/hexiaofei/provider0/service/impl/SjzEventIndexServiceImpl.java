@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Transactional
-@Service("sjzEventContentService")
+@Service("sjzEventIndexService")
 public class SjzEventIndexServiceImpl implements SjzEventIndexService {
 
     @Autowired
