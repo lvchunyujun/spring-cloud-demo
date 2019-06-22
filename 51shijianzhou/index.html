@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>51时间轴</title>
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="utils.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $.ajax({
+                type: "POST",
+                url: "http://lcyj31:6010/eventIndex/1_2",
+                dataType:'jsonp',
+                jsonp: "callback",
+                jsonpCallback:"eciHandler",
+                success:function(data){
+
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown){
+                   alert(textStatus+"  "+XMLHttpRequest.state());
+                }
+            });
+        });
+        var eciHandler = function(resultData){
+            var result = JSON.stringify(resultData); //json对象转成字符串
+            var sjzEvt = resultData.data.voList;
+
+            if(sjzEvt.length>0){
+                $("#content").empty();
+
+                for ( var i = 0; i <sjzEvt.length; i++){
+                    var main_cell_div = document.createElement("div");
+                    main_cell_div = $(main_cell_div).addClass("ei_count_main_cell");
+
+                    var main_time = document.createElement("div");
+                    var main_content = document.createElement("div");
+                    main_time = $(main_time).addClass("ei_count_main_time");
+                    main_content = $(main_content).addClass("ei_count_main_content");
+
+                    var evTime = new Date(sjzEvt[i].eventTime);
+                    $(main_time).append(evTime.Format("yyyy年MM月dd日"));
+                    $(main_content).append(sjzEvt[i].eventContent);
+                    main_cell_div = $(main_cell_div).append(main_time).append(main_content);
+                    $("#content").append(main_cell_div);
+                    // alert(sjzEvt[i].eventTime+"  "+sjzEvt[i].eventContent);
+                }
+            }
+
+
+
+        };
+    </script>
+    <style type="text/css">
+        body
+        {
+            margin:auto;
+            left:0;
+            top:0;
+            right:0;
+            bottom:0;
+            background-color: #efdcb9;
+        }
+        #content
+        {
+            padding-top: 65px;
+        }
+        .sjz_zj
+        {
+            /*position: absolute;*/
+            margin:auto;
+            left: 0px;
+            right: 0px;
+        }
+        .title_top
+        {
+            width: 1000px;
+            height: 50px;
+            color: #000000;
+            font-size: 24px;
+            line-height:50px;
+            color: #1683a8c2;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+        .ei_count_main
+         {
+            width: 1000px;
+            min-height: 800px;
+            font-size: 14px;
+         }
+        .ei_count_main_cell
+        {
+            float: right;
+            width: 850px;
+            height: 100px;
+
+        }
+        .ei_count_main_time
+        {
+            float:left;
+            width: 150px;
+            height: 100px;
+            line-height: 100px;
+            text-align: center;
+            color: #1683a8;
+        }
+        .ei_count_main_content
+        {
+            float:left;
+            width: 680px;
+            height: 100px;
+            padding: 10px 5px;
+            text-indent:30px;
+            color: #575757;
+        }
+    </style>
+</head>
+<body>
+     <div style="" class="sjz_zj title_top">51时间轴 | 读史使人明智</div>
+
+     <div id="content" class="sjz_zj ei_count_main">
+         <!--<div class="ei_count_main_cell">-->
+             <!--<div class="ei_count_main_time">2019年6月1日</div>-->
+             <!--<div class="ei_count_main_content">-->
+                 <!--6月9日上午，工信部正式向中国电信、中国移动、中国联通、中国广电发放5G商用牌照。-->
+                     <!--同时也宣布中国已经正式进入5G商用元年。目前，中国的三大运营商都已经制定和发布了5G商用时间表。-->
+                     <!--其中，中国移动宣传2019年商用5G；而中国电信和联通宣传的2020年商用5G。-->
+             <!--</div>-->
+         <!--</div>-->
+         <!--<div class="ei_count_main_cell">-->
+             <!--<div class="ei_count_main_time">2019年6月1日</div>-->
+             <!--<div class="ei_count_main_content">-->
+                 <!--<p>6月9日上午，工信部正式向中国电信、中国移动、中国联通、中国广电发放5G商用牌照。-->
+                     <!--同时也宣布中国已经正式进入5G商用元年。目前，中国的三大运营商都已经制定和发布了5G商用时间表。-->
+                     <!--其中，中国移动宣传2019年商用5G；而中国电信和联通宣传的2020年商用5G。<br></p>-->
+             <!--</div>-->
+         <!--</div>-->
+         <!--<div class="ei_count_main_cell">-->
+             <!--<div class="ei_count_main_time">2019年6月1日</div>-->
+             <!--<div class="ei_count_main_content">-->
+                 <!--<p>6月9日上午，工信部正式向中国电信、中国移动、中国联通、中国广电发放5G商用牌照。-->
+                     <!--同时也宣布中国已经正式进入5G商用元年。目前，中国的三大运营商都已经制定和发布了5G商用时间表。-->
+                     <!--其中，中国移动宣传2019年商用5G；而中国电信和联通宣传的2020年商用5G。<br></p>-->
+             <!--</div>-->
+         <!--</div>-->
+         <!--<div class="ei_count_main_cell">-->
+             <!--<div class="ei_count_main_time">2019年6月1日</div>-->
+             <!--<div class="ei_count_main_content">-->
+                 <!--<p>6月9日上午，工信部正式向中国电信、中国移动、中国联通、中国广电发放5G商用牌照。-->
+                     <!--同时也宣布中国已经正式进入5G商用元年。目前，中国的三大运营商都已经制定和发布了5G商用时间表。-->
+                     <!--其中，中国移动宣传2019年商用5G；而中国电信和联通宣传的2020年商用5G。<br></p>-->
+             <!--</div>-->
+         <!--</div>-->
+     </div>
+
+</body>
+</html>
