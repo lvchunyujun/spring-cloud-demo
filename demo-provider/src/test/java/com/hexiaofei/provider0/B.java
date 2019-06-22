@@ -11,7 +11,6 @@ public class B extends A {
 
     public static void main(String[] args){
         B a = new B();
-        a.f();
         Byte b = null;
         Integer s2 = 111111;
         Integer s1 = 111111;

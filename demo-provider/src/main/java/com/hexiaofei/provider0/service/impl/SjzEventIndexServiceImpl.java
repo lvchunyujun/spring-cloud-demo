@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Transactional
@@ -40,7 +41,19 @@ public class SjzEventIndexServiceImpl implements SjzEventIndexService {
     @Override
     public PageVo<SjzEventIndex> getPageVoObject(PageVo<SjzEventIndex> pageVo) throws PlatformException {
 
-        return null;
+        List<SjzEventIndex> list = new ArrayList<>();
+
+        // step1: 查询当前总记录条数
+        int recordCount = sjzEventIndexMapper.selectCountByAll();
+        pageVo.setRecordCount(recordCount);
+
+        // step2: 开始位置
+        int offset = pageVo.getCurrentPage()-1<1?0:pageVo.getCurrentPage()-1;
+        // step3: 结果集
+        list = sjzEventIndexMapper.selectListByPaging(pageVo.getPageSize()*offset,pageVo.getPageSize());
+        pageVo.setVoList(list);
+
+        return pageVo;
     }
 
     @Override

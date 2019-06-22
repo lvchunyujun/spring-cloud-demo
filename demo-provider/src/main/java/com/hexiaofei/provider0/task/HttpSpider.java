@@ -22,7 +22,7 @@ import java.util.Date;
 public class HttpSpider implements PageProcessor {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(HttpSpider.class);
-    private Site site = Site.me().setRetryTimes(3).setSleepTime(10000);
+    private Site site = Site.me().setRetryTimes(3).setSleepTime(5000);
 
     @Autowired
     private SjzSpiderWebsiteService sjzSpiderWebsiteService ;
@@ -49,6 +49,7 @@ public class HttpSpider implements PageProcessor {
 
         Elements titleEmt = head.getElementsByTag("title");
         title = titleEmt.text();
+        LOGGER.info("title：  "+(title!=null?title:""));
         Elements metas = head.getElementsByTag("meta");
         int metaSize = metas.size();
         for(int i = 0 ; i < metaSize ; i++){

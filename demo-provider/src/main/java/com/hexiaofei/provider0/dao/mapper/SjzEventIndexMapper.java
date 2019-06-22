@@ -3,6 +3,8 @@ package com.hexiaofei.provider0.dao.mapper;
 import com.hexiaofei.provider0.domain.SjzEventIndex;
 import com.hexiaofei.provider0.domain.SjzEventIndexExample;
 import java.util.List;
+
+import com.hexiaofei.provider0.vo.PageVo;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.DeleteProvider;
 import org.apache.ibatis.annotations.Insert;
@@ -154,4 +156,24 @@ public interface SjzEventIndexMapper {
         "where id = #{id,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(SjzEventIndex record);
+
+    @Select("select count(*) from sjz_event_index order by eventTime")
+    int selectCountByAll();
+
+    @Select({
+            " select",
+            " id, eventTime, eventContent, eventType, eventState, recordCreateTime ",
+            " from sjz_event_index ",
+            " order by eventTime desc ",
+            " limit #{offset},#{pagesize} "
+    })
+    @Results({
+            @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true),
+            @Result(column="eventTime", property="eventTime", jdbcType=JdbcType.TIMESTAMP),
+            @Result(column="eventContent", property="eventContent", jdbcType=JdbcType.VARCHAR),
+            @Result(column="eventType", property="eventType", jdbcType=JdbcType.TINYINT),
+            @Result(column="eventState", property="eventState", jdbcType=JdbcType.TINYINT),
+            @Result(column="recordCreateTime", property="recordCreateTime", jdbcType=JdbcType.TIMESTAMP)
+    })
+    List<SjzEventIndex> selectListByPaging(@Param("offset") int offset,@Param("pagesize")  int pageSize);
 }

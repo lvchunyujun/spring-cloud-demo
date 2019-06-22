@@ -24,7 +24,7 @@
 		<java.version>1.7</java.version>
 		<spring-cloud.version>Edgware.RELEASE</spring-cloud.version>
 		<druid.version>1.0.2</druid.version>
-		<webmagic.version>0.6.1</webmagic.version>
+		<webmagic.version>0.7.3</webmagic.version>
 	</properties>
 
 	<dependencies>
@@ -123,6 +123,11 @@
 			<version>1.2.17</version>
 		</dependency>
 		<!-- 爬虫:start -->
+		<dependency>
+			<groupId>com.belerweb</groupId>
+			<artifactId>pinyin4j</artifactId>
+			<version>2.5.1</version>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
@@ -160,7 +165,15 @@
 					<overwrite>true</overwrite>
 				</configuration>
 			</plugin>
-			<!-- mybatis插件 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
+                </configuration>
+            </plugin>
+            <!-- mybatis插件 -->
 		</plugins>
 	</build>
 
