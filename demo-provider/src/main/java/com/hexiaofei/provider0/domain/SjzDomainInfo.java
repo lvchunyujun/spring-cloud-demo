@@ -11,7 +11,7 @@ public class SjzDomainInfo {
     /**
      *域名名称
      */
-    private Integer domainName;
+    private String domainName;
 
     /**
      *域名URL
@@ -34,7 +34,7 @@ public class SjzDomainInfo {
     private Short type;
 
     /**
-     *当前抓取状态:0-正常，10：异常
+     *当前抓取状态:200-正常，-99：异常
      */
     private Short crawlStatus;
 
@@ -46,7 +46,7 @@ public class SjzDomainInfo {
     /**
      *抓取用时
      */
-    private Date crawlUseTime;
+    private Integer crawlUseTime;
 
     /**
      *描述
@@ -85,14 +85,14 @@ public class SjzDomainInfo {
     /**
      *域名名称
      */
-    public Integer getDomainName() {
+    public String getDomainName() {
         return domainName;
     }
 
     /**
      *域名名称
      */
-    public void setDomainName(Integer domainName) {
+    public void setDomainName(String domainName) {
         this.domainName = domainName;
     }
 
@@ -160,7 +160,7 @@ public class SjzDomainInfo {
     }
 
     /**
-     *当前抓取状态:0-正常，10：异常
+     *当前抓取状态:200-正常，-99：异常
      */
     public void setCrawlStatus(Short crawlStatus) {
         this.crawlStatus = crawlStatus;
@@ -183,14 +183,14 @@ public class SjzDomainInfo {
     /**
      *抓取用时
      */
-    public Date getCrawlUseTime() {
+    public Integer getCrawlUseTime() {
         return crawlUseTime;
     }
 
     /**
      *抓取用时
      */
-    public void setCrawlUseTime(Date crawlUseTime) {
+    public void setCrawlUseTime(Integer crawlUseTime) {
         this.crawlUseTime = crawlUseTime;
     }
 

@@ -64,7 +64,7 @@ public class SjzDomainInfoSqlProvider {
         }
         
         if (record.getDomainName() != null) {
-            VALUES("domainName", "#{domainName,jdbcType=INTEGER}");
+            VALUES("domainName", "#{domainName,jdbcType=VARCHAR}");
         }
         
         if (record.getDomainUrl() != null) {
@@ -92,7 +92,7 @@ public class SjzDomainInfoSqlProvider {
         }
         
         if (record.getCrawlUseTime() != null) {
-            VALUES("crawlUseTime", "#{crawlUseTime,jdbcType=TIMESTAMP}");
+            VALUES("crawlUseTime", "#{crawlUseTime,jdbcType=INTEGER}");
         }
         
         if (record.getDescription() != null) {
@@ -167,7 +167,7 @@ public class SjzDomainInfoSqlProvider {
         }
         
         if (record.getDomainName() != null) {
-            SET("domainName = #{record.domainName,jdbcType=INTEGER}");
+            SET("domainName = #{record.domainName,jdbcType=VARCHAR}");
         }
         
         if (record.getDomainUrl() != null) {
@@ -195,7 +195,7 @@ public class SjzDomainInfoSqlProvider {
         }
         
         if (record.getCrawlUseTime() != null) {
-            SET("crawlUseTime = #{record.crawlUseTime,jdbcType=TIMESTAMP}");
+            SET("crawlUseTime = #{record.crawlUseTime,jdbcType=INTEGER}");
         }
         
         if (record.getDescription() != null) {
@@ -229,14 +229,14 @@ public class SjzDomainInfoSqlProvider {
         UPDATE("sjz_domain_info");
         
         SET("id = #{record.id,jdbcType=INTEGER}");
-        SET("domainName = #{record.domainName,jdbcType=INTEGER}");
+        SET("domainName = #{record.domainName,jdbcType=VARCHAR}");
         SET("domainUrl = #{record.domainUrl,jdbcType=VARCHAR}");
         SET("domainIp = #{record.domainIp,jdbcType=CHAR}");
         SET("source = #{record.source,jdbcType=VARCHAR}");
         SET("type = #{record.type,jdbcType=SMALLINT}");
         SET("crawlStatus = #{record.crawlStatus,jdbcType=SMALLINT}");
         SET("lastCrawlTime = #{record.lastCrawlTime,jdbcType=TIMESTAMP}");
-        SET("crawlUseTime = #{record.crawlUseTime,jdbcType=TIMESTAMP}");
+        SET("crawlUseTime = #{record.crawlUseTime,jdbcType=INTEGER}");
         SET("description = #{record.description,jdbcType=VARCHAR}");
         SET("manageStatus = #{record.manageStatus,jdbcType=SMALLINT}");
         SET("contentLevel = #{record.contentLevel,jdbcType=INTEGER}");
@@ -258,7 +258,7 @@ public class SjzDomainInfoSqlProvider {
         UPDATE("sjz_domain_info");
         
         if (record.getDomainName() != null) {
-            SET("domainName = #{domainName,jdbcType=INTEGER}");
+            SET("domainName = #{domainName,jdbcType=VARCHAR}");
         }
         
         if (record.getDomainUrl() != null) {
@@ -286,7 +286,7 @@ public class SjzDomainInfoSqlProvider {
         }
         
         if (record.getCrawlUseTime() != null) {
-            SET("crawlUseTime = #{crawlUseTime,jdbcType=TIMESTAMP}");
+            SET("crawlUseTime = #{crawlUseTime,jdbcType=INTEGER}");
         }
         
         if (record.getDescription() != null) {

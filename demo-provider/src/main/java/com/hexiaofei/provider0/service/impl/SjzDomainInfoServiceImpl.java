@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 @Transactional
@@ -40,6 +41,8 @@ public class SjzDomainInfoServiceImpl implements SjzDomainInfoService {
 
     @Override
     public PageVo<SjzDomainInfo> getPageVoObject(PageVo<SjzDomainInfo> pageVo) throws PlatformException {
+
+
         return null;
     }
 
@@ -47,4 +50,52 @@ public class SjzDomainInfoServiceImpl implements SjzDomainInfoService {
     public List<SjzDomainInfo> getAllObject() throws PlatformException {
         return null;
     }
+
+
+    @Override
+    public PageVo<SjzDomainInfo> getPageVoSjzDomainInfoForWaitCrawl(PageVo<SjzDomainInfo> pageVo, SjzDomainInfo sjzDomainInfo) throws PlatformException {
+
+
+        // step1: 总记录条数
+        int recordCount = sjzDomainInfoMapper.selectCountByPaging(sjzDomainInfo.getCrawlStatus(),sjzDomainInfo.getLastCrawlTime());
+        pageVo.setRecordCount(recordCount);
+
+        // step2: 开始位置
+        int offset = pageVo.getCurrentPage()-1<1?0:pageVo.getCurrentPage()-1;
+
+        List<SjzDomainInfo> list = sjzDomainInfoMapper.selectListByPaging(sjzDomainInfo.getCrawlStatus(),sjzDomainInfo.getLastCrawlTime(),offset*pageVo.getPageSize(),pageVo.getPageSize());
+        pageVo.setVoList(list);
+
+        return pageVo;
+    }
+
+    @Override
+    public int getCountByWaitCrawl(SjzDomainInfo sjzDomainInfo) {
+        int recordCount = sjzDomainInfoMapper.selectCountByPaging(sjzDomainInfo.getCrawlStatus(),sjzDomainInfo.getLastCrawlTime());
+        return recordCount;
+    }
+
+    @Override
+    public int updateByCrawlResult(SjzDomainInfo sjzDomainInfo) {
+        int resut = sjzDomainInfoMapper.updateByCrawlResult(sjzDomainInfo);
+        return resut;
+    }
+
+    @Override
+    public int updateStatusByUrl(String url,Date lastCrawlTime, String domainName, Short crawlStatus, Integer crawlUseTime) {
+        SjzDomainInfo sjzDomainInfo = new SjzDomainInfo();
+
+
+        sjzDomainInfo.setDomainUrl(url);
+        sjzDomainInfo.setDomainName(domainName);
+        sjzDomainInfo.setLastCrawlTime(lastCrawlTime);
+        sjzDomainInfo.setCrawlStatus(crawlStatus);
+
+        sjzDomainInfo.setCrawlUseTime(crawlUseTime);
+
+        int resut = updateByCrawlResult(sjzDomainInfo);
+        return resut;
+    }
+
+
 }
