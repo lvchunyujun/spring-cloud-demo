@@ -18,6 +18,21 @@ public interface SjzDomainInfoService extends IBaseService<SjzDomainInfo> {
     public PageVo<SjzDomainInfo> getPageVoSjzDomainInfoForWaitCrawl(PageVo<SjzDomainInfo> pageVo,SjzDomainInfo sjzDomainInfo) throws PlatformException;
 
     /**
+     * 获取等待抓取域名的列表 查询没有抓取的，不按时间
+     * @param pageVo
+     * @param sjzDomainInfo
+     * @return
+     * @throws PlatformException
+     */
+    public PageVo<SjzDomainInfo> getPageVoSjzDomainInfoForWaitCrawl1(PageVo<SjzDomainInfo> pageVo,SjzDomainInfo sjzDomainInfo)throws PlatformException;;
+
+    /**
+     *
+     * @param sjzDomainInfo
+     * @return
+     */
+    public int getCountByWaitCrawl1(SjzDomainInfo sjzDomainInfo);
+    /**
      * 获取等待抓取域名的总数
      * @param sjzDomainInfo
      * @return
@@ -41,4 +56,6 @@ public interface SjzDomainInfoService extends IBaseService<SjzDomainInfo> {
      * @return
      */
     public int updateStatusByUrl(String url, Date lastCrawlTime, String domainName, Short status, Integer crawlUseTime);
+
+
 }

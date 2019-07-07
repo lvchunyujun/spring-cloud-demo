@@ -17,13 +17,12 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.SpiderListener;
-import us.codecraft.webmagic.model.OOSpider;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 @Component
-@EnableAsync     // 多线程异步执行
+@EnableAsync
 public class WebSpiderTask {
 
     private static Logger LOGGER = LoggerFactory.getLogger(WebSpiderTask.class);
@@ -52,22 +51,22 @@ public class WebSpiderTask {
         List<SpiderListener> listenerList = new ArrayList();
         listenerList.add(new SjzHttpSpiderListener());
         spider.setSpiderListeners(listenerList).setDownloader(new SjzHttpClientDownloader()).addUrl(url).thread(thread_c).run();
-        OOSpider OO;
     }
 
     /**
      *
      */
     @Async
-    @Scheduled(cron="20 32 23 * * ?")
+    @Scheduled(cron="0 39 12 * * ?")
     public void loadingUrl2(){
+        System.out.println("hello world!");
         try {
             int currentPage = 1;
-            int pageSize = 500;
-            while(checkOfWaitCrawlUrl()){
+            int pageSize = 200;
+            while(checkOfWaitCrawlUrl1()){
                 LOGGER.info("开始加载第[{}]页数据……",currentPage);
                  // 因每次循环都初始化查询 ，所以当前页=1；currentPage只用作计数
-                List<SjzDomainInfo> list = getListUrlByWaitCrwal(1,pageSize);
+                List<SjzDomainInfo> list = getListUrlByWaitCrwal1(1,pageSize);
 
                 for(int i = 0 ; i < list.size() ; i++ ){
                     SjzDomainInfo sjzDomainInfo = list.get(i);
@@ -75,8 +74,6 @@ public class WebSpiderTask {
                 }
                 currentPage++;
             }
-        } catch (PlatformException e) {
-            LOGGER.error("加载页面异常！",e);
         } catch (Exception e){
             LOGGER.error("加载页面异常！",e);
         }
@@ -209,4 +206,42 @@ public class WebSpiderTask {
         int count = sjzDomainInfoService.getCountByWaitCrawl(sjzDomainInfo);
         return count>0;
     }
+
+    public List<SjzDomainInfo> getListUrlByWaitCrwal1(int currentPage,int pageSize) throws PlatformException {
+
+        List<SjzDomainInfo> list = new ArrayList();
+        SjzDomainInfo sjzDomainInfo = new SjzDomainInfo();
+        sjzDomainInfo.setLastCrawlTime(new Date());
+        sjzDomainInfo.setCrawlUseTime(-1);
+        int count = sjzDomainInfoService.getCountByWaitCrawl1(sjzDomainInfo);
+
+        // 当前需要抓取页面数量==0 不需要抓取
+        if(checkOfWaitCrawlUrl1()){
+            PageVo pageVo = new PageVo();
+            pageVo.setPageSize(pageSize);
+            pageVo.setCurrentPage(currentPage);
+            pageVo = sjzDomainInfoService.getPageVoSjzDomainInfoForWaitCrawl1(pageVo,sjzDomainInfo);
+
+            list = pageVo.getVoList();
+        }
+        return list;
+    }
+
+    /**
+     * 检查是否有等待抓取的页面
+     * @return
+     */
+    private boolean checkOfWaitCrawlUrl1(){
+        SjzDomainInfo sjzDomainInfo = new SjzDomainInfo();
+        sjzDomainInfo.setLastCrawlTime(new Date());
+        sjzDomainInfo.setCrawlUseTime(-1);
+        int count = -1;
+        try {
+             count = sjzDomainInfoService.getCountByWaitCrawl1(sjzDomainInfo);
+        }catch (Exception e){
+            LOGGER.error("加载页面异常！",e);
+        }
+        return count>0;
+    }
+
 }

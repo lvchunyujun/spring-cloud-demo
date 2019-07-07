@@ -29,7 +29,7 @@ public class A {
         }
     }
 
-    public static void main(String[] args) throws BadHanyuPinyinOutputFormatCombination {
+    public static void main(String[] args) throws BadHanyuPinyinOutputFormatCombination, InterruptedException {
 //        char[] cc = "律陆驴流遛鎏鲁率驴".toCharArray();
 //        for(char cn: cc){
 //            String[] ss = PinyinHelper.toHanyuPinyinStringArray(cn,new HanyuPinyinOutputFormat());

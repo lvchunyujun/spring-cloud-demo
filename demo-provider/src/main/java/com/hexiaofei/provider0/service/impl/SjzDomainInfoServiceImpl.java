@@ -70,6 +70,27 @@ public class SjzDomainInfoServiceImpl implements SjzDomainInfoService {
     }
 
     @Override
+    public PageVo<SjzDomainInfo> getPageVoSjzDomainInfoForWaitCrawl1(PageVo<SjzDomainInfo> pageVo, SjzDomainInfo sjzDomainInfo) throws PlatformException {
+        // step1: 总记录条数
+        int recordCount = sjzDomainInfoMapper.selectCountByPaging1(sjzDomainInfo);
+        pageVo.setRecordCount(recordCount);
+
+        // step2: 开始位置
+        int offset = pageVo.getCurrentPage()-1<1?0:pageVo.getCurrentPage()-1;
+
+        List<SjzDomainInfo> list = sjzDomainInfoMapper.selectListByPaging1(sjzDomainInfo,offset*pageVo.getPageSize(),pageVo.getPageSize());
+        pageVo.setVoList(list);
+
+        return pageVo;
+    }
+
+    @Override
+    public int getCountByWaitCrawl1(SjzDomainInfo sjzDomainInfo) {
+        int resourceId = sjzDomainInfoMapper.selectCountByPaging1(sjzDomainInfo);
+        return resourceId;
+    }
+
+    @Override
     public int getCountByWaitCrawl(SjzDomainInfo sjzDomainInfo) {
         int recordCount = sjzDomainInfoMapper.selectCountByPaging(sjzDomainInfo.getCrawlStatus(),sjzDomainInfo.getLastCrawlTime());
         return recordCount;

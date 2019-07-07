@@ -18,10 +18,7 @@ import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.processor.PageProcessor;
 import us.codecraft.webmagic.selector.Html;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Component
 public class SjzPageProcessor implements PageProcessor {
@@ -52,12 +49,21 @@ public class SjzPageProcessor implements PageProcessor {
     @Override
     public void process(Page page) {
         LOGGER.info("【解析网站页面】--> {}",page.getUrl());
-        Html html = page.getHtml();
-        String url = page.getUrl().toString();
-        Document document = html.getDocument();
-        Element headElement = document.head();
         Map<String, List<String>> header = page.getHeaders();
-        parseHead(headElement,url,header);
+        List<String> list = new ArrayList<String>();
+        list.add(String.valueOf(page.getStatusCode()));
+        header.put("statusCode",list);
+        String url = page.getUrl().toString();
+        // 200：返回成功
+        if(page.getStatusCode() == 200){
+            Html html = page.getHtml();
+            Document document = html.getDocument();
+            Element headElement = document.head();
+            parseHead(headElement,url,header);
+        }else{
+            int crawlResultId =  modifySjzDomainInfo(url,header);
+            LOGGER.info("【解析网站页面】网站异常{}  statusCode:{}",page.getUrl(),page.getStatusCode());
+        }
         LOGGER.info("【解析网站页面】--> {}",page.getUrl());
     }
 
@@ -96,8 +102,7 @@ public class SjzPageProcessor implements PageProcessor {
             int pageResultId = sjzSpiderWebsiteService.addObject(ssw);
             LOGGER.info("【解析网站页面HEAD】 保存页面HEAD成功 ID:{}, [url:{}] ",pageResultId,url);
 
-            int crawlResultId =  modifySjzDomainInfo(url,header);
-            LOGGER.info("【解析网站页面HEAD】 更新抓取结果成功 ID:{}, [url:{}]",crawlResultId,url);
+            modifySjzDomainInfo(url,header);
         } catch (PlatformException e) {
             LOGGER.error("【解析网站页面HEAD】保存页面信息异常!",e);
         }
@@ -123,12 +128,14 @@ public class SjzPageProcessor implements PageProcessor {
 
         sjzDomainInfo.setDomainName(domainName);
         sjzDomainInfo.setLastCrawlTime(new Date());
-        sjzDomainInfo.setCrawlStatus((short)200);
+        short statusCode = (Short.valueOf(header.get("statusCode").get(0)));
+        sjzDomainInfo.setCrawlStatus(statusCode);
         // 耗时
         long endCrawlTime = System.currentTimeMillis();
         sjzDomainInfo.setCrawlUseTime((int)(endCrawlTime -startCrawlTime));
 
         int crawlResult = sjzDomainInfoService.updateByCrawlResult(sjzDomainInfo);
+        LOGGER.info("【解析网站页面HEAD】 更新抓取结果成功 ID:{}, [url:{}]",crawlResult,url);
         return crawlResult;
     }
 }

@@ -194,6 +194,26 @@ public interface SjzDomainInfoMapper {
     })
     List<SjzDomainInfo> selectListByPaging(@Param("crawlStatus")  Short crawlStatus,@Param("lastCrawlTime")  Date lastCrawlTime,@Param("offset") Integer offset,@Param("pageSize") Integer pageSize);
 
+
+    /**
+     *
+     * @param sjzDomainInfo
+     * @param offset
+     * @param pageSize
+     * @return
+     */
+    @SelectProvider(type=SjzDomainInfoSqlProvider.class, method="selectListByPaging1")
+    List<SjzDomainInfo> selectListByPaging1(@Param("sjzDomainInfo")  SjzDomainInfo sjzDomainInfo,@Param("offset") Integer offset,@Param("pageSize") Integer pageSize);
+
+    /**
+     *
+     * @param sjzDomainInfo
+     * @return
+     */
+    @SelectProvider(type=SjzDomainInfoSqlProvider.class, method="selectCountByPaging1")
+    int selectCountByPaging1(SjzDomainInfo sjzDomainInfo);
+
+
     @Select(" select count(*) from sjz_domain_info sdi where sdi.crawlStatus = #{crawlStatus,jdbcType=SMALLINT} and (sdi.lastCrawlTime is null or sdi.lastCrawlTime < #{lastCrawlTime}) ")
     int selectCountByPaging(@Param("crawlStatus") Short crawlStatus,@Param("lastCrawlTime") Date lastCrawlTime);
 
