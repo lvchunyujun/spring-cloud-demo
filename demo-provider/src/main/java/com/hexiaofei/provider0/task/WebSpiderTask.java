@@ -35,6 +35,8 @@ public class WebSpiderTask {
                                          "TV","info","name","mobi","travel",
                                          "pro","museum","coop","aero","xin",
                                          "wiki","club","wang","win","vip"};
+    private static String[] SubdomainPrefix = {"news"};
+
     @Autowired
     private SjzBasePinyinService sjzBasePinyinService;
     @Autowired
@@ -57,7 +59,7 @@ public class WebSpiderTask {
      *
      */
     @Async
-    @Scheduled(cron="0 39 12 * * ?")
+    @Scheduled(cron="0 04 21 * * ?")
     public void loadingUrl2(){
         System.out.println("hello world!");
         try {
@@ -79,8 +81,14 @@ public class WebSpiderTask {
         }
     }
 
+    @Async
+    @Scheduled(cron="10 25 22 * * ?")
+    public void parseHtml(){
+        crawlWebPage("https://www.qq.com/");
+    }
+
 //    @Async
-//    @Scheduled(cron="10 1 23 * * ?")
+//    @Scheduled(cron="10 28 23 * * ?")
     public void loadingUrl() throws PlatformException {
         int count = sjzBasePinyinService.getCountByAll();
 
@@ -107,7 +115,7 @@ public class WebSpiderTask {
                     LOGGER.info("add domain_info-->id:"+resultId);
                     TimeUnit.MILLISECONDS.sleep(40);
                 }catch (Exception e){
-                    LOGGER.error("抓取网站异常！",e);
+                    LOGGER.error("添加域名网站异常！",e);
                 }
             }
         }
@@ -123,9 +131,10 @@ public class WebSpiderTask {
     public String[]  getUrl(int domainPinyinId) throws PlatformException {
 
         List<String> urls = new ArrayList<String>();
-
+        // 解析http协议
         StringBuffer http = new StringBuffer("http");
         urls = concatDomain(http,domainPinyinId);
+        // 解析https协议
         StringBuffer https = new StringBuffer("https");
         urls.addAll(concatDomain(https,domainPinyinId));
 
@@ -143,20 +152,24 @@ public class WebSpiderTask {
         List<String> urls = new ArrayList();
 
         url.append("://");
-        url.append("www");
-        url.append(".");
 
-        SjzBasePinyin sjzBasePinyin = sjzBasePinyinService.getObjectById(domainPinyinId);
+        for(String domainPrefix: SubdomainPrefix){
+            // 域名前缀
+            url.append(domainPrefix);
 
+            url.append(".");
+            SjzBasePinyin sjzBasePinyin = sjzBasePinyinService.getObjectById(domainPinyinId);
+            url.append(sjzBasePinyin.getPinYin());
+            url.append(".");
 
-        url.append(sjzBasePinyin.getPinYin());
-        url.append(".");
-
-        // 遍历拼接domainSuffix
-        for(int i = 0 ; i <  domainSuf.length; i++){
-            urls.add(url.append(domainSuf[i]).toString());
-            url.delete(url.length()-domainSuf[i].length(),url.length()) ;
+            // 域名后缀：遍历拼接domainSuffix
+            for(int i = 0 ; i <  domainSuf.length; i++){
+                urls.add(url.append(domainSuf[i]).toString());
+                url.delete(url.length()-domainSuf[i].length(),url.length()) ;
+            }
         }
+
+
         return urls;
     }
 

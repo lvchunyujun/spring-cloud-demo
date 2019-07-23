@@ -4,53 +4,108 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.core.io.ClassPathResource;
 
+import java.util.PriorityQueue;
+import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * Created by hexiaofei on 2018/4/22.
  */
-public class DemoTest extends B{
-//    static String name = "DemoTst_Name";
-//    static{
-//        System.out.println("DemoTst.static{}");
-//    }
+public class DemoTest {
+    static Object o1 = new Object();
+    static Object o2 = new Object();
 
-    public static void gmain(String[] args) {
-        Integer a = 100;
-        Integer b = 100;
-        Integer c = 3;
-        Integer d = 3;
-        Integer e = 321;
-        Integer f = 321;
-        Integer ff = 100;
-        Integer fff = 221;
-        Long g = 3l;
-        System.out.println(a == b);
-        System.out.println(e == f);
-        System.out.println(f == (ff+fff));
-        System.out.println(c == (a+b));
-        System.out.println(c.equals(a+b));
-        System.out.println(g == (a+b));
-        System.out.println(g.equals(a+b));
+    static SynchronousQueue sq = new SynchronousQueue();
+    final CyclicBarrier cyclicBarrier;
 
-        String[] s = {"",""};
-        ClassPathResource resource = new ClassPathResource("");
-        ApplicationContext context = new FileSystemXmlApplicationContext(s);
-        context.getBean("");
-        context.containsBean("");
+    public DemoTest(){
+        cyclicBarrier = new CyclicBarrier(4, new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("开始："+Thread.currentThread().getName());
+            }
+        });
     }
 
-    public static void mian(String[] args){
-        byte b1 = 1,b2 = 2,b3,b4;
-        final byte b5 = 1,b6 = 2;
-        b3 = b5 + b6;
+    public static void main(String[] args) throws InterruptedException {
 
-
+//        BlockingQueue bq = new ArrayBlockingQueue(10);
+//
+//        for(int i = 0 ; i < 20 ; i++){
+//            boolean b = bq.offer(i,1000,TimeUnit.MILLISECONDS);
+//            System.out.println(b);
+//        }
+        int COUNT_BITS = Integer.SIZE - 3;
+        System.out.println(Integer.SIZE - 3);
+        System.out.println(-1 << COUNT_BITS);
+        System.out.println(0 << COUNT_BITS);
+        System.out.println(1 << COUNT_BITS);
+        System.out.println(2 << COUNT_BITS);
+        System.out.println(3 << COUNT_BITS);
+        int RUNNING    = -1 << COUNT_BITS;
+        AtomicInteger ctl = new AtomicInteger(ctlOf(RUNNING, 0));
+        System.out.println(ctl);
+//        ExecutorService es = Executors.newFixedThreadPool(10);
     }
+    private static int ctlOf(int rs, int wc) { return rs | wc; }
+    public void executorF(){
+        Executor executor = Executors.newCachedThreadPool();
+    }
+
+    public void ff(){
+        for(int i = 0 ; i < 10 ; i++){
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        System.out.println("准备："+Thread.currentThread().getName());
+                        cyclicBarrier.await();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (BrokenBarrierException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+        }
+    }
+
+
+    void deadLock(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                synchronized (o1){
+                    System.out.println(Thread.currentThread()+"--> 1");
+                    try {
+                        TimeUnit.SECONDS.sleep(9);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    synchronized (o2){
+                        System.out.println(Thread.currentThread()+"--> 2");
+                    }
+                }
+            }
+        }).start();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                synchronized (o2){
+                    System.out.println(Thread.currentThread()+"--> 1");
+                    try {
+                        TimeUnit.SECONDS.sleep(9);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    synchronized (o1){
+                        System.out.println(Thread.currentThread()+"--> 2");
+                    }
+                }
+            }
+        }).start();
+    }
+
 }
-//class A{
-//
-////    static String name = "A_Name";
-////    static{
-////        System.out.println("A.static{}");
-////    }
-//
-//}
+

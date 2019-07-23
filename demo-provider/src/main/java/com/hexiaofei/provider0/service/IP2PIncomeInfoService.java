@@ -24,4 +24,5 @@ public interface IP2PIncomeInfoService {
      *   最低收益
      */
     void findP2PIncomeForStats();
+
 }

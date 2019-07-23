@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.Page;
+import us.codecraft.webmagic.Request;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.processor.PageProcessor;
 import us.codecraft.webmagic.selector.Html;
@@ -54,12 +55,16 @@ public class SjzPageProcessor implements PageProcessor {
         list.add(String.valueOf(page.getStatusCode()));
         header.put("statusCode",list);
         String url = page.getUrl().toString();
+
         // 200：返回成功
         if(page.getStatusCode() == 200){
             Html html = page.getHtml();
             Document document = html.getDocument();
             Element headElement = document.head();
             parseHead(headElement,url,header);
+
+            // parseBody
+            parseBody(page,document.body());
         }else{
             int crawlResultId =  modifySjzDomainInfo(url,header);
             LOGGER.info("【解析网站页面】网站异常{}  statusCode:{}",page.getUrl(),page.getStatusCode());
@@ -112,14 +117,61 @@ public class SjzPageProcessor implements PageProcessor {
     /**
      * 解析 HTML BODY part
      */
-    public void parseBody(){
+    public void parseBody(Page page,Element bodyEls){
+        String url = page.getUrl().toString();
+        LOGGER.debug("【解析body】--> {}",url);
+        Elements cse = bodyEls.children();
+        Iterator<Element> itsEl = cse.iterator();
+        Element e;
+        while (itsEl.hasNext()){
+            e = itsEl.next();
+            if(e==null){
+                break;
+            }
+            String tagName = e.tagName();
+//            LOGGER.info("【解析body】 url={},tagName={}",url,tagName);
+            if(HtmlTag.A_TAG.equals(tagName)){
+                String href = e.attr("href");
+                String text = e.text();
+                LOGGER.info("【解析body】 url=[{}],tagName={},href=[{}],text={}",url,tagName,href,text);
+                page.addTargetRequest(new Request(href));
+            }else if(HtmlTag.TITLE_TAG.equals(tagName)){
 
+            }else if(HtmlTag.IMG_TAG.equals(tagName)){
+
+            }else if(HtmlTag.AREA_TAG.equals(tagName)){
+
+            }else {
+//                LOGGER.info("【解析body】 url={},tagName={}",url,tagName);
+            }
+            // 如果存在子节点
+            Elements ncses;
+            if((ncses = e.children()) != null){
+                Iterator<Element> nItsEl = ncses.iterator();
+                Element ce;
+                while (nItsEl.hasNext()){
+                    if((ce = nItsEl.next())!=null){
+                        parseBody(page,ce);
+                    }
+                }
+            }
+
+        }
+
+        LOGGER.debug("【解析body】<-- {}",url);
     }
+
     @Override
     public Site getSite() {
         return site;
     }
 
+    /**
+     *
+     * @param url
+     * @param header
+     * @return
+     */
     public int modifySjzDomainInfo(String url,Map<String, List<String>> header){
         SjzDomainInfo sjzDomainInfo = new SjzDomainInfo();
 

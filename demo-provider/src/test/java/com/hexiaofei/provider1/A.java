@@ -6,14 +6,21 @@ import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombi
 
 import java.util.*;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class A {
 
 
     protected void fF() {
         List l = new ArrayList<Object>();
+             l.remove(3);
+             l = new LinkedList();
+             ((LinkedList) l).remove(3);
+             l = new CopyOnWriteArrayList();
+
         String s1 = "", s2 = "";
         s1.concat(s2);
+        l.size();
 
         StringBuffer sbuf = null;
         sbuf.append("");
@@ -81,9 +88,25 @@ public class A {
 //        BlockingQueue b;
 //        TreeMap treeMap;
 
-        Stack stack = new Stack();
-        stack.push("");
-        System.out.println(stack.search(""));
+        List<Integer> cowa = new CopyOnWriteArrayList();
+
+        for(int i = 0 ; i < 10 ; i++){
+            cowa.add(i);
+        }
+
+        for(Integer i: cowa){
+            cowa.add(i);
+        }
+        int j = 10;
+        Iterator iterable = cowa.iterator();
+        while(iterable.hasNext()){
+            cowa.add(j++);
+            cowa.remove(3);
+            System.out.println(iterable.next());
+            iterable.remove();
+        }
+
+        Collections.synchronizedMap(new HashMap<>());
     }
 
 }
