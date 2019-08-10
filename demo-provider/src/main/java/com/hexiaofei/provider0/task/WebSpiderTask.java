@@ -82,7 +82,7 @@ public class WebSpiderTask {
     }
 
     @Async
-    @Scheduled(cron="10 25 22 * * ?")
+    @Scheduled(cron="10 35 22 * * ?")
     public void parseHtml(){
         crawlWebPage("https://www.qq.com/");
     }
