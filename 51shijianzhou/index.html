@@ -10,7 +10,7 @@
         $(document).ready(function(){
             $.ajax({
                 type: "POST",
-                url: "http://lcyj31:6010/eventIndex/1_1",
+                url: "http://localhost:6010/eventIndex/1_5",
                 dataType:'jsonp',
                 jsonp: "callback",
                 jsonpCallback:"eciHandler",
@@ -87,7 +87,7 @@
         function data_paging(currentPage,pageSize){
             $.ajax({
                 type: "POST",
-                url: "http://lcyj31:6010/eventIndex/"+currentPage+"_"+pageSize,
+                url: "http://localhost:6010/eventIndex/"+currentPage+"_"+pageSize,
                 dataType:'jsonp',
                 jsonp: "callback",
                 jsonpCallback:"eciHandler",
@@ -108,12 +108,13 @@
             top:0;
             right:0;
             bottom:0;
-            /*background-color: #acc9c4d1;*/
-            background-color: #b49d5a;
+            background-color: #f1f4f9;
+
         }
         #content
         {
-            padding-top: 60px;
+            position: absolute;
+            padding-top: 30px;
         }
         .sjz_zj
         {
@@ -141,17 +142,17 @@
          }
         .ei_count_main_cell
         {
-            float: right;
+            margin: auto;
             width: 850px;
-            height: 100px;
+            height: 85px;
 
         }
         .ei_count_main_time
         {
             float:left;
             width: 150px;
-            height: 100px;
-            line-height: 100px;
+
+            line-height: 85px;
             text-align: center;
             color: #1683a8;
         }
@@ -159,13 +160,14 @@
         {
             float:left;
             width: 680px;
-            height: 100px;
             padding: 10px 5px;
             text-indent:30px;
             color: #575757;
+            border: 1px solid #aaa;
         }
         .ger_center_
         {
+            position: absolute;
             margin: auto;
             left: 0px;
             right: 0px;
@@ -176,12 +178,18 @@
         {
             color: #1683a8;
         }
+        .bg_card
+        {
+            background-color: #ffffff;
+            -moz-box-shadow: 10px 10px 5px #888888; /* 老的 Firefox */
+            box-shadow: 0 10px 30px #888888;
+        }
     </style>
 </head>
 <body>
      <div style="" class="sjz_zj title_top">51时间轴 | 读史使人明智</div>
 
-     <div id="content" class="sjz_zj ei_count_main">
+     <div id="content" class="sjz_zj ei_count_main bg_card">
          <!--<div class="ei_count_main_cell">
              <div class="ei_count_main_time">2019年6月1日</div>
              <div class="ei_count_main_content">
@@ -193,8 +201,8 @@
 
      </div>
      <div class="ger_center_ ger_text_">
-         <a id="previous_page" href="javascript:void(0);" >上一页</a>&nbsp&nbsp&nbsp&nbsp
-         <a id="next_page" href="javascript:void(0);" >下一页</a>
+         <a id="previous_page" href="javascript:void(0);" style="color: #1683a8;text-decoration:none">上一页</a>&nbsp&nbsp&nbsp&nbsp
+         <a id="next_page" href="javascript:void(0);" style="color: #1683a8;text-decoration:none" >下一页</a>
      </div>
 
 </body>
