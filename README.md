@@ -3,4 +3,7 @@
    2. Feign
    3. zuul
    4. zipkin
-   5. 
+   5. Hystrix-dashboard-server	 
+   6. consumer	 
+   7. provider	 
+   8. config-server
