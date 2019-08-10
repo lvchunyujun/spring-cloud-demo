@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>事件管理</title>
+    <link th:href="@{comm.css}" rel="stylesheet" type="text/css" />
+    <style type="text/css" >
+        body
+        {
+            color: rgba(82, 82, 82, 0.85);
+        }
+        a{text-decoration:none;}
+        ul{
+            list-style: none;
+        }
+        .sjz_nvg
+        {
+            margin: 15px 40px;
+        }
+        .sjz_menu
+        {
+            float: left;
+            width: 20%;
+            min-height: 400px;
+        }
+        .sjz_menu a
+        {
+            border-bottom: 1px solid #aaa; */
+        }
+        .sjz_center
+        {
+            float: right;
+            width: 80%;
+            min-height: 400px;
+        }
+        .sjz_center_ad
+        {
+            float: right;
+            width: 100px;
+        }
+        .sjz_center_content
+        {
+            width: 100%;
+            border: 1px solid #aaa;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h3>51时间轴事件管理</h3>
+        <hr/>
+
+
+    </div>
+    <div class="sjz_nvg">
+        当前位置：<a href="/admin/index">首页</a> > 时间管理中心
+    </div>
+    <div>
+        <!-- 菜单 -->
+        <div class="sjz_menu">
+            <ul>
+                <li><a href="/admin/eventIndex" >事件管理</a></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+        <div class="sjz_center">
+            <div>
+                <div></div>
+                <div class="sjz_center_ad"><a href="/admin/toAddEventIndex">添加</a></div>
+            </div>
+            <table class="sjz_center_content">
+                <thead>
+                   <tr>
+                       <th style="width: 10%;"> 编号 </th>
+                       <th style="width: 20%;"> 时间 </th>
+                       <th> 事件 </th>
+                       <th style="width: 10%;"> 类型 </th>
+                       <th style="width: 10%;"> 状态 </th>
+                       <th style="width: 10%;"> 操作 </th>
+                   </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>

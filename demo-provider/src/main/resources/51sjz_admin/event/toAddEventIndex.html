@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>事件管理</title>
+    <link th:href="@{comm.css}" rel="stylesheet" type="text/css" />
+    <style type="text/css" >
+        body
+        {
+            color: rgba(82, 82, 82, 0.85);
+        }
+        a{text-decoration:none;}
+        ul{
+            list-style: none;
+        }
+        .sjz_nvg
+        {
+            margin: 15px 40px;
+        }
+        .sjz_menu
+        {
+            float: left;
+            width: 20%;
+            min-height: 400px;
+        }
+        .sjz_menu a
+        {
+            border-bottom: 1px solid #aaa; */
+        }
+        .sjz_center
+        {
+            float: right;
+            width: 80%;
+            min-height: 400px;
+            font-size: 14px;
+        }
+        .sjz_center_ad
+        {
+            float: right;
+            width: 100px;
+        }
+        .sjz_center_content
+        {
+            width: 100%;
+            border: 1px solid #aaa;
+        }
+        .sjz_center_ta
+        {
+            width: 95%;
+            min-height: 200px;
+        }
+        .sjz_center_ta_tarea
+        {
+            width: 95%;
+
+        }
+        .sjz_center_ta table
+        {
+            width: 100%;
+        }
+        .sjz_center_ta table .tr1
+        {
+            height:45px;
+        }.sjz_center_ta table .tr2
+        {
+            height:100px;
+        }.sjz_center_ta table .tr3
+        {
+            height:45px;
+        }.sjz_center_ta table .tr4
+        {
+            height:50px;
+        }
+        .sjz_center_t_td
+        {
+            width: 95%;
+        }
+        .sjz_center_ta_submit
+        {
+            width: 60px;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <h3>51时间轴事件管理</h3>
+    <hr/>
+
+
+</div>
+<div class="sjz_nvg">
+    当前位置：<a href="/admin/index">首页</a> > 时间管理中心
+</div>
+<div>
+    <!-- 菜单 -->
+    <div class="sjz_menu">
+        <ul>
+            <li><a href="/admin/eventIndex" >事件管理</a></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <div class="sjz_center">
+        <div>
+            <div></div>
+        </div>
+        <div class="sjz_center_ta">
+             <form action="/admin/addEventIndex" method="post">
+                 <table>
+                     <thead>
+
+                     </thead>
+                     <tbody>
+                         <tr class="tr1">
+                             <td>时间：</td>
+                             <td class="sjz_center_t_td"><input type="text" name="eventTime" value=""/>&nbsp;&nbsp; 日期格式:yyyy-MM-dd</td>
+                         </tr>
+                         <tr class="tr2">
+                             <td>内容：</td>
+                             <td><textarea name="eventContent" rows="7" class="sjz_center_ta_tarea"></textarea></td>
+                         </tr>
+                         <tr class="tr3">
+                             <td>类型：</td>
+                             <td><select name="eventType">
+                                 <option value="0">文本</option>
+                                 <option value="10">超链接</option>
+                             </select></td>
+                         </tr>
+                         <tr class="tr4">
+                             <td><input class="sjz_center_ta_submit" type="submit" value="确定"  /></td>
+                             <td></td>
+                         </tr>
+                     </tbody>
+                 </table>
+             </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

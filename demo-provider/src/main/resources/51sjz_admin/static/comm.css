@@ -1,0 +1,26 @@
+ul{
+    list-style: none;
+}
+.sjz_menu
+{
+    height: 20%;
+    background-color: paleturquoise;
+}
+body
+{
+    color: rgba(0, 0, 0, 0.85);
+}
+a{text-decoration:none;}
+.sjz_menu
+{
+    float: left;
+    width: 20%;
+    background-color: #c4d5fb9c;
+    min-height: 400px;
+}
+.sjz_center
+{
+    float: right;
+    width: 80%;
+    min-height: 400px;
+}
