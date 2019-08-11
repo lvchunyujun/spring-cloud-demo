@@ -8,6 +8,12 @@
         body
         {
             color: rgba(82, 82, 82, 0.85);
+            font-size: 14px;
+        }
+        .sjz_title
+        {
+            font-size: 16px;
+            margin: 20px 40px;
         }
         a{text-decoration:none;}
         ul{
@@ -25,7 +31,7 @@
         }
         .sjz_menu a
         {
-            border-bottom: 1px solid #aaa; */
+            border-bottom: 1px solid #aaa;
         }
         .sjz_center
         {
@@ -83,61 +89,62 @@
 </head>
 <body>
 <div>
-    <h3>51时间轴事件管理</h3>
-    <hr/>
-
-
-</div>
-<div class="sjz_nvg">
-    当前位置：<a href="/admin/index">首页</a> > 时间管理中心
-</div>
-<div>
-    <!-- 菜单 -->
-    <div class="sjz_menu">
-        <ul>
-            <li><a href="/admin/eventIndex" >事件管理</a></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-        </ul>
+    <div class="sjz_title">
+        <h3>事件管理</h3>
+        <hr/>
     </div>
-    <div class="sjz_center">
-        <div>
-            <div></div>
+    <div class="sjz_nvg">
+        当前位置：<a href="/admin/index">首页</a> > <a href="/admin/eventIndex">事件管理</a> > 添加事件
+    </div>
+    <div>
+        <!-- 菜单 -->
+        <div class="sjz_menu">
+            <ul>
+                <li><a href="/admin/eventIndex">事件管理</a></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
         </div>
-        <div class="sjz_center_ta">
-             <form action="/admin/addEventIndex" method="post">
-                 <table>
-                     <thead>
+        <div class="sjz_center">
+            <div>
+                <div></div>
+            </div>
+            <div class="sjz_center_ta">
+                <form action="/admin/addEventIndex" method="post">
+                    <table>
+                        <thead>
 
-                     </thead>
-                     <tbody>
-                         <tr class="tr1">
-                             <td>时间：</td>
-                             <td class="sjz_center_t_td"><input type="text" name="eventTime" value=""/>&nbsp;&nbsp; 日期格式:yyyy-MM-dd</td>
-                         </tr>
-                         <tr class="tr2">
-                             <td>内容：</td>
-                             <td><textarea name="eventContent" rows="7" class="sjz_center_ta_tarea"></textarea></td>
-                         </tr>
-                         <tr class="tr3">
-                             <td>类型：</td>
-                             <td><select name="eventType">
-                                 <option value="0">文本</option>
-                                 <option value="10">超链接</option>
-                             </select></td>
-                         </tr>
-                         <tr class="tr4">
-                             <td><input class="sjz_center_ta_submit" type="submit" value="确定"  /></td>
-                             <td></td>
-                         </tr>
-                     </tbody>
-                 </table>
-             </form>
+                        </thead>
+                        <tbody>
+                        <tr class="tr1">
+                            <td>时间：</td>
+                            <td class="sjz_center_t_td"><input type="text" name="eventTime" value=""/>&nbsp;&nbsp;
+                                日期格式:yyyy-MM-dd
+                            </td>
+                        </tr>
+                        <tr class="tr2">
+                            <td>内容：</td>
+                            <td><textarea name="eventContent" rows="7" class="sjz_center_ta_tarea"></textarea></td>
+                        </tr>
+                        <tr class="tr3">
+                            <td>类型：</td>
+                            <td><select name="eventType">
+                                <option value="0">文本</option>
+                                <option value="10">超链接</option>
+                            </select></td>
+                        </tr>
+                        <tr class="tr4">
+                            <td><input class="sjz_center_ta_submit" type="submit" value="确定"/></td>
+                            <td></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
         </div>
     </div>
 </div>
-
 </body>
 </html>

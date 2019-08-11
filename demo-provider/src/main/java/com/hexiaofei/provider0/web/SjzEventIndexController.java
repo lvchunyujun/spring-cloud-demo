@@ -20,7 +20,7 @@ public class SjzEventIndexController extends BaseController{
     @RequestMapping("/{currentPage}_{pageSize}")
     @ResponseBody
     public String eventIndex(SjzEventIndex sjzEventIndex,@PathVariable int currentPage,@PathVariable int pageSize,String callback){
-
+        ResultEntity re = new ResultEntity();
         PageVo pageVo = new PageVo<SjzEventIndex>();
         if(currentPage>0){
             pageVo.setCurrentPage(currentPage);
@@ -32,16 +32,16 @@ public class SjzEventIndexController extends BaseController{
         }
         try {
             pageVo = sjzEventIndexService.getPageVoObject(pageVo);
-            getResultEntity().setResultCode("0000");
-            getResultEntity().setResultMsg("success");
-            getResultEntity().setData(pageVo);
+            re.setResultCode("0000");
+            re.setResultMsg("success");
+            re.setData(pageVo);
         } catch (Exception e) {
             logger.error("查询异常！",e);
-            getResultEntity().setResultCode("9999");
-            getResultEntity().setResultMsg("网络异常，稍后重试！");
+            re.setResultCode("9999");
+            re.setResultMsg("网络异常，稍后重试！");
         }
 
 //        return getResultEntity().toString();
-        return callback+"("+getResultEntity().toString()+")";
+        return callback+"("+re.toString()+")";
     }
 }

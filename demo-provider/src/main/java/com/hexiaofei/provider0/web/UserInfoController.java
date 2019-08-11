@@ -27,20 +27,22 @@ public class UserInfoController extends BaseController{
     @RequestMapping("/{id}")
     @ResponseBody
     public String findUserInfoById(@PathVariable Integer id){
+        ResultEntity re = new ResultEntity();
+
 
         try {
             UserInfo user = userInfoService.getUserInfoById(id);
             TimeUnit.MILLISECONDS.sleep(100);
-            getResultEntity().setResultCode("000000");
-            getResultEntity().setResultMsg("success");
-            getResultEntity().setData(user);
+            re.setResultCode("000000");
+            re.setResultMsg("success");
+            re.setData(user);
         } catch (InterruptedException e) {
-            getResultEntity().setResultCode("999999");
-            getResultEntity().setResultMsg("系统异常！");
+            re.setResultCode("999999");
+            re.setResultMsg("系统异常！");
             e.printStackTrace();
         }
-        LOGGER.info("【{}】查询客户id={},详情{}",id,getResultEntity().toString());
-        return getResultEntity().toString();
+        LOGGER.info("【{}】查询客户id={},详情{}",id,re.toString());
+        return re.toString();
     }
 
 }

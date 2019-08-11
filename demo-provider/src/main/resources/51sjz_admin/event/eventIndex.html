@@ -4,10 +4,17 @@
     <meta charset="UTF-8"/>
     <title>事件管理</title>
     <link th:href="@{comm.css}" rel="stylesheet" type="text/css" />
+    <script href="jquery-3.4.1.min.js" type="text/javascript" />
     <style type="text/css" >
         body
+         {
+             color: rgba(82, 82, 82, 0.85);
+             font-size: 14px;
+         }
+        .sjz_title
         {
-            color: rgba(82, 82, 82, 0.85);
+            font-size: 16px;
+            margin: 20px 40px;
         }
         a{text-decoration:none;}
         ul{
@@ -25,8 +32,10 @@
         }
         .sjz_menu a
         {
-            border-bottom: 1px solid #aaa; */
+            border-bottom: 1px solid #aaa;
         }
+
+
         .sjz_center
         {
             float: right;
@@ -40,20 +49,115 @@
         }
         .sjz_center_content
         {
-            width: 100%;
+            width: 95%;
             border: 1px solid #aaa;
         }
     </style>
+    <!--
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $.ajax({
+                type: "POST",
+                url: "/admin/eventIndex/list/1_5",
+                dataType:'jsonp',
+                jsonp: "callback",
+                jsonpCallback:"eciHandler",
+                success:function(data){
+
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown){
+                    alert(textStatus+"  "+XMLHttpRequest.state());
+                }
+            });
+        });
+        var eciHandler = function(resultData){
+            var result = JSON.stringify(resultData); //json对象转成字符串
+            var sjzEvt = resultData.data.voList;
+
+            if( sjzEvt.length > 0){
+                $("#content").empty();
+                var size = sjzEvt.length;
+                for (var i = 0; i < size ; i++){
+                    var main_cell_div = document.createElement("div");
+                    main_cell_div = $(main_cell_div).addClass("ei_count_main_cell");
+
+                    var main_time = document.createElement("div");
+                    var main_content = document.createElement("div");
+                    main_time = $(main_time).addClass("ei_count_main_time");
+                    main_content = $(main_content).addClass("ei_count_main_content");
+
+                    var evTime = new Date(sjzEvt[i].eventTime);
+                    $(main_time).append(evTime.Format("yyyy年MM月dd日"));
+                    $(main_content).append(sjzEvt[i].eventContent);
+                    main_cell_div = $(main_cell_div).append(main_time).append(main_content);
+                    $("#content").append(main_cell_div);
+
+                }
+            }
+            link_paging(resultData.data.currentPage,resultData.data.pageCount,resultData.data.pageSize);
+        };
+
+        /**
+         *
+         * @param currentPage 当前页
+         * @param countPage  总页数
+         * @param pageSize  每页显示条数
+         */
+        function link_paging(currentPage,countPage,pageSize){
+            $("#previous_page").unbind("click");
+            $("#next_page").unbind("click");
+            // step1: 已经到达首页
+            if(currentPage == 1 && currentPage == countPage){
+                $("#previous_page").click(function () {
+                    data_paging(currentPage,pageSize);
+                });
+                $("#next_page").click(function () {
+                    data_paging(currentPage,pageSize);
+                });
+            }else if(currentPage == countPage){
+                $("#previous_page").click(function () {
+                    data_paging(currentPage-1,pageSize);
+                });
+                $("#next_page").click(function () {
+                    data_paging(currentPage,pageSize);
+                });
+            }else{
+                $("#previous_page").click(function () {
+                    data_paging(currentPage-1,pageSize);
+                });
+                $("#next_page").click(function () {
+                    data_paging(currentPage+1,pageSize);
+                });
+            }
+
+        }
+
+        function data_paging(currentPage,pageSize){
+            $.ajax({
+                type: "POST",
+                url: "/admin/eventIndex/list/"+currentPage+"_"+pageSize,
+                dataType:'jsonp',
+                jsonp: "callback",
+                jsonpCallback:"eciHandler",
+                success:function(data){
+
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown){
+                    alert(textStatus+"  "+XMLHttpRequest.state());
+                }
+            });
+        }
+
+    </script>
+    -->
 </head>
 <body>
-    <div>
-        <h3>51时间轴事件管理</h3>
+    <div class="sjz_title">
+        <h3>事件管理</h3>
         <hr/>
-
-
     </div>
     <div class="sjz_nvg">
-        当前位置：<a href="/admin/index">首页</a> > 时间管理中心
+        当前位置：<a href="/admin/index">首页</a> > 事件管理
     </div>
     <div>
         <!-- 菜单 -->

@@ -7,22 +7,11 @@ import com.alibaba.fastjson.JSONObject;
  */
 public abstract class BaseController {
 
-    private ResultEntity resultEntity;
-
-    public ResultEntity getResultEntity() {
-        synchronized (this) {
-            if (null == resultEntity) {
-                resultEntity = new ResultEntity();
-            }
-        }
-        return resultEntity;
+    protected ResultEntity getResultEntity(){
+        return new ResultEntity();
     }
 
-    public void setResultEntity(ResultEntity resultEntity) {
-        this.resultEntity = resultEntity;
-    }
-
-    class ResultEntity{
+   protected class ResultEntity{
         private String resultCode;
         private String resultMsg;
         private Object data;
