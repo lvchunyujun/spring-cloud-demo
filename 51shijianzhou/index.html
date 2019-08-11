@@ -10,7 +10,7 @@
         $(document).ready(function(){
             $.ajax({
                 type: "POST",
-                url: "http://localhost:6010/eventIndex/1_5",
+                url: "http://localhost:6010/eventIndex/1_6",
                 dataType:'jsonp',
                 jsonp: "callback",
                 jsonpCallback:"eciHandler",
@@ -144,7 +144,7 @@
         {
             margin: auto;
             width: 850px;
-            height: 85px;
+            min-height: 100px;
 
         }
         .ei_count_main_time
@@ -159,6 +159,7 @@
         .ei_count_main_content
         {
             float:left;
+            min-height: 40px;
             width: 680px;
             padding: 10px 5px;
             text-indent:30px;
