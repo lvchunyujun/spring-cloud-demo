@@ -53,11 +53,12 @@
             border-bottom: 1px solid #aaa;
         }
 
-        .sjz_center_content_tr_2
+        .sjz_center_content_td_2
         {
             text-indent: 30px;
             text-align: left;
         }
+
         <!-- paging start -->
         .ger_center_
         {
@@ -107,6 +108,11 @@
 
                     root_tag = $(root_tag).addClass("sjz_center_content_tr");
 
+                    <!-- 隔行分色 -->
+                    if(i%2==1){
+                        root_tag.css("background-color","#edf8ff");
+                    }
+
                     var td_event_id = document.createElement("td");
                     var td_event_time = document.createElement("td");
                     var td_event_content = document.createElement("td");
@@ -114,7 +120,7 @@
                     var td_event_status = document.createElement("td");
                     var td_event_opt = document.createElement("td");
 
-                    // 1
+                    // 1 编号
                     root_tag = root_tag.append($(td_event_id).text(sjzEvt[i].id));
                     // 2
                     var evTime = new Date(sjzEvt[i].eventTime);
@@ -122,18 +128,39 @@
                     root_tag = root_tag.append(td_event_time);
                     // 3
                     td_event_content = $(td_event_content).text(sjzEvt[i].eventContent);
-                    root_tag = root_tag.append(td_event_content).addClass("sjz_center_content_tr_2");
-                    // 4
-                    td_event_type = $(td_event_type).text(sjzEvt[i].eventType);
+                    td_event_content.addClass("sjz_center_content_td_2");
+                    root_tag = root_tag.append(td_event_content);
+                    // 4 类型标签
+                    var type_ = sjzEvt[i].eventType;
+                    switch (type_){
+                        case 0 : type_ = "文本"; break;
+                        case 10: type_ = "链接"; break;
+                    }
+                    td_event_type = $(td_event_type).text(type_);
+
                     root_tag = root_tag.append(td_event_type);
-                    // 5
-                    td_event_status = $(td_event_status).text(sjzEvt[i].eventState);
+                    // 5 状态
+                    var status_ = sjzEvt[i].eventState;
+                    switch (status_){
+                        case 0 : status_ = "发布"; break;
+                        case 10: status_ = "待审核"; break;
+                        case 20: status_ = "审核通过"; break;
+                        case 30: status_ = "审核禁止"; break;
+                    }
+                    td_event_status = $(td_event_status).text(status_);
                     root_tag = root_tag.append(td_event_status);
-                    // 6
-                    var td_event_opt_a = document.createElement("a");
-                    td_event_opt_a = $(td_event_opt_a).attr("href","/admin/envent/delete/id");
-                    td_event_opt_a = td_event_opt_a.text("修改");
-                    td_event_opt = $(td_event_opt).append(td_event_opt_a);
+                    // 6 操作  更新标签
+                    var td_event_opt_a_u = document.createElement("a");
+                    td_event_opt_a_u = $(td_event_opt_a_u).attr("href","/admin/event/toUpdate/"+sjzEvt[i].id);
+                    td_event_opt_a_u = $(td_event_opt_a_u).text("修改");
+                    td_event_opt = $(td_event_opt).append(td_event_opt_a_u);
+                    td_event_opt = $(td_event_opt).append("&nbsp;|&nbsp;");
+                    // 6 操作  删除标签
+                    var td_event_opt_a_d = document.createElement("a");
+                    td_event_opt_a_d = $(td_event_opt_a_d).attr("href","/admin/envent/delete/"+sjzEvt[i].id);
+                    td_event_opt_a_d = $(td_event_opt_a_d).text("删除");
+                    td_event_opt = $(td_event_opt).append(td_event_opt_a_d);
+
                     root_tag = root_tag.append(td_event_opt);
 
                     $("#sjz_center_content_tbody").append(root_tag);

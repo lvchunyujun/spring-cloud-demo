@@ -56,13 +56,30 @@ public class SjzEventIndexServiceImpl implements SjzEventIndexService {
     }
 
     @Override
-    public int updateObject(SjzEventIndex mob) throws PlatformException {
+    public int updateObject(SjzEventIndex sjzEventIndex) throws PlatformException {
+
+        SjzEventIndex old = getObjectById(sjzEventIndex.getId());
+
+        if(sjzEventIndex.getEventContent()!=null){
+            old.setEventContent(sjzEventIndex.getEventContent());
+        }
+        if(sjzEventIndex.getEventState()!=null){
+            old.setEventState(sjzEventIndex.getEventState());
+        }
+        if(sjzEventIndex.getEventTime()!=null){
+            old.setEventTime(sjzEventIndex.getEventTime());
+        }
+        if(sjzEventIndex.getEventType()!=null){
+            old.setEventType(sjzEventIndex.getEventType());
+        }
+
+        int resultId = sjzEventIndexMapper.updateByPrimaryKey(old);
         return 0;
     }
 
     @Override
     public SjzEventIndex getObjectById(int id) throws PlatformException {
-        return null;
+        return sjzEventIndexMapper.selectByPrimaryKey(id);
     }
 
     @Override

@@ -27,7 +27,7 @@ public class SjzEventIndex {
     private Byte eventType;
 
     /**
-     *状态：0:正常 默认，10:不显示
+     *状态：0:发布，10:待审核(默认)，20:审核通过 30:审核禁止
      */
     private Byte eventState;
 
