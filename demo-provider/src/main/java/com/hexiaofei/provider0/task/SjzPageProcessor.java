@@ -6,6 +6,8 @@ import com.hexiaofei.provider0.domain.SjzSpiderWebsite;
 import com.hexiaofei.provider0.exception.PlatformException;
 import com.hexiaofei.provider0.service.SjzDomainInfoService;
 import com.hexiaofei.provider0.service.SjzSpiderWebsiteService;
+import com.shijianzhou.language.engine.parse.JsoupDocumentParser;
+import com.shijianzhou.language.engine.parse.ParserFactory;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -20,12 +22,22 @@ import us.codecraft.webmagic.processor.PageProcessor;
 import us.codecraft.webmagic.selector.Html;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Component
 public class SjzPageProcessor implements PageProcessor {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(SjzPageProcessor.class);
-    private Site site = Site.me().setRetryTimes(1).setSleepTime(5000);
+    // 设置请求头模仿浏览器，避免发生 403问题
+    private Site site = Site.me()
+            .setUserAgent("Mozilla/5.0 (Windows NT 10.0; WOW64; rv:56.0) Gecko/20100101 Firefox/56.0")
+            .setRetryTimes(1)
+            .setSleepTime(5000);
+
+    /**
+     * 缓存已经执行了的URL，避免重复
+     */
+    private static ConcurrentHashMap<String,Set<String>> concurrentHashMap;
 
     @Autowired
     private SjzSpiderWebsiteService sjzSpiderWebsiteService ;
@@ -35,8 +47,8 @@ public class SjzPageProcessor implements PageProcessor {
 
     private Long startCrawlTime;
 
-
     public SjzPageProcessor() {
+
         sjzSpiderWebsiteService = SpringContextUtil.getBean("sjzSpiderWebsiteService");
     }
 
@@ -123,6 +135,9 @@ public class SjzPageProcessor implements PageProcessor {
         Elements cse = bodyEls.children();
         Iterator<Element> itsEl = cse.iterator();
         Element e;
+
+        // 解析文本内容
+        parseElement(bodyEls);
         while (itsEl.hasNext()){
             e = itsEl.next();
             if(e==null){
@@ -159,6 +174,19 @@ public class SjzPageProcessor implements PageProcessor {
         }
 
         LOGGER.debug("【解析body】<-- {}",url);
+    }
+
+    /**
+     *
+     * @param element
+     */
+    public void parseElement(Element element){
+        ParserFactory parserFactory = ParserFactory.getInstance();
+        JsoupDocumentParser jsoupDocumentParser = parserFactory.getJsoupDocumentParser();
+        List<String> target = jsoupDocumentParser.parserElement(element);
+        for(String s : target){
+            System.out.println("解析结果："+s);
+        }
     }
 
     @Override
