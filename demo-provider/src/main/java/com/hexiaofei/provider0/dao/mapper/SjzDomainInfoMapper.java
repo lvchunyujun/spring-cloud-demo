@@ -5,6 +5,8 @@ import com.hexiaofei.provider0.domain.SjzDomainInfoExample;
 
 import java.util.Date;
 import java.util.List;
+
+import com.hexiaofei.provider0.domain.SjzEventIndex;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.DeleteProvider;
 import org.apache.ibatis.annotations.Insert;
@@ -226,4 +228,34 @@ public interface SjzDomainInfoMapper {
             " where domainUrl = #{domainUrl,jdbcType=VARCHAR} "
     })
     int updateByCrawlResult(SjzDomainInfo sjzDomainInfo);
+
+    @Select(" select count(*) from sjz_domain_info ")
+    int selectCountByAll();
+
+    @Select({
+            " select ",
+            " id, domainName, domainUrl, domainIp, source, type, crawlStatus, lastCrawlTime, ",
+            " crawlUseTime, description, manageStatus, contentLevel, createTime ",
+            " from sjz_domain_info sdi ",
+            " order by sdi.createTime desc ",
+            " limit #{offset},#{pagesize} "
+    })
+    @Results({
+            @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true),
+            @Result(column="domainName", property="domainName", jdbcType=JdbcType.VARCHAR),
+            @Result(column="domainUrl", property="domainUrl", jdbcType=JdbcType.VARCHAR),
+            @Result(column="domainIp", property="domainIp", jdbcType=JdbcType.CHAR),
+            @Result(column="source", property="source", jdbcType=JdbcType.VARCHAR),
+            @Result(column="type", property="type", jdbcType=JdbcType.SMALLINT),
+            @Result(column="crawlStatus", property="crawlStatus", jdbcType=JdbcType.SMALLINT),
+            @Result(column="lastCrawlTime", property="lastCrawlTime", jdbcType=JdbcType.TIMESTAMP),
+            @Result(column="crawlUseTime", property="crawlUseTime", jdbcType=JdbcType.INTEGER),
+            @Result(column="description", property="description", jdbcType=JdbcType.VARCHAR),
+            @Result(column="manageStatus", property="manageStatus", jdbcType=JdbcType.SMALLINT),
+            @Result(column="contentLevel", property="contentLevel", jdbcType=JdbcType.INTEGER),
+            @Result(column="createTime", property="createTime", jdbcType=JdbcType.TIMESTAMP)
+    })
+    List<SjzDomainInfo> selectListByPaging2(@Param("offset") int offset, @Param("pagesize")  int pageSize);
+
+
 }

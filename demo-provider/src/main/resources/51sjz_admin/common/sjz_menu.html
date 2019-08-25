@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <link th:href="@{/css/comm.css}" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<!-- 菜单 -->
+<div class="sjz_menu" th:fragment="sjz_menu">
+    <ul>
+        <li><a href="/admin/eventIndex" >事件管理</a></li>
+        <li><a href="/admin/nlRegExp/index" >表达式模板管理</a></li>
+        <li><a href="/admin/domainInfo/index" >域名地址管理</a></li>
+        <li><a href="/admin/spiderWebsite/index" >网址信息管理</a></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+</body>
+</html>

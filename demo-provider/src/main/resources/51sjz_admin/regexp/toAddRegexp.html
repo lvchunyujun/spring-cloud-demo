@@ -86,12 +86,12 @@
     <div class="sjz_nvg">
         当前位置：<a href="/admin/index">首页</a> > <a href="/admin/eventIndex">事件管理</a> > 添加事件
     </div>
-    <div>
+    <div class="sjz_c">
         <!-- 菜单 -->
         <div class="sjz_menu">
             <ul>
                 <li><a href="/admin/eventIndex">事件管理</a></li>
-                <li><a href="/admin/nlRegExp/index" >表达式模板管理</a></li>
+                <li><a href="/admin/nlRegExp/index">表达式模板管理</a></li>
                 <li></li>
                 <li></li>
                 <li></li>
@@ -120,7 +120,7 @@
                         </tr>
                         <tr class="tr3">
                             <td>类型：</td>
-                            <td><select name="eventType" >
+                            <td><select name="eventType">
                                 <option value="0">文本</option>
                                 <option value="10">超链接</option>
                             </select></td>
@@ -137,5 +137,6 @@
         </div>
     </div>
 </div>
+<div th:replace="common/sjz_bottom :: sjz_bottom"></div>
 </body>
 </html>

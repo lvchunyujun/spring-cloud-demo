@@ -1,6 +1,7 @@
 package com.hexiaofei.provider0.service.impl;
 
 import com.hexiaofei.provider0.dao.mapper.SjzSpiderWebsiteMapper;
+import com.hexiaofei.provider0.domain.SjzDomainInfo;
 import com.hexiaofei.provider0.domain.SjzSpiderWebsite;
 import com.hexiaofei.provider0.exception.PlatformException;
 import com.hexiaofei.provider0.service.SjzSpiderWebsiteService;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Transactional
@@ -43,7 +45,19 @@ public class SjzSpiderWebsiteServiceImpl implements SjzSpiderWebsiteService {
 
     @Override
     public PageVo<SjzSpiderWebsite> getPageVoObject(PageVo<SjzSpiderWebsite> pageVo) throws PlatformException {
-        return null;
+        List<SjzSpiderWebsite> list = new ArrayList<>();
+
+        // step1: 查询当前总记录条数
+        int recordCount = sjzSpiderWebsiteMapper.selectCountByAll();
+        pageVo.setRecordCount(recordCount);
+
+        // step2: 开始位置
+        int offset = pageVo.getCurrentPage()-1<1?0:pageVo.getCurrentPage()-1;
+        // step3: 结果集
+        list = sjzSpiderWebsiteMapper.selectListByPaging(pageVo.getPageSize()*offset,pageVo.getPageSize());
+        pageVo.setVoList(list);
+
+        return pageVo;
     }
 
     @Override

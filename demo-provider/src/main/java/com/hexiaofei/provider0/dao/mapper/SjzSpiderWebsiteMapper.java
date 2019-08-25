@@ -1,7 +1,10 @@
 package com.hexiaofei.provider0.dao.mapper;
 
+import com.hexiaofei.provider0.domain.SjzDomainInfo;
 import com.hexiaofei.provider0.domain.SjzSpiderWebsite;
 import com.hexiaofei.provider0.domain.SjzSpiderWebsiteExample;
+
+import java.util.Date;
 import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.DeleteProvider;
@@ -195,4 +198,25 @@ public interface SjzSpiderWebsiteMapper {
         "where id = #{id,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(SjzSpiderWebsite record);
+
+    @Select(" select count(*) from sjz_spider_website ")
+    int selectCountByAll();
+
+    @Select({
+            " select ",
+            " id, websiteUrl, websiteTitle, websiteDescri, createTime, websiteContent ",
+            " from sjz_spider_website sdw ",
+            " order by sdw.createTime desc ",
+            " limit #{offset},#{pagesize} "
+    })
+    @Results({
+            @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true),
+            @Result(column="websiteUrl", property="websiteUrl", jdbcType=JdbcType.VARCHAR),
+            @Result(column="websiteTitle", property="websiteTitle", jdbcType=JdbcType.VARCHAR),
+            @Result(column="websiteDescri", property="websiteDescri", jdbcType=JdbcType.VARCHAR),
+            @Result(column="createTime", property="createTime", jdbcType=JdbcType.TIMESTAMP),
+            @Result(column="websiteContent", property="websiteContent", jdbcType=JdbcType.LONGVARCHAR)
+    })
+    List<SjzSpiderWebsite> selectListByPaging(@Param("offset") int offset, @Param("pagesize")  int pageSize);
+
 }

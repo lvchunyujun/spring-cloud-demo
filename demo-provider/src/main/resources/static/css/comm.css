@@ -11,8 +11,28 @@ body
     color: rgba(82, 82, 82, 0.85);
     font-size: 14px;
 }
+/* 页面标题 */
+.sjz_title
+{
+    font-size: 16px;
+    margin: 20px 40px;
+}
+/* 页面标题 */
 
+/* 页面导航 */
+.sjz_nvg
+{
+    margin: 15px 40px;
+}
+/* 页面导航 */
 
+/* 页面中心DIV */
+.sjz_c
+{
+    min-height: 800px;
+}
+/* 页面中心DIV */
+/* 菜单 */
 .sjz_menu
 {
     float: left;
@@ -27,3 +47,29 @@ body
 {
     border-bottom: 1px solid #aaa;
 }
+/* 菜单 */
+
+/* 内容中心div */
+.sjz_center
+{
+    float: right;
+    width: 80%;
+    min-height: 400px;
+    margin-bottom: 60px;
+}
+/* 内容中心div */
+
+/* 页面底部 */
+.sjz_bottom
+{
+    min-height: 100px;
+    border-top: 1px solid #aaa;
+    margin: 0px 40px;
+    text-align: center;
+    font-size: 14px;
+}
+.sjz_bottom h4
+{
+    margin: 10px auto;
+}
+/* 页面底部 */

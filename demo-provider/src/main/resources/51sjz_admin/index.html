@@ -33,23 +33,15 @@
         当前位置：首页
     </div>
      <!-- 内容 -->
-     <div>
+     <div class="sjz_c">
          <!-- 菜单 -->
-         <div class="sjz_menu">
-             <ul>
-                 <li><a href="/admin/eventIndex" >事件管理</a></li>
-                 <li><a href="/admin/nlRegExp/index" >表达式模板管理</a></li>
-                 <li></li>
-                 <li></li>
-                 <li></li>
-             </ul>
-         </div>
+         <div th:replace="common/sjz_menu :: sjz_menu"  ></div>
          <div class="sjz_center">
 
          </div>
      </div>
     <div style="">
     </div>
-
+    <div th:replace="common/sjz_bottom :: sjz_bottom"  ></div>
 </body>
 </html>
