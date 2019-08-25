@@ -25,19 +25,19 @@
 			<property name="forceBigDecimals" value="false" />
 		</javaTypeResolver>
 
-		<javaModelGenerator targetPackage="com.hexiaofei.provider0.domain"
+		<javaModelGenerator targetPackage="com.shijianzhou.language.domain"
 							targetProject="/Users/hexiaofei/Documents/workspaces/testDemo/spring-cloud-demo/demo-provider/src/main/java">
 			<property name="enableSubPackages" value="true"/>
 			<property name="trimStrings" value="true"/>
 		</javaModelGenerator>
 
-		<sqlMapGenerator targetPackage="com.hexiaofei.provider0.dao.mapper"
+		<sqlMapGenerator targetPackage="com.shijianzhou.language.dao.mapper"
 						 targetProject="/Users/hexiaofei/Documents/workspaces/testDemo/spring-cloud-demo/demo-provider/src/main/java">
 			<property name="enableSubPackages" value="true"/>
 		</sqlMapGenerator>
 
 		<javaClientGenerator type="ANNOTATEDMAPPER"
-							 targetPackage="com.hexiaofei.provider0.dao.mapper"
+							 targetPackage="com.shijianzhou.language.dao.mapper"
 							 targetProject="/Users/hexiaofei/Documents/workspaces/testDemo/spring-cloud-demo/demo-provider/src/main/java">
 			<property name="enableSubPackages" value="true"/>
 		</javaClientGenerator>
@@ -50,7 +50,11 @@
 		<!--<table tableName="sjz_base_pinyin" domainObjectName="SjzBasePinyin">-->
 			<!--<property name="useActualColumnNames" value="true"/>-->
 		<!--</table>-->
-		<table tableName="sjz_domain_info" domainObjectName="SjzDomainInfo">
+		<!--<table tableName="sjz_domain_info" domainObjectName="SjzDomainInfo">-->
+			<!--<property name="useActualColumnNames" value="true"/>-->
+		<!--</table>-->
+
+		<table tableName="sjz_nl_reg_exp" domainObjectName="SjzNlRegExp">
 			<property name="useActualColumnNames" value="true"/>
 		</table>
 	</context>

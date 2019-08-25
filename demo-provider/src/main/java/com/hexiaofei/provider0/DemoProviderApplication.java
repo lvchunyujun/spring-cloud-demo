@@ -22,9 +22,9 @@ import java.util.concurrent.ThreadPoolExecutor;
 @SpringBootApplication
 @EnableHystrix
 @EnableTransactionManagement                       // 事物管理
-@MapperScan("com.hexiaofei.provider0.dao.mapper")
+@MapperScan(basePackages = {"com.hexiaofei.provider0.dao.mapper","com.shijianzhou.language.dao.mapper"})
 @EnableScheduling                                 // 定时任务
-@ComponentScan(basePackages = {"com.hexiaofei.provider0"})
+@ComponentScan(basePackages = {"com.hexiaofei.provider0","com.shijianzhou.language"})
 public class DemoProviderApplication {
 
 	public static void main(String[] args) {

@@ -9,6 +9,7 @@ import com.hexiaofei.provider0.service.IUserInfoService;
 import com.hexiaofei.provider0.service.SjzEventIndexService;
 import com.hexiaofei.provider0.service.SjzSpiderWebsiteService;
 import com.hexiaofei.provider0.vo.PageVo;
+import net.bytebuddy.implementation.bytecode.Throw;
 import org.apache.catalina.core.ApplicationContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,14 +29,15 @@ public class SjzEventIndexServiceImpl implements SjzEventIndexService {
     @Autowired
     private SjzSpiderWebsiteService sjzSpiderWebsiteService;
 
+    @Transactional(rollbackFor = Exception.class) 
     @Override
     public int addEventIndexAndUser(SjzEventIndex sjzEventIndex, SjzSpiderWebsite sjzSpiderWebsite) throws PlatformException {
 
         sjzSpiderWebsiteService.addObject(sjzSpiderWebsite);
 
         addObject(sjzEventIndex);
-
-
+        if(true)
+         throw new PlatformException("测试事物传播");
         return 0;
     }
 
@@ -46,6 +48,7 @@ public class SjzEventIndexServiceImpl implements SjzEventIndexService {
         int resultId = -1;
         if(mob!=null){
             resultId = sjzEventIndexMapper.insert(mob);
+//            throw new PlatformException("测试事物传播");
         }
         return resultId;
     }

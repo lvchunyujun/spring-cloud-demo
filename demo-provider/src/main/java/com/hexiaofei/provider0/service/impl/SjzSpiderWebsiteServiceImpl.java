@@ -19,6 +19,7 @@ public class SjzSpiderWebsiteServiceImpl implements SjzSpiderWebsiteService {
     @Autowired
     private SjzSpiderWebsiteMapper sjzSpiderWebsiteMapper;
 
+    @Transactional(rollbackFor = Exception.class,propagation = Propagation.REQUIRES_NEW)
     @Override
     public int addObject(SjzSpiderWebsite mob) throws PlatformException {
         int result = sjzSpiderWebsiteMapper.insert(mob);

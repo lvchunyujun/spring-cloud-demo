@@ -11,3 +11,19 @@ body
     color: rgba(82, 82, 82, 0.85);
     font-size: 14px;
 }
+
+
+.sjz_menu
+{
+    float: left;
+    width: 20%;
+    min-height: 400px;
+}
+.sjz_menu li
+{
+    margin: 0px 0px 10px 0px;
+}
+.sjz_menu a
+{
+    border-bottom: 1px solid #aaa;
+}

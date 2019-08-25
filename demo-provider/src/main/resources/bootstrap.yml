@@ -4,7 +4,7 @@ eureka:
   client:
     register-with-eureka: true
     serviceUrl:
-      defaultZone: http://hn-demo1:8686/eureka/,http://hn-demo2:8688/eureka/
+      defaultZone: http://hn-demo1:8686/eureka/
     healthcheck:
       enabled: true
   instance:

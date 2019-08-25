@@ -1,48 +1,19 @@
 package com.hexiaofei.provider0.web;
 
-import com.alibaba.fastjson.JSONObject;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.servlet.ModelAndView;
 
-/**
- * Created by Administrator on 2017/12/26.
- */
-public abstract class BaseController {
+public interface BaseController<T> {
 
-    protected ResultEntity getResultEntity(){
-        return new ResultEntity();
-    }
+     String index();
 
-   protected class ResultEntity{
-        private String resultCode;
-        private String resultMsg;
-        private Object data;
+     String toAdd();
 
-        public String getResultCode() {
-            return resultCode;
-        }
+     String add(T t);
 
-        public void setResultCode(String resultCode) {
-            this.resultCode = resultCode;
-        }
+     ModelAndView toUpadte(@PathVariable Integer id);
 
-        public String getResultMsg() {
-            return resultMsg;
-        }
+     ModelAndView update(T t);
 
-        public void setResultMsg(String resultMsg) {
-            this.resultMsg = resultMsg;
-        }
-
-        public Object getData() {
-            return data;
-        }
-
-        public void setData(Object data) {
-            this.data = data;
-        }
-
-        @Override
-        public String toString() {
-            return JSONObject.toJSONString(this);
-        }
-    }
+     String listEventIndex(T t,@PathVariable int currentPage,@PathVariable int pageSize);
 }
