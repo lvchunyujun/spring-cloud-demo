@@ -56,7 +56,7 @@ public class WebSpiderTask {
     }
 
     /**
-     *
+     * 抓取网站
      */
     @Async
     @Scheduled(cron="0 04 21 * * ?")
@@ -81,12 +81,19 @@ public class WebSpiderTask {
         }
     }
 
+    /**
+     * 抓取并解析网站内容
+     */
     @Async
     @Scheduled(cron="10 24 23 * * ?")
     public void parseHtml(){
         crawlWebPage("http://www.wangshiyan.com/");
     }
 
+    /**
+     * 根据规则生产网站地址
+     * @throws PlatformException
+     */
 //    @Async
 //    @Scheduled(cron="10 28 23 * * ?")
     public void loadingUrl() throws PlatformException {

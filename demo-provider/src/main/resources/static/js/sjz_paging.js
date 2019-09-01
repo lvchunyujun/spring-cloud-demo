@@ -51,6 +51,17 @@ var eciHandler = function(resultData){
                     val_ = map[key].typeMap[val_];
                     td_tag = $(td_tag).text(val_);
                 }
+                // 图标映射
+                if(map[key].tagType == 'bg_img'){
+                    val_ = map[key].typeMap[val_];
+                    var bg_img = document.createElement("img");
+                    bg_img = $(bg_img).attr("src","/images/"+val_+"");
+
+                    if(map[key].img_class !=null && map[key].img_class.length > 0){
+                        bg_img = $(bg_img).addClass(map[key].img_class);
+                    }
+                    td_tag = $(td_tag).append(bg_img);
+                }
                 if(map[key].tagType == 'a_operation'){
                     var indexName = map[key].indexName;
                     // 6.1 操作  更新标签
@@ -120,6 +131,10 @@ function link_paging(currentPage,countPage,pageSize){
             data_paging(currentPage+1,pageSize);
         });
     }
+
+    // 显示分页数据信息
+    $("#sjz_page_info").text("(第"+(currentPage==null||currentPage==""?"-":currentPage)+"页，共"
+                                +(countPage==null||countPage==""?"-":countPage)+"页)");
 
 }
 

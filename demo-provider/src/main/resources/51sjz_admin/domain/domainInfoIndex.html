@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <title>域名地址管理</title>
+    <link rel="icon" th:href="@{/images/favicon.ico}" type="image/gif" />
     <link th:href="@{/css/comm.css}" rel="stylesheet" type="text/css" />
     <link th:href="@{/css/sjz_paging.css}" rel="stylesheet" type="text/css" />
     <script th:src="@{/js/jquery-3.4.1.min.js}" type="text/javascript" />
@@ -47,7 +48,7 @@
             {   bUrl:"/admin/domainInfo/list/",
                 sBUrl:"_",
                 dPageNo:1,
-                dPageSize:20,
+                dPageSize:300,
                 bootstrapDiv:{
                            id_:"sjz_center_content_tbody"
                 },
@@ -104,8 +105,7 @@
 </head>
 <body>
     <div class="sjz_title">
-        <h3>域名地址管理</h3>
-        <hr/>
+        <img th:src="@{/images/51shijianzhou.png}" class="sjz_title_img" /><h3>域名地址管理</h3>
     </div>
     <div class="sjz_nvg">
         当前位置：<a href="/admin/index">首页</a> > 域名地址管理
@@ -136,6 +136,7 @@
                 </tbody>
             </table>
             <div class="ger_center_ ger_text_">
+                <div id="sjz_page_info"></div>
                 <a id="previous_page" href="javascript:void(0);" style="color: #1683a8;text-decoration:none">上一页</a>&nbsp;&nbsp;&nbsp;&nbsp;
                 <a id="next_page" href="javascript:void(0);" style="color: #1683a8;text-decoration:none" >下一页</a>
             </div>

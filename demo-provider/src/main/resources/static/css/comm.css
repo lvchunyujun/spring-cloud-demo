@@ -1,3 +1,9 @@
+body
+{
+    color: rgba(82, 82, 82, 0.85);
+    font-size: 14px;
+    margin: 0px;
+}
 a
 {
     text-decoration:none;
@@ -6,38 +12,58 @@ a
 ul{
     list-style: none;
 }
-body
+
+.input_readonly
 {
-    color: rgba(82, 82, 82, 0.85);
-    font-size: 14px;
+    color: #aaa;
 }
 /* 页面标题 */
 .sjz_title
 {
     font-size: 16px;
-    margin: 20px 40px;
+    margin: 0px;
+    padding: 25px 40px;
+    min-height: 55px;
+    background-color: #eaf2ff;
+    color: #80acdb;
+}
+.sjz_title_img
+{
+    float: left;
+    height: 45px;
+}
+.sjz_title h3
+{
+    width: 300px;
+    margin: 0px;
+    font-size: 31px;
+    float: left;
+    padding: 0px 10px;
 }
 /* 页面标题 */
 
 /* 页面导航 */
 .sjz_nvg
 {
-    margin: 15px 40px;
+    background-color: #c3e0ff;
+    padding: 15px 40px;
 }
 /* 页面导航 */
 
-/* 页面中心DIV */
+/* 页面中心DIV overflow: hidden;解决float不能自适应； */
 .sjz_c
 {
     min-height: 800px;
+    overflow: hidden;
 }
 /* 页面中心DIV */
 /* 菜单 */
 .sjz_menu
 {
     float: left;
-    width: 20%;
-    min-height: 400px;
+    width: 16%;
+    min-height: 600px;
+    background-color: #eaf2ff;
 }
 .sjz_menu li
 {
@@ -46,6 +72,7 @@ body
 .sjz_menu a
 {
     border-bottom: 1px solid #aaa;
+    margin-left: 15px;
 }
 /* 菜单 */
 
@@ -63,10 +90,10 @@ body
 .sjz_bottom
 {
     min-height: 100px;
-    border-top: 1px solid #aaa;
-    margin: 0px 40px;
     text-align: center;
-    font-size: 14px;
+    font-size: 18px;
+    background-color: #eaf2ff;
+    color: #80acdb;
 }
 .sjz_bottom h4
 {

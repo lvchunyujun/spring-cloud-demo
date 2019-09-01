@@ -6,6 +6,7 @@ import com.hexiaofei.provider0.domain.SjzEventIndex;
 import com.hexiaofei.provider0.exception.PlatformException;
 import com.hexiaofei.provider0.service.SjzDomainInfoService;
 import com.hexiaofei.provider0.vo.PageVo;
+import jodd.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,13 +33,23 @@ public class SjzDomainInfoServiceImpl implements SjzDomainInfoService {
     }
 
     @Override
-    public int updateObject(SjzDomainInfo mob) throws PlatformException {
-        return 0;
+    public int updateObject(SjzDomainInfo sjzDomainInfo) throws PlatformException {
+        SjzDomainInfo newObj = getObjectById(sjzDomainInfo.getId());
+
+        if(StringUtil.isNotEmpty(sjzDomainInfo.getDomainName())){
+            newObj.setDomainName(sjzDomainInfo.getDomainName());
+        }
+
+
+
+
+        int resultId = sjzDomainInfoMapper.updateByPrimaryKeySelective(sjzDomainInfo);
+        return resultId;
     }
 
     @Override
     public SjzDomainInfo getObjectById(int id) throws PlatformException {
-        return null;
+        return sjzDomainInfoMapper.selectByPrimaryKey(id);
     }
 
     @Override
