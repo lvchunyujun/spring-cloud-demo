@@ -24,7 +24,7 @@ ul{
     margin: 0px;
     padding: 25px 40px;
     min-height: 55px;
-    background-color: #eaf2ff;
+    background-color: #18468c;
     color: #80acdb;
 }
 .sjz_title_img
@@ -80,11 +80,36 @@ ul{
 .sjz_center
 {
     float: right;
-    width: 80%;
+    width: 84%;
     min-height: 400px;
     margin-bottom: 60px;
 }
+/* 内容中心> 列表<a> 添加标签 */
+.sjz_center_ad
+{
+    float: right;
+    width: 4%;
+    height: 60px;
+    line-height: 60px;
+}
+/* 内容中心> 列表table */
+.sjz_center_content
+{
+    width: 99%;
+    border: 1px solid #f1f1f1;
+    min-height: 500px;
+}
+
+/* 内容中心> 更新table */
+.sjz_center_ta table
+{
+    width: 96%;
+    margin: 0 auto;
+}
+
 /* 内容中心div */
+
+
 
 /* 页面底部 */
 .sjz_bottom
@@ -92,7 +117,7 @@ ul{
     min-height: 100px;
     text-align: center;
     font-size: 18px;
-    background-color: #eaf2ff;
+    background-color: #18468c;
     color: #80acdb;
 }
 .sjz_bottom h4
@@ -100,3 +125,5 @@ ul{
     margin: 10px auto;
 }
 /* 页面底部 */
+
+

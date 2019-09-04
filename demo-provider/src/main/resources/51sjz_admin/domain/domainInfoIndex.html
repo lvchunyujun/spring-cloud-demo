@@ -11,18 +11,6 @@
     <script th:src="@{/js/sjz_paging.js}" type="text/javascript" />
 
     <style type="text/css" >
-
-        .sjz_center_ad
-        {
-            float: right;
-            width: 100px;
-        }
-        .sjz_center_content
-        {
-            width: 95%;
-            border: 1px solid #f1f1f1;
-            min-height: 500px;
-        }
         .sjz_center_content thead
         {
             background-color: #eaeaea;
@@ -70,21 +58,36 @@
                         tagType:"text_type",
                         typeMap:{
                             "0000":"自动匹配",
-                            "0100":"手动录入"
+                            "0100":"网站抓取",
+                            "0200":"手动录入"
                         }
                     },
                     type:{
                         tagType:"text_type",
                         typeMap:{
+                            10:"新闻",
+                            20:"金融",
+                            30:"艺术",
+                            40:"体育",
+                            50:"游戏",
                             0:"其他"
                         }
                     },
                     crawlStatus:{
                         tagType:"text",
                     },
-                    lastCrawlTime:{
-                        tagType:"text_datetime",
-                        dateFormat:"yyyy-MM-dd"
+                    // lastCrawlTime:{
+                    //     tagType:"text_datetime",
+                    //     dateFormat:"yyyy-MM-dd"
+                    // },
+                    manageStatus:{
+                        tagType:"text_type",
+                        typeMap:{
+                            0:"正常",
+                            10:"测试",
+                            20:"禁用"
+
+                        }
                     },
                     u_d_operation:{
                         tagType:"a_operation",
@@ -127,7 +130,7 @@
                        <th style="width: 8%;"> 来源 </th>
                        <th style="width: 8%;"> 类型 </th>
                        <th style="width: 8%;"> 状态 </th>
-                       <th style="width: 15%" >最后抓取时间</th>
+                       <th style="width: 15%" >管理状态</th>
                        <th style="width: 8%;"> 操作 </th>
                    </tr>
                 </thead>

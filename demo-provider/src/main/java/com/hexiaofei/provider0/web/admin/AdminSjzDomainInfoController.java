@@ -85,7 +85,7 @@ public class AdminSjzDomainInfoController extends AdminBaseController implements
     }
 
     /**
-     * 更新事件
+     * 更新域名信息
      * @return
      */
     @RequestMapping(value = "domainInfo/update",method = RequestMethod.POST)
