@@ -8,10 +8,12 @@ import com.shijianzhou.language.domain.SjzNlRegExp;
 import com.shijianzhou.language.service.SjzNlRegExpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Transactional
 @Service("sjzNlRegExpService")
 public class SjzNlRegExpServiceImpl implements SjzNlRegExpService {
 
@@ -19,8 +21,8 @@ public class SjzNlRegExpServiceImpl implements SjzNlRegExpService {
     private SjzNlRegExpMapper sjzNlRegExpMapper;
 
     @Override
-    public int addObject(Object mob) throws PlatformException {
-        return 0;
+    public int addObject(SjzNlRegExp sjzNlRegExp) throws PlatformException {
+        return sjzNlRegExpMapper.insert(sjzNlRegExp);
     }
 
     @Override
@@ -29,12 +31,12 @@ public class SjzNlRegExpServiceImpl implements SjzNlRegExpService {
     }
 
     @Override
-    public int updateObject(Object mob) throws PlatformException {
+    public int updateObject(SjzNlRegExp sjzNlRegExp) throws PlatformException {
         return 0;
     }
 
     @Override
-    public Object getObjectById(int id) throws PlatformException {
+    public SjzNlRegExp getObjectById(int id) throws PlatformException {
         return null;
     }
 
@@ -56,7 +58,7 @@ public class SjzNlRegExpServiceImpl implements SjzNlRegExpService {
     }
 
     @Override
-    public List getAllObject() throws PlatformException {
+    public List<SjzNlRegExp> getAllObject() throws PlatformException {
         return null;
     }
 }

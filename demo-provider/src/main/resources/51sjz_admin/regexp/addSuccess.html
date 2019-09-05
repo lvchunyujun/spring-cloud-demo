@@ -2,16 +2,21 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>事件管理</title>
+    <title>表达式模板管理</title>
     <link rel="icon" th:href="@{/images/favicon.ico}" type="image/gif" />
     <link th:href="@{/css/comm.css}" rel="stylesheet" type="text/css" />
     <script th:src="@{/js/jquery-3.4.1.min.js}" type="text/javascript" />
     <script th:src="@{/js/utils.js}" type="text/javascript" />
 </head>
 <body>
-     <h3>51时间轴事件管理</h3>
+    <div class="sjz_title">
+        <img th:src="@{/images/51shijianzhou.png}" class="sjz_title_img" /><h3>表达式模板管理</h3>
+    </div>
+    <div class="sjz_nvg">
+        当前位置：<a href="/admin/index">首页</a> > <a href="/admin/nlRegExp/index" >表达式模板管理</a>
+    </div>
      添加成功！
-     <a href="/admin/toAddEventIndex" >添加时间轴事件</a>
+     <a href="/admin/nlRegExp/toAdd" >添加表达式模板</a>
      <div th:replace="common/sjz_bottom :: sjz_bottom"  ></div>
 </body>
 </html>

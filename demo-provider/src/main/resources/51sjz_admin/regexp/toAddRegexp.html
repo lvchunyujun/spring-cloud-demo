@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>事件管理</title>
+    <title>表达式模板管理</title>
     <link rel="icon" th:href="@{/images/favicon.ico}" type="image/gif" />
     <link th:href="@{/css/comm.css}" rel="stylesheet" type="text/css" />
     <script th:src="@{/js/jquery-3.4.1.min.js}" type="text/javascript" />
@@ -14,23 +14,12 @@
     </script>
     <style type="text/css" >
 
-        .sjz_center
-        {
-            float: right;
-            width: 80%;
-            min-height: 400px;
-            font-size: 14px;
-        }
         .sjz_center_ad
         {
             float: right;
             width: 100px;
         }
-        .sjz_center_content
-        {
-            width: 100%;
-            border: 1px solid #aaa;
-        }
+
         .sjz_center_ta
         {
             width: 95%;
@@ -40,10 +29,6 @@
         {
             width: 95%;
 
-        }
-        .sjz_center_ta table
-        {
-            width: 100%;
         }
         .sjz_center_ta table .tr1
         {
@@ -66,6 +51,10 @@
         {
             width: 60px;
         }
+        .sjz_center_t_td .regexp
+        {
+            width: 500px;
+        }
     </style>
 </head>
 <body>
@@ -74,48 +63,73 @@
         <img th:src="@{/images/51shijianzhou.png}" class="sjz_title_img" /><h3>事件管理</h3>
     </div>
     <div class="sjz_nvg">
-        当前位置：<a href="/admin/index">首页</a> > <a href="/admin/eventIndex">事件管理</a> > 添加事件
+        当前位置：<a href="/admin/index">首页</a> > <a href="/admin/nlRegExp/index">表达式模板管理</a> > 添加表达式模板
     </div>
     <div class="sjz_c">
         <!-- 菜单 -->
-        <div class="sjz_menu">
-            <ul>
-                <li><a href="/admin/eventIndex">事件管理</a></li>
-                <li><a href="/admin/nlRegExp/index">表达式模板管理</a></li>
-                <li></li>
-                <li></li>
-                <li></li>
-            </ul>
-        </div>
+        <div th:replace="common/sjz_menu :: sjz_menu"  ></div>
         <div class="sjz_center">
             <div>
                 <div></div>
             </div>
             <div class="sjz_center_ta">
-                <form action="/admin/addEventIndex" method="post">
+                <form action="/admin/nlRegExp/addEventIndex" method="post">
                     <table>
                         <thead>
 
                         </thead>
                         <tbody>
                         <tr class="tr1">
-                            <td>时间：</td>
-                            <td class="sjz_center_t_td"><input type="text" name="eventTime" value=""/>&nbsp;&nbsp;
-                                日期格式:yyyy-MM-dd
+                            <td>模板：</td>
+                            <td class="sjz_center_t_td">
+                                <input type="text" name="regExpPattern" class="regexp" value=""/>&nbsp;&nbsp;
                             </td>
                         </tr>
                         <tr class="tr2">
-                            <td>内容：</td>
-                            <td><textarea name="eventContent" rows="7" class="sjz_center_ta_tarea"></textarea></td>
+                            <td>实例：</td>
+                            <td><textarea name="regExpDemo" rows="7" class="sjz_center_ta_tarea"></textarea></td>
                         </tr>
                         <tr class="tr3">
-                            <td>类型：</td>
-                            <td><select name="eventType">
-                                <option value="0">文本</option>
-                                <option value="10">超链接</option>
-                            </select></td>
+                            <td>组合类型：</td>
+                            <td>
+                                <label>
+                                    <input name="patternType"  type="radio" value="0" />边界类型
+                                </label>
+                                <label>
+                                    <input name="patternType"  type="radio" value="10" />前置类型
+                                </label>
+                                <label>
+                                    <input name="patternType"  type="radio" value="20" />后置类型
+                                </label>
+                                <label>
+                                    <input name="patternType"  type="radio" value="30" />环绕类型
+                                </label>
+                            </td>
                         </tr>
                         <tr class="tr4">
+                            <td>匹配类型：</td>
+                            <td>
+                                <label>
+                                    <input name="matchType"  type="radio" value="0000" />其他
+                                </label>
+                            </td>
+                        </tr>
+                        <tr class="tr5">
+                            <td>检查状态：</td>
+                            <td class="sjz_center_t_td">
+                                <label>
+                                    <input name="checkStatus"  type="radio" value="0000" />未校验
+                                </label>
+                                <label>
+                                    <input name="checkStatus"  type="radio" value="0000" />已校验
+                                </label>
+                            </td>
+                        </tr>
+                        <tr class="tr6">
+                            <td>描述：</td>
+                            <td><textarea name="descr" rows="7" class="sjz_center_ta_tarea"></textarea></td>
+                        </tr>
+                        <tr class="tr7">
                             <td><input class="sjz_center_ta_submit" type="submit" value="确定"/></td>
                             <td></td>
                         </tr>
