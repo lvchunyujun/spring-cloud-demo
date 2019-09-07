@@ -9,11 +9,7 @@
     <script th:src="@{/js/utils.js}" type="text/javascript" />
     <style type="text/css" >
 
-        .sjz_center_ta
-        {
-            width: 95%;
-            min-height: 200px;
-        }
+
         .sjz_center_ta_tarea
         {
             width: 95%;
@@ -56,79 +52,87 @@
     </div>
     <div class="sjz_c">
         <!-- 菜单 -->
-        <div class="sjz_menu">
-            <ul>
-                <li><a href="/admin/eventIndex">事件管理</a></li>
-                <li><a href="/admin/nlRegExp/index" >表达式模板管理</a></li>
-                <li></li>
-                <li></li>
-                <li></li>
-            </ul>
-        </div>
+        <div th:replace="common/sjz_menu :: sjz_menu"  ></div>
         <div class="sjz_center">
             <div>
                 <div></div>
             </div>
             <div class="sjz_center_ta">
-                <form action="/admin/event/upadte" method="post">
+                <form action="/admin/nlRegExp/updata" method="post">
                     <table>
                         <thead>
 
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>编号：</td><td><div th:text="${sjzEventIndex.id}"></div></td>
+                        <tr class="tr1">
+                            <td>模板：</td>
+                            <td class="sjz_center_t_td">
+                                <input type="text" name="id" class="regexp" th:value="${sjzNlRegExp.id}"/>&nbsp;&nbsp;
+                            </td>
                         </tr>
                         <tr class="tr1">
-                            <td>时间：</td>
+                            <td>模板：</td>
                             <td class="sjz_center_t_td">
-                                <input type="hidden" name="id" th:value="${sjzEventIndex.id}" />
-                                <input type="text" name="eventTime"
-                                       th:value="${sjzEventIndex.eventTime}
-                                                  ? ${#dates.format(sjzEventIndex.eventTime,'yyyy-MM-dd')}
-                                                  : ''"/>&nbsp;&nbsp;
-
+                                <input type="text" name="regExpPattern" class="regexp" th:value="${sjzNlRegExp.regExpPattern}"/>&nbsp;&nbsp;
                             </td>
                         </tr>
                         <tr class="tr2">
-                            <td>内容：</td>
-                            <td>
-                                <textarea name="eventContent" rows="7"
-                                          class="sjz_center_ta_tarea"
-                                          th:text="${sjzEventIndex.eventContent}"></textarea>
-                            </td>
+                            <td>实例：</td>
+                            <td><textarea name="regExpDemo" rows="7" class="sjz_center_ta_tarea" th:text="${sjzNlRegExp.regExpDemo}"></textarea></td>
                         </tr>
                         <tr class="tr3">
-                            <td>类型：</td>
-                            <td><select name="eventType"
-                                        th:field="${sjzEventIndex.eventType}"
-                                        th:switch="${sjzEventIndex.eventType}">
-                                <option value="" >-请选择-</option>
-                                <option th:selected="${sjzEventIndex.eventType=='0'}" value="0">文本</option>
-                                <option th:selected="${sjzEventIndex.eventType=='10'}" value="10">超链接</option>
-                            </select></td>
-                        </tr>
-                        <tr>
-                            <td>状态：</td>
+                            <td>组合类型：</td>
                             <td>
                                 <label>
-                                    <input name="eventState" th:checked="${sjzEventIndex.eventState==0}" type="radio" value="0" />:发布
+                                    <input name="patternType" th:checked="${sjzNlRegExp.patternType==0}" type="radio" value="0" />边界类型
                                 </label>
-                                &nbsp;
                                 <label>
-                                    <input name="eventState" th:checked="${sjzEventIndex.eventState==10}" type="radio" value="10" />:待审核
+                                    <input name="patternType" th:checked="${sjzNlRegExp.patternType==10}" type="radio" value="10" />前置类型
                                 </label>
-                                &nbsp;
                                 <label>
-                                    <input name="eventState" th:checked="${sjzEventIndex.eventState==20}" type="radio" value="20" />:审核通过
+                                    <input name="patternType" th:checked="${sjzNlRegExp.patternType==20}" type="radio" value="20" />后置类型
                                 </label>
-                                &nbsp;
                                 <label>
-                                    <input name="eventState" th:checked="${sjzEventIndex.eventState==30}" type="radio" value="30" />:审核禁止
+                                    <input name="patternType" th:checked="${sjzNlRegExp.patternType==30}" type="radio" value="30" />环绕类型
                                 </label>
                             </td>
                         </tr>
                         <tr class="tr4">
+                            <td>匹配类型：</td>
+                            <td>
+                                <label>
+                                    <input name="matchType" th:checked="${sjzNlRegExp.matchType==0}" type="radio" value="0" />名词
+                                </label>
+                                <label>
+                                    <input name="matchType" th:checked="${sjzNlRegExp.matchType==100}" type="radio" value="100" />动词
+                                </label>
+                                <label>
+                                    <input name="matchType" th:checked="${sjzNlRegExp.matchType==200}" type="radio" value="200" />形容词
+                                </label>
+                                <label>
+                                    <input name="matchType" th:checked="${sjzNlRegExp.matchType==300}" type="radio" value="300" />数词
+                                </label>
+                            </td>
+                        </tr>
+                        <tr class="tr5">
+                            <td>检查状态：</td>
+                            <td class="sjz_center_t_td">
+                                <label>
+                                    <input name="checkStatus" th:checked="${sjzNlRegExp.checkStatus==0}"  type="radio" value="0" />未校验
+                                </label>
+                                <label>
+                                    <input name="checkStatus" th:checked="${sjzNlRegExp.checkStatus==10}"  type="radio" value="10" />已校验
+                                </label>
+                                <label>
+                                    <input name="checkStatus" th:checked="${sjzNlRegExp.checkStatus==20}"  type="radio" value="20" />禁用
+                                </label>
+                            </td>
+                        </tr>
+                        <tr class="tr6">
+                            <td>描述：</td>
+                            <td><textarea name="descr" rows="7" class="sjz_center_ta_tarea" th:text="${sjzNlRegExp.descr}"></textarea></td>
+                        </tr>
+                        <tr class="tr7">
                             <td><input class="sjz_center_ta_submit" type="submit" value="确定"/></td>
                             <td></td>
                         </tr>

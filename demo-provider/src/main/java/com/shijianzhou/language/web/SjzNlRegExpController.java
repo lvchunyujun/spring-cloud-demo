@@ -1,5 +1,6 @@
 package com.shijianzhou.language.web;
 
+import com.hexiaofei.provider0.domain.SjzDomainInfo;
 import com.hexiaofei.provider0.domain.SjzEventIndex;
 import com.hexiaofei.provider0.exception.PlatformException;
 import com.hexiaofei.provider0.service.SjzEventIndexService;
@@ -61,14 +62,42 @@ public class SjzNlRegExpController extends AdminBaseController implements BaseCo
         }
     }
 
-    @Override
-    public ModelAndView toUpadte(Integer id) {
-        return null;
-    }
 
     @Override
+    @RequestMapping(value = "/nlRegExp/toUpdate/{id}")
+    public ModelAndView toUpdate(@PathVariable Integer id) {
+        ModelAndView modelAndView =
+                new ModelAndView(STATIC_BASE_URL+"/toUpdateRegexp");
+        try {
+            SjzNlRegExp sjzNlRegExp = sjzNlRegExpService.getObjectById(id);
+            if(sjzNlRegExp!=null)
+                modelAndView.addObject(sjzNlRegExp);
+        }catch (PlatformException e){
+
+        }
+
+        return modelAndView;
+    }
+
+
+    @Override
+    @RequestMapping(value = "/nlRegExp/updata")
     public ModelAndView update(SjzNlRegExp sjzNlRegExp) {
-        return null;
+        ModelAndView modelAndView = new ModelAndView(STATIC_BASE_URL+"/toUpdateRegexp");
+        int resultId = -1;
+        try {
+
+            resultId = sjzNlRegExpService.updateObject(sjzNlRegExp);
+            sjzNlRegExp = sjzNlRegExpService.getObjectById(sjzNlRegExp.getId());
+            if(sjzNlRegExp!=null)
+                modelAndView.addObject(sjzNlRegExp);
+            modelAndView.addObject("resultCode","0");
+            modelAndView.addObject("resultMsg","修改成功！");
+        }catch (PlatformException e){
+
+        }
+
+        return modelAndView;
     }
 
     @RequestMapping(value = "/nlRegExp/list/{currentPage}_{pageSize}")

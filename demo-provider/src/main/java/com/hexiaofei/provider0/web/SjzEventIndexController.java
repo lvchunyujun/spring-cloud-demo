@@ -63,7 +63,7 @@ public class SjzEventIndexController extends AbstractBaseController implements B
     }
 
     @Override
-    public ModelAndView toUpadte(Integer id) {
+    public ModelAndView toUpdate(Integer id) {
         return null;
     }
 

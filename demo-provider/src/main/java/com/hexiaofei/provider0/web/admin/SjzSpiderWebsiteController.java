@@ -40,7 +40,7 @@ public class SjzSpiderWebsiteController extends AdminBaseController implements B
     }
 
     @Override
-    public ModelAndView toUpadte(Integer id) {
+    public ModelAndView toUpdate(Integer id) {
         return null;
     }
 

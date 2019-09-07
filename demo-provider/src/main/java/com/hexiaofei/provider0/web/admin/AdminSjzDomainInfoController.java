@@ -70,7 +70,7 @@ public class AdminSjzDomainInfoController extends AdminBaseController implements
      * @return
      */
     @RequestMapping(value = "domainInfo/toUpdate/{id}")
-    public ModelAndView toUpadte(@PathVariable Integer id){
+    public ModelAndView toUpdate(@PathVariable Integer id){
         ModelAndView modelAndView =
                 new ModelAndView(STATIC_BASE_URL+"/toUpdateDomainInfo");
         try {

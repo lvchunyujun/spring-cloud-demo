@@ -11,7 +11,7 @@ public interface BaseController<T> {
 
      String add(T t);
 
-     ModelAndView toUpadte(@PathVariable Integer id);
+     ModelAndView toUpdate(@PathVariable Integer id);
 
      ModelAndView update(T t);
 

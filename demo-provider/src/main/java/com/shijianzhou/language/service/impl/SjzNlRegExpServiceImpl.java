@@ -2,6 +2,7 @@ package com.shijianzhou.language.service.impl;
 
 import com.hexiaofei.provider0.domain.SjzEventIndex;
 import com.hexiaofei.provider0.exception.PlatformException;
+import com.hexiaofei.provider0.service.base.AbstractService;
 import com.hexiaofei.provider0.vo.PageVo;
 import com.shijianzhou.language.dao.mapper.SjzNlRegExpMapper;
 import com.shijianzhou.language.domain.SjzNlRegExp;
@@ -15,7 +16,7 @@ import java.util.List;
 
 @Transactional
 @Service("sjzNlRegExpService")
-public class SjzNlRegExpServiceImpl implements SjzNlRegExpService {
+public class SjzNlRegExpServiceImpl extends AbstractService implements SjzNlRegExpService {
 
     @Autowired
     private SjzNlRegExpMapper sjzNlRegExpMapper;
@@ -32,12 +33,16 @@ public class SjzNlRegExpServiceImpl implements SjzNlRegExpService {
 
     @Override
     public int updateObject(SjzNlRegExp sjzNlRegExp) throws PlatformException {
-        return 0;
+        int resultId = -1;
+        SjzNlRegExp targetObj = getObjectById(sjzNlRegExp.getId());
+        targetObj = refreshObjectForNotNullVal(targetObj,sjzNlRegExp);
+        resultId = sjzNlRegExpMapper.updateByPrimaryKey(targetObj);
+        return resultId;
     }
 
     @Override
     public SjzNlRegExp getObjectById(int id) throws PlatformException {
-        return null;
+        return sjzNlRegExpMapper.selectByPrimaryKey(id);
     }
 
     @Override
@@ -61,4 +66,5 @@ public class SjzNlRegExpServiceImpl implements SjzNlRegExpService {
     public List<SjzNlRegExp> getAllObject() throws PlatformException {
         return null;
     }
+
 }

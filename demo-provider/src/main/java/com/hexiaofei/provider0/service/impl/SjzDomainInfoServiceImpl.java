@@ -36,34 +36,8 @@ public class SjzDomainInfoServiceImpl extends AbstractService implements SjzDoma
     public int updateObject(SjzDomainInfo sjzDomainInfo) throws PlatformException {
         SjzDomainInfo targetObject = getObjectById(sjzDomainInfo.getId());
 
-        if(StringUtil.isNotEmpty(sjzDomainInfo.getDomainName())){
-            targetObject.setDomainName(sjzDomainInfo.getDomainName());
-        }
-
-        if(StringUtil.isNotEmpty(sjzDomainInfo.getDomainUrl())){
-            targetObject.setDomainUrl(sjzDomainInfo.getDomainUrl());
-        }
-        if(StringUtil.isNotEmpty(sjzDomainInfo.getDomainIp())){
-            targetObject.setDomainIp(sjzDomainInfo.getDomainIp());
-        }
-        if(StringUtil.isNotEmpty(sjzDomainInfo.getSource())){
-            targetObject.setSource(sjzDomainInfo.getSource());
-        }
-        if(sjzDomainInfo.getType()!=null){
-            targetObject.setType(sjzDomainInfo.getType());
-        }
-        if(StringUtil.isNotEmpty(sjzDomainInfo.getDescription())){
-            targetObject.setDescription(sjzDomainInfo.getDescription());
-        }
-        if(sjzDomainInfo.getManageStatus() != null){
-            targetObject.setManageStatus(sjzDomainInfo.getManageStatus());
-        }
-        if(sjzDomainInfo.getContentLevel() != null ){
-            targetObject.setContentLevel(sjzDomainInfo.getContentLevel());
-        }
-
           // * 刷新对象值-为不为空的值（暂未实现）
-//        targetObject =  refreshObjectForNotNullVal(targetObject,sjzDomainInfo);
+        targetObject =  refreshObjectForNotNullVal(targetObject,sjzDomainInfo);
 
         int resultId = sjzDomainInfoMapper.updateByPrimaryKey(targetObject);
         return resultId;

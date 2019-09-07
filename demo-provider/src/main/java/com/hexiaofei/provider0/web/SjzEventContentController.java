@@ -24,7 +24,7 @@ public class SjzEventContentController extends AbstractBaseController implements
     }
 
     @Override
-    public ModelAndView toUpadte(Integer id) {
+    public ModelAndView toUpdate(Integer id) {
         return null;
     }
 

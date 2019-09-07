@@ -71,7 +71,7 @@ public class AdminSjzEventIndexController extends AdminBaseController implements
      * @return
      */
     @RequestMapping(value = "/event/toUpdate/{id}")
-    public ModelAndView toUpadte(@PathVariable Integer id){
+    public ModelAndView toUpdate(@PathVariable Integer id){
         ModelAndView modelAndView =
                 new ModelAndView("event/toUpdateEventIndex");
         try {
