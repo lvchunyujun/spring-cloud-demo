@@ -1,6 +1,8 @@
 package com.hexiaofei.provider0.task;
 
 import com.hexiaofei.provider0.common.SpringContextUtil;
+import com.hexiaofei.provider0.common.consts.DomainStatusEnum;
+import com.hexiaofei.provider0.common.consts.DomainTypeEnum;
 import com.hexiaofei.provider0.domain.SjzDomainInfo;
 import com.hexiaofei.provider0.domain.SjzSpiderWebsite;
 import com.hexiaofei.provider0.exception.PlatformException;
@@ -131,7 +133,7 @@ public class SjzPageProcessor implements PageProcessor {
      */
     public void parseBody(Page page,Element bodyEls){
         String url = page.getUrl().toString();
-        LOGGER.debug("【解析body】--> {}",url);
+        LOGGER.info("【解析body】--> {}",url);
         Elements cse = bodyEls.children();
         Iterator<Element> itsEl = cse.iterator();
         Element e;
@@ -148,7 +150,8 @@ public class SjzPageProcessor implements PageProcessor {
             if(HtmlTag.A_TAG.equals(tagName)){
                 String href = e.attr("href");
                 String text = e.text();
-                LOGGER.info("【解析body】 url=[{}],tagName={},href=[{}],text={}",url,tagName,href,text);
+                LOGGER.info("【解析body】<a> url=[{}],tagName={},href=[{}],text={}",url,tagName,href,text);
+                addNewDomainUrlIfNotExist(href);
                 page.addTargetRequest(new Request(href));
             }else if(HtmlTag.TITLE_TAG.equals(tagName)){
 
@@ -173,7 +176,25 @@ public class SjzPageProcessor implements PageProcessor {
 
         }
 
-        LOGGER.debug("【解析body】<-- {}",url);
+        LOGGER.info("【解析body】<-- {}",url);
+    }
+
+    /**
+     * 如果域名不存在则新增域名
+     */
+    public void addNewDomainUrlIfNotExist(String url){
+        SjzDomainInfo sjzDomainInfo = new SjzDomainInfo();
+        sjzDomainInfo.setType(DomainTypeEnum.OTHER.getType());
+        sjzDomainInfo.setCrawlStatus(DomainStatusEnum.NEW_INIT.getCode());
+        sjzDomainInfo.setDomainUrl(url);
+        sjzDomainInfo.setCreateTime(new Date());
+        sjzDomainInfo.setSource("0100");
+
+        try {
+            sjzDomainInfoService.addObjectForNotExist(sjzDomainInfo);
+        } catch (PlatformException e) {
+            LOGGER.error("【保存新域名地址】保存异常",e);
+        }
     }
 
     /**

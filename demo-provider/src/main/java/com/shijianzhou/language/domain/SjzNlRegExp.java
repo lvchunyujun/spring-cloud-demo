@@ -14,6 +14,11 @@ public class SjzNlRegExp {
     private String regExpPattern;
 
     /**
+     *正则表达式编码
+     */
+    private String regExpCode;
+
+    /**
      *匹配实例
      */
     private String regExpDemo;
@@ -69,6 +74,14 @@ public class SjzNlRegExp {
      */
     public void setRegExpPattern(String regExpPattern) {
         this.regExpPattern = regExpPattern == null ? null : regExpPattern.trim();
+    }
+
+    public String getRegExpCode() {
+        return regExpCode;
+    }
+
+    public void setRegExpCode(String regExpCode) {
+        this.regExpCode = regExpCode;
     }
 
     /**

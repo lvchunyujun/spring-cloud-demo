@@ -1,11 +1,14 @@
 package com.hexiaofei.provider0.service.impl;
 
+import com.hexiaofei.provider0.common.consts.DomainStatusEnum;
+import com.hexiaofei.provider0.common.consts.DomainTypeEnum;
 import com.hexiaofei.provider0.dao.mapper.SjzDomainInfoMapper;
 import com.hexiaofei.provider0.domain.SjzDomainInfo;
 import com.hexiaofei.provider0.exception.PlatformException;
 import com.hexiaofei.provider0.service.SjzDomainInfoService;
 import com.hexiaofei.provider0.service.base.AbstractService;
 import com.hexiaofei.provider0.vo.PageVo;
+import com.shijianzhou.language.service.SjzNlRegExpService;
 import jodd.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,10 +24,42 @@ public class SjzDomainInfoServiceImpl extends AbstractService implements SjzDoma
 
     @Autowired
     private SjzDomainInfoMapper sjzDomainInfoMapper;
+    @Autowired
+    private SjzNlRegExpService sjzNlRegExpService;
+
     @Override
     public int addObject(SjzDomainInfo mob) throws PlatformException {
         int result = sjzDomainInfoMapper.insert(mob);
         return result;
+    }
+
+    @Override
+    public int addObjectForNotExist(SjzDomainInfo sjzDomainInfo) throws PlatformException {
+
+        int result = -1;
+
+        String url = sjzDomainInfo.getDomainUrl();
+        // step1: 截取URL中的域名地址
+        List<String> rList = sjzNlRegExpService.getListMarchForRegExpCode(url,"URL_DOMAIN");
+        url = rList != null && rList.size()>0 ?rList.get(0):null;
+        if(url == null){
+            throw new PlatformException("URL="+sjzDomainInfo.getDomainUrl()+" 不是一个正确的网址！");
+        }
+        sjzDomainInfo.setDomainUrl(url);
+
+        // step2: 查询当前domainUrl是否存在
+        SjzDomainInfo obj = getObjectForUrl(sjzDomainInfo.getDomainUrl());
+
+        // step3: 如果不存在则新增domainUrl
+        if(obj == null){
+            result = addObject(sjzDomainInfo);
+        }
+        return result;
+    }
+
+    @Override
+    public SjzDomainInfo getObjectForUrl(String domainUrl) {
+        return sjzDomainInfoMapper.selectByUrl(domainUrl);
     }
 
     @Override
@@ -137,5 +172,18 @@ public class SjzDomainInfoServiceImpl extends AbstractService implements SjzDoma
         return resut;
     }
 
+    @Override
+    public List<SjzDomainInfo> getListByNewUrl(int pageSize, int currentPage) throws PlatformException {
+        List<SjzDomainInfo> list = new ArrayList();
+        SjzDomainInfo sjzDomainInfo = new SjzDomainInfo();
+        // 新增加的域名URL，未进行抓取
+        sjzDomainInfo.setCrawlStatus((short)DomainStatusEnum.NEW_INIT.getCode());
 
+        PageVo pageVo = new PageVo();
+        pageVo.setPageSize(pageSize);
+        pageVo.setCurrentPage(currentPage);
+        pageVo = this.getPageVoSjzDomainInfoForWaitCrawl1(pageVo,sjzDomainInfo);
+
+        return pageVo.getVoList();
+    }
 }

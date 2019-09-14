@@ -5,9 +5,10 @@ package com.hexiaofei.provider0.common.consts;
  */
 public enum DomainStatusEnum {
 
-    NORMAL((short)200,"正常"),
+    NEW_INIT((short)-200,"新增状态"),
     NO_EXIST((short)-100,"网站不存在"),
     VISIT_OUTTIME((short)-99,"访问超时"),
+    NORMAL((short)200,"正常"),
     STATUS_430((short)430,"状态430");
     private Short code;
     private String status;

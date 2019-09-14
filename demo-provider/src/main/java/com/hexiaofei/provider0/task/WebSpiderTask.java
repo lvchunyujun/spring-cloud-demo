@@ -81,13 +81,35 @@ public class WebSpiderTask {
         }
     }
 
-    /**
-     * 抓取并解析网站内容
-     */
-    @Async
-    @Scheduled(cron="10 24 23 * * ?")
-    public void parseHtml(){
-        crawlWebPage("http://www.wangshiyan.com/");
+
+    @Scheduled(cron="0 7 23 * * ?")
+    public void loadingNewUrl(){
+        LOGGER.info("【解析新URL】--> 开始解析页面……");
+
+        int pageSize = 200;
+        int currentPage = 1;
+        List<SjzDomainInfo> list = null;
+        boolean flag = true;
+        while(flag){
+
+            try {
+                list = sjzDomainInfoService.getListByNewUrl(pageSize,currentPage);
+            } catch (PlatformException e) {
+                LOGGER.error("【解析新URL】查询List异常！");
+            }
+
+            if(list!=null && list.size() > 0){
+                for(int i = 0 ; i < list.size() ; i++ ){
+                    SjzDomainInfo sjzDomainInfo = list.get(i);
+                    crawlWebPage(sjzDomainInfo.getDomainUrl());
+                }
+            }else{
+                flag = false;
+            }
+        }
+
+
+        LOGGER.info("【解析新URL】<-- 结束解析页面……");
     }
 
     /**
@@ -227,6 +249,9 @@ public class WebSpiderTask {
         return count>0;
     }
 
+
+
+
     public List<SjzDomainInfo> getListUrlByWaitCrwal1(int currentPage,int pageSize) throws PlatformException {
 
         List<SjzDomainInfo> list = new ArrayList();
@@ -246,6 +271,9 @@ public class WebSpiderTask {
         }
         return list;
     }
+
+
+
 
     /**
      * 检查是否有等待抓取的页面

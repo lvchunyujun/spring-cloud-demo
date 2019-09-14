@@ -49,11 +49,18 @@ public class SjzDomainInfoSqlProvider {
                 if(isAddOR)sql.append(or);
                 sql.append(" sdi.crawlUseTime is null  ");
             }
+
+            if(sjzDomainInfo.getCrawlStatus() != null){
+                if(isAddOR)sql.append(or);
+                sql.append(" sdi.crawlStatus = #{sjzDomainInfo.crawlStatus,jdbcType=SMALLINT}  ");
+            }
+            sql.append(" order by sdi.lastCrawlTime asc ");
             // 分页
             if(parameter.get("offset")!=null){
                 sql.append(" limit #{offset,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}  ");
             }
         }
+
 
         return sql.toString();
     }
@@ -81,6 +88,13 @@ public class SjzDomainInfoSqlProvider {
                     sql.append(or);
                 }
                 sql.append(" sdi.crawlUseTime is null  ");
+            }
+            if(sjzDomainInfo.getCrawlStatus() != null){
+                if(isAddOR)
+                {
+                    sql.append(or);
+                }
+                sql.append(" sdi.crawlStatus = #{crawlStatus,jdbcType=SMALLINT}  ");
             }
         }
 

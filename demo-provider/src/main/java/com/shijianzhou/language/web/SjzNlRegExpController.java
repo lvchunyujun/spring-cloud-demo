@@ -129,4 +129,26 @@ public class SjzNlRegExpController extends AdminBaseController implements BaseCo
 
         return re.toString();
     }
+
+    @RequestMapping(value = "/nlRegExp/check")
+    @ResponseBody
+    public String getRegExpMarchCheck(SjzNlRegExp sjzNlRegExp){
+        ResultEntity re = getResultEntity();
+        try {
+            boolean checked = sjzNlRegExpService.getNlRegExpCheck(sjzNlRegExp);
+            if(checked){
+                re.setResultCode("0000");
+                re.setResultMsg("success");
+            }else{
+                re.setResultCode("1000");
+                re.setResultMsg("fail！");
+            }
+        } catch (Exception e) {
+            re.setResultCode("9999");
+            re.setResultMsg("网络异常，稍后重试！");
+            logger.error("查询异常！",e);
+        }
+
+        return re.toString();
+    }
 }

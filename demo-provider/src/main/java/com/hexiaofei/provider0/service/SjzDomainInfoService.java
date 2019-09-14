@@ -6,6 +6,7 @@ import com.hexiaofei.provider0.service.base.IBaseService;
 import com.hexiaofei.provider0.vo.PageVo;
 
 import java.util.Date;
+import java.util.List;
 
 public interface SjzDomainInfoService extends IBaseService<SjzDomainInfo> {
 
@@ -15,7 +16,7 @@ public interface SjzDomainInfoService extends IBaseService<SjzDomainInfo> {
      * @return
      * @throws PlatformException
      */
-    public PageVo<SjzDomainInfo> getPageVoSjzDomainInfoForWaitCrawl(PageVo<SjzDomainInfo> pageVo,SjzDomainInfo sjzDomainInfo) throws PlatformException;
+    PageVo<SjzDomainInfo> getPageVoSjzDomainInfoForWaitCrawl(PageVo<SjzDomainInfo> pageVo,SjzDomainInfo sjzDomainInfo) throws PlatformException;
 
     /**
      * 获取等待抓取域名的列表 查询没有抓取的，不按时间
@@ -24,27 +25,27 @@ public interface SjzDomainInfoService extends IBaseService<SjzDomainInfo> {
      * @return
      * @throws PlatformException
      */
-    public PageVo<SjzDomainInfo> getPageVoSjzDomainInfoForWaitCrawl1(PageVo<SjzDomainInfo> pageVo,SjzDomainInfo sjzDomainInfo)throws PlatformException;;
+    PageVo<SjzDomainInfo> getPageVoSjzDomainInfoForWaitCrawl1(PageVo<SjzDomainInfo> pageVo,SjzDomainInfo sjzDomainInfo)throws PlatformException;;
 
     /**
      *
      * @param sjzDomainInfo
      * @return
      */
-    public int getCountByWaitCrawl1(SjzDomainInfo sjzDomainInfo);
+    int getCountByWaitCrawl1(SjzDomainInfo sjzDomainInfo);
     /**
      * 获取等待抓取域名的总数
      * @param sjzDomainInfo
      * @return
      */
-    public int getCountByWaitCrawl(SjzDomainInfo sjzDomainInfo);
+    int getCountByWaitCrawl(SjzDomainInfo sjzDomainInfo);
 
     /**
      * 根据抓取结果更新域名信息
      * @param sjzDomainInfo
      * @return
      */
-    public int updateByCrawlResult(SjzDomainInfo sjzDomainInfo);
+    int updateByCrawlResult(SjzDomainInfo sjzDomainInfo);
 
     /**
      * 根据url 更新状态
@@ -55,7 +56,23 @@ public interface SjzDomainInfoService extends IBaseService<SjzDomainInfo> {
      * @param crawlUseTime
      * @return
      */
-    public int updateStatusByUrl(String url, Date lastCrawlTime, String domainName, Short status, Integer crawlUseTime);
+    int updateStatusByUrl(String url, Date lastCrawlTime, String domainName, Short status, Integer crawlUseTime);
+
+    /**
+     * 如果域名不存在则添加域名对象
+     * @param sjzDomainInfo
+     * @return
+     */
+    int addObjectForNotExist(SjzDomainInfo sjzDomainInfo)throws PlatformException;
+
+    /**
+     *
+     * @param url
+     * @return
+     * @throws PlatformException
+     */
+    SjzDomainInfo getObjectForUrl(String url) throws PlatformException;
 
 
+    List<SjzDomainInfo> getListByNewUrl(int pageSize,int currentPage) throws PlatformException;
 }
