@@ -1,6 +1,7 @@
 package com.hexiaofei.provider0.task;
 
 import com.hexiaofei.provider0.common.SpringContextUtil;
+import com.hexiaofei.provider0.common.consts.DomainManageStatusEnum;
 import com.hexiaofei.provider0.common.consts.DomainStatusEnum;
 import com.hexiaofei.provider0.common.consts.DomainTypeEnum;
 import com.hexiaofei.provider0.domain.SjzDomainInfo;
@@ -189,6 +190,7 @@ public class SjzPageProcessor implements PageProcessor {
         sjzDomainInfo.setDomainUrl(url);
         sjzDomainInfo.setCreateTime(new Date());
         sjzDomainInfo.setSource("0100");
+        sjzDomainInfo.setManageStatus(DomainManageStatusEnum.NORMAL.getCode());
 
         try {
             sjzDomainInfoService.addObjectForNotExist(sjzDomainInfo);
