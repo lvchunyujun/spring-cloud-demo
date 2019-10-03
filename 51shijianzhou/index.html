@@ -39,7 +39,7 @@
                     main_content = $(main_content).addClass("ei_count_main_content");
 
                     var evTime = new Date(sjzEvt[i].eventTime);
-                    $(main_time).append(evTime.Format("yyyy年MM月dd日"));
+                    $(main_time).append(evTime.Format("yyyy-MM-dd"));
                     $(main_content).append(sjzEvt[i].eventContent);
                     main_cell_div = $(main_cell_div).append(main_time).append(main_content);
                     $("#content").append(main_cell_div);
