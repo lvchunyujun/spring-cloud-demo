@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-//@RestController
+@RestController
 @RequestMapping("/eventIndex")
 public class SjzEventIndexController extends AbstractBaseController implements BaseController<SjzEventIndex>{
 

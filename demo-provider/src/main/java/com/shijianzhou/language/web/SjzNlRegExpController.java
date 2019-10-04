@@ -125,8 +125,6 @@ public class SjzNlRegExpController extends AdminBaseController implements BaseCo
             re.setResultMsg("网络异常，稍后重试！");
             logger.error("查询异常！",e);
         }
-
-
         return re.toString();
     }
 

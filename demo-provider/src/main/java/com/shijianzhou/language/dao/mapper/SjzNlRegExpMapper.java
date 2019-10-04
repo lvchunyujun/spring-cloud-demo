@@ -127,7 +127,7 @@ public interface SjzNlRegExpMapper {
      */
     @Select({
         "select",
-        "id, regExpPattern, regExpDemo, patternType, matchType, checkStatus, createTime, ",
+        "id, regExpPattern,regExpCode, regExpDemo, patternType, matchType, checkStatus, createTime, ",
         "descr",
         "from sjz_nl_reg_exp",
         "where id = #{id,jdbcType=INTEGER}"

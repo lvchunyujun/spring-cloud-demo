@@ -9,6 +9,9 @@ import com.hexiaofei.provider0.domain.SjzSpiderWebsite;
 import com.hexiaofei.provider0.exception.PlatformException;
 import com.hexiaofei.provider0.service.SjzDomainInfoService;
 import com.hexiaofei.provider0.service.SjzSpiderWebsiteService;
+import com.shijianzhou.language.engine.content.SjzNlContentConsume;
+import com.shijianzhou.language.engine.content.SjzNlContentConsumeFactory;
+import com.shijianzhou.language.engine.content.SjzNlStringContentConsumeFactory;
 import com.shijianzhou.language.engine.parse.JsoupDocumentParser;
 import com.shijianzhou.language.engine.parse.ParserFactory;
 import org.jsoup.nodes.Document;
@@ -139,8 +142,10 @@ public class SjzPageProcessor implements PageProcessor {
         Iterator<Element> itsEl = cse.iterator();
         Element e;
 
-        // 解析文本内容
-        parseElement(bodyEls);
+        // step1: 消费标签内容
+        doConsumeContent(bodyEls);
+
+        // step2: 解析标签内容
         while (itsEl.hasNext()){
             e = itsEl.next();
             if(e==null){
@@ -180,6 +185,8 @@ public class SjzPageProcessor implements PageProcessor {
         LOGGER.info("【解析body】<-- {}",url);
     }
 
+
+
     /**
      * 如果域名不存在则新增域名
      */
@@ -200,16 +207,21 @@ public class SjzPageProcessor implements PageProcessor {
     }
 
     /**
-     *
+     * 消费Element内容
      * @param element
      */
-    public void parseElement(Element element){
-        ParserFactory parserFactory = ParserFactory.getInstance();
-        JsoupDocumentParser jsoupDocumentParser = parserFactory.getJsoupDocumentParser();
-        List<String> target = jsoupDocumentParser.parserElement(element);
-        for(String s : target){
-            System.out.println("解析结果："+s);
-        }
+    private void doConsumeContent(Element element){
+        doConsumeContent(element.text());
+    }
+
+    /**
+     * 消费String内容
+     * @param str
+     */
+    private void doConsumeContent(String str){
+        SjzNlContentConsumeFactory contentConsumeFactory = new SjzNlStringContentConsumeFactory();
+        SjzNlContentConsume contentConsume =  contentConsumeFactory.getContentConsume();
+        contentConsume.doProcess(str);
     }
 
     @Override

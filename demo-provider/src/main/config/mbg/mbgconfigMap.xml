@@ -25,6 +25,27 @@
 			<property name="forceBigDecimals" value="false" />
 		</javaTypeResolver>
 
+
+		<!-- 51事件轴模块   -->
+		<javaModelGenerator targetPackage="com.hexiaofei.provider0.domain"
+							targetProject="/Users/hexiaofei/Documents/workspaces/testDemo/spring-cloud-demo/demo-provider/src/main/java">
+			<property name="enableSubPackages" value="true"/>
+			<property name="trimStrings" value="true"/>
+		</javaModelGenerator>
+
+		<sqlMapGenerator targetPackage="com.hexiaofei.provider0.dao.mapper"
+						 targetProject="/Users/hexiaofei/Documents/workspaces/testDemo/spring-cloud-demo/demo-provider/src/main/java">
+			<property name="enableSubPackages" value="true"/>
+		</sqlMapGenerator>
+
+		<javaClientGenerator type="ANNOTATEDMAPPER"
+							 targetPackage="com.hexiaofei.provider0.dao.mapper"
+							 targetProject="/Users/hexiaofei/Documents/workspaces/testDemo/spring-cloud-demo/demo-provider/src/main/java">
+			<property name="enableSubPackages" value="true"/>
+		</javaClientGenerator>
+
+		<!--  NL 自然语言处理模块
+
 		<javaModelGenerator targetPackage="com.shijianzhou.language.domain"
 							targetProject="/Users/hexiaofei/Documents/workspaces/testDemo/spring-cloud-demo/demo-provider/src/main/java">
 			<property name="enableSubPackages" value="true"/>
@@ -42,6 +63,8 @@
 			<property name="enableSubPackages" value="true"/>
 		</javaClientGenerator>
 
+
+		-->
 		<!--<table tableName="sjz_event_index" domainObjectName="SjzEventIndex"><property name="useActualColumnNames" value="true"/></table>-->
 		<!--<table tableName="sjz_event_content" domainObjectName="SjzEventContent"><property name="useActualColumnNames" value="true"/></table>-->
 		<!--<table tableName="sjz_spider_website" domainObjectName="SjzSpiderWebsite">
@@ -54,7 +77,18 @@
 			<!--<property name="useActualColumnNames" value="true"/>-->
 		<!--</table>-->
 
-		<table tableName="sjz_nl_reg_exp" domainObjectName="SjzNlRegExp">
+		<!--<table tableName="sjz_nl_reg_exp" domainObjectName="SjzNlRegExp">
+			<property name="useActualColumnNames" value="true"/>
+		</table>-->
+		<!--<table tableName="sjz_nl_word_meta" domainObjectName="SjzNlWordMeta">
+			<property name="useActualColumnNames" value="true"/>
+		</table>-->
+
+		<!--<table tableName="sjz_nl_relate_pattern_unit" domainObjectName="SjzNlRelatePatternUnit">
+			<property name="useActualColumnNames" value="true"/>
+		</table>-->
+
+		<table tableName="sjz_event_index_temp" domainObjectName="SjzEventIndexTemp">
 			<property name="useActualColumnNames" value="true"/>
 		</table>
 	</context>

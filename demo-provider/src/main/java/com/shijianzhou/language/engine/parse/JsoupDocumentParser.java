@@ -33,9 +33,13 @@ public class JsoupDocumentParser implements Parser{
 
     public List<String> parserElement(Element element){
         if(element == null) return null;
-        List<String> target = new ArrayList<>();
 
         String txt = element.text();
+        return parseString(txt);
+    }
+
+    public List<String> parseString(String txt){
+        List<String> target = new ArrayList<>();
 
         if(StringUtils.isNotBlank(txt)){
             String[] ss = txt.split(PERIOD_CN);
@@ -47,14 +51,6 @@ public class JsoupDocumentParser implements Parser{
                 }else if(marchStr(s,D_P3)){
                     target.add(s);
                 }
-            }
-        }
-        // 解析子元素
-        Elements elements = element.children();
-        if(elements != null){
-            Iterator<Element> iterable = elements.iterator();
-            while(iterable.hasNext()){
-                target.addAll(parserElement(iterable.next()));
             }
         }
         return target;

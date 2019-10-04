@@ -59,9 +59,9 @@ public class AdminSjzDomainInfoController extends AdminBaseController implements
             resultId = -99;
         }
         if(resultId>0){
-            return STATIC_BASE_URL+"/addSuccess";
+            return ADD_SUCCESS_URL;
         }else{
-            return STATIC_BASE_URL+"/addFail";
+            return ADD_FAIL_URL;
         }
     }
 

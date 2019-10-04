@@ -27,6 +27,10 @@ public class SjzDomainInfo {
      *来源:0000
      */
     private String source;
+    /**
+     * 所属语言：ZH,EN
+     */
+    private String language;
 
     /**
      *域名所属类型:0-其他

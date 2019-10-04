@@ -157,7 +157,7 @@ public interface SjzEventIndexMapper {
     })
     int updateByPrimaryKey(SjzEventIndex record);
 
-    @Select("select count(*) from sjz_event_index order by eventTime")
+    @Select("select count(*) from sjz_event_index ")
     int selectCountByAll();
 
     @Select({
