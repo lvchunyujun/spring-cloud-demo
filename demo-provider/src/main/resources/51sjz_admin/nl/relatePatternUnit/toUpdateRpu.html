@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>关联模式单元管理</title>
+    <link rel="icon" th:href="@{/images/favicon.ico}" type="image/gif" />
+    <link th:href="@{/css/comm.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/regexp.css}" rel="stylesheet" type="text/css" />
+    <script th:src="@{/js/jquery-3.4.1.min.js}" type="text/javascript" />
+    <script th:src="@{/js/utils.js}" type="text/javascript" />
+    <script th:src="@{/js/regexp.js}" type="text/javascript" />
+    <style type="text/css" >
+
+        .sjz_center_ta table .tr1
+        {
+            height:45px;
+        }.sjz_center_ta table .tr2
+        {
+            height:100px;
+        }.sjz_center_ta table .tr3
+        {
+            height:45px;
+        }.sjz_center_ta table .tr4
+        {
+            height:50px;
+        }
+        .sjz_center_ta_submit
+        {
+            width: 60px;
+        }
+
+    </style>
+
+    <script >
+        /*<![CDATA[*/
+        function addForm(){
+            var tr_s = $(".sjz_center_ta table tbody tr");
+            var tr_size = $(tr_s).length;
+            var lastTr = $(tr_s).last();
+
+            var lTr = $(lastTr).prev();
+            var count = tr_size-1;
+            var patternName = "";
+
+
+            $(lastTr).before("<tr>" +
+                "<td></td>" +
+                "<td><input type='text' name='volist["+count+"].patternName' value='"+patternName+"'/></td>" +
+                "<td><input type='text' name='volist["+count+"].unitSerialNo' value='"+tr_size+"' /></td>" +
+                "<td><input type='text' name='volist["+count+"].regExpCode'/></td>" +
+                "<td><input type='text' name='volist["+count+"].regExpPattern'/></td>" +
+                "<td><label><input name='volist["+count+"].relateType' type='radio' value='0'/>包含</label><label><input name='volist["+count+"].relateType' type='radio' value='10'/>排除</label></td>" +
+                "<td><label><input name='volist["+count+"].useStatus' type='radio' value='0' />开启</label><label><input name='volist["+count+"].useStatus' type='radio' value='10' />关闭</label></td>" +
+                "<td><textarea name='volist["+count+"].descript' rows='2'  /></td>" +
+                "</tr>");
+        }
+
+        function deleteForm(){
+            var lastTr = $(".sjz_center_ta table tbody tr:last");
+            var targetTr = $(lastTr).prev();
+            var td = $(targetTr).children("td").get(0);
+            var inputs = $(td).children("input");
+
+            if(inputs!=null && $(inputs).length > 0){
+                var input = $(inputs).get(0);
+                var id = $(input).val();
+                if(confirm("确定要删除["+id+"]记录！")){
+                    $.ajax({
+                        type: "POST",
+                        url: "/admin/rpu/delete/"+id,
+                        success:function(data){
+                            $(targetTr).remove()
+                        },
+                        error: function(XMLHttpRequest, textStatus, errorThrown){
+                            alert(textStatus+"  "+XMLHttpRequest.state());
+                        }});
+                }
+            }else{
+                $(targetTr).remove()
+            }
+        }
+        /*]]>*/
+    </script>
+
+</head>
+<body>
+<div>
+    <div class="sjz_title">
+        <img th:src="@{/images/51shijianzhou.png}" class="sjz_title_img" /><h3>关联模式单元管理</h3>
+    </div>
+    <div class="sjz_nvg">
+        当前位置：<a href="/admin/index">首页</a> > <a href="/admin/rpu/index">关联模式单元管理</a> > 修改关联模式单元
+    </div>
+    <div class="sjz_c">
+        <!-- 菜单 -->
+        <div th:replace="common/sjz_menu :: sjz_menu"  ></div>
+        <div class="sjz_center">
+            <div>
+                <div></div>
+            </div>
+            <div class="sjz_center_ta">
+                <form action="/admin/rpu/updateList" method="post">
+                    <table>
+                        <thead>
+                        <tr>
+                            <td>编号</td>
+                            <td>
+                                匹配模板名称
+                            </td>
+                            <td>
+                                顺序号
+                            </td>
+                            <td>
+                                正则表达式代码
+                            </td>
+                            <td>
+                                正则表达式
+                            </td>
+                            <td>
+                                关联类型
+                            </td>
+                            <td>
+                                使用状态
+                            </td>
+                            <td>
+                                描述
+                            </td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="tr1" th:each="rpu,rpuStat:${volist}" >
+                            <td><input type="text" th:name="volist[__${rpuStat.index}__].id" th:value="${rpu.id}" /> </td>
+                            <td >
+                                <input type="text" th:name="volist[__${rpuStat.index}__].patternName" th:value="${rpu.patternName}" />&nbsp;&nbsp;
+                            </td>
+                            <td >
+                                <input type="text"  th:name="volist[__${rpuStat.index}__].unitSerialNo" th:value="${rpu.unitSerialNo}" />&nbsp;&nbsp;
+                            </td>
+                            <td><input th:name="volist[__${rpuStat.index}__].regExpCode"  th:value="${rpu.regExpCode}"  /></td>
+                            <td><input th:name="volist[__${rpuStat.index}__].regExpPattern"  th:value="${rpu.regExpPattern}"  /></td>
+                            <td>
+                                <label>
+                                    <input th:name="volist[__${rpuStat.index}__].relateType" type="radio"
+                                           th:checked="${rpu.relateType==0}" value="0"/>包含
+                                </label>
+
+                                <label>
+                                    <input th:name="volist[__${rpuStat.index}__].relateType" type="radio"
+                                           th:checked="${rpu.relateType==10}" value="10"/>排除
+                                </label>
+
+                            </td>
+                            <td >
+                                <div class="check_label_div">
+                                    <label>
+                                        <input th:name="volist[__${rpuStat.index}__].useStatus" type="radio" th:checked="${rpu.useStatus==0}" value="0" />开启
+                                    </label>
+                                    <label>
+                                        <input th:name="volist[__${rpuStat.index}__].useStatus" type="radio" th:checked="${rpu.useStatus==10}" value="10" />关闭
+                                    </label>
+                                </div>
+                            </td>
+                            <td><textarea th:name="volist[__${rpuStat.index}__].descript" rows="2"  th:text="${rpu.descript}"  ></textarea></td>
+                        </tr>
+                        <tr>
+                            <td><a href="#" onclick="javascript:addForm();" style="margin: 0 20px;" ><img th:src="@{/images/common/a.png}" /></a>
+                                <a href="#" onclick="javascript:deleteForm();" style="margin: 0 20px;"><img th:src="@{/images/common/d.png}" /></a></td>
+                            <td><input class="sjz_center_ta_submit" type="submit" value="确定"/></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div th:replace="common/sjz_bottom :: sjz_bottom"  ></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>分词元数据管理</title>
+    <link rel="icon" th:href="@{/images/favicon.ico}" type="image/gif" />
+    <link th:href="@{/css/comm.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/sjz_paging.css}" rel="stylesheet" type="text/css" />
+    <script th:src="@{/js/jquery-3.4.1.min.js}" type="text/javascript" />
+    <script th:src="@{/js/utils.js}" type="text/javascript" />
+    <script th:src="@{/js/sjz_paging.js}" type="text/javascript" />
+
+    <style type="text/css" >
+
+        .sjz_center_content thead
+        {
+            background-color: #eaeaea;
+        }
+        .sjz_center_content_tr
+        {
+            text-align: center;
+            border-bottom: 1px solid #aaa;
+        }
+
+        .sjz_center_content_td_2
+        {
+            text-indent: 30px;
+            text-align: left;
+        }
+
+        .sjz_bg_png_regexp
+        {
+            width: 20px;
+        }
+    </style>
+
+    <script type="text/javascript">
+
+        var pageVo =
+            {   bUrl:"/admin/nlWordMeta/list/",
+                sBUrl:"_",
+                dPageNo:1,
+                dPageSize:10,
+                bootstrapDiv:{
+                           id_:"sjz_center_content_tbody"
+                },
+                rootDiv:{
+                    class_:"sjz_center_content_tr"
+                },
+                voMapping:{
+                    id:{
+                        tagType:"text"
+                    },
+                    wordMetaCode:{
+                        tagType:"text"
+                    },
+                    wordMetaEn:{
+                        tagType:"text"
+                    },
+                    wordMetaZh:{
+                        tagType:"text"
+                    },
+                    simpleWordMetaEn:{
+                        tagType:"text"
+                    },
+                    simpleWordMetaZh:{
+                        tagType:"text"
+                    },
+                    parentWordMetaCodeId:{
+                        tagType:"text"
+                    },
+                    description:{
+                        tagType:"text"
+                    },
+                    u_d_operation:{
+                        tagType:"a_operation",
+                        indexName:"id",
+                        updateHref:"/admin/nlWordMeta/toUpdate/",
+                        updateTxt:"修改",
+                        deleteHref:"/admin/nlWordMeta/delete/",
+                        deleteTxt:"删除"
+                    }
+                },
+                getUrl:function () {
+                    return pageVo.bUrl+pageVo.dPageNo+pageVo.sBUrl+pageVo.dPageSize;
+                }
+            };
+
+    </script>
+
+</head>
+<body>
+    <div class="sjz_title">
+        <img th:src="@{/images/51shijianzhou.png}" class="sjz_title_img" /><h3>表达式模板管理</h3>
+    </div>
+    <div class="sjz_nvg">
+        当前位置：<a href="/admin/index">首页</a> > 分词元数据管理
+    </div>
+    <div class="sjz_c">
+        <!-- 菜单 -->
+        <div th:replace="common/sjz_menu :: sjz_menu"  ></div>
+        <div class="sjz_center">
+            <div>
+                <div></div>
+                <div class="sjz_center_ad"><a href="/admin/nlWordMeta/toAdd">添加</a></div>
+            </div>
+            <table class="sjz_center_content">
+                <thead>
+                   <tr>
+                       <th style="width: 8%;"> 序号 </th>
+                       <th style="width: 8%;"> 编码 </th>
+                       <th style="width: 10%" >词类英文名称</th>
+                       <th style="width: 10%">词类名称中文</th>
+                       <th style="width: 8%;"> 英文名称缩写 </th>
+                       <th style="width: 8%;"> 中文名称缩写 </th>
+                       <th style="width: 8%;"> 父类编码 </th>
+                       <th > 描述 </th>
+                       <th style="width: 8%;"> 操作 </th>
+                   </tr>
+                </thead>
+
+                <tbody id="sjz_center_content_tbody">
+                </tbody>
+            </table>
+            <div class="ger_center_ ger_text_">
+                <div id="sjz_page_info"></div>
+                <a id="previous_page" href="javascript:void(0);" style="color: #1683a8;text-decoration:none">上一页</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                <a id="next_page" href="javascript:void(0);" style="color: #1683a8;text-decoration:none" >下一页</a>
+            </div>
+        </div>
+    </div>
+    <div th:replace="common/sjz_bottom :: sjz_bottom"  ></div>
+</body>
+</html>
