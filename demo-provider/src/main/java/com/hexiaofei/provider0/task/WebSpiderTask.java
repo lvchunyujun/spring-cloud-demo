@@ -56,33 +56,9 @@ public class WebSpiderTask {
     }
 
     /**
-     * 抓取网站
+     * 正式方式
      */
-    @Async
-    @Scheduled(cron="0 04 21 * * ?")
-    public void loadingUrl2(){
-        System.out.println("hello world!");
-        try {
-            int currentPage = 1;
-            int pageSize = 200;
-            while(checkOfWaitCrawlUrl1()){
-                LOGGER.info("开始加载第[{}]页数据……",currentPage);
-                 // 因每次循环都初始化查询 ，所以当前页=1；currentPage只用作计数
-                List<SjzDomainInfo> list = getListUrlByWaitCrwal1(1,pageSize);
-
-                for(int i = 0 ; i < list.size() ; i++ ){
-                    SjzDomainInfo sjzDomainInfo = list.get(i);
-                    crawlWebPage(sjzDomainInfo.getDomainUrl());
-                }
-                currentPage++;
-            }
-        } catch (Exception e){
-            LOGGER.error("加载页面异常！",e);
-        }
-    }
-
-
-    @Scheduled(cron="0 7 23 * * ?")
+    @Scheduled(cron="0 10 21 * * ?")
     public void loadingNewUrl(){
         LOGGER.info("【解析新URL】--> 开始解析页面……");
 
@@ -110,6 +86,32 @@ public class WebSpiderTask {
 
 
         LOGGER.info("【解析新URL】<-- 结束解析页面……");
+    }
+
+    /**
+     * 抓取网站
+     */
+    @Async
+//    @Scheduled(cron="0 04 21 * * ?")
+    public void loadingUrl2(){
+        System.out.println("hello world!");
+        try {
+            int currentPage = 1;
+            int pageSize = 200;
+            while(checkOfWaitCrawlUrl1()){
+                LOGGER.info("开始加载第[{}]页数据……",currentPage);
+                 // 因每次循环都初始化查询 ，所以当前页=1；currentPage只用作计数
+                List<SjzDomainInfo> list = getListUrlByWaitCrwal1(1,pageSize);
+
+                for(int i = 0 ; i < list.size() ; i++ ){
+                    SjzDomainInfo sjzDomainInfo = list.get(i);
+                    crawlWebPage(sjzDomainInfo.getDomainUrl());
+                }
+                currentPage++;
+            }
+        } catch (Exception e){
+            LOGGER.error("加载页面异常！",e);
+        }
     }
 
     /**

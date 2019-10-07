@@ -4,6 +4,7 @@ import com.hexiaofei.provider0.common.SpringContextUtil;
 import com.hexiaofei.provider0.common.consts.DomainManageStatusEnum;
 import com.hexiaofei.provider0.common.consts.DomainStatusEnum;
 import com.hexiaofei.provider0.common.consts.DomainTypeEnum;
+import com.hexiaofei.provider0.common.consts.SjzSystemConsts;
 import com.hexiaofei.provider0.domain.SjzDomainInfo;
 import com.hexiaofei.provider0.domain.SjzSpiderWebsite;
 import com.hexiaofei.provider0.exception.PlatformException;
@@ -143,7 +144,7 @@ public class SjzPageProcessor implements PageProcessor {
         Element e;
 
         // step1: 消费标签内容
-        doConsumeContent(bodyEls);
+        doConsumeContent(page,bodyEls);
 
         // step2: 解析标签内容
         while (itsEl.hasNext()){
@@ -210,18 +211,23 @@ public class SjzPageProcessor implements PageProcessor {
      * 消费Element内容
      * @param element
      */
-    private void doConsumeContent(Element element){
-        doConsumeContent(element.text());
+    private void doConsumeContent(Page page,Element element){
+        doConsumeContent(page,element.text());
     }
 
     /**
      * 消费String内容
      * @param str
      */
-    private void doConsumeContent(String str){
+    private void doConsumeContent(Page page,String str){
         SjzNlContentConsumeFactory contentConsumeFactory = new SjzNlStringContentConsumeFactory();
         SjzNlContentConsume contentConsume =  contentConsumeFactory.getContentConsume();
-        contentConsume.doProcess(str);
+
+        Map<String,Object> sourceMap = new HashMap<>();
+        sourceMap.put(SjzSystemConsts.CONSUME_SOURCE_MAP_URL,page.getUrl());
+        sourceMap.put(SjzSystemConsts.CONSUME_SOURCE_MAP_TXT,str);
+
+        contentConsume.doProcess(sourceMap);
     }
 
     @Override

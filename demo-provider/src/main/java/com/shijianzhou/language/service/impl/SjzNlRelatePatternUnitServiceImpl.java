@@ -2,7 +2,6 @@ package com.shijianzhou.language.service.impl;
 
 import com.hexiaofei.provider0.exception.PlatformException;
 import com.hexiaofei.provider0.service.base.AbstractService;
-import com.hexiaofei.provider0.service.base.BaseService;
 import com.hexiaofei.provider0.vo.PageVo;
 import com.shijianzhou.language.dao.mapper.SjzNlRelatePatternUnitMapper;
 import com.shijianzhou.language.domain.SjzNlRelatePatternUnit;
@@ -97,5 +96,15 @@ public class SjzNlRelatePatternUnitServiceImpl extends AbstractService implement
             map.put("resultId",resultId);
         }
         return resultList;
+    }
+
+    @Override
+    public List<Map<String, Object>> getGroupListByPatternName() throws PlatformException {
+        return sjzNlRelatePatternUnitMapper.selectGroupByPatternName();
+    }
+
+    @Override
+    public List<SjzNlRelatePatternUnit> getListByPatternName() throws PlatformException {
+        return null;
     }
 }

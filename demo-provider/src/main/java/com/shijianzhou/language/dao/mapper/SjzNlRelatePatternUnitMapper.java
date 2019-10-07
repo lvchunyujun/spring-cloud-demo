@@ -3,6 +3,8 @@ package com.shijianzhou.language.dao.mapper;
 import com.shijianzhou.language.domain.SjzNlRelatePatternUnit;
 import com.shijianzhou.language.domain.SjzNlRelatePatternUnitExample;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.DeleteProvider;
 import org.apache.ibatis.annotations.Insert;
@@ -196,4 +198,11 @@ public interface SjzNlRelatePatternUnitMapper {
             @Result(column="useStatus", property="useStatus", jdbcType=JdbcType.SMALLINT)
     })
     List<SjzNlRelatePatternUnit> selectListByPaging(@Param("offset") int offset, @Param("pagesize")  int pageSize);
+
+    @Select({" select rpu.patternName,rpu.useStatus from sjz_nl_relate_pattern_unit rpu group by rpu.patternName,rpu.useStatus "})
+    @Results({
+            @Result(column="patternName", property="patternName", jdbcType=JdbcType.VARCHAR),
+            @Result(column="useStatus", property="useStatus", jdbcType=JdbcType.SMALLINT)
+    })
+    List<Map<String,Object>> selectGroupByPatternName();
 }
