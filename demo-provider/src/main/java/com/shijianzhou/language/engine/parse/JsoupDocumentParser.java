@@ -101,7 +101,7 @@ public class JsoupDocumentParser implements Parser{
             case SystemConsts.LANGUAGE_ZH: flag = PERIOD_ZH;
         }
 
-        if(StringUtils.isNotBlank(flag)){
+        if(StringUtils.isBlank(flag)){
             throw new PlatformException("不支持的语言类型！");
         }
 

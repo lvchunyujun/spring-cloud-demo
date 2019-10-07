@@ -2,12 +2,17 @@ package com.hexiaofei.provider0.task;
 
 import com.hexiaofei.provider0.common.consts.DomainStatusEnum;
 import com.hexiaofei.provider0.common.consts.DomainTypeEnum;
+import com.hexiaofei.provider0.common.consts.SjzSystemConsts;
 import com.hexiaofei.provider0.domain.SjzBasePinyin;
 import com.hexiaofei.provider0.domain.SjzDomainInfo;
 import com.hexiaofei.provider0.exception.PlatformException;
 import com.hexiaofei.provider0.service.SjzBasePinyinService;
 import com.hexiaofei.provider0.service.SjzDomainInfoService;
 import com.hexiaofei.provider0.vo.PageVo;
+import com.shijianzhou.language.engine.content.SjzNlContentConsume;
+import com.shijianzhou.language.engine.content.SjzNlContentConsumeFactory;
+import com.shijianzhou.language.engine.content.SjzNlMapStringContentConsumeFactory;
+import com.shijianzhou.language.engine.content.SjzNlStringContentConsumeFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +63,7 @@ public class WebSpiderTask {
     /**
      * 正式方式
      */
-    @Scheduled(cron="0 10 21 * * ?")
+    @Scheduled(cron="20 53 15 * * ?")
     public void loadingNewUrl(){
         LOGGER.info("【解析新URL】--> 开始解析页面……");
 
@@ -88,6 +93,20 @@ public class WebSpiderTask {
         LOGGER.info("【解析新URL】<-- 结束解析页面……");
     }
 
+    @Scheduled(cron="40 14 12 * * ?")
+    public void test(){
+        SjzNlContentConsumeFactory contentConsumeFactory = new SjzNlMapStringContentConsumeFactory();
+        SjzNlContentConsume contentConsume =contentConsumeFactory.getContentConsume();
+
+
+        String str = "2016年8月22日上线国内知名交易平台比特币交易网";
+
+        Map<String,Object> sourceMap = new HashMap<>();
+        sourceMap.put(SjzSystemConsts.CONSUME_SOURCE_MAP_URL,"baidu.com");
+        sourceMap.put(SjzSystemConsts.CONSUME_SOURCE_MAP_TXT,str);
+
+        contentConsume.doProcess(sourceMap);
+    }
     /**
      * 抓取网站
      */

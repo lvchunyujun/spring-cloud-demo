@@ -174,10 +174,10 @@ public interface SjzEventIndexTempMapper {
     int selectCountByAll();
 
     @Select({
-            "select",
-            "id, eventTime, eventContent, eventType, eventState, createTime, patternName, ",
-            "unitSerialNo, domainName",
-            "from sjz_event_index_temp",
+            " select",
+            " id, eventTime, eventContent, eventType, eventState, createTime, patternName, ",
+            " unitSerialNo, domainName",
+            " from sjz_event_index_temp",
             " order by id desc ",
             " limit #{offset},#{pagesize} "
     })

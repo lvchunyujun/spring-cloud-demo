@@ -12,9 +12,8 @@ import com.hexiaofei.provider0.service.SjzDomainInfoService;
 import com.hexiaofei.provider0.service.SjzSpiderWebsiteService;
 import com.shijianzhou.language.engine.content.SjzNlContentConsume;
 import com.shijianzhou.language.engine.content.SjzNlContentConsumeFactory;
-import com.shijianzhou.language.engine.content.SjzNlStringContentConsumeFactory;
-import com.shijianzhou.language.engine.parse.JsoupDocumentParser;
-import com.shijianzhou.language.engine.parse.ParserFactory;
+import com.shijianzhou.language.engine.content.SjzNlMapStringContentConsumeFactory;
+import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -30,6 +29,8 @@ import us.codecraft.webmagic.selector.Html;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @Component
 public class SjzPageProcessor implements PageProcessor {
@@ -220,14 +221,17 @@ public class SjzPageProcessor implements PageProcessor {
      * @param str
      */
     private void doConsumeContent(Page page,String str){
-        SjzNlContentConsumeFactory contentConsumeFactory = new SjzNlStringContentConsumeFactory();
-        SjzNlContentConsume contentConsume =  contentConsumeFactory.getContentConsume();
 
-        Map<String,Object> sourceMap = new HashMap<>();
-        sourceMap.put(SjzSystemConsts.CONSUME_SOURCE_MAP_URL,page.getUrl());
-        sourceMap.put(SjzSystemConsts.CONSUME_SOURCE_MAP_TXT,str);
+        if(StringUtils.isNotBlank(str)) {
+            SjzNlContentConsumeFactory contentConsumeFactory = new SjzNlMapStringContentConsumeFactory();
+            SjzNlContentConsume contentConsume = contentConsumeFactory.getContentConsume();
 
-        contentConsume.doProcess(sourceMap);
+            Map<String, Object> sourceMap = new HashMap<>();
+            sourceMap.put(SjzSystemConsts.CONSUME_SOURCE_MAP_URL, page.getUrl().toString());
+            sourceMap.put(SjzSystemConsts.CONSUME_SOURCE_MAP_TXT, str);
+
+            contentConsume.doProcess(sourceMap);
+        }
     }
 
     @Override
