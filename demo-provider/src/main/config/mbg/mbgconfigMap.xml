@@ -88,7 +88,15 @@
 			<property name="useActualColumnNames" value="true"/>
 		</table>-->
 
-		<table tableName="sjz_event_index_temp" domainObjectName="SjzEventIndexTemp">
+		<!--<table tableName="sjz_event_index_temp" domainObjectName="SjzEventIndexTemp">-->
+			<!--<property name="useActualColumnNames" value="true"/>-->
+		<!--</table>-->
+
+		<!--<table tableName="sjz_domain_word_sort" domainObjectName="SjzDomainWordSort">-->
+			<!--<property name="useActualColumnNames" value="true"/>-->
+		<!--</table>-->
+
+		<table tableName="sjz_domain_spider_task" domainObjectName="SjzDomainSpiderTask">
 			<property name="useActualColumnNames" value="true"/>
 		</table>
 	</context>
