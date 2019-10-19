@@ -21,4 +21,10 @@
     float: left;
     margin: 0 10px;
 }
+.sjz_center_content_tr
+{
+    text-align: center;
+    height: 20px;
+    border-bottom: 1px solid #aaa;
+}
 <!-- paging start -->

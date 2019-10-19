@@ -82,7 +82,7 @@ ul{
 {
     float: right;
     width: 84%;
-    min-height: 400px;
+    min-height: 600px;
     margin-bottom: 60px;
 }
 /* 内容中心> 列表<a> 添加标签 */
@@ -98,7 +98,6 @@ ul{
 {
     width: 99%;
     border: 1px solid #f1f1f1;
-    min-height: 500px;
 }
 
 /* 内容中心> 更新div */

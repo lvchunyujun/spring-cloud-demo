@@ -15,18 +15,6 @@
         {
             background-color: #eaeaea;
         }
-        .sjz_center_content_tr
-        {
-            text-align: center;
-            border-bottom: 1px solid #aaa;
-        }
-
-        .sjz_center_content_td_2
-        {
-            text-indent: 30px;
-            text-align: left;
-        }
-
 
     </style>
 
@@ -36,7 +24,7 @@
             {   bUrl:"/admin/domainInfo/list/",
                 sBUrl:"_",
                 dPageNo:1,
-                dPageSize:300,
+                dPageSize:50,
                 bootstrapDiv:{
                            id_:"sjz_center_content_tbody"
                 },
@@ -135,12 +123,12 @@
                 <tbody id="sjz_center_content_tbody">
                 </tbody>
             </table>
+        </div>
             <div class="ger_center_ ger_text_">
                 <div id="sjz_page_info"></div>
                 <a id="previous_page" href="javascript:void(0);" style="color: #1683a8;text-decoration:none">上一页</a>&nbsp;&nbsp;&nbsp;&nbsp;
                 <a id="next_page" href="javascript:void(0);" style="color: #1683a8;text-decoration:none" >下一页</a>
             </div>
-        </div>
     </div>
 
     <div th:replace="common/sjz_bottom :: sjz_bottom"  ></div>
