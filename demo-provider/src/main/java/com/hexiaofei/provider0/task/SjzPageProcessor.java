@@ -26,6 +26,7 @@ import us.codecraft.webmagic.Request;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.processor.PageProcessor;
 import us.codecraft.webmagic.selector.Html;
+import us.codecraft.webmagic.utils.UrlUtils;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -37,7 +38,7 @@ public class SjzPageProcessor implements PageProcessor {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(SjzPageProcessor.class);
     // 设置请求头模仿浏览器，避免发生 403问题
-    private Site site = Site.me()
+    private final static Site site = Site.me()
             .setUserAgent("Mozilla/5.0 (Windows NT 10.0; WOW64; rv:56.0) Gecko/20100101 Firefox/56.0")
             .setRetryTimes(1)
             .setSleepTime(5000);
@@ -196,6 +197,7 @@ public class SjzPageProcessor implements PageProcessor {
         SjzDomainInfo sjzDomainInfo = new SjzDomainInfo();
         sjzDomainInfo.setType(DomainTypeEnum.OTHER.getType());
         sjzDomainInfo.setCrawlStatus(DomainStatusEnum.NEW_INIT.getCode());
+        sjzDomainInfo.setDomainName(UrlUtils.getDomain(url));
         sjzDomainInfo.setDomainUrl(url);
         sjzDomainInfo.setCreateTime(new Date());
         sjzDomainInfo.setSource("0100");
