@@ -14,6 +14,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.annotations.UpdateProvider;
+import org.apache.ibatis.cursor.Cursor;
 import org.apache.ibatis.type.JdbcType;
 
 public interface SjzDomainSpiderTaskMapper {
@@ -195,4 +196,45 @@ public interface SjzDomainSpiderTaskMapper {
             @Result(column="spiderTaskDescription", property="spiderTaskDescription", jdbcType=JdbcType.VARCHAR)
     })
     List<SjzDomainSpiderTask> selectListByPaging(@Param("offset") int offset, @Param("pagesize")  int pageSize);
+
+
+    @Select({
+            "select",
+            "id, spiderTaskName,patternName, wordCode, wordMetaEn, wordMetaZh, spiderTaskType, spiderTaskStatus, ",
+            "spiderTaskCreateTime, spiderTaskDescription",
+            "from sjz_domain_spider_task"
+    })
+    @Results({
+            @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true),
+            @Result(column="spiderTaskName", property="spiderTaskName", jdbcType=JdbcType.VARCHAR),
+            @Result(column="wordCode", property="wordCode", jdbcType=JdbcType.INTEGER),
+            @Result(column="patternName", property="patternName", jdbcType=JdbcType.VARCHAR),
+            @Result(column="wordMetaEn", property="wordMetaEn", jdbcType=JdbcType.VARCHAR),
+            @Result(column="wordMetaZh", property="wordMetaZh", jdbcType=JdbcType.VARCHAR),
+            @Result(column="spiderTaskType", property="spiderTaskType", jdbcType=JdbcType.SMALLINT),
+            @Result(column="spiderTaskStatus", property="spiderTaskStatus", jdbcType=JdbcType.SMALLINT),
+            @Result(column="spiderTaskCreateTime", property="spiderTaskCreateTime", jdbcType=JdbcType.TIMESTAMP),
+            @Result(column="spiderTaskDescription", property="spiderTaskDescription", jdbcType=JdbcType.VARCHAR)
+    })
+    Cursor<SjzDomainSpiderTask> selectCursorByAll();
+
+    @Select({
+            "select",
+            "id, spiderTaskName,patternName, wordCode, wordMetaEn, wordMetaZh, spiderTaskType, spiderTaskStatus, ",
+            "spiderTaskCreateTime, spiderTaskDescription",
+            "from sjz_domain_spider_task"
+    })
+    @Results({
+            @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true),
+            @Result(column="spiderTaskName", property="spiderTaskName", jdbcType=JdbcType.VARCHAR),
+            @Result(column="wordCode", property="wordCode", jdbcType=JdbcType.INTEGER),
+            @Result(column="patternName", property="patternName", jdbcType=JdbcType.VARCHAR),
+            @Result(column="wordMetaEn", property="wordMetaEn", jdbcType=JdbcType.VARCHAR),
+            @Result(column="wordMetaZh", property="wordMetaZh", jdbcType=JdbcType.VARCHAR),
+            @Result(column="spiderTaskType", property="spiderTaskType", jdbcType=JdbcType.SMALLINT),
+            @Result(column="spiderTaskStatus", property="spiderTaskStatus", jdbcType=JdbcType.SMALLINT),
+            @Result(column="spiderTaskCreateTime", property="spiderTaskCreateTime", jdbcType=JdbcType.TIMESTAMP),
+            @Result(column="spiderTaskDescription", property="spiderTaskDescription", jdbcType=JdbcType.VARCHAR)
+    })
+    List<SjzDomainSpiderTask> selectListByAll();
 }

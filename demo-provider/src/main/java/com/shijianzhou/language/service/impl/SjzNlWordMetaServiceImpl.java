@@ -1,8 +1,10 @@
 package com.shijianzhou.language.service.impl;
 
 import com.hexiaofei.provider0.exception.PlatformException;
+import com.hexiaofei.provider0.service.base.AbstractService;
 import com.hexiaofei.provider0.vo.PageVo;
 import com.shijianzhou.language.dao.mapper.SjzNlWordMetaMapper;
+import com.shijianzhou.language.domain.SjzNlRegExp;
 import com.shijianzhou.language.domain.SjzNlWordMeta;
 import com.shijianzhou.language.service.SjzNlWordMetaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,7 @@ import java.util.List;
 
 @Transactional
 @Controller("sjzNlWordMetaService")
-public class SjzNlWordMetaServiceImpl implements SjzNlWordMetaService {
+public class SjzNlWordMetaServiceImpl extends AbstractService implements SjzNlWordMetaService {
 
     @Autowired
     private SjzNlWordMetaMapper sjzNlWordMetaMapper;
@@ -51,12 +53,16 @@ public class SjzNlWordMetaServiceImpl implements SjzNlWordMetaService {
 
     @Override
     public int updateObject(SjzNlWordMeta mob) throws PlatformException {
-        return 0;
+        int resultId = -1;
+        SjzNlWordMeta targetObj = getObjectById(mob.getId());
+        targetObj = refreshObjectForNotNullVal(targetObj,mob);
+        resultId = sjzNlWordMetaMapper.updateByPrimaryKey(targetObj);
+        return resultId;
     }
 
     @Override
     public SjzNlWordMeta getObjectById(int id) throws PlatformException {
-        return null;
+        return sjzNlWordMetaMapper.selectByPrimaryKey(id);
     }
 
     @Override

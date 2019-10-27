@@ -2,15 +2,20 @@ package com.hexiaofei.provider0.service.impl;
 
 import com.hexiaofei.provider0.dao.mapper.SjzDomainSpiderTaskMapper;
 import com.hexiaofei.provider0.domain.SjzDomainSpiderTask;
+import com.hexiaofei.provider0.domain.SjzDomainWordSort;
 import com.hexiaofei.provider0.exception.PlatformException;
 import com.hexiaofei.provider0.service.SjzDomainSpiderTaskService;
+import com.hexiaofei.provider0.service.SjzDomainWordSortService;
 import com.hexiaofei.provider0.vo.PageVo;
+import org.apache.ibatis.cursor.Cursor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Transactional
 @Service("sjzDomainSpiderTaskService")
@@ -18,6 +23,9 @@ public class SjzDomainSpiderTaskServiceImpl implements SjzDomainSpiderTaskServic
 
     @Autowired
     private SjzDomainSpiderTaskMapper sjzDomainSpiderTaskMapper;
+
+    @Autowired
+    private SjzDomainWordSortService sjzDomainWordSortService;
 
     @Override
     public int addObject(SjzDomainSpiderTask mob) throws PlatformException {
@@ -58,6 +66,34 @@ public class SjzDomainSpiderTaskServiceImpl implements SjzDomainSpiderTaskServic
 
     @Override
     public List<SjzDomainSpiderTask> getAllObject() throws PlatformException {
-        return null;
+        return sjzDomainSpiderTaskMapper.selectListByAll();
     }
+
+
+    @Override
+    public List<SjzDomainSpiderTask> getAllObject(Short taskStatus) throws PlatformException {
+        List<SjzDomainSpiderTask> list = null;
+        list = getAllObject();
+
+        list = list.stream().filter(task -> task.getSpiderTaskStatus().equals(taskStatus)).collect(Collectors.toList());
+
+        return list;
+    }
+
+    @Override
+    public Cursor<SjzDomainWordSort> getWordSordDomainCursorByTaskStatus(Short taskStatus) throws PlatformException {
+
+        List<SjzDomainSpiderTask> list = getAllObject(taskStatus);
+
+        return sjzDomainWordSortService.getCursorByDomainSpiderTaskList(list);
+    }
+
+    @Override
+    public List<SjzDomainWordSort> getWordSordDomainListByTaskStatus(Short taskStatus) throws PlatformException {
+        List<SjzDomainSpiderTask> list = getAllObject(taskStatus);
+
+        return sjzDomainWordSortService.getListByDomainSpiderTaskList(list);
+    }
+
+
 }

@@ -78,7 +78,7 @@ public class SjzNlWordMetaController extends AdminBaseController implements Base
 
 
     @Override
-    @RequestMapping(value = "/nlWordMeta/updata")
+    @RequestMapping(value = "/nlWordMeta/updata",method = RequestMethod.POST)
     public ModelAndView update(SjzNlWordMeta sjzNlWordMeta) {
         ModelAndView modelAndView = new ModelAndView(STATIC_BASE_URL+"/toUpdateWordMeta");
         int resultId = -1;

@@ -77,7 +77,7 @@ public class SjzNlMapStringContentConsume implements SjzNlContentConsume<Map<Str
              * rpuList 必须是根据序列号顺序排列
              */
             List<SjzNlRelatePatternUnit> rpuList = sjzNlRelatePatternUnitService.getListObject(obj);
-            parseConsumeByRelatePatternUnitList(url,targetStr,rpuList);
+            parseConsumeByRelatePatternUnitList(url,ss[i],rpuList);
         }
     }
 

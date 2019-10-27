@@ -13,10 +13,13 @@ import static org.apache.ibatis.jdbc.SqlBuilder.UPDATE;
 import static org.apache.ibatis.jdbc.SqlBuilder.VALUES;
 import static org.apache.ibatis.jdbc.SqlBuilder.WHERE;
 
+import com.hexiaofei.provider0.domain.SjzDomainSpiderTask;
 import com.hexiaofei.provider0.domain.SjzDomainWordSort;
 import com.hexiaofei.provider0.domain.SjzDomainWordSortExample.Criteria;
 import com.hexiaofei.provider0.domain.SjzDomainWordSortExample.Criterion;
 import com.hexiaofei.provider0.domain.SjzDomainWordSortExample;
+
+import java.text.MessageFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -254,7 +257,7 @@ public class SjzDomainWordSortSqlProvider {
         if (record.getSimpleWordMetaZh() != null) {
             SET("simpleWordMetaZh = #{simpleWordMetaZh,jdbcType=VARCHAR}");
         }
-        
+
         if (record.getCreateTime() != null) {
             SET("createTime = #{createTime,jdbcType=TIMESTAMP}");
         }
@@ -365,5 +368,25 @@ public class SjzDomainWordSortSqlProvider {
         if (sb.length() > 0) {
             WHERE(sb.toString());
         }
+    }
+
+    public String selectListBySpiderTaskList(Map<String,List<SjzDomainSpiderTask>> map){
+        List<SjzDomainSpiderTask> list = map.get("list");
+        StringBuilder sqlBuilder = new StringBuilder("select id, domainName, domainUrl, wordMetaCode, wordMetaEn, wordMetaZh, simpleWordMetaEn,simpleWordMetaZh, createTime, description");
+        sqlBuilder.append(" from sjz_domain_word_sort s ") ;
+        sqlBuilder.append(" where  s.wordMetaCode in ( ");
+
+
+        for(int i = 0 ; i < list.size() ; i++){
+            sqlBuilder.append(" #{list[");
+            sqlBuilder.append(i);
+            sqlBuilder.append("].wordCode ,jdbcType=INTEGER}");
+            if(list.size()-1 > i){
+                sqlBuilder.append(" , ");
+            }
+        }
+        sqlBuilder.append(" ) ");
+
+        return sqlBuilder.toString();
     }
 }

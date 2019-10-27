@@ -11,18 +11,25 @@
     <script th:src="@{/js/regexp.js}" type="text/javascript" />
     <style type="text/css" >
 
-        .sjz_center_ta table .tr1
+        .sjz_center_ad
         {
-            height:45px;
-        }.sjz_center_ta table .tr2
+            float: right;
+            width: 100px;
+        }
+
+        .sjz_center_ta
         {
-            height:100px;
-        }.sjz_center_ta table .tr3
+            width: 95%;
+            min-height: 200px;
+        }
+        .sjz_center_ta_tarea
         {
-            height:45px;
-        }.sjz_center_ta table .tr4
+            width: 95%;
+
+        }
+        .sjz_center_ta table tr
         {
-            height:50px;
+            height:40px;
         }
         .sjz_center_t_td
         {
@@ -32,7 +39,15 @@
         {
             width: 60px;
         }
-
+        .sjz_center_t_td .regexp
+        {
+            width: 500px;
+        }
+        .sjz_center .sjz_center_top_add li
+        {
+            display: inline;
+            margin-left: 20px;
+        }
 
 
 
@@ -56,7 +71,7 @@
                 <div></div>
             </div>
             <div class="sjz_center_ta">
-                <form action="/admin/nlRegExp/updata" method="post">
+                <form action="/admin/nlWordMeta/updata" method="post">
                     <table>
                         <thead>
                             <tr>
@@ -66,90 +81,52 @@
                         </thead>
                         <tbody>
                         <tr class="tr1">
-                            <td>编号：</td>
+                            <td>ID：</td>
                             <td class="sjz_center_t_td">
-                                <input type="text" name="id" th:value="${sjzNlRegExp.id}" class="input_readonly" readonly="readonly" />&nbsp;&nbsp;
-                            </td>
-                        </tr>
-                        <tr class="tr2">
-                            <td>模板：</td>
-                            <td class="sjz_center_t_td">
-                                <input type="text" name="regExpPattern" class="regexp" th:value="${sjzNlRegExp.regExpPattern}"/>&nbsp;&nbsp;
+                                <input type="text" name="id" th:value="${sjzNlWordMeta.id}"/>&nbsp;&nbsp;
                             </td>
                         </tr>
                         <tr class="tr1">
-                            <td>模板代码：</td>
+                            <td>编码：</td>
                             <td class="sjz_center_t_td">
-                                <input type="text" name="regExpCode" th:value="${sjzNlRegExp.regExpCode}"/>&nbsp;&nbsp;
+                                <input type="text" name="wordMetaCode" th:value="${sjzNlWordMeta.wordMetaCode}"/>&nbsp;&nbsp;
                             </td>
                         </tr>
-                        <tr class="tr3">
-                            <td>实例：</td>
-                            <td><textarea name="regExpDemo" rows="7" class="sjz_center_ta_tarea" th:text="${sjzNlRegExp.regExpDemo}"></textarea></td>
-                        </tr>
-                        <tr class="tr4">
-                            <td>组合类型：</td>
-                            <td>
-                                <label>
-                                    <input name="patternType" th:checked="${sjzNlRegExp.patternType==0}" type="radio" value="0" />边界类型
-                                </label>
-                                <label>
-                                    <input name="patternType" th:checked="${sjzNlRegExp.patternType==10}" type="radio" value="10" />前置类型
-                                </label>
-                                <label>
-                                    <input name="patternType" th:checked="${sjzNlRegExp.patternType==20}" type="radio" value="20" />后置类型
-                                </label>
-                                <label>
-                                    <input name="patternType" th:checked="${sjzNlRegExp.patternType==30}" type="radio" value="30" />环绕类型
-                                </label>
-                            </td>
-                        </tr>
-                        <tr class="tr5">
-                            <td>匹配类型：</td>
-                            <td>
-                                <label>
-                                    <input name="matchType" th:checked="${sjzNlRegExp.matchType==0}" type="radio" value="0" />名词
-                                </label>
-                                <label>
-                                    <input name="matchType" th:checked="${sjzNlRegExp.matchType==100}" type="radio" value="100" />动词
-                                </label>
-                                <label>
-                                    <input name="matchType" th:checked="${sjzNlRegExp.matchType==200}" type="radio" value="200" />形容词
-                                </label>
-                                <label>
-                                    <input name="matchType" th:checked="${sjzNlRegExp.matchType==300}" type="radio" value="300" />数词
-                                </label>
-                            </td>
-                        </tr>
-                        <tr class="tr6">
-                            <td>检查状态：</td>
+                        <tr class="tr1">
+                            <td>词类英文名称：</td>
                             <td class="sjz_center_t_td">
-                                <div class="check_label_div">
-                                    <label>
-                                        <input name="checkStatus" th:checked="${sjzNlRegExp.checkStatus==0}"  type="radio" value="0" />未校验
-                                    </label>
-                                    <label>
-                                        <input name="checkStatus" th:checked="${sjzNlRegExp.checkStatus==10}"  type="radio" value="10" />已校验
-                                    </label>
-                                    <label>
-                                        <input name="checkStatus" th:checked="${sjzNlRegExp.checkStatus==20}"  type="radio" value="20" />禁用
-                                    </label>
-                                </div>
-                                <div class="check_img_div">
-                                    <img src="" class="check_img_msg"/>
-                                </div>
-                                <div class="check_a_div">
-                                    <a class="check_a" href="javascript:void(0);"  onclick="javascript:regExp_checked();" >验证</a>
-
-                                </div>
-                                <!--<input type="button"  onclick="regExp_checked();" value="检查" />-->
+                                <input type="text" name="wordMetaEn" th:value="${sjzNlWordMeta.wordMetaEn}" />&nbsp;&nbsp;
                             </td>
+                        </tr>
+                        <tr class="tr2">
+                            <td>词类名称中文：</td>
+                            <td><input type="text"  name="wordMetaZh" th:value="${sjzNlWordMeta.wordMetaZh}" /></td>
+                        </tr>
+                        <tr class="tr2">
+                            <td>英文名称缩写：</td>
+                            <td><input type="text"  name="simpleWordMetaEn" th:value="${sjzNlWordMeta.simpleWordMetaEn}" /></td>
+                        </tr>
+                        <tr class="tr2">
+                            <td>中文名称缩写：</td>
+                            <td><input type="text"  name="simpleWordMetaZh" th:value="${sjzNlWordMeta.simpleWordMetaZh}" /></td>
+                        </tr>
+                        <tr class="tr2">
+                            <td>所属语言ID：</td>
+                            <td><input type="text"   name="languageId" th:value="${sjzNlWordMeta.languageId}" /></td>
+                        </tr>
+                        <tr class="tr2">
+                            <td>所属父类词类编码：</td>
+                            <td><input type="text"  name="parentWordMetaCodeId" th:value="${sjzNlWordMeta.parentWordMetaCodeId}" /></td>
+                        </tr>
+                        <tr class="tr2">
+                            <td>第几级词类：</td>
+                            <td><input type="text"  name="level" th:value="${sjzNlWordMeta.level}" /></td>
+                        </tr>
+                        <tr class="tr2">
+                            <td>描述：</td>
+                            <td><textarea name="description" th:text="${sjzNlWordMeta.description}" ></textarea></td>
                         </tr>
                         <tr class="tr7">
-                            <td>描述：</td>
-                            <td><textarea name="descr" rows="7" th:text="${sjzNlRegExp.descr}"></textarea></td>
-                        </tr>
-                        <tr class="tr8">
                             <td><input class="sjz_center_ta_submit" type="submit" value="确定"/></td>
                             <td></td>
                         </tr>
