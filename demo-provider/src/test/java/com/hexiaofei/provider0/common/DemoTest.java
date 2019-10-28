@@ -1,4 +1,4 @@
-package com.hexiaofei.provider0;
+package com.hexiaofei.provider0.common;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;

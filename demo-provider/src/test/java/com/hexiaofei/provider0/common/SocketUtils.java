@@ -1,4 +1,4 @@
-package com.hexiaofei.provider0;
+package com.hexiaofei.provider0.common;
 
 import java.io.*;
 import java.net.InetAddress;

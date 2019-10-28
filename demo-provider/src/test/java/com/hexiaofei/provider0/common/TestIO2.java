@@ -1,6 +1,6 @@
-package com.hexiaofei.provider0.service;
+package com.hexiaofei.provider0.common;
 
-import com.hexiaofei.provider0.SocketUtils;
+import com.hexiaofei.provider0.common.SocketUtils;
 
 import java.io.IOException;
 

@@ -1,17 +1,7 @@
-package com.hexiaofei.provider0;
+package com.hexiaofei.provider0.common;
 
 import com.hexiaofei.provider1.A;
-import org.apache.log4j.net.SocketServer;
-
-import java.io.IOException;
-import java.io.Serializable;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.util.*;
 import java.util.concurrent.*;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicStampedReference;
-
 /**
  * Created by hexiaofei on 2018/4/22.
  */

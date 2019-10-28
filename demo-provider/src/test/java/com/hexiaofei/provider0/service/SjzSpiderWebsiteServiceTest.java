@@ -1,4 +1,4 @@
-package com.hexiaofei.provider0.service.impl;
+package com.hexiaofei.provider0.service;
 
 import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.databind.ser.Serializers;
