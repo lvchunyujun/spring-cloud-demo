@@ -1,6 +1,5 @@
 package com.hexiaofei.provider0.common;
 
-import com.hexiaofei.provider1.A;
 import java.util.concurrent.*;
 /**
  * Created by hexiaofei on 2018/4/22.
