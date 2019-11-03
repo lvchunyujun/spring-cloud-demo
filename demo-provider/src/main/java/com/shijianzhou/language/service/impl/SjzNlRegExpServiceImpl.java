@@ -30,7 +30,7 @@ public class SjzNlRegExpServiceImpl extends AbstractService implements SjzNlRegE
 
     @Override
     public int deleteObjectById(int id) throws PlatformException {
-        return 0;
+        return sjzNlRegExpMapper.deleteByPrimaryKey(id);
     }
 
     @Override

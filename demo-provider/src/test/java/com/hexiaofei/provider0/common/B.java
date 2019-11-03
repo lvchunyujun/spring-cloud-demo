@@ -5,7 +5,7 @@ import java.util.concurrent.*;
 /**
  * Created by hexiaofei on 2018/4/22.
  */
-public class B<K,V> extends A {
+public class B<K,V> {
 
     private static final int COUNT_BITS = Integer.SIZE - 3;
     /** 线程池容量 (2^29)-1 */

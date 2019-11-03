@@ -152,4 +152,25 @@ public class AdminSjzDomainInfoController extends AdminBaseController implements
 
         return re.toString();
     }
+
+    @RequestMapping(value = STATIC_BASE_URL+"/delete/{id}")
+    @ResponseBody
+    @Override
+    public String delete(@PathVariable Integer id) {
+        ResultEntity re = getResultEntity();
+        try {
+            int resultId = sjzDomainInfoService.deleteObjectById(id);
+            if(resultId > 0){
+                re.setResultCode("0000");
+                re.setResultMsg("success");
+            }
+        } catch (PlatformException e) {
+            re.setResultCode("9999");
+            re.setResultMsg("网络异常，稍后重试！");
+            logger.error("查询异常！",e);
+        }
+        return re.toString();
+    }
+
+
 }

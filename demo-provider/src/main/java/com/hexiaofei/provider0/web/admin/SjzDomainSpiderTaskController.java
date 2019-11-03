@@ -1,6 +1,7 @@
 package com.hexiaofei.provider0.web.admin;
 
 import com.hexiaofei.provider0.domain.SjzDomainSpiderTask;
+import com.hexiaofei.provider0.exception.PlatformException;
 import com.hexiaofei.provider0.service.SjzDomainSpiderTaskService;
 import com.hexiaofei.provider0.vo.PageVo;
 import com.hexiaofei.provider0.web.BaseController;
@@ -96,4 +97,25 @@ public class SjzDomainSpiderTaskController extends AdminBaseController implement
 
         return re.toString();
     }
+
+    @RequestMapping(value = STATIC_BASE_URL+"/delete/{id}")
+    @ResponseBody
+    @Override
+    public String delete(@PathVariable Integer id) {
+        ResultEntity re = getResultEntity();
+        try {
+            int resultId = sjzDomainSpiderTaskService.deleteObjectById(id);
+            if(resultId > 0){
+                re.setResultCode("0000");
+                re.setResultMsg("success");
+            }
+        } catch (PlatformException e) {
+            re.setResultCode("9999");
+            re.setResultMsg("网络异常，稍后重试！");
+            logger.error("查询异常！",e);
+        }
+        return re.toString();
+    }
+
+
 }

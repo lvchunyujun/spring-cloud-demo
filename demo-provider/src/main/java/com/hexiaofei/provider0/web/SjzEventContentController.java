@@ -37,4 +37,11 @@ public class SjzEventContentController extends AbstractBaseController implements
     public String listEventIndex(SjzEventContent sjzEventContent, int currentPage, int pageSize) {
         return null;
     }
+
+    @Override
+    public String delete(Integer id) {
+        return null;
+    }
+
+
 }

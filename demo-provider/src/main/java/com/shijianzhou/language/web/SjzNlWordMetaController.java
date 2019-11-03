@@ -21,7 +21,7 @@ import java.util.Date;
 @Controller
 public class SjzNlWordMetaController extends AdminBaseController implements BaseController<SjzNlWordMeta> {
 
-    public static Logger logger = LoggerFactory.getLogger(SjzNlWordMetaController.class);
+    public static Logger LOGGER = LoggerFactory.getLogger(SjzNlWordMetaController.class);
 
     private final static String STATIC_BASE_URL = "nl/wordMeta";
 
@@ -120,11 +120,31 @@ public class SjzNlWordMetaController extends AdminBaseController implements Base
         } catch (Exception e) {
             re.setResultCode("9999");
             re.setResultMsg("网络异常，稍后重试！");
-            logger.error("查询异常！",e);
+            LOGGER.error("查询异常！",e);
         }
 
 
         return re.toString();
     }
+
+    @RequestMapping(value = STATIC_BASE_URL+"/delete/{id}")
+    @ResponseBody
+    @Override
+    public String delete(@PathVariable Integer id) {
+        ResultEntity re = getResultEntity();
+        try {
+            int resultId = sjzNlWordMetaService.deleteObjectById(id);
+            if(resultId > 0){
+                re.setResultCode("0000");
+                re.setResultMsg("success");
+            }
+        } catch (PlatformException e) {
+            re.setResultCode("9999");
+            re.setResultMsg("网络异常，稍后重试！");
+            LOGGER.error("查询异常！",e);
+        }
+        return re.toString();
+    }
+
 
 }

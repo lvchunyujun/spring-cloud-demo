@@ -104,8 +104,13 @@ var eciHandler = function(resultData){
                     if(map[key].deleteHref !=null && map[key].deleteHref != "" && map[key].deleteHref.length > 0){
 
                         var td_event_opt_a_d = document.createElement("a");
-                        td_event_opt_a_d = $(td_event_opt_a_d).attr("href",map[key].updateHref+obj[indexName]);
+                        // td_event_opt_a_d = $(td_event_opt_a_d).attr("href",map[key].updateHref+obj[indexName]);
                         td_event_opt_a_d = $(td_event_opt_a_d).text(map[key].deleteTxt);
+                        td_event_opt_a_d = $(td_event_opt_a_d)
+                            .attr("href","javascript:void(0);");
+
+
+                        $(td_event_opt_a_d).bind("click",{url:map[key].deleteHref,id:obj[map[key].indexName]},delete_record);
                         td_tag = $(td_tag).append(td_event_opt_a_d);
                     }
 
@@ -179,5 +184,26 @@ function data_paging(currentPage,pageSize){
     });
 }
 
+
+function delete_record(e){
+
+
+    if(confirm("您好，确定要删除["+e.data.id+"]记录！")){
+
+        $.ajax({
+            type: "post",
+            url: e.data.url+e.data.id,
+            dataType:'json',
+            success:function(data){
+                alert("删除成功！");
+                window.location.reload();
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown){
+                alert(textStatus+"  "+XMLHttpRequest.state());
+            }
+        });
+    }
+
+}
 
 /*]]>*/

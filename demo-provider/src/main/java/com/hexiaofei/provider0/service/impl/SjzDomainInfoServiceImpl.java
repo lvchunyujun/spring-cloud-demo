@@ -64,7 +64,7 @@ public class SjzDomainInfoServiceImpl extends AbstractService implements SjzDoma
 
     @Override
     public int deleteObjectById(int id) throws PlatformException {
-        return 0;
+        return sjzDomainInfoMapper.deleteByPrimaryKey(id);
     }
 
     @Override

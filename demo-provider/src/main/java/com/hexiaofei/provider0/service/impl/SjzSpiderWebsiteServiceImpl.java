@@ -30,7 +30,7 @@ public class SjzSpiderWebsiteServiceImpl implements SjzSpiderWebsiteService {
 
     @Override
     public int deleteObjectById(int id) throws PlatformException {
-        return 0;
+        return sjzSpiderWebsiteMapper.deleteByPrimaryKey(id);
     }
 
     @Override

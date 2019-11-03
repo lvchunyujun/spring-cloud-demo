@@ -72,6 +72,12 @@ public class UserInfoController extends AbstractBaseController implements BaseCo
     }
 
     @Override
+    public String delete(Integer id) {
+        return null;
+    }
+
+
+    @Override
     public ModelAndView update(UserInfo userInfo) {
         return null;
     }

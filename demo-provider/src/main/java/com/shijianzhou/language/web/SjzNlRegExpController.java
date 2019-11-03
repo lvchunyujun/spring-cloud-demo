@@ -128,6 +128,27 @@ public class SjzNlRegExpController extends AdminBaseController implements BaseCo
         return re.toString();
     }
 
+    @RequestMapping(value = STATIC_BASE_URL+"/delete/{id}")
+    @ResponseBody
+    @Override
+    public String delete(@PathVariable Integer id) {
+        ResultEntity re = getResultEntity();
+        try {
+            int resultId = sjzNlRegExpService.deleteObjectById(id);
+            if(resultId > 0){
+                re.setResultCode("0000");
+                re.setResultMsg("success");
+            }
+        } catch (PlatformException e) {
+            re.setResultCode("9999");
+            re.setResultMsg("网络异常，稍后重试！");
+            logger.error("查询异常！",e);
+        }
+        return re.toString();
+    }
+
+
+
     @RequestMapping(value = "/nlRegExp/check")
     @ResponseBody
     public String getRegExpMarchCheck(SjzNlRegExp sjzNlRegExp){

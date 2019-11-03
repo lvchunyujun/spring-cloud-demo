@@ -1,15 +1,13 @@
 package com.hexiaofei.provider0.service.impl; 
 
 import com.hexiaofei.provider0.domain.SjzDomainWordSort;
+import com.hexiaofei.provider0.service.AbstractTest;
 import com.hexiaofei.provider0.service.SjzDomainWordSortService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.Before; 
 import org.junit.After;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 /** 
 * SjzDomainWordSortServiceImpl Tester. 
@@ -18,9 +16,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 * @since <pre>Oct 28, 2019</pre> 
 * @version 1.0 
 */
-@RunWith(SpringRunner.class)
-@SpringBootTest
-public class SjzDomainWordSortServiceImplTest { 
+
+public class SjzDomainWordSortServiceImplTest extends AbstractTest {
 
     @Autowired
     SjzDomainWordSortService sjzDomainWordSortService;

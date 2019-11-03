@@ -55,7 +55,7 @@ public class SjzEventIndexServiceImpl implements SjzEventIndexService {
 
     @Override
     public int deleteObjectById(int id) throws PlatformException {
-        return 0;
+        return sjzEventIndexMapper.deleteByPrimaryKey(id);
     }
 
     @Override
