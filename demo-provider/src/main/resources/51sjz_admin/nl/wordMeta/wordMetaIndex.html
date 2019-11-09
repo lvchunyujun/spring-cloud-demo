@@ -8,7 +8,7 @@
     <link th:href="@{/css/sjz_paging.css}" rel="stylesheet" type="text/css" />
     <script th:src="@{/js/jquery-3.4.1.min.js}" type="text/javascript" />
     <script th:src="@{/js/utils.js}" type="text/javascript" />
-    <script th:src="@{/js/sjz_paging.js}" type="text/javascript" />
+    <script th:src="@{/js/sjz_paging_v1.0.2.js}" type="text/javascript" />
 
     <style type="text/css" >
 
@@ -74,9 +74,7 @@
 
 </head>
 <body>
-    <div class="sjz_title">
-        <img th:src="@{/images/51shijianzhou.png}" class="sjz_title_img" /><h3>表达式模板管理</h3>
-    </div>
+    <div th:replace="common/sjz_top :: sjz_top"  ></div>
     <div class="sjz_nvg">
         当前位置：<a href="/admin/index">首页</a> > 分词元数据管理
     </div>

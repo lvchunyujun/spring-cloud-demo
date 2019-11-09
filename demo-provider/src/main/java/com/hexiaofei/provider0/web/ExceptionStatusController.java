@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class ExceptionStatusController implements ErrorController {
 
-
+    private final static String WEB_STATUS_URL = "/common/";
 
     @RequestMapping("/error")
     public String handleError(HttpServletRequest request){
@@ -21,11 +21,9 @@ public class ExceptionStatusController implements ErrorController {
         if(statusCode == 401){
             return "/401";
         }else if(statusCode == 404){
-            return "/common/sjz_404";
-        }else if(statusCode == 403){
-            return "/403";
+            return WEB_STATUS_URL+"sjz_404";
         }else{
-            return "/500";
+            return WEB_STATUS_URL+"sjz_500";
         }
 
     }

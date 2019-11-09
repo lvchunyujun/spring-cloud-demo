@@ -1,7 +1,8 @@
 package com.hexiaofei.provider0;
 
 import com.hexiaofei.provider0.domain.UserInfo;
-import com.hexiaofei.provider0.service.IUserInfoService;
+import com.hexiaofei.provider0.exception.PlatformException;
+import com.hexiaofei.provider0.service.UserInfoService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +14,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class TestUserInfoService {
 
     @Autowired
-    private IUserInfoService userInfoService;
+    private UserInfoService userInfoService;
 
     @Test
-    public void test(){
-        UserInfo userInfo = userInfoService.getUserInfoById(2);
+    public void test() throws PlatformException {
+        UserInfo userInfo = userInfoService.getObjectById(10);
         System.out.println(userInfo);
     }
 }

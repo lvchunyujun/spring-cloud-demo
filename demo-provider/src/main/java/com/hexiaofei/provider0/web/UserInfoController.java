@@ -1,7 +1,8 @@
 package com.hexiaofei.provider0.web;
 
 import com.hexiaofei.provider0.domain.UserInfo;
-import com.hexiaofei.provider0.service.IUserInfoService;
+import com.hexiaofei.provider0.exception.PlatformException;
+import com.hexiaofei.provider0.service.UserInfoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-//import org.springframework.web.bind.annotation.RestController;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -23,7 +23,7 @@ public class UserInfoController extends AbstractBaseController implements BaseCo
 
 
     @Autowired
-    private IUserInfoService userInfoService;
+    private UserInfoService userInfoService;
 
     @RequestMapping("/{id}")
     @ResponseBody
@@ -32,12 +32,17 @@ public class UserInfoController extends AbstractBaseController implements BaseCo
 
 
         try {
-            UserInfo user = userInfoService.getUserInfoById(id);
+            UserInfo user = userInfoService.getObjectById(id);
+
             TimeUnit.MILLISECONDS.sleep(100);
             re.setResultCode("000000");
             re.setResultMsg("success");
             re.setData(user);
-        } catch (InterruptedException e) {
+        }catch (PlatformException e){
+            re.setResultCode("999999");
+            re.setResultMsg("系统异常！");
+            e.printStackTrace();
+        }catch (InterruptedException e) {
             re.setResultCode("999999");
             re.setResultMsg("系统异常！");
             e.printStackTrace();

@@ -3,17 +3,12 @@ package com.hexiaofei.provider0.service.impl;
 import com.hexiaofei.provider0.dao.mapper.SjzEventIndexMapper;
 import com.hexiaofei.provider0.domain.SjzEventIndex;
 import com.hexiaofei.provider0.domain.SjzSpiderWebsite;
-import com.hexiaofei.provider0.domain.UserInfo;
 import com.hexiaofei.provider0.exception.PlatformException;
-import com.hexiaofei.provider0.service.IUserInfoService;
 import com.hexiaofei.provider0.service.SjzEventIndexService;
 import com.hexiaofei.provider0.service.SjzSpiderWebsiteService;
 import com.hexiaofei.provider0.vo.PageVo;
-import net.bytebuddy.implementation.bytecode.Throw;
-import org.apache.catalina.core.ApplicationContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;

@@ -96,7 +96,12 @@
 			<!--<property name="useActualColumnNames" value="true"/>-->
 		<!--</table>-->
 
+		<!--
 		<table tableName="sjz_domain_spider_task" domainObjectName="SjzDomainSpiderTask">
+			<property name="useActualColumnNames" value="true"/>
+		</table>
+		-->
+		<table tableName="user_info" domainObjectName="UserInfo">
 			<property name="useActualColumnNames" value="true"/>
 		</table>
 	</context>

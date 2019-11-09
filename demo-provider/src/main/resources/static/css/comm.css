@@ -41,6 +41,12 @@ ul{
     float: left;
     padding: 0px 10px;
 }
+.a_logout
+{
+    color: #1683a8;
+    float: right;
+    margin: 15px 50px;
+}
 /* 页面标题 */
 
 /* 页面导航 */
