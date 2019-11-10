@@ -1,11 +1,16 @@
-package com.hexiaofei.provider0.web;
+package com.hexiaofei.provider0.web.admin;
 
+import com.hexiaofei.provider0.domain.SjzDomainInfo;
 import com.hexiaofei.provider0.domain.UserInfo;
 import com.hexiaofei.provider0.exception.PlatformException;
 import com.hexiaofei.provider0.service.UserInfoService;
+import com.hexiaofei.provider0.vo.PageVo;
+import com.hexiaofei.provider0.web.AbstractBaseController;
+import com.hexiaofei.provider0.web.BaseController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,20 +20,20 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by Administrator on 2017/11/17.
  */
-//@RestController
-@RequestMapping("/userInfo")
-public class UserInfoController extends AbstractBaseController implements BaseController<UserInfo>{
+@Controller
+public class AdminUserInfoController extends AdminBaseController implements BaseController<UserInfo> {
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(UserInfoController.class);
+    private final static Logger LOGGER = LoggerFactory.getLogger(AdminUserInfoController.class);
 
+    private final static String BASE_URL = "userInfo";
 
     @Autowired
     private UserInfoService userInfoService;
 
-    @RequestMapping("/{id}")
+    @RequestMapping(BASE_URL+"/{id}")
     @ResponseBody
     public String findUserInfoById(@PathVariable Integer id){
-        ResultEntity re = new ResultEntity();
+        ResultEntity re = getResultEntity();
 
 
         try {
@@ -51,37 +56,66 @@ public class UserInfoController extends AbstractBaseController implements BaseCo
         return re.toString();
     }
 
+    @RequestMapping(value = BASE_URL+"/index")
     @Override
     public String index() {
-        return null;
+        return BASE_URL+"/userInfoIndex";
     }
 
+    @RequestMapping(value = BASE_URL+"/toAdd")
     @Override
     public String toAdd() {
         return null;
     }
 
+    @RequestMapping(value = BASE_URL+"/add")
     @Override
     public String add(UserInfo o) {
         return null;
     }
 
+    @RequestMapping(value = BASE_URL+"/toUpdate")
     @Override
     public ModelAndView toUpdate(Integer id) {
         return null;
     }
 
+    @RequestMapping(value = BASE_URL+"/list/{currentPage}_{pageSize}")
     @Override
-    public String listEventIndex(UserInfo o, int currentPage, int pageSize) {
-        return null;
+    @ResponseBody
+    public String listEventIndex(UserInfo o,@PathVariable int currentPage,@PathVariable int pageSize) {
+        ResultEntity re = getResultEntity();
+
+        PageVo pageVo = new PageVo<UserInfo>();
+        if(currentPage>0){
+            pageVo.setCurrentPage(currentPage);
+        }else{
+            pageVo.setCurrentPage(1);
+        }
+        if(pageSize>0){
+            pageVo.setPageSize(pageSize);
+        }
+        try {
+            pageVo = userInfoService.getPageVoObject(pageVo);
+            re.setData(pageVo);
+            re.setResultCode("0000");
+            re.setResultMsg("success");
+        } catch (Exception e) {
+            re.setResultCode("9999");
+            re.setResultMsg("网络异常，稍后重试！");
+            LOGGER.error("查询异常！",e);
+        }
+
+        return re.toString();
     }
 
+    @RequestMapping(value = BASE_URL+"/delete")
     @Override
     public String delete(Integer id) {
         return null;
     }
 
-
+    @RequestMapping(value = BASE_URL+"/update")
     @Override
     public ModelAndView update(UserInfo userInfo) {
         return null;
