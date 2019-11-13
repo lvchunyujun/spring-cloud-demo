@@ -109,10 +109,23 @@ public class AdminUserInfoController extends AdminBaseController implements Base
         return re.toString();
     }
 
-    @RequestMapping(value = BASE_URL+"/delete")
+    @RequestMapping(value = BASE_URL+"/delete/{id}")
     @Override
-    public String delete(Integer id) {
-        return null;
+    @ResponseBody
+    public String delete(@PathVariable Integer id) {
+        ResultEntity re = getResultEntity();
+        try {
+            int resultId = userInfoService.deleteObjectById(id);
+            if(resultId > 0){
+                re.setResultCode("0000");
+                re.setResultMsg("success");
+            }
+        } catch (PlatformException e) {
+            re.setResultCode("9999");
+            re.setResultMsg("网络异常，稍后重试！");
+            LOGGER.error("查询异常！",e);
+        }
+        return re.toString();
     }
 
     @RequestMapping(value = BASE_URL+"/update")

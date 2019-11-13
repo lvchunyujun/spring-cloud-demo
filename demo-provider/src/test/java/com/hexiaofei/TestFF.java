@@ -8,10 +8,12 @@ public class TestFF {
 
     public static void main(String[] args) {
 
-       B b = new B();
-       Integer i = new Integer(223);
-       Long l = new Long(23);
-        System.out.println(i == 223);
+        B b = new B();
+        ClassLoader cl = b.getClass().getClassLoader();
+        System.out.println(cl.getClass().getName());
+        String s = "";
+        cl =s.getClass().getClassLoader();
+        System.out.println(cl.getClass().getName());
     }
 
 
