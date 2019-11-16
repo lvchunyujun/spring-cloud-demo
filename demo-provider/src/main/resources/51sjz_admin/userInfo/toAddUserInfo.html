@@ -64,7 +64,7 @@
 <div>
     <div th:replace="common/sjz_top :: sjz_top"  ></div>
     <div class="sjz_nvg">
-        当前位置：<a href="/admin/index">首页</a> > <a href="/admin/nlRegExp/index">表达式模板管理</a> > 添加表达式模板
+        当前位置：<a href="/admin/index">首页</a> > <a href="/admin/userInfo/index">用户信息管理</a> > 添加用户信息
     </div>
     <div class="sjz_c">
         <!-- 菜单 -->
@@ -73,74 +73,82 @@
             <div  >
             </div>
             <div class="sjz_center_ta">
-                <form action="/admin/rpu/add" method="post">
+                <form action="/admin/userInfo/add" method="post">
                     <table>
                         <thead>
-                            <tr>
-                                <td style="width: 10%;"></td>
-                                <td></td>
-                            </tr>
                         </thead>
                         <tbody>
-                        <tr class="tr1">
-                            <td>匹配模板名称：</td>
-                            <td class="sjz_center_t_td">
-                                <input type="text" name="patternName" value=""/>&nbsp;&nbsp;
-                            </td>
-                        </tr>
-                        <tr class="tr1">
-                            <td>顺序号：</td>
-                            <td class="sjz_center_t_td">
-                                <input type="text" name="unitSerialNo" value=""/>&nbsp;&nbsp;
-                            </td>
-                        </tr>
-                        <tr class="tr2">
-                            <td>正则表达式代码：</td>
-                            <td><input name="regExpCode" /></td>
-                        </tr>
-                        <tr class="tr2">
-                            <td>正则表达式：</td>
-                            <td><input name="regExpPattern" /></td>
-                        </tr>
-                        <tr class="tr3">
-                            <td>关联类型：</td>
+
+                        <tr class="tr1"  >
                             <td>
-                                <label>
-                                    <input name="relateType"  type="radio" value="0" />包含
-                                </label>
-                                <label>
-                                    <input name="relateType"  type="radio" value="10" />排除
-                                </label>
+                                昵称
+                            </td>
+                            <td>
+                                <input type="text" th:name="nickName"  />
+                            </td>
+                        </tr>
+                        <tr class="tr1"  >
+                            <td>
+                                用户名
+                            </td>
+                            <td>
+                                <input type="text" th:name="userName"  />
+                            </td>
+                        </tr>
+                        <tr class="tr1"  >
+                            <td>
+                                真实姓名
+                            </td>
+                            <td>
+                                <input type="text" th:name="realName" />
+                            </td>
+                        </tr>
+                        <tr class="tr1"  >
+                            <td>
+                                角色
+                            </td>
+                            <td>
+                                <label><input type="radio" name="role" value="10" />:后台管理员</label>
+                                <label><input type="radio" name="role" value="20" checked="checked" />:普通用户</label>
+                            </td>
+                        </tr>
+                        <tr class="tr1"  >
+                            <td>
+                                身份证号
+                            </td>
+                            <td>
+                                <input type="text" th:name="idCard"  />
+                            </td>
+                        </tr>
+                        <tr class="tr1"  >
+                            <td>
+                                手机号码
+                            </td>
+                            <td>
+                                <input type="text" th:name="phone" />
+                            </td>
+                        </tr>
+                        <tr class="tr1"  >
+                            <td>
+                                email地址
+                            </td>
+                            <td>
+                                <input type="text" th:name="email" />
                             </td>
                         </tr>
 
-                        <tr class="tr5">
-                            <td>使用状态：</td>
-                            <td class="sjz_center_t_td">
-                                <div class="check_label_div">
-                                    <label>
-                                        <input name="useStatus" type="radio" value="0" />开启
-                                    </label>
-                                    <label>
-                                        <input name="useStatus" type="radio" value="10" />关闭
-                                    </label>
-                                </div>
-                                <div class="check_img_div">
-                                    <img src="" class="check_img_msg"/>
-                                </div>
-                                <div class="check_a_div">
-                                    <a class="check_a" href="javascript:void(0);"  onclick="javascript:regExp_checked();" >验证</a>
-
-                                </div>
+                        <tr class="tr1"  >
+                            <td>
+                                状态
+                            </td>
+                            <td>
+                                <label><input type="radio" name="status" value="0" />:正常</label>
                             </td>
                         </tr>
-                        <tr class="tr6">
-                            <td>描述：</td>
-                            <td><textarea name="descript" rows="7" ></textarea></td>
-                        </tr>
-                        <tr class="tr7">
-                            <td><input class="sjz_center_ta_submit" type="submit" value="确定"/></td>
+
+                        <tr>
                             <td></td>
+                            <td><input class="sjz_center_ta_submit" type="submit" value="确定"/></td>
                         </tr>
                         </tbody>
                     </table>

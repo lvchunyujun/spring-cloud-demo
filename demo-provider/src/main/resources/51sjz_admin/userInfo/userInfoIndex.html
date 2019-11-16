@@ -9,7 +9,7 @@
     <script th:src="@{/js/jquery-3.4.1.min.js}" type="text/javascript" />
     <script th:src="@{/js/utils.js}" type="text/javascript" />
     <script th:src="@{/js/sjz_paging_v1.0.2.js}" type="text/javascript" />
-
+    <script th:src="@{/js/common.js}" type="text/javascript" />
     <style type="text/css" >
 
         .sjz_center_content thead
@@ -51,8 +51,9 @@
                     role:{
                         tagType:"text_type",
                         typeMap:{
-                            0:"普通用户",
-                            10:"后台管理员"
+                            10:"后台管理员",
+                            20:"普通用户"
+
                         }
                     },
                     status:{
@@ -64,7 +65,7 @@
                     u_d_operation:{
                         tagType:"a_operation",
                         indexName:"id",
-                        updateHref:"/admin/userInfo/toUpdateUnit/",
+                        updateHref:"/admin/userInfo/toUpdate/",
                         updateTxt:"修改",
                         deleteHref:"/admin/userInfo/delete/",
                         deleteTxt:"删除"

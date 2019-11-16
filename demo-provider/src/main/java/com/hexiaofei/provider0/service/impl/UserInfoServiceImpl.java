@@ -1,10 +1,13 @@
 package com.hexiaofei.provider0.service.impl;
 
+import com.hexiaofei.provider0.common.WebSystemConsts;
 import com.hexiaofei.provider0.dao.mapper.UserInfoMapper;
 import com.hexiaofei.provider0.domain.UserInfo;
 import com.hexiaofei.provider0.exception.PlatformException;
 import com.hexiaofei.provider0.service.UserInfoService;
+import com.hexiaofei.provider0.service.base.AbstractService;
 import com.hexiaofei.provider0.utils.security.MD5;
+import com.hexiaofei.provider0.utils.security.RSAUtils;
 import com.hexiaofei.provider0.vo.PageVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +21,7 @@ import java.util.List;
  */
 @Transactional
 @Service("userInfoService")
-public class UserInfoServiceImpl implements UserInfoService {
+public class UserInfoServiceImpl extends AbstractService implements UserInfoService {
 
     @Autowired
     private UserInfoMapper userInfoMapper;
@@ -30,8 +33,10 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
-    public int addObject(UserInfo mob) throws PlatformException {
-        return userInfoMapper.insert(mob);
+    public int addObject(UserInfo userInfo) throws PlatformException {
+        userInfo.setPassword(MD5.encodeByMd5AndSalt(WebSystemConsts.DFAULT_PASSWORD));
+        userInfo.setLoginCount(0);
+        return userInfoMapper.insert(userInfo);
     }
 
     @Override
@@ -40,8 +45,12 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
-    public int updateObject(UserInfo mob) throws PlatformException {
-        return userInfoMapper.updateByPrimaryKey(mob);
+    public int updateObject(UserInfo userInfo) throws PlatformException {
+        int resultId = -1;
+        UserInfo targetObj = getObjectById(userInfo.getId());
+        targetObj = refreshObjectForNotNullVal(targetObj,userInfo);
+        resultId = userInfoMapper.updateByPrimaryKey(targetObj);
+        return resultId;
     }
 
     @Override

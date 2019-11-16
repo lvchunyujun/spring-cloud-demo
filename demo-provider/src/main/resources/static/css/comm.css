@@ -81,6 +81,22 @@ ul{
     border-bottom: 1px solid #aaa;
     margin-left: 15px;
 }
+.menu_img_ctl_left
+{
+    left: 16%;
+    width: 15px;
+    z-index: 999;
+    position: absolute;
+
+}
+.menu_img_ctl_right
+{
+    left: 0%;
+    width: 15px;
+    z-index: 999;
+    position: absolute;
+    display: none;
+}
 /* 菜单 */
 
 /* 内容中心div */
@@ -102,7 +118,7 @@ ul{
 /* 内容中心> 列表table */
 .sjz_center_content
 {
-    width: 99%;
+    width: 100%;
     border: 1px solid #f1f1f1;
 }
 

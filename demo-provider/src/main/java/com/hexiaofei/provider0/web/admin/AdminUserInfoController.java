@@ -1,11 +1,9 @@
 package com.hexiaofei.provider0.web.admin;
 
-import com.hexiaofei.provider0.domain.SjzDomainInfo;
 import com.hexiaofei.provider0.domain.UserInfo;
 import com.hexiaofei.provider0.exception.PlatformException;
 import com.hexiaofei.provider0.service.UserInfoService;
 import com.hexiaofei.provider0.vo.PageVo;
-import com.hexiaofei.provider0.web.AbstractBaseController;
 import com.hexiaofei.provider0.web.BaseController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,8 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -65,19 +66,47 @@ public class AdminUserInfoController extends AdminBaseController implements Base
     @RequestMapping(value = BASE_URL+"/toAdd")
     @Override
     public String toAdd() {
-        return null;
+        return BASE_URL+"/toAddUserInfo";
     }
 
     @RequestMapping(value = BASE_URL+"/add")
     @Override
-    public String add(UserInfo o) {
-        return null;
+    public String add(UserInfo userInfo) {
+        int resultId = -1;
+        try {
+
+            // step1: 检查正则表达式是否存在、
+
+
+            // step2: 序号是否正确
+
+
+            userInfo.setRegisterDate(new Date());
+            resultId = userInfoService.addObject(userInfo);
+        } catch (PlatformException e) {
+            LOGGER.error("查询异常！",e);
+        }
+
+        if(resultId>0){
+            return ADD_SUCCESS_URL;
+        }else{
+            return ADD_FAIL_URL;
+        }
     }
 
-    @RequestMapping(value = BASE_URL+"/toUpdate")
+    @RequestMapping(value = BASE_URL+"/toUpdate/{id}")
     @Override
-    public ModelAndView toUpdate(Integer id) {
-        return null;
+    public ModelAndView toUpdate(@PathVariable Integer id) {
+
+        ModelAndView modelAndView = new ModelAndView(BASE_URL+"/toUpdateUserInfo");
+        try {
+            UserInfo userInfo = userInfoService.getObjectById(id);
+            modelAndView.addObject("userInfo",userInfo);
+        } catch (PlatformException e) {
+            LOGGER.error("查询异常！",e);
+        }
+
+        return modelAndView;
     }
 
     @RequestMapping(value = BASE_URL+"/list/{currentPage}_{pageSize}")
@@ -128,9 +157,18 @@ public class AdminUserInfoController extends AdminBaseController implements Base
         return re.toString();
     }
 
-    @RequestMapping(value = BASE_URL+"/update")
+    @RequestMapping(value = BASE_URL+"/update",method = RequestMethod.POST)
     @Override
     public ModelAndView update(UserInfo userInfo) {
-        return null;
+        ModelAndView modelAndView = new ModelAndView(BASE_URL+"/toUpdateUserInfo");
+        try {
+            userInfoService.updateObject(userInfo);
+            UserInfo targetUserInfo = userInfoService.getObjectById(userInfo.getId());
+            modelAndView.addObject("userInfo",targetUserInfo);
+        } catch (PlatformException e) {
+            LOGGER.error("查询异常！",e);
+        }
+
+        return modelAndView;
     }
 }

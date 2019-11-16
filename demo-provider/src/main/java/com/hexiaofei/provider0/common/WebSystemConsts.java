@@ -6,7 +6,9 @@ public interface WebSystemConsts {
     int COOKIEAGE = 1800;
 
     String COOKIE_USER = "USERINFO";
-    int COOKIE_OUTTIME = 60;
+    int COOKIE_OUTTIME = 600;
+
+    String DFAULT_PASSWORD = "000000";
 
     String ADMIN_TOLOGIN_URL = "/toLogin";
     String ADMIN_LOGIN_URL   = "/login";

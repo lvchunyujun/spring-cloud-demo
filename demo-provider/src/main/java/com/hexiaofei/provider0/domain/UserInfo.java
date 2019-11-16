@@ -46,7 +46,7 @@ public class UserInfo {
     /**
      *email地址
      */
-    private String eMail;
+    private String email;
 
     /**
      *注册日期
@@ -176,17 +176,19 @@ public class UserInfo {
     }
 
     /**
-     *email地址
+     * email
+     * @return
      */
-    public String geteMail() {
-        return eMail;
+    public String getEmail() {
+        return email;
     }
 
     /**
-     *email地址
+     * email
+     * @param email
      */
-    public void seteMail(String eMail) {
-        this.eMail = eMail == null ? null : eMail.trim();
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     /**

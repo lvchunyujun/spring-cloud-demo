@@ -4,10 +4,14 @@
     <meta charset="UTF-8"/>
     <title>Title</title>
     <link th:href="@{/css/comm.css}" rel="stylesheet" type="text/css" />
+
 </head>
 <body>
 <!-- 菜单 -->
-<div class="sjz_menu" th:fragment="sjz_menu">
+<div class="_sjz_menu" th:fragment="sjz_menu">
+    <img class="menu_img_ctl_left" src="/images/common/left_go.png" />
+    <img class="menu_img_ctl_right" src="/images/common/right_go.png" />
+<div class="sjz_menu" >
     <ul>
         <li>历史轴管理</li>
         <li><a href="/admin/eventIndex" >事件管理</a></li>
@@ -35,6 +39,7 @@
         <li><a href="/admin/" >角色管理(来源客户端)</a></li>
         <li><a href="/admin/" >系统设置管理(来源客户端)</a></li>
     </ul>
+</div>
 </div>
 </body>
 </html>

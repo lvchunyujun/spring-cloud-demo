@@ -91,8 +91,8 @@ public class UserInfoSqlProvider {
             VALUES("phone", "#{phone,jdbcType=CHAR}");
         }
         
-        if (record.geteMail() != null) {
-            VALUES("eMail", "#{eMail,jdbcType=VARCHAR}");
+        if (record.getEmail() != null) {
+            VALUES("email", "#{email,jdbcType=VARCHAR}");
         }
         
         if (record.getRegisterDate() != null) {
@@ -130,7 +130,7 @@ public class UserInfoSqlProvider {
         SELECT("role");
         SELECT("idCard");
         SELECT("phone");
-        SELECT("eMail");
+        SELECT("email");
         SELECT("registerDate");
         SELECT("status");
         SELECT("loginCount");
@@ -189,8 +189,8 @@ public class UserInfoSqlProvider {
             SET("phone = #{record.phone,jdbcType=CHAR}");
         }
         
-        if (record.geteMail() != null) {
-            SET("eMail = #{record.eMail,jdbcType=VARCHAR}");
+        if (record.getEmail() != null) {
+            SET("email = #{record.email,jdbcType=VARCHAR}");
         }
         
         if (record.getRegisterDate() != null) {
@@ -227,7 +227,7 @@ public class UserInfoSqlProvider {
         SET("role = #{record.role,jdbcType=SMALLINT}");
         SET("idCard = #{record.idCard,jdbcType=CHAR}");
         SET("phone = #{record.phone,jdbcType=CHAR}");
-        SET("eMail = #{record.eMail,jdbcType=VARCHAR}");
+        SET("email = #{record.email,jdbcType=VARCHAR}");
         SET("registerDate = #{record.registerDate,jdbcType=TIMESTAMP}");
         SET("status = #{record.status,jdbcType=SMALLINT}");
         SET("loginCount = #{record.loginCount,jdbcType=INTEGER}");
@@ -275,8 +275,8 @@ public class UserInfoSqlProvider {
             SET("phone = #{phone,jdbcType=CHAR}");
         }
         
-        if (record.geteMail() != null) {
-            SET("eMail = #{eMail,jdbcType=VARCHAR}");
+        if (record.getEmail() != null) {
+            SET("email = #{email,jdbcType=VARCHAR}");
         }
         
         if (record.getRegisterDate() != null) {

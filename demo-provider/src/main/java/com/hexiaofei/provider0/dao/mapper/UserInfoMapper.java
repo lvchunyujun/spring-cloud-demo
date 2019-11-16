@@ -58,13 +58,13 @@ public interface UserInfoMapper {
         "insert into user_info (id, nickName, ",
         "userName, password, ",
         "realName, role, ",
-        "idCard, phone, eMail, ",
+        "idCard, phone, email, ",
         "registerDate, status, ",
         "loginCount)",
         "values (#{id,jdbcType=INTEGER}, #{nickName,jdbcType=VARCHAR}, ",
         "#{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, ",
         "#{realName,jdbcType=VARCHAR}, #{role,jdbcType=SMALLINT}, ",
-        "#{idCard,jdbcType=CHAR}, #{phone,jdbcType=CHAR}, #{eMail,jdbcType=VARCHAR}, ",
+        "#{idCard,jdbcType=CHAR}, #{phone,jdbcType=CHAR}, #{email,jdbcType=VARCHAR}, ",
         "#{registerDate,jdbcType=TIMESTAMP}, #{status,jdbcType=SMALLINT}, ",
         "#{loginCount,jdbcType=INTEGER})"
     })
@@ -95,7 +95,7 @@ public interface UserInfoMapper {
         @Result(column="role", property="role", jdbcType=JdbcType.SMALLINT),
         @Result(column="idCard", property="idCard", jdbcType=JdbcType.CHAR),
         @Result(column="phone", property="phone", jdbcType=JdbcType.CHAR),
-        @Result(column="eMail", property="eMail", jdbcType=JdbcType.VARCHAR),
+        @Result(column="email", property="email", jdbcType=JdbcType.VARCHAR),
         @Result(column="registerDate", property="registerDate", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="status", property="status", jdbcType=JdbcType.SMALLINT),
         @Result(column="loginCount", property="loginCount", jdbcType=JdbcType.INTEGER)
@@ -110,7 +110,7 @@ public interface UserInfoMapper {
      */
     @Select({
         "select",
-        "id, nickName, userName, password, realName, role, idCard, phone, eMail, registerDate, ",
+        "id, nickName, userName, password, realName, role, idCard, phone, email, registerDate, ",
         "status, loginCount",
         "from user_info",
         "where id = #{id,jdbcType=INTEGER}"
@@ -124,7 +124,7 @@ public interface UserInfoMapper {
         @Result(column="role", property="role", jdbcType=JdbcType.SMALLINT),
         @Result(column="idCard", property="idCard", jdbcType=JdbcType.CHAR),
         @Result(column="phone", property="phone", jdbcType=JdbcType.CHAR),
-        @Result(column="eMail", property="eMail", jdbcType=JdbcType.VARCHAR),
+        @Result(column="email", property="email", jdbcType=JdbcType.VARCHAR),
         @Result(column="registerDate", property="registerDate", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="status", property="status", jdbcType=JdbcType.SMALLINT),
         @Result(column="loginCount", property="loginCount", jdbcType=JdbcType.INTEGER)
@@ -173,7 +173,7 @@ public interface UserInfoMapper {
           "role = #{role,jdbcType=SMALLINT},",
           "idCard = #{idCard,jdbcType=CHAR},",
           "phone = #{phone,jdbcType=CHAR},",
-          "eMail = #{eMail,jdbcType=VARCHAR},",
+          "email = #{email,jdbcType=VARCHAR},",
           "registerDate = #{registerDate,jdbcType=TIMESTAMP},",
           "status = #{status,jdbcType=SMALLINT},",
           "loginCount = #{loginCount,jdbcType=INTEGER}",
@@ -182,7 +182,7 @@ public interface UserInfoMapper {
     int updateByPrimaryKey(UserInfo record);
 
     @Select({"select",
-            "id, nickName, userName, password, realName, role, idCard, phone, eMail, registerDate, ",
+            "id, nickName, userName, password, realName, role, idCard, phone, email, registerDate, ",
             "status, loginCount",
             "from user_info",
             "where userName = #{userName,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}"
@@ -196,19 +196,19 @@ public interface UserInfoMapper {
             @Result(column="role", property="role", jdbcType=JdbcType.SMALLINT),
             @Result(column="idCard", property="idCard", jdbcType=JdbcType.CHAR),
             @Result(column="phone", property="phone", jdbcType=JdbcType.CHAR),
-            @Result(column="eMail", property="eMail", jdbcType=JdbcType.VARCHAR),
+            @Result(column="email", property="email", jdbcType=JdbcType.VARCHAR),
             @Result(column="registerDate", property="registerDate", jdbcType=JdbcType.TIMESTAMP),
             @Result(column="status", property="status", jdbcType=JdbcType.SMALLINT),
             @Result(column="loginCount", property="loginCount", jdbcType=JdbcType.INTEGER)
     })
-    UserInfo selectUserInfoForLogin(@Param("userName")String userName,@Param("password") String password);
+    UserInfo selectUserInfoForLogin(@Param("userName") String userName, @Param("password") String password);
 
     @Select("select count(*) from user_info ")
     int selectCountByAll();
 
     @Select({
             "select",
-            "id, nickName, userName, password, realName, role, idCard, phone, eMail, registerDate, ",
+            "id, nickName, userName, password, realName, role, idCard, phone, email, registerDate, ",
             "status, loginCount",
             "from user_info",
             " limit #{offset},#{pagesize} "
@@ -222,11 +222,11 @@ public interface UserInfoMapper {
             @Result(column="role", property="role", jdbcType=JdbcType.SMALLINT),
             @Result(column="idCard", property="idCard", jdbcType=JdbcType.CHAR),
             @Result(column="phone", property="phone", jdbcType=JdbcType.CHAR),
-            @Result(column="eMail", property="eMail", jdbcType=JdbcType.VARCHAR),
+            @Result(column="email", property="email", jdbcType=JdbcType.VARCHAR),
             @Result(column="registerDate", property="registerDate", jdbcType=JdbcType.TIMESTAMP),
             @Result(column="status", property="status", jdbcType=JdbcType.SMALLINT),
             @Result(column="loginCount", property="loginCount", jdbcType=JdbcType.INTEGER)
     })
-    List<UserInfo> selectListByPaging(@Param("offset") int offset, @Param("pagesize")  int pageSize);
+    List<UserInfo> selectListByPaging(@Param("offset") int offset, @Param("pagesize") int pageSize);
 
 }
