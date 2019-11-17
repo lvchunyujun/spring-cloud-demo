@@ -1,6 +1,7 @@
 package com.hexiaofei.provider0.service.impl;
 
 import com.hexiaofei.provider0.dao.mapper.SjzEventIndexTempMapper;
+import com.hexiaofei.provider0.domain.SjzEventIndex;
 import com.hexiaofei.provider0.domain.SjzEventIndexTemp;
 import com.hexiaofei.provider0.exception.PlatformException;
 import com.hexiaofei.provider0.service.SjzEventIndexTempService;
@@ -29,13 +30,29 @@ public class SjzEventIndexTempServiceImpl implements SjzEventIndexTempService {
     }
 
     @Override
-    public int updateObject(SjzEventIndexTemp mob) throws PlatformException {
-        return 0;
+    public int updateObject(SjzEventIndexTemp sjzEventIndexTemp) throws PlatformException {
+        SjzEventIndexTemp old = getObjectById(sjzEventIndexTemp.getId());
+
+        if(sjzEventIndexTemp.getEventContent()!=null){
+            old.setEventContent(sjzEventIndexTemp.getEventContent());
+        }
+        if(sjzEventIndexTemp.getEventState()!=null){
+            old.setEventState(sjzEventIndexTemp.getEventState());
+        }
+        if(sjzEventIndexTemp.getEventTime()!=null){
+            old.setEventTime(sjzEventIndexTemp.getEventTime());
+        }
+        if(sjzEventIndexTemp.getEventType()!=null){
+            old.setEventType(sjzEventIndexTemp.getEventType());
+        }
+
+        int resultId = sjzEventIndexTempMapper.updateByPrimaryKey(old);
+        return resultId;
     }
 
     @Override
     public SjzEventIndexTemp getObjectById(int id) throws PlatformException {
-        return null;
+        return sjzEventIndexTempMapper.selectByPrimaryKey(id);
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.hexiaofei.provider0.domain;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class SjzEventIndexTemp {
@@ -11,6 +13,7 @@ public class SjzEventIndexTemp {
     /**
      *事件发生时间
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date eventTime;
 
     /**
