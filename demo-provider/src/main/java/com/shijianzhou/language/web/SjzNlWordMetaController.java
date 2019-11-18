@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Date;
+import java.util.List;
 
 @Controller
 public class SjzNlWordMetaController extends AdminBaseController implements BaseController<SjzNlWordMeta> {
@@ -146,5 +147,45 @@ public class SjzNlWordMetaController extends AdminBaseController implements Base
         return re.toString();
     }
 
+
+    @RequestMapping(value = STATIC_BASE_URL+"/getListByPWMC/{parentWordMetaCode}")
+    @ResponseBody
+    public String getListByParentWordMetaCode(@PathVariable("parentWordMetaCode") Integer parentWordMetaCode){
+        ResultEntity re = getResultEntity();
+        List<SjzNlWordMeta> list ;
+
+        try {
+            list = sjzNlWordMetaService.getListByParentWordMetaCode(parentWordMetaCode);
+            re.setData(list);
+            re.setResultCode("0000");
+            re.setResultMsg("success！");
+        } catch (PlatformException e) {
+            re.setResultCode("9999");
+            re.setResultMsg("网络异常，稍后重试！");
+            LOGGER.error("查询异常！",e);
+        }
+
+        return re.toString();
+    }
+
+    @RequestMapping(value = STATIC_BASE_URL+"/getByWMC/{wordMetaCode}")
+    @ResponseBody
+    public String getWordMetaCodeByWordMetaCode(@PathVariable("wordMetaCode") Integer wordMetaCode){
+        ResultEntity re = getResultEntity();
+
+        SjzNlWordMeta sjzNlWordMeta;
+        try {
+            sjzNlWordMeta = sjzNlWordMetaService.getSjzNlWordMetaByWordMetaCode(wordMetaCode);
+            re.setData(sjzNlWordMeta);
+            re.setResultCode("0000");
+            re.setResultMsg("success！");
+        } catch (PlatformException e) {
+            re.setResultCode("9999");
+            re.setResultMsg("网络异常，稍后重试！");
+            LOGGER.error("查询异常！",e);
+        }
+
+        return re.toString();
+    }
 
 }

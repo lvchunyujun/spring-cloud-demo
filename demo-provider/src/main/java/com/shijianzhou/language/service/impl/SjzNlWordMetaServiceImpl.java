@@ -42,6 +42,16 @@ public class SjzNlWordMetaServiceImpl extends AbstractService implements SjzNlWo
     }
 
     @Override
+    public SjzNlWordMeta getSjzNlWordMetaByWordMetaCode(Integer wordMetaCode) throws PlatformException {
+        return sjzNlWordMetaMapper.selectByWordMetaCode(wordMetaCode);
+    }
+
+    @Override
+    public List<SjzNlWordMeta> getListByParentWordMetaCode(Integer parentWordMetaCode) throws PlatformException {
+        return sjzNlWordMetaMapper.selectListByParentWordMetaCode(parentWordMetaCode);
+    }
+
+    @Override
     public int addObject(SjzNlWordMeta mob) throws PlatformException {
         return sjzNlWordMetaMapper.insert(mob);
     }
@@ -86,4 +96,6 @@ public class SjzNlWordMetaServiceImpl extends AbstractService implements SjzNlWo
     public List<SjzNlWordMeta> getAllObject() throws PlatformException {
         return null;
     }
+
+
 }

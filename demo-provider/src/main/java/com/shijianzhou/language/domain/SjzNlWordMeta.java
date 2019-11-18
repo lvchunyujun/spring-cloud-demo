@@ -46,7 +46,7 @@ public class SjzNlWordMeta {
     /**
      *所属父类词类编码
      */
-    private Integer parentWordMetaCodeId;
+    private Integer parentWordMetaCode;
 
     /**
      *第几级词类
@@ -178,15 +178,15 @@ public class SjzNlWordMeta {
     /**
      *所属父类词类编码
      */
-    public Integer getParentWordMetaCodeId() {
-        return parentWordMetaCodeId;
+    public Integer getParentWordMetaCode() {
+        return parentWordMetaCode;
     }
 
     /**
      *所属父类词类编码
      */
-    public void setParentWordMetaCodeId(Integer parentWordMetaCodeId) {
-        this.parentWordMetaCodeId = parentWordMetaCodeId;
+    public void setParentWordMetaCode(Integer parentWordMetaCode) {
+        this.parentWordMetaCode = parentWordMetaCode;
     }
 
     /**

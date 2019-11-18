@@ -91,8 +91,8 @@ public class SjzNlWordMetaSqlProvider {
             VALUES("languageTypeCode", "#{languageTypeCode,jdbcType=CHAR}");
         }
         
-        if (record.getParentWordMetaCodeId() != null) {
-            VALUES("parentWordMetaCodeId", "#{parentWordMetaCodeId,jdbcType=INTEGER}");
+        if (record.getParentWordMetaCode() != null) {
+            VALUES("parentWordMetaCode", "#{parentWordMetaCode,jdbcType=INTEGER}");
         }
         
         if (record.getLevel() != null) {
@@ -130,7 +130,7 @@ public class SjzNlWordMetaSqlProvider {
         SELECT("simpleWordMetaZh");
         SELECT("languageId");
         SELECT("languageTypeCode");
-        SELECT("parentWordMetaCodeId");
+        SELECT("parentWordMetaCode");
         SELECT("level");
         SELECT("createTime");
         SELECT("description");
@@ -189,8 +189,8 @@ public class SjzNlWordMetaSqlProvider {
             SET("languageTypeCode = #{record.languageTypeCode,jdbcType=CHAR}");
         }
         
-        if (record.getParentWordMetaCodeId() != null) {
-            SET("parentWordMetaCodeId = #{record.parentWordMetaCodeId,jdbcType=INTEGER}");
+        if (record.getParentWordMetaCode() != null) {
+            SET("parentWordMetaCode = #{record.parentWordMetaCode,jdbcType=INTEGER}");
         }
         
         if (record.getLevel() != null) {
@@ -227,7 +227,7 @@ public class SjzNlWordMetaSqlProvider {
         SET("simpleWordMetaZh = #{record.simpleWordMetaZh,jdbcType=CHAR}");
         SET("languageId = #{record.languageId,jdbcType=INTEGER}");
         SET("languageTypeCode = #{record.languageTypeCode,jdbcType=CHAR}");
-        SET("parentWordMetaCodeId = #{record.parentWordMetaCodeId,jdbcType=INTEGER}");
+        SET("parentWordMetaCode = #{record.parentWordMetaCode,jdbcType=INTEGER}");
         SET("level = #{record.level,jdbcType=SMALLINT}");
         SET("createTime = #{record.createTime,jdbcType=TIMESTAMP}");
         SET("description = #{record.description,jdbcType=VARCHAR}");
@@ -275,8 +275,8 @@ public class SjzNlWordMetaSqlProvider {
             SET("languageTypeCode = #{languageTypeCode,jdbcType=CHAR}");
         }
         
-        if (record.getParentWordMetaCodeId() != null) {
-            SET("parentWordMetaCodeId = #{parentWordMetaCodeId,jdbcType=INTEGER}");
+        if (record.getParentWordMetaCode() != null) {
+            SET("parentWordMetaCode = #{parentWordMetaCode,jdbcType=INTEGER}");
         }
         
         if (record.getLevel() != null) {

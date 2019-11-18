@@ -58,13 +58,13 @@ public interface SjzNlWordMetaMapper {
         "wordMetaEn, wordMetaZh, ",
         "simpleWordMetaEn, simpleWordMetaZh, ",
         "languageId, languageTypeCode, ",
-        "parentWordMetaCodeId, level, ",
+        "parentWordMetaCode, level, ",
         "createTime, description)",
         "values (#{id,jdbcType=INTEGER}, #{wordMetaCode,jdbcType=INTEGER}, ",
         "#{wordMetaEn,jdbcType=CHAR}, #{wordMetaZh,jdbcType=CHAR}, ",
         "#{simpleWordMetaEn,jdbcType=CHAR}, #{simpleWordMetaZh,jdbcType=CHAR}, ",
         "#{languageId,jdbcType=INTEGER}, #{languageTypeCode,jdbcType=CHAR}, ",
-        "#{parentWordMetaCodeId,jdbcType=INTEGER}, #{level,jdbcType=SMALLINT}, ",
+        "#{parentWordMetaCode,jdbcType=INTEGER}, #{level,jdbcType=SMALLINT}, ",
         "#{createTime,jdbcType=TIMESTAMP}, #{description,jdbcType=VARCHAR})"
     })
     int insert(SjzNlWordMeta record);
@@ -94,7 +94,7 @@ public interface SjzNlWordMetaMapper {
         @Result(column="simpleWordMetaZh", property="simpleWordMetaZh", jdbcType=JdbcType.CHAR),
         @Result(column="languageId", property="languageId", jdbcType=JdbcType.INTEGER),
         @Result(column="languageTypeCode", property="languageTypeCode", jdbcType=JdbcType.CHAR),
-        @Result(column="parentWordMetaCodeId", property="parentWordMetaCodeId", jdbcType=JdbcType.INTEGER),
+        @Result(column="parentWordMetaCode", property="parentWordMetaCode", jdbcType=JdbcType.INTEGER),
         @Result(column="level", property="level", jdbcType=JdbcType.SMALLINT),
         @Result(column="createTime", property="createTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="description", property="description", jdbcType=JdbcType.VARCHAR)
@@ -110,7 +110,7 @@ public interface SjzNlWordMetaMapper {
     @Select({
         "select",
         "id, wordMetaCode, wordMetaEn, wordMetaZh, simpleWordMetaEn, simpleWordMetaZh, ",
-        "languageId, languageTypeCode, parentWordMetaCodeId, level, createTime, description",
+        "languageId, languageTypeCode, parentWordMetaCode, level, createTime, description",
         "from sjz_nl_word_meta",
         "where id = #{id,jdbcType=INTEGER}"
     })
@@ -123,7 +123,7 @@ public interface SjzNlWordMetaMapper {
         @Result(column="simpleWordMetaZh", property="simpleWordMetaZh", jdbcType=JdbcType.CHAR),
         @Result(column="languageId", property="languageId", jdbcType=JdbcType.INTEGER),
         @Result(column="languageTypeCode", property="languageTypeCode", jdbcType=JdbcType.CHAR),
-        @Result(column="parentWordMetaCodeId", property="parentWordMetaCodeId", jdbcType=JdbcType.INTEGER),
+        @Result(column="parentWordMetaCode", property="parentWordMetaCode", jdbcType=JdbcType.INTEGER),
         @Result(column="level", property="level", jdbcType=JdbcType.SMALLINT),
         @Result(column="createTime", property="createTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="description", property="description", jdbcType=JdbcType.VARCHAR)
@@ -172,7 +172,7 @@ public interface SjzNlWordMetaMapper {
           "simpleWordMetaZh = #{simpleWordMetaZh,jdbcType=CHAR},",
           "languageId = #{languageId,jdbcType=INTEGER},",
           "languageTypeCode = #{languageTypeCode,jdbcType=CHAR},",
-          "parentWordMetaCodeId = #{parentWordMetaCodeId,jdbcType=INTEGER},",
+          "parentWordMetaCode = #{parentWordMetaCode,jdbcType=INTEGER},",
           "level = #{level,jdbcType=SMALLINT},",
           "createTime = #{createTime,jdbcType=TIMESTAMP},",
           "description = #{description,jdbcType=VARCHAR}",
@@ -186,7 +186,7 @@ public interface SjzNlWordMetaMapper {
     @Select({
             "select",
             "id, wordMetaCode, wordMetaEn, wordMetaZh, simpleWordMetaEn, simpleWordMetaZh, ",
-            "languageId, languageTypeCode, parentWordMetaCodeId, level, createTime, description",
+            "languageId, languageTypeCode, parentWordMetaCode, level, createTime, description",
             "from sjz_nl_word_meta",
             " order by createTime desc ",
             " limit #{offset},#{pagesize} "
@@ -200,10 +200,44 @@ public interface SjzNlWordMetaMapper {
             @Result(column="simpleWordMetaZh", property="simpleWordMetaZh", jdbcType=JdbcType.CHAR),
             @Result(column="languageId", property="languageId", jdbcType=JdbcType.INTEGER),
             @Result(column="languageTypeCode", property="languageTypeCode", jdbcType=JdbcType.CHAR),
-            @Result(column="parentWordMetaCodeId", property="parentWordMetaCodeId", jdbcType=JdbcType.INTEGER),
+            @Result(column="parentWordMetaCode", property="parentWordMetaCode", jdbcType=JdbcType.INTEGER),
             @Result(column="level", property="level", jdbcType=JdbcType.SMALLINT),
             @Result(column="createTime", property="createTime", jdbcType=JdbcType.TIMESTAMP),
             @Result(column="description", property="description", jdbcType=JdbcType.VARCHAR)
     })
     List<SjzNlWordMeta> selectListByPaging(@Param("offset") int offset, @Param("pagesize")  int pageSize);
+
+    @Select("select s.* from sjz_nl_word_meta s where s.parentWordMetaCode = #{parentWordMetaCode} ")
+    @Results({
+            @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true),
+            @Result(column="wordMetaCode", property="wordMetaCode", jdbcType=JdbcType.INTEGER),
+            @Result(column="wordMetaEn", property="wordMetaEn", jdbcType=JdbcType.CHAR),
+            @Result(column="wordMetaZh", property="wordMetaZh", jdbcType=JdbcType.CHAR),
+            @Result(column="simpleWordMetaEn", property="simpleWordMetaEn", jdbcType=JdbcType.CHAR),
+            @Result(column="simpleWordMetaZh", property="simpleWordMetaZh", jdbcType=JdbcType.CHAR),
+            @Result(column="languageId", property="languageId", jdbcType=JdbcType.INTEGER),
+            @Result(column="languageTypeCode", property="languageTypeCode", jdbcType=JdbcType.CHAR),
+            @Result(column="parentWordMetaCode", property="parentWordMetaCode", jdbcType=JdbcType.INTEGER),
+            @Result(column="level", property="level", jdbcType=JdbcType.SMALLINT),
+            @Result(column="createTime", property="createTime", jdbcType=JdbcType.TIMESTAMP),
+            @Result(column="description", property="description", jdbcType=JdbcType.VARCHAR)
+    })
+    List<SjzNlWordMeta> selectListByParentWordMetaCode(@Param("parentWordMetaCode") int parentWordMetaCode);
+
+    @Select("select s.* from sjz_nl_word_meta s where s.wordMetaCode = #{wordMetaCode}")
+    @Results({
+            @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true),
+            @Result(column="wordMetaCode", property="wordMetaCode", jdbcType=JdbcType.INTEGER),
+            @Result(column="wordMetaEn", property="wordMetaEn", jdbcType=JdbcType.CHAR),
+            @Result(column="wordMetaZh", property="wordMetaZh", jdbcType=JdbcType.CHAR),
+            @Result(column="simpleWordMetaEn", property="simpleWordMetaEn", jdbcType=JdbcType.CHAR),
+            @Result(column="simpleWordMetaZh", property="simpleWordMetaZh", jdbcType=JdbcType.CHAR),
+            @Result(column="languageId", property="languageId", jdbcType=JdbcType.INTEGER),
+            @Result(column="languageTypeCode", property="languageTypeCode", jdbcType=JdbcType.CHAR),
+            @Result(column="parentWordMetaCode", property="parentWordMetaCode", jdbcType=JdbcType.INTEGER),
+            @Result(column="level", property="level", jdbcType=JdbcType.SMALLINT),
+            @Result(column="createTime", property="createTime", jdbcType=JdbcType.TIMESTAMP),
+            @Result(column="description", property="description", jdbcType=JdbcType.VARCHAR)
+    })
+    SjzNlWordMeta selectByWordMetaCode(@Param("wordMetaCode") int wordMetaCode);
 }

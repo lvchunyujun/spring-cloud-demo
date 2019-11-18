@@ -41,4 +41,19 @@ public interface SjzNlWordMetaService extends IBaseService<SjzNlWordMeta> {
      * @throws PlatformException
      */
     List<String> getListMarchForRegExpCode(String targetStr, String regExpCode)throws PlatformException;
+
+    /**
+     * 查询单词信息根据wordMetaCode
+     * @param wordMetaCode
+     * @return
+     * @throws PlatformException
+     */
+    SjzNlWordMeta getSjzNlWordMetaByWordMetaCode(Integer wordMetaCode)throws PlatformException;
+
+    /**
+     * 查询包含的所有子类型词类
+     * @return parentWordMetaCode
+     * @throws PlatformException
+     */
+    List<SjzNlWordMeta> getListByParentWordMetaCode(Integer parentWordMetaCode)throws PlatformException;
 }
