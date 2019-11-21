@@ -50,6 +50,41 @@
             margin-left: 20px;
         }
     </style>
+    <script type="text/javascript">
+        /*<![CDATA[*/
+        $(document).ready(function(){
+            loadingWord(-1);
+        });
+
+        function loadingWord(parentCode) {
+            var _url = "/admin/nl/wordMeta/getListByPWMC/";
+
+            $.ajax({
+                type: "get",
+                url: _url+parentCode,
+                dataType:'json',
+                success:function(data){
+                    parseData(data);
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown){
+                    alert(textStatus+"  "+XMLHttpRequest.state());
+                }
+            });
+        }
+
+        function parseData(data){
+
+            var _resultCode = data.resultCode;
+            if(_resultCode == '0000'){
+                var _data = data.data;
+                for(var i = 0 ; i < _data.length ; i++){
+                    var _word = _data[i];
+                    $("#_word_list").append("<li>"+"  "+_word.wordMetaZh+"["+_word.wordMetaEn+"]+</li>");
+                }
+            }
+        }
+        /*]]>*/
+    </script>
 </head>
 <body>
 <div>
@@ -63,7 +98,9 @@
         <div class="sjz_center">
             <div class="" style=" min-height: 200px;">
                 <div style="height: 30px;">
+                    <ul id="_word_list">
 
+                    </ul>
                 </div>
             </div>
             <div class="sjz_center_ta">
