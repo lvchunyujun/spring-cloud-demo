@@ -3,6 +3,7 @@ body
     color: rgba(82, 82, 82, 0.85);
     font-size: 14px;
     margin: 0px;
+    background-color: #eee;
 }
 a
 {
@@ -104,8 +105,9 @@ ul{
 {
     float: right;
     width: 84%;
-    min-height: 600px;
-    margin-bottom: 60px;
+    min-height: 800px;
+    background-color: #ffffff;
+    border-radius: 5px;
 }
 /* 内容中心> 列表<a> 添加标签 */
 .sjz_center_ad
@@ -120,19 +122,23 @@ ul{
 {
     width: 100%;
     border: 1px solid #f1f1f1;
+    background-color: #fff;
 }
 
 /* 内容中心> 更新div */
 .sjz_center_ta
 {
-    width: 95%;
+    width: 100%;
     min-height: 200px;
 }
 /* 内容中心> 更新table */
 .sjz_center_ta table
 {
-    width: 90%;
-    margin: 40px 5%;
+    width: 99%;
+    margin: 10px 0.5%;
+    background-color: #fff;
+    padding: 20px 0px;
+    order-radius: 10px;
 }
 
 /* 内容中心div */
