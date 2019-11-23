@@ -5,55 +5,29 @@
     <title>表达式模板管理</title>
     <link rel="icon" th:href="@{/images/favicon.ico}" type="image/gif" />
     <link th:href="@{/css/comm.css}" rel="stylesheet" type="text/css" />
-    <link th:href="@{/css/regexp.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/wordMeta.css}" rel="stylesheet" type="text/css" />
     <script th:src="@{/js/jquery-3.4.1.min.js}" type="text/javascript" />
     <script th:src="@{/js/utils.js}" type="text/javascript" />
-    <script th:src="@{/js/regexp.js}" type="text/javascript" />
-    <style type="text/css" >
 
-        .sjz_center_ad
-        {
-            float: right;
-            width: 100px;
+    <!-- 单词选择遮罩层 -->
+    <link th:href="@{/js/sjzPlugs/wordCheck.css}" rel="stylesheet" type="text/css" />
+    <script th:src="@{/js/sjzPlugs/wordCheck.js}" type="text/javascript" />
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#_show_word_list").bind("click",startDialogOpen);
+        });
+        workCheck = {
+            checkType:"radio",
+            checkedFun:function(obj){
+                $(" input[ name='parentWordMetaCode' ]").val(obj.wordMetaCode);
+                $("._sjz_parentWmdc p").text(obj.wordMetaZh+"["+obj.wordMetaEn+"]");
+            },
+            uncheckedFun:function(obj){
+                $(" input[ type='parentWordMetaCode']").val("");
+                $("._sjz_parentWmdc p").text("");
+            }
         }
-
-        .sjz_center_ta
-        {
-            width: 95%;
-            min-height: 200px;
-        }
-        .sjz_center_ta_tarea
-        {
-            width: 95%;
-
-        }
-        .sjz_center_ta table tr
-        {
-            height:40px;
-        }
-        .sjz_center_t_td
-        {
-            width: 95%;
-        }
-        .sjz_center_ta_submit
-        {
-            width: 60px;
-        }
-        .sjz_center_t_td .regexp
-        {
-            width: 500px;
-        }
-        .sjz_center .sjz_center_top_add li
-        {
-            display: inline;
-            margin-left: 20px;
-        }
-
-
-
-    </style>
-
-
+    </script>
 </head>
 <body>
 <div>
@@ -65,67 +39,63 @@
         <!-- 菜单 -->
         <div th:replace="common/sjz_menu :: sjz_menu"  ></div>
         <div class="sjz_center">
-            <div>
-                <div></div>
-            </div>
             <div class="sjz_center_ta">
                 <form action="/admin/nlWordMeta/updata" method="post">
-                    <table>
-                        <thead>
-                            <tr>
-                                <td style="width: 10%;"></td>
-                                <td></td>
-                            </tr>
-                        </thead>
+                    <table class="_from_table">
                         <tbody>
+                        <tr>
+                            <td class="_sjz_from_table_name">编码：</td>
+                            <td class="_sjz_from_table_input"><input type="text" name="id" th:value="${sjzNlWordMeta.id}" readonly="readonly"/></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
                         <tr class="tr1">
-                            <td>ID：</td>
-                            <td class="sjz_center_t_td">
-                                <input type="text" name="id" th:value="${sjzNlWordMeta.id}"/>&nbsp;&nbsp;
+                            <td class="_sjz_from_table_name">代码：</td>
+                            <td class="_sjz_from_table_input"><input type="text" name="wordMetaCode" th:value="${sjzNlWordMeta.wordMetaCode}"/></td>
+                            <td class="_sjz_from_table_name">英文名称：</td>
+                            <td class="_sjz_from_table_input"><input type="text" name="wordMetaEn" th:value="${sjzNlWordMeta.wordMetaEn}" /></td>
+                            <td class="_sjz_from_table_name">英文名称缩写：</td>
+                            <td class="_sjz_from_table_input"><input type="text"  name="simpleWordMetaEn" th:value="${sjzNlWordMeta.simpleWordMetaEn}" /></td>
+                            <td class="_sjz_from_table_name">第几级词类：</td>
+                            <td class="_sjz_from_table_input"><input type="text"  name="level" th:value="${sjzNlWordMeta.level}" /></td>
+                        </tr>
+
+                        <tr class="tr1">
+                            <td class="_sjz_from_table_name" >父类代码：</td>
+                            <td class="_sjz_from_table_input"><input type="text"  name="parentWordMetaCode" th:value="${sjzNlWordMeta.parentWordMetaCode}" /> <div id="_show_word_list">+</div></td>
+                            <td class="_sjz_from_table_name">名称中文：</td>
+                            <td class="_sjz_from_table_input"><input type="text"  name="wordMetaZh" th:value="${sjzNlWordMeta.wordMetaZh}" /></td>
+                            <td class="_sjz_from_table_name">中文名称缩写：</td>
+                            <td class="_sjz_from_table_input"><input type="text"  name="simpleWordMetaZh" th:value="${sjzNlWordMeta.simpleWordMetaZh}" /></td>
+                            <td class="_sjz_from_table_name">所属语言ID：</td>
+                            <td class="_sjz_from_table_input"><input type="text"   name="languageId" th:value="${sjzNlWordMeta.languageId}" /></td>
+                        </tr>
+                        <tr class="tr1">
+                            <td></td>
+                            <td colspan="6" class="_sjz_parentWmdc">
+                                <p ></p>
                             </td>
                         </tr>
                         <tr class="tr1">
-                            <td>编码：</td>
-                            <td class="sjz_center_t_td">
-                                <input type="text" name="wordMetaCode" th:value="${sjzNlWordMeta.wordMetaCode}"/>&nbsp;&nbsp;
-                            </td>
+                            <td class="_sjz_from_table_name">描述：</td>
+                            <td class="_sjz_from_table_input" colspan="3"><textarea name="description"  th:text="${sjzNlWordMeta.description}" ></textarea></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
+
                         <tr class="tr1">
-                            <td>词类英文名称：</td>
-                            <td class="sjz_center_t_td">
-                                <input type="text" name="wordMetaEn" th:value="${sjzNlWordMeta.wordMetaEn}" />&nbsp;&nbsp;
-                            </td>
-                        </tr>
-                        <tr class="tr2">
-                            <td>词类名称中文：</td>
-                            <td><input type="text"  name="wordMetaZh" th:value="${sjzNlWordMeta.wordMetaZh}" /></td>
-                        </tr>
-                        <tr class="tr2">
-                            <td>英文名称缩写：</td>
-                            <td><input type="text"  name="simpleWordMetaEn" th:value="${sjzNlWordMeta.simpleWordMetaEn}" /></td>
-                        </tr>
-                        <tr class="tr2">
-                            <td>中文名称缩写：</td>
-                            <td><input type="text"  name="simpleWordMetaZh" th:value="${sjzNlWordMeta.simpleWordMetaZh}" /></td>
-                        </tr>
-                        <tr class="tr2">
-                            <td>所属语言ID：</td>
-                            <td><input type="text"   name="languageId" th:value="${sjzNlWordMeta.languageId}" /></td>
-                        </tr>
-                        <tr class="tr2">
-                            <td>所属父类词类编码：</td>
-                            <td><input type="text"  name="parentWordMetaCode" th:value="${sjzNlWordMeta.parentWordMetaCode}" /></td>
-                        </tr>
-                        <tr class="tr2">
-                            <td>第几级词类：</td>
-                            <td><input type="text"  name="level" th:value="${sjzNlWordMeta.level}" /></td>
-                        </tr>
-                        <tr class="tr2">
-                            <td>描述：</td>
-                            <td><textarea name="description" th:text="${sjzNlWordMeta.description}" ></textarea></td>
-                        </tr>
-                        <tr class="tr7">
+                            <td></td>
                             <td><input class="sjz_center_ta_submit" type="submit" value="确定"/></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                             <td></td>
                         </tr>
                         </tbody>
@@ -135,6 +105,17 @@
         </div>
     </div>
     <div th:replace="common/sjz_bottom :: sjz_bottom"  ></div>
+</div>
+<!-- 遮罩层 -->
+<div id="_sjz_word_meta_div">
+    <div class="box" >
+        <div id="dialog" >
+            <div id="_dialog_close" >X关闭</div>
+            <div id="_sjz_word_meta_c">
+
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

@@ -21,7 +21,7 @@ function startDialogOpen() {
     $("#_sjz_word_meta_div").show();
     $("#_dialog_close").bind("click",dialogClose);
     $("#_sjz_word_meta_c").empty();
-    loadingWord(-1);
+    loadingWord(0);
 }
 
 function dialogOpen(){

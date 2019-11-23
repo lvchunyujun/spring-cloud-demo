@@ -5,6 +5,7 @@
     <title>表达式模板管理</title>
     <link rel="icon" th:href="@{/images/favicon.ico}" type="image/gif" />
     <link th:href="@{/css/comm.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/wordMeta.css}" rel="stylesheet" type="text/css" />
     <script th:src="@{/js/jquery-3.4.1.min.js}" type="text/javascript" />
     <script th:src="@{/js/utils.js}" type="text/javascript" />
     <script th:src="@{/js/regexp.js}" type="text/javascript" />
@@ -13,76 +14,7 @@
     <script th:src="@{/js/sjzPlugs/wordCheck.js}" type="text/javascript" />
 
 
-    <style type="text/css" >
-        .sjz_center_ad
-        {
-            float: right;
-            width: 100px;
-        }
 
-
-        .sjz_center_ta_tarea
-        {
-            width: 95%;
-
-        }
-        .sjz_center_ta table tr
-        {
-            height: 25px;
-        }
-        .sjz_center_t_td
-        {
-            width: 95%;
-        }
-        .sjz_center_ta_submit
-        {
-            width: 60px;
-        }
-        .sjz_center_t_td .regexp
-        {
-            width: 500px;
-        }
-        ._sjz_from_table_name
-        {
-            width: 6%;
-            text-align: right;
-        }
-        ._sjz_from_table_input
-        {
-            width: 10%;
-        }
-        ._sjz_from_table_input input
-        {
-            width: 95%;
-        }
-        ._sjz_from_table_input textarea
-        {
-            margin: 0px;
-            width: 98%;
-            height: 60px;
-        }
-        .sjz_center .sjz_center_top_add li
-        {
-            display: inline;
-            margin-left: 20px;
-        }
-        #_show_word_list
-        {
-            width: 10%;
-            float: right;
-            text-align: center;
-            cursor:pointer;
-        }
-        ._sjz_parentWmdc p
-        {
-            float: left;
-            width: auto;
-            background-color: #07ce16;
-            border-radius: 2px;
-            color: #fff;
-            padding: 0px 5px;
-        }
-    </style>
     <script type="text/javascript">
         $(document).ready(function(){
             $("#_show_word_list").bind("click",startDialogOpen);
@@ -124,7 +56,6 @@
                             <td class="_sjz_from_table_name">第几级词类：</td>
                             <td class="_sjz_from_table_input"><input type="text"  name="level" /></td>
                         </tr>
-
                         <tr class="tr1">
                             <td class="_sjz_from_table_name" >父类代码：</td>
                             <td class="_sjz_from_table_input"><input type="text" name="parentWordMetaCode" style="width: 85%;" /> <div id="_show_word_list">+</div></td>
@@ -147,9 +78,6 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                        </tr>
-                        <tr>
-
                         </tr>
                         <tr class="tr1">
                             <td></td>

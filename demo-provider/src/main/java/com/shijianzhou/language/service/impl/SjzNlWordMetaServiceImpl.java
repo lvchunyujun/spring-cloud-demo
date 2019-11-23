@@ -53,6 +53,11 @@ public class SjzNlWordMetaServiceImpl extends AbstractService implements SjzNlWo
 
     @Override
     public int addObject(SjzNlWordMeta mob) throws PlatformException {
+
+        if(mob.getWordMetaCode() == null|| mob.getWordMetaCode() < 0 ){
+            mob.setWordMetaCode(0);
+        }
+
         return sjzNlWordMetaMapper.insert(mob);
     }
 
