@@ -107,7 +107,9 @@ ul{
     width: 84%;
     min-height: 800px;
     background-color: #ffffff;
-    border-radius: 5px;
+    border: #ddd solid 1px;
+    border-radius: 10px;
+    box-sizing: border-box;
 }
 /* 内容中心> 列表<a> 添加标签 */
 .sjz_center_ad
@@ -143,6 +145,14 @@ ul{
 
 /* 内容中心div */
 
+/* 内容>表头 */
+.sjz_center_ta table thead
+{
+    text-align: center;
+    font-weight: bold;
+    color: #999;
+}
+/* 内容>表头 */
 
 
 /* 页面底部 */

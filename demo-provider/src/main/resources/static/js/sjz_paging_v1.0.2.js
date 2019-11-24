@@ -74,6 +74,13 @@ var eciHandler = function(resultData){
                         t_target_ = map[key].aTarget;
                     }
                     $(text_a_).attr("target",t_target_);
+
+                    TEXT_LENGTH_LIMIT = map[key].show_length !=null && map[key].show_length>0 ? map[key].show_length: TEXT_LENGTH_LIMIT;
+                    // 隐藏过多字符
+                    if(val_ != null && val_.length > TEXT_LENGTH_LIMIT){
+                        val_ = val_.substring(0,TEXT_LENGTH_LIMIT)+"……";
+                    }
+
                     text_a_ =  $(text_a_).text(val_);
                     td_tag = $(td_tag).append(text_a_);
                 }
