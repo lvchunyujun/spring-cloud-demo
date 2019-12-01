@@ -127,6 +127,10 @@ ul{
     background-color: #fff;
 }
 
+.sjz_center_content thead
+{
+    background-color: #eaeaea;
+}
 /* 内容中心> 更新div */
 .sjz_center_ta
 {
@@ -152,6 +156,7 @@ ul{
     font-weight: bold;
     color: #999;
 }
+
 /* 内容>表头 */
 
 

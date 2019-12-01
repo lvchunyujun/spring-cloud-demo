@@ -38,10 +38,7 @@ mybatis:
 #showSql
 logging:
   level:
-    com:
-      hexiaofei:
-        mapper : debug
-
+    com.hexiaofei.provider0.dao.mapper : DEBUG
 
 
 

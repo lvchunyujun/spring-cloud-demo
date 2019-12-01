@@ -44,6 +44,7 @@
         <div class="sjz_center">
             <div class="sjz_center_ta">
                 <form action="/admin/nlWordMeta/add" method="post">
+                    <!--
                     <table class="_from_table">
                         <tbody>
                         <tr class="tr1">
@@ -79,6 +80,44 @@
                             <td></td>
                             <td></td>
                         </tr>
+
+                        <tr class="tr1">
+                            <td></td>
+                            <td><input class="sjz_center_ta_submit" type="submit" value="确定"/></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    -->
+
+                    <table class="_from_table">
+                        <tbody>
+                        <tr class="tr1">
+                            <td class="_sjz_from_table_name">名称中文：</td>
+                            <td class="_sjz_from_table_input"><input type="text"  name="wordMetaZh" /></td>
+                            <td class="_sjz_from_table_name">英文名称：</td>
+                            <td class="_sjz_from_table_input"><input type="text" name="wordMetaEn" value=""/></td>
+                            <td class="_sjz_from_table_name">中文名称缩写：</td>
+                            <td class="_sjz_from_table_input"><input type="text"  name="simpleWordMetaZh"  /></td>
+                            <td class="_sjz_from_table_name">英文名称缩写：</td>
+                            <td class="_sjz_from_table_input"><input type="text"  name="simpleWordMetaEn"  /></td>
+                        </tr>
+                        <tr class="tr1">
+                            <td class="_sjz_from_table_name" >父类代码：</td>
+                            <td class="_sjz_from_table_input"><input type="text" name="parentWordMetaCode" style="width: 85%;" /> <div id="_show_word_list">+</div></td>
+                            <td class="_sjz_from_table_name">描述：</td>
+                            <td class="_sjz_from_table_input" colspan="5"><textarea name="description"  ></textarea></td>
+                        </tr>
+                        <tr class="tr1">
+                            <td></td>
+                            <td colspan="6" class="_sjz_parentWmdc"><p></p></td>
+                        </tr>
+
                         <tr class="tr1">
                             <td></td>
                             <td><input class="sjz_center_ta_submit" type="submit" value="确定"/></td>

@@ -1,9 +1,6 @@
 package com.shijianzhou.language.web;
 
-import com.hexiaofei.provider0.domain.SjzDomainInfo;
-import com.hexiaofei.provider0.domain.SjzEventIndex;
 import com.hexiaofei.provider0.exception.PlatformException;
-import com.hexiaofei.provider0.service.SjzEventIndexService;
 import com.hexiaofei.provider0.vo.PageVo;
 import com.hexiaofei.provider0.web.BaseController;
 import com.hexiaofei.provider0.web.admin.AdminBaseController;
