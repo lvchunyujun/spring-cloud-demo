@@ -1,6 +1,6 @@
 package com.shijianzhou.language.engine.content;
 
-import com.hexiaofei.provider0.common.SpringContextUtil;
+import com.hexiaofei.provider0.common.consts.SjzEventStateEnum;
 import com.hexiaofei.provider0.common.consts.SjzSystemConsts;
 import com.hexiaofei.provider0.domain.SjzEventIndex;
 import com.hexiaofei.provider0.domain.SjzEventIndexTemp;
@@ -130,7 +130,7 @@ public class SjzNlMapStringContentConsume implements SjzNlContentConsume<Map<Str
     private void addEventIndex(Date date,String eventCount){
         SjzEventIndex sjzEventIndex = new SjzEventIndex();
         sjzEventIndex.setEventType(SjzSystemConsts.EVENT_TYPE_TXT);
-        sjzEventIndex.setEventState(SjzSystemConsts.EVENT_STATE_SHOW);
+        sjzEventIndex.setEventState(SjzEventStateEnum.CHECK.getStatus());
         sjzEventIndex.setEventTime(date);
         sjzEventIndex.setEventContent(eventCount);
         sjzEventIndex.setRecordCreateTime(new Date());
