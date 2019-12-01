@@ -42,11 +42,14 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<!-- web模块 -->
+
+		<!-- 测试模块 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!-- 测试模块 -->
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
