@@ -1,0 +1,28 @@
+spring:
+  datasource:
+     driver-class-name: com.mysql.jdbc.Driver
+     type: com.alibaba.druid.pool.DruidDataSource
+     url: jdbc:mysql://lcyj88:3306/shijianzhou?useUnicode=true&characterEncoding=utf-8&useSSL=false
+     username: 'lcyj'
+     password: '000000'
+  freemarker:
+    enabled: false
+  application:
+    name: spring-feign-consumer
+  thymeleaf:
+    mode: HTML5
+    prefix: classpath:/51sjz_client/
+    suffix: .html
+    encoding: utf-8
+    content-type: text/html
+    cache: false
+
+endpoints:
+  shutdown:
+    enabled: true                            # 启用shutdown
+    sensitive: false                         # 禁用密码验证
+
+feign:
+   hystrix:
+     enabled: true
+

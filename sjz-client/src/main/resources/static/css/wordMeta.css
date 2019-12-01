@@ -1,0 +1,54 @@
+.sjz_center_ta table tr
+{
+    height: 25px;
+}
+
+.sjz_center_ta_submit
+{
+    width: 60px;
+}
+._sjz_from_table_name
+{
+    width: 6%;
+    text-align: right;
+}
+._sjz_from_table_input
+{
+    width: 10%;
+}
+._sjz_from_table_input input
+{
+    width: 95%;
+}
+._sjz_from_table_input textarea
+{
+    margin: 0px;
+    width: 98%;
+}
+.sjz_center .sjz_center_top_add li
+{
+    display: inline;
+    margin-left: 20px;
+}
+#_show_word_list
+{
+    width: 10%;
+    float: right;
+    text-align: center;
+    cursor:pointer;
+    color: #55f;
+    font-weight: bold;
+}
+._sjz_parentWmdc p
+{
+    float: left;
+    width: auto;
+    background-color: #07ce16;
+    border-radius: 2px;
+    color: #fff;
+    padding: 0px 5px;
+}
+._sjz_from_table_input input[name='parentWordMetaCode']
+{
+    width: 85%;
+}

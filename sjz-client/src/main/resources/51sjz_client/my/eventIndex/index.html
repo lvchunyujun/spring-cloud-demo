@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>事件管理</title>
+    <link rel="icon" th:href="@{/images/favicon.ico}" type="image/gif" />
+    <link th:href="@{/css/common.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/js/admin_paging_plugs/sjz_paging.css}" rel="stylesheet" type="text/css" />
+    <script th:src="@{/js/jquery-3.4.1.min.js}" type="text/javascript" />
+    <script th:src="@{/js/common.js}" type="text/javascript" />
+    <script th:src="@{/js/admin_paging_plugs/sjz_paging_v1.0.2.js}" type="text/javascript" />
+    <script th:src="@{/js/utils.js}" type="text/javascript" />
+    <script th:src="@{/js/common.js}" type="text/javascript" />
+    <style type="text/css" >
+
+        .sjz_center_content thead
+        {
+            background-color: #eaeaea;
+        }
+
+        <!-- paging start -->
+        .ger_center_
+        {
+            position: absolute;
+            margin: auto;
+            left: 0px;
+            right: 0px;
+            width: 1000px;
+            text-align: center;
+        }
+        .ger_text_
+        {
+            color: #1683a8;
+            color: #1683a8;
+            margin: 20px 5% 0px 0px;
+            float: right;
+        }
+        <!-- paging start -->
+    </style>
+
+    <script type="text/javascript">
+        var pageVo =
+            {   bUrl:"/my/eventIndex/list/",
+                sBUrl:"_",
+                dPageNo:1,
+                dPageSize:20,
+                bootstrapDiv:{
+                    id_:"sjz_center_content_tbody"
+                },
+                rootDiv:{
+                    class_:"sjz_center_content_tr"
+                },
+                voMapping:{
+                    id:{
+                        tagType:"text",
+                        show_length:35
+                    },
+                    eventTime:{
+                        tagType:"text_datetime",
+                        dateFormat:"yyyy-MM-dd"
+
+                    },
+                    eventContent:{
+                        tagType:"text"
+                    },
+                    eventType:{
+                        tagType:"text_type",
+                        typeMap:{
+                            0:"文本",
+                            20:"连接"
+                        }
+                    },
+                    eventState:{
+                        tagType:"text_type",
+                        typeMap:{
+                            0:"待审核",
+                            10:"发布",
+                            20:"审核通过",
+                            30:"审核禁止"
+                        }
+                    },
+                    u_d_operation:{
+                        tagType:"a_operation",
+                        indexName:"id",
+                        updateHref:"/my/eventIndex/toUpdate/",
+                        updateTxt:"修改",
+                        deleteHref:"/my/eventIndex/delete/",
+                        deleteTxt:"删除"
+                    }
+                },
+                getUrl:function () {
+                    return pageVo.bUrl+pageVo.dPageNo+pageVo.sBUrl+pageVo.dPageSize;
+                }
+            };
+
+    </script>
+
+</head>
+<body>
+    <div th:replace="common/sjz_top :: sjz_top"  ></div>
+    <div class="sjz_nvg">
+        当前位置：<a href="/my/index">首页</a> > 事件管理
+    </div>
+    <div class="sjz_c">
+        <!-- 菜单 -->
+        <div th:replace="common/sjz_menu :: sjz_menu"  ></div>
+        <div class="sjz_center">
+            <div>
+                <div></div>
+                <div class="sjz_center_ad"><a href="/my/toAddEventIndex">添加</a></div>
+            </div>
+            <table class="sjz_center_content">
+                <thead>
+                   <tr>
+                       <th style="width: 8%;"> 编号 </th>
+                       <th style="width: 15%;"> 事件时间 </th>
+                       <th> 事件 </th>
+                       <th style="width: 8%;"> 类型 </th>
+                       <th style="width: 8%;"> 状态 </th>
+                       <th style="width: 8%;"> 操作 </th>
+                   </tr>
+                </thead>
+
+                <tbody id="sjz_center_content_tbody">
+
+                </tbody>
+            </table>
+        </div>
+        <div class="ger_center_ ger_text_">
+            <div id="sjz_page_info"></div>
+            <a id="previous_page" href="javascript:void(0);" style="color: #1683a8;text-decoration:none">上一页</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a id="next_page" href="javascript:void(0);" style="color: #1683a8;text-decoration:none" >下一页</a>
+        </div>
+    </div>
+    <div th:replace="common/sjz_bottom :: sjz_bottom"  ></div>
+</body>
+</html>

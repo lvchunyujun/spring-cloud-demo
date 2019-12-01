@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>历史轴</title>
+    <link rel="icon" th:href="@{/images/favicon.ico}" type="image/gif" />
+    <meta http-equiv="Access-Control-Allow-Origin" content="历史轴|历史|时间轴|"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/common.css}"  />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}"  />
+    <link rel="stylesheet" type="text/css" th:href="@{/js/client_paging_plugs/paging.css}"  />
+    <script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"/>
+    <script type="text/javascript" th:src="@{/js/utils.js}" />
+</head>
+<body>
+     <div style="" class="lsz_top_">
+         <div class="lsz_top_titale_">历史轴 | 读史使人明智</div>
+         <div class="lsz_top_my_">
+             <a href="/my/eventIndex/index?currentPage=1&amp;pageSize=10">贡献一条</a>
+             <a href="/toLogin">登录</a>
+         </div>
+       <img src="" />
+     </div>
+     <div class="sjz_zj ei_count_main bg_card">
+         <div class="lsz_content" >
+             <div class="ei_count_main_cell" th:each="eventIndex:${eil}">
+                 <div class="ei_count_main_time" th:text="${eventIndex.eventTime} ? ${#dates.format(eventIndex.eventTime,'yyyy-MM-dd')} : ''"></div>
+                 <div class="ei_count_main_content" th:text="${eventIndex.eventContent} "></div>
+             </div>
+         </div>
+         <div class="lsz_paging_">
+             <a id="previous_page" href="/index?currentPage=1&amp;pageSize=10" target="_parent" style="color: #1683a8;text-decoration:none">上一页</a>&nbsp;&nbsp;&nbsp;&nbsp;
+             <a id="next_page" href="/index?currentPage=1&amp;pageSize=10"  target="_parent"  style="color: #1683a8;text-decoration:none" >下一页</a>
+         </div>
+         <div class="lsz_boot_">历史轴（lishizhou.com）</div>
+     </div>
+</body>
+</html>

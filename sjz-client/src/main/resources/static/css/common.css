@@ -1,0 +1,178 @@
+body
+{
+    color: rgba(82, 82, 82, 0.85);
+    font-size: 14px;
+    margin: 0px;
+    background-color: #eee;
+}
+a
+{
+    text-decoration:none;
+    color: #1683a8;
+}
+ul{
+    list-style: none;
+}
+
+.input_readonly
+{
+    color: #aaa;
+    text-align: center;
+}
+/* 页面标题 */
+.sjz_title
+{
+    font-size: 16px;
+    margin: 0px;
+    padding: 25px 40px;
+    min-height: 55px;
+    background-color: #18468c;
+    color: #80acdb;
+}
+.sjz_title_img
+{
+    float: left;
+    height: 45px;
+}
+.sjz_title h3
+{
+    width: 300px;
+    margin: 0px;
+    font-size: 31px;
+    float: left;
+    padding: 0px 10px;
+}
+.a_logout
+{
+    color: #1683a8;
+    float: right;
+    margin: 15px 50px;
+}
+/* 页面标题 */
+
+/* 页面导航 */
+.sjz_nvg
+{
+    background-color: #c3e0ff;
+    padding: 15px 40px;
+}
+/* 页面导航 */
+
+/* 页面中心DIV overflow: hidden;解决float不能自适应； */
+.sjz_c
+{
+    min-height: 800px;
+    overflow: hidden;
+}
+/* 页面中心DIV */
+/* 菜单 */
+.sjz_menu
+{
+    float: left;
+    width: 16%;
+    min-height: 600px;
+    background-color: #eaf2ff;
+}
+.sjz_menu li
+{
+    margin: 0px 0px 10px 0px;
+}
+.sjz_menu a
+{
+    border-bottom: 1px solid #aaa;
+    margin-left: 15px;
+}
+.menu_img_ctl_left
+{
+    left: 16%;
+    width: 25px;
+    z-index: 999;
+    position: absolute;
+
+}
+.menu_img_ctl_right
+{
+    left: 0%;
+    width: 25px;
+    z-index: 999;
+    position: absolute;
+    display: none;
+}
+/* 菜单 */
+
+/* 内容中心div */
+.sjz_center
+{
+    float: right;
+    width: 84%;
+    min-height: 800px;
+    background-color: #ffffff;
+    border: #ddd solid 1px;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+/* 内容中心> 列表<a> 添加标签 */
+.sjz_center_ad
+{
+    float: right;
+    width: 4%;
+    height: 60px;
+    line-height: 60px;
+}
+/* 内容中心> 列表table */
+.sjz_center_content
+{
+    width: 100%;
+    border: 1px solid #f1f1f1;
+    background-color: #fff;
+}
+
+.sjz_center_content thead
+{
+    background-color: #eaeaea;
+}
+/* 内容中心> 更新div */
+.sjz_center_ta
+{
+    width: 100%;
+    min-height: 200px;
+}
+/* 内容中心> 更新table */
+.sjz_center_ta table
+{
+    width: 99%;
+    margin: 10px 0.5%;
+    background-color: #fff;
+    padding: 20px 0px;
+    order-radius: 10px;
+}
+
+/* 内容中心div */
+
+/* 内容>表头 */
+.sjz_center_ta table thead
+{
+    text-align: center;
+    font-weight: bold;
+    color: #999;
+}
+
+/* 内容>表头 */
+
+
+/* 页面底部 */
+.sjz_bottom
+{
+    min-height: 100px;
+    text-align: center;
+    font-size: 18px;
+    background-color: #18468c;
+    color: #80acdb;
+}
+.sjz_bottom h4
+{
+    margin: 10px auto;
+}
+/* 页面底部 */
+
+

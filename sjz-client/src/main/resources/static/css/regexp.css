@@ -1,0 +1,48 @@
+
+table tbody tr td:first-child
+{
+    text-align: right;
+    padding-right: 10px;
+}
+
+/* 检查按钮样式 */
+.check_label_div{
+    float: left;
+}
+.check_img_div{
+    float: left;
+    width: 200px;
+}
+.check_a_div{
+    float: left;
+}
+.check_img_msg
+{
+    height: 18px;
+    vertical-align: middle;
+    margin-left: 20px;
+}
+.check_a
+{
+    border: 1px solid #1683a8;
+    padding: 0px 10px;
+}
+/* 检查按钮样式 */
+
+/* 正则表达式-增加、修改页面样式 */
+input[name="regExpPattern"]
+{
+    width: 95%;
+}
+
+textarea[name="regExpDemo"]
+{
+    width: 95%;
+
+}
+textarea[name="descr"]
+{
+    width: 95%;
+
+}
+/* 正则表达式-增加、修改页面样式 */
