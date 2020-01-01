@@ -9,7 +9,7 @@
 	<packaging>jar</packaging>
 
 	<name>spring-cloud-provider</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Service-demo</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -21,13 +21,14 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>1.7</java.version>
+		<java.version>1.8</java.version>
 		<spring-cloud.version>Dalston.SR4</spring-cloud.version>
 		<druid.version>1.0.2</druid.version>
 		<sharding-core-jdbc.version>2.0.1</sharding-core-jdbc.version>
 	</properties>
 
 	<dependencies>
+		<!--  -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-eureka</artifactId>
@@ -36,7 +37,9 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-config</artifactId>
 		</dependency>
-		<!-- DAO -->
+
+
+		<!-- DAO:start -->
 		<dependency>
 			<groupId>org.mybatis.spring.boot</groupId>
 			<artifactId>mybatis-spring-boot-starter</artifactId>
@@ -52,6 +55,8 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		<!-- DAO:start -->
+
 		<!-- 引入sharding-jdbc核心模块 -->
 		<dependency>
 			<groupId>com.dangdang</groupId>

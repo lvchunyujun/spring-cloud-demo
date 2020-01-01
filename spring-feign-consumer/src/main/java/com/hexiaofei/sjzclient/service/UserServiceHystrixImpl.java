@@ -1,6 +1,6 @@
-package com.hexiaofei.springfeignconsumer.service;
+package com.hexiaofei.sjzclient.service;
 
-import com.hexiaofei.springfeignconsumer.entity.User;
+import com.hexiaofei.sjzclient.entity.User;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PathVariable;
 

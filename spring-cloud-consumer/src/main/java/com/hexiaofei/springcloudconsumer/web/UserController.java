@@ -24,8 +24,8 @@ public class UserController extends BaseController{
 
     @RequestMapping("/{id}")
     @ResponseBody
-    public ResultVo findUserByID(@PathVariable Integer id){
-        ResultVo resultVo = new  ResultVo();
+    public ResultEntity findUserByID(@PathVariable Integer id){
+        ResultEntity resultVo = new  ResultEntity();
         User user = userService.getUserById(id);
         resultVo.setResultCode("0000");
         resultVo.setResultMsg("success");
@@ -35,8 +35,8 @@ public class UserController extends BaseController{
 
     @ResponseBody
     @RequestMapping("/modify/{id}")
-    public ResultVo updateUserById(@PathVariable() int id,int credit){
-        ResultVo resultVo = new ResultVo();
+    public ResultEntity updateUserById(@PathVariable() int id,int credit){
+        ResultEntity resultVo = new ResultEntity();
 
         User user = new User();
         user.setId(id);

@@ -1,4 +1,4 @@
-package com.hexiaofei.springfeignconsumer.entity;
+package com.hexiaofei.sjzclient.entity;
 
 /**
  * Created by Administrator on 2017/11/17.

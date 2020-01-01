@@ -101,16 +101,17 @@
                         <tr>
                             <td>状态：</td>
                             <td>
-                                <label>
-                                    <input name="eventState" th:checked="${sjzEventIndex.eventState==0}" type="radio" value="0" />发布
-                                </label>
-                                &nbsp;
+
                                 <label>
                                     <input name="eventState" th:checked="${sjzEventIndex.eventState==10}" type="radio" value="10" />待审核
                                 </label>
                                 &nbsp;
                                 <label>
                                     <input name="eventState" th:checked="${sjzEventIndex.eventState==20}" type="radio" value="20" />审核通过
+                                </label>
+                                &nbsp;
+                                <label>
+                                    <input name="eventState" th:checked="${sjzEventIndex.eventState==0}" type="radio" value="0" />发布
                                 </label>
                                 &nbsp;
                                 <label>

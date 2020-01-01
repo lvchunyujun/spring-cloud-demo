@@ -10,4 +10,6 @@ import com.hexiaofei.sjzclient.service.base.IBaseService;
 public interface UserInfoService  extends IBaseService<UserInfo> {
 
     UserInfo getUserInfoForLogin(String userName, String password) throws PlatformException;
+
+
 }

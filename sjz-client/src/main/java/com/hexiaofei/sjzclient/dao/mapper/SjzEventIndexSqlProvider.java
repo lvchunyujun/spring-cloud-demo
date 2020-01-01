@@ -13,6 +13,59 @@ import static org.apache.ibatis.jdbc.SqlBuilder.*;
 
 public class SjzEventIndexSqlProvider {
 
+    public String selectCountByObject(Map<String,Object>  map){
+        StringBuilder sql = new StringBuilder();
+
+        SjzEventIndex sjzEventIndex = (SjzEventIndex)map.get("sjzEventIndex");
+
+        Integer authorId = (Integer)map.get("authorId");
+
+        sql.append(" select count(*) from sjz_event_index sei ");
+        sql.append(" where 1=1 ");
+
+        if(sjzEventIndex!=null && sjzEventIndex.getEventState() != null){
+            sql.append(" and sei.eventState = #{sjzEventIndex.eventState,jdbcType=TINYINT} ");
+        }
+
+        if(authorId!=null){
+            sql.append(" and exists (select 1 from sjz_event_author sea where sea.userId = #{authorId,jdbcType=INTEGER} and sea.eventIndexId= sei.id)");
+        }
+
+        return sql.toString();
+    }
+
+    /**
+     * 分页查询列表
+     * @param map 条件
+     * @return
+     */
+    public String selectPagingListByObject(Map<String,Object>  map){
+        StringBuilder sql = new StringBuilder();
+
+        SjzEventIndex sjzEventIndex = (SjzEventIndex)map.get("sjzEventIndex");
+
+        Integer authorId = (Integer)map.get("authorId");
+
+        sql.append(" select sei.* from sjz_event_index sei ");
+        sql.append(" where 1=1 ");
+
+        if(sjzEventIndex != null && sjzEventIndex.getEventState() != null){
+           sql.append(" and sei.eventState = #{sjzEventIndex.eventState,jdbcType=TINYINT} ");
+        }
+        if(authorId!=null){
+           sql.append(" and exists (select 1 from sjz_event_author sea where sea.userId = #{authorId,jdbcType=INTEGER} and sea.eventIndexId= sei.id)");
+        }
+
+        sql.append(" order by sei.eventTime desc ");
+
+        // limit
+        sql.append(" limit #{offset,jdbcType=INTEGER}, #{pageSize,jdbcType=INTEGER}");
+
+        return sql.toString();
+    }
+
+
+
     public String selectListByPaging(SjzEventIndex sjzEventIndex){
         StringBuffer sqlStr = new StringBuffer();
         sqlStr.append(" select id,eventTime,eventContent,eventType,eventState,recordCreateTime ");
