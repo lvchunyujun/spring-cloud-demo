@@ -12,13 +12,11 @@ import com.hexiaofei.provider0.vo.PageVo;
 import com.shijianzhou.language.engine.content.SjzNlContentConsume;
 import com.shijianzhou.language.engine.content.SjzNlContentConsumeFactory;
 import com.shijianzhou.language.engine.content.SjzNlMapStringContentConsumeFactory;
-import com.shijianzhou.language.engine.content.SjzNlStringContentConsumeFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.SpiderListener;
@@ -63,7 +61,7 @@ public class WebSpiderTask {
     /**
      * 正式方式
      */
-    @Scheduled(cron="20 53 15 * * ?")
+//    @Scheduled(cron="20 53 15 * * ?")
     public void loadingNewUrl(){
         LOGGER.info("【解析新URL】--> 开始解析页面……");
 
@@ -93,7 +91,7 @@ public class WebSpiderTask {
         LOGGER.info("【解析新URL】<-- 结束解析页面……");
     }
 
-    @Scheduled(cron="40 14 12 * * ?")
+//    @Scheduled(cron="40 14 12 * * ?")
     public void test(){
         SjzNlContentConsumeFactory contentConsumeFactory = new SjzNlMapStringContentConsumeFactory();
         SjzNlContentConsume contentConsume =contentConsumeFactory.getContentConsume();

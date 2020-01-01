@@ -4,8 +4,8 @@ import com.hexiaofei.provider0.common.consts.SpiderTaskStatusEnum;
 import com.hexiaofei.provider0.domain.SjzDomainWordSort;
 import com.hexiaofei.provider0.exception.PlatformException;
 import com.hexiaofei.provider0.service.SjzDomainSpiderTaskService;
-import com.hexiaofei.provider0.task.*;
-import org.apache.ibatis.cursor.Cursor;
+import com.hexiaofei.provider0.task.AbstractWebSpider;
+import com.hexiaofei.provider0.task.WebSpiderTask;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +31,7 @@ public class SjzEventSpiderTask extends AbstractWebSpider {
      * 抓取页面
      */
 
-    @Scheduled(cron="00 00 22 * * ?")
+    @Scheduled(cron="00 36 21 * * ?")
     public void crawlWebPage(){
         Spider spider = initSpider();
 
@@ -40,7 +40,7 @@ public class SjzEventSpiderTask extends AbstractWebSpider {
         try {
             list = sjzDomainSpiderTaskService.getWordSordDomainListByTaskStatus(SpiderTaskStatusEnum.ON.getCode());
 
-             Iterator<SjzDomainWordSort> iterable = list.iterator();
+            Iterator<SjzDomainWordSort> iterable = list.iterator();
 
             while(iterable.hasNext()){
                 SjzDomainWordSort sjzDomainWordSort = iterable.next();

@@ -4,16 +4,14 @@ import com.hexiaofei.provider0.domain.SjzEventIndex;
 import com.hexiaofei.provider0.exception.PlatformException;
 import com.hexiaofei.provider0.service.SjzEventIndexService;
 import com.hexiaofei.provider0.vo.PageVo;
+import com.hexiaofei.provider0.vo.query.SjzEventIndexQo;
 import com.hexiaofei.provider0.web.BaseController;
 import com.hexiaofei.provider0.web.SjzEventIndexController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Date;
@@ -60,9 +58,9 @@ public class AdminSjzEventIndexController extends AdminBaseController implements
             resultId = -99;
         }
         if(resultId>0){
-            return "event/addSuccess";
+            return ADD_SUCCESS_URL;
         }else{
-            return "event/addFail";
+            return ADD_FAIL_URL;
         }
     }
 
@@ -109,6 +107,11 @@ public class AdminSjzEventIndexController extends AdminBaseController implements
         return modelAndView;
     }
 
+    @Override
+    public String listEventIndex(SjzEventIndex sjzEventIndex, int currentPage, int pageSize) {
+        return null;
+    }
+
     public String toDelete(){
         return "";
     }
@@ -119,16 +122,17 @@ public class AdminSjzEventIndexController extends AdminBaseController implements
 
     /**
      * 分页查询事件列表
-     * @param sjzEventIndex
-     * @param currentPage
-     * @param pageSize
+     *
+     * @param sjzEventIndexQo
      * @return
      */
-    @RequestMapping(value = "eventIndex/list/{currentPage}_{pageSize}")
+    @RequestMapping(value = "eventIndex/list",method = {RequestMethod.POST})
     @ResponseBody
-    public String listEventIndex(SjzEventIndex sjzEventIndex,@PathVariable int currentPage,@PathVariable int pageSize){
-
+    public String listEventIndex(@RequestBody SjzEventIndexQo sjzEventIndexQo){
         ResultEntity re = getResultEntity();
+
+        int currentPage = sjzEventIndexQo.getPageVo().getCurrentPage();
+        int pageSize = sjzEventIndexQo.getPageVo().getPageSize();
 
         PageVo pageVo = new PageVo<SjzEventIndex>();
         if(currentPage>0){
@@ -140,13 +144,15 @@ public class AdminSjzEventIndexController extends AdminBaseController implements
             pageVo.setPageSize(pageSize);
         }
         try {
-            pageVo = sjzEventIndexService.getPageVoObject(pageVo);
+            pageVo = sjzEventIndexService.getPageVoObjectByAuthorId(null,sjzEventIndexQo,pageVo);
+
             re.setData(pageVo);
             re.setResultCode("0000");
             re.setResultMsg("success");
         } catch (Exception e) {
             re.setResultCode("9999");
             re.setResultMsg("网络异常，稍后重试！");
+            re.setData(new PageVo());
             logger.error("查询异常！",e);
         }
 

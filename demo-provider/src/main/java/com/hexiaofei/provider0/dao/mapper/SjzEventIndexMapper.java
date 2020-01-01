@@ -2,21 +2,11 @@ package com.hexiaofei.provider0.dao.mapper;
 
 import com.hexiaofei.provider0.domain.SjzEventIndex;
 import com.hexiaofei.provider0.domain.SjzEventIndexExample;
-import java.util.List;
-
-import com.hexiaofei.provider0.vo.PageVo;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.DeleteProvider;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.InsertProvider;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectProvider;
-import org.apache.ibatis.annotations.Update;
-import org.apache.ibatis.annotations.UpdateProvider;
+import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
+
+import java.util.List;
+import java.util.Map;
 
 public interface SjzEventIndexMapper {
     /**
@@ -176,4 +166,18 @@ public interface SjzEventIndexMapper {
             @Result(column="recordCreateTime", property="recordCreateTime", jdbcType=JdbcType.TIMESTAMP)
     })
     List<SjzEventIndex> selectListByPaging(@Param("offset") int offset,@Param("pagesize")  int pageSize);
+
+    @SelectProvider(type=SjzEventIndexSqlProvider.class, method="selectCountByObject")
+    int selectCountByObject(Map<String,Object> map);
+
+    @SelectProvider(type=SjzEventIndexSqlProvider.class, method="selectPagingListByObject")
+    @Results({
+            @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true),
+            @Result(column="eventTime", property="eventTime", jdbcType=JdbcType.TIMESTAMP),
+            @Result(column="eventContent", property="eventContent", jdbcType=JdbcType.VARCHAR),
+            @Result(column="eventType", property="eventType", jdbcType=JdbcType.TINYINT),
+            @Result(column="eventState", property="eventState", jdbcType=JdbcType.TINYINT),
+            @Result(column="recordCreateTime", property="recordCreateTime", jdbcType=JdbcType.TIMESTAMP)
+    })
+    List<SjzEventIndex> selectPagingListByObject(Map<String,Object> map);
 }

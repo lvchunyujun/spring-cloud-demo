@@ -1,28 +1,84 @@
 package com.hexiaofei.provider0.dao.mapper;
 
-import static org.apache.ibatis.jdbc.SqlBuilder.BEGIN;
-import static org.apache.ibatis.jdbc.SqlBuilder.DELETE_FROM;
-import static org.apache.ibatis.jdbc.SqlBuilder.FROM;
-import static org.apache.ibatis.jdbc.SqlBuilder.INSERT_INTO;
-import static org.apache.ibatis.jdbc.SqlBuilder.ORDER_BY;
-import static org.apache.ibatis.jdbc.SqlBuilder.SELECT;
-import static org.apache.ibatis.jdbc.SqlBuilder.SELECT_DISTINCT;
-import static org.apache.ibatis.jdbc.SqlBuilder.SET;
-import static org.apache.ibatis.jdbc.SqlBuilder.SQL;
-import static org.apache.ibatis.jdbc.SqlBuilder.UPDATE;
-import static org.apache.ibatis.jdbc.SqlBuilder.VALUES;
-import static org.apache.ibatis.jdbc.SqlBuilder.WHERE;
-
 import com.hexiaofei.provider0.domain.SjzEventIndex;
+import com.hexiaofei.provider0.domain.SjzEventIndexExample;
 import com.hexiaofei.provider0.domain.SjzEventIndexExample.Criteria;
 import com.hexiaofei.provider0.domain.SjzEventIndexExample.Criterion;
-import com.hexiaofei.provider0.domain.SjzEventIndexExample;
+import com.hexiaofei.provider0.vo.query.SjzEventIndexQo;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static org.apache.ibatis.jdbc.SqlBuilder.*;
+
 public class SjzEventIndexSqlProvider {
+
+    public String selectCountByObject(Map<String,Object>  map){
+        StringBuilder sql = new StringBuilder();
+
+        SjzEventIndexQo sjzEventIndexQo = (SjzEventIndexQo)map.get("sjzEventIndexQo");
+
+        Integer authorId = (Integer)map.get("authorId");
+
+        sql.append(" select count(*) from sjz_event_index sei ");
+        sql.append(" where 1=1 ");
+
+        if(sjzEventIndexQo != null && sjzEventIndexQo.getId() !=null && sjzEventIndexQo.getId() > -1){
+            sql.append(" and sei.id = #{sjzEventIndexQo.id,jdbcType=TINYINT} ");
+        }
+        if(sjzEventIndexQo != null && sjzEventIndexQo.getStartDate() != null){
+            sql.append(" and sei.eventTime >= #{sjzEventIndexQo.startDate,jdbcType=TIMESTAMP} ");
+        }
+        if(sjzEventIndexQo != null && sjzEventIndexQo.getEndDate() != null){
+            sql.append(" and sei.eventTime <= #{sjzEventIndexQo.endDate,jdbcType=TIMESTAMP} ");
+        }
+        if(sjzEventIndexQo!=null && sjzEventIndexQo.getEventState() != null && !(sjzEventIndexQo.getEventState() < 0)){
+            sql.append(" and sei.eventState = #{sjzEventIndexQo.eventState,jdbcType=TINYINT} ");
+        }
+        if(authorId!=null){
+            sql.append(" and exists (select 1 from sjz_event_author sea where sea.userId = #{authorId,jdbcType=INTEGER} and sea.eventIndexId= sei.id)");
+        }
+
+        return sql.toString();
+    }
+
+    /**
+     * 分页查询列表
+     * @param map 条件
+     * @return
+     */
+    public String selectPagingListByObject(Map<String,Object>  map){
+        StringBuilder sql = new StringBuilder();
+
+        SjzEventIndexQo sjzEventIndexQo = (SjzEventIndexQo)map.get("sjzEventIndexQo");
+
+        // 作者ID
+        Integer authorId = (Integer)map.get("authorId");
+
+        sql.append(" select sei.* from sjz_event_index sei ");
+        sql.append(" where 1=1 ");
+        if(sjzEventIndexQo != null && sjzEventIndexQo.getId() !=null && sjzEventIndexQo.getId() > -1){
+            sql.append(" and sei.id = #{sjzEventIndexQo.id,jdbcType=TINYINT} ");
+        }
+        if(sjzEventIndexQo != null && sjzEventIndexQo.getStartDate() != null){
+            sql.append(" and sei.eventTime >= #{sjzEventIndexQo.startDate,jdbcType=TIMESTAMP} ");
+        }
+        if(sjzEventIndexQo != null && sjzEventIndexQo.getEndDate() != null){
+            sql.append(" and sei.eventTime <= #{sjzEventIndexQo.endDate,jdbcType=TIMESTAMP} ");
+        }
+        if(sjzEventIndexQo!=null && sjzEventIndexQo.getEventState() != null && !(sjzEventIndexQo.getEventState() < 0)){
+            sql.append(" and sei.eventState = #{sjzEventIndexQo.eventState,jdbcType=TINYINT} ");
+        }
+        if(authorId!=null){
+            sql.append(" and exists (select 1 from sjz_event_author sea where sea.userId = #{authorId,jdbcType=INTEGER} and sea.eventIndexId= sei.id)");
+        }
+        sql.append(" order by sei.eventTime desc ");
+        // limit
+        sql.append(" limit #{offset,jdbcType=INTEGER}, #{pageSize,jdbcType=INTEGER}");
+
+        return sql.toString();
+    }
+
 
     public String selectListByPaging(SjzEventIndex sjzEventIndex){
         StringBuffer sqlStr = new StringBuffer();

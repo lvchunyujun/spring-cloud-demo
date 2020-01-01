@@ -16,19 +16,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Date;
-
 @Controller
 public class AdminSjzDomainInfoController extends AdminBaseController implements BaseController<SjzDomainInfo> {
 
     public static Logger logger = LoggerFactory.getLogger(SjzEventIndexController.class);
 
-    private final static String STATIC_BASE_URL = "domain";
+    private final static String STATIC_BASE_URL = "domainInfo";
 
     @Autowired
     private SjzDomainInfoService sjzDomainInfoService;
 
-    @RequestMapping("domainInfo/index")
+    @RequestMapping(STATIC_BASE_URL+"/index")
     public String index(){
 
         return STATIC_BASE_URL+"/domainInfoIndex";
@@ -38,9 +36,9 @@ public class AdminSjzDomainInfoController extends AdminBaseController implements
      * 跳转到添加页面
      * @return
      */
-    @RequestMapping(value = "domainInfo/toAddDomainInfo")
+    @RequestMapping(value = STATIC_BASE_URL+"/toAdd")
     public String toAdd(){
-        return STATIC_BASE_URL+"/toAddDomainInfo";
+        return STATIC_BASE_URL+"/toAdd";
     }
 
     /**
@@ -48,7 +46,7 @@ public class AdminSjzDomainInfoController extends AdminBaseController implements
      * @param sjzDomainInfo
      * @return
      */
-    @RequestMapping(value = "domainInfo/addDomainInfo",method = RequestMethod.POST)
+    @RequestMapping(value = STATIC_BASE_URL+"/add",method = RequestMethod.POST)
     public String add(SjzDomainInfo sjzDomainInfo){
         int resultId = -1;
         try {
@@ -69,7 +67,7 @@ public class AdminSjzDomainInfoController extends AdminBaseController implements
      * 跳转到更新页面
      * @return
      */
-    @RequestMapping(value = "domainInfo/toUpdate/{id}")
+    @RequestMapping(value = STATIC_BASE_URL+"/toUpdate/{id}")
     public ModelAndView toUpdate(@PathVariable Integer id){
         ModelAndView modelAndView =
                 new ModelAndView(STATIC_BASE_URL+"/toUpdateDomainInfo");
@@ -88,7 +86,7 @@ public class AdminSjzDomainInfoController extends AdminBaseController implements
      * 更新域名信息
      * @return
      */
-    @RequestMapping(value = "domainInfo/update",method = RequestMethod.POST)
+    @RequestMapping(value = STATIC_BASE_URL+"/update",method = RequestMethod.POST)
     public ModelAndView update(SjzDomainInfo sjzDomainInfo){
 
         ModelAndView modelAndView = new ModelAndView(STATIC_BASE_URL+"/toUpdateDomainInfo");
@@ -123,7 +121,7 @@ public class AdminSjzDomainInfoController extends AdminBaseController implements
      * @param pageSize
      * @return
      */
-    @RequestMapping(value = "domainInfo/list/{currentPage}_{pageSize}")
+    @RequestMapping(value = STATIC_BASE_URL+"/list/{currentPage}_{pageSize}")
     @ResponseBody
     public String listEventIndex(SjzDomainInfo sjzDomainInfo,@PathVariable int currentPage,@PathVariable int pageSize){
 

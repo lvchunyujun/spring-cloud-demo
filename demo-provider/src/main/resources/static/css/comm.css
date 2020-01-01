@@ -24,7 +24,7 @@ ul{
 {
     font-size: 16px;
     margin: 0px;
-    padding: 25px 40px;
+    padding: 5px 40px;
     min-height: 55px;
     background-color: #18468c;
     color: #80acdb;
@@ -46,7 +46,7 @@ ul{
 {
     color: #1683a8;
     float: right;
-    margin: 15px 50px;
+    margin: 5px 50px;
 }
 /* 页面标题 */
 
@@ -54,7 +54,11 @@ ul{
 .sjz_nvg
 {
     background-color: #c3e0ff;
-    padding: 15px 40px;
+    padding: 5px 40px;
+}
+.sjz_nvg strong
+{
+    color: #444;
 }
 /* 页面导航 */
 
@@ -116,8 +120,8 @@ ul{
 {
     float: right;
     width: 4%;
-    height: 60px;
-    line-height: 60px;
+    height: 40px;
+    line-height: 40px;
 }
 /* 内容中心> 列表table */
 .sjz_center_content

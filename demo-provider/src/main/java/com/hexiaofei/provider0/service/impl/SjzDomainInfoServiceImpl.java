@@ -1,7 +1,6 @@
 package com.hexiaofei.provider0.service.impl;
 
 import com.hexiaofei.provider0.common.consts.DomainStatusEnum;
-import com.hexiaofei.provider0.common.consts.DomainTypeEnum;
 import com.hexiaofei.provider0.dao.mapper.SjzDomainInfoMapper;
 import com.hexiaofei.provider0.domain.SjzDomainInfo;
 import com.hexiaofei.provider0.exception.PlatformException;
@@ -9,7 +8,6 @@ import com.hexiaofei.provider0.service.SjzDomainInfoService;
 import com.hexiaofei.provider0.service.base.AbstractService;
 import com.hexiaofei.provider0.vo.PageVo;
 import com.shijianzhou.language.service.SjzNlRegExpService;
-import jodd.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,8 +26,9 @@ public class SjzDomainInfoServiceImpl extends AbstractService implements SjzDoma
     private SjzNlRegExpService sjzNlRegExpService;
 
     @Override
-    public int addObject(SjzDomainInfo mob) throws PlatformException {
-        int result = sjzDomainInfoMapper.insert(mob);
+    public int addObject(SjzDomainInfo sjzDomainInfo) throws PlatformException {
+        sjzDomainInfo.setCreateTime(new Date());
+        int result = sjzDomainInfoMapper.insert(sjzDomainInfo);
         return result;
     }
 

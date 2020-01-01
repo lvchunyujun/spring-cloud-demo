@@ -7,6 +7,7 @@ import com.hexiaofei.provider0.domain.SjzEventIndex;
 import com.hexiaofei.provider0.exception.PlatformException;
 import com.hexiaofei.provider0.service.SjzDomainSpiderTaskService;
 import com.hexiaofei.provider0.service.SjzDomainWordSortService;
+import com.hexiaofei.provider0.service.base.AbstractService;
 import com.hexiaofei.provider0.vo.PageVo;
 import org.apache.ibatis.cursor.Cursor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ import java.util.Map;
 
 @Transactional
 @Service("sjzDomainWordSortService")
-public class SjzDomainWordSortServiceImpl implements SjzDomainWordSortService {
+public class SjzDomainWordSortServiceImpl extends AbstractService implements SjzDomainWordSortService {
 
     @Autowired
     private SjzDomainWordSortMapper sjzDomainWordSortMapper;
@@ -39,8 +40,12 @@ public class SjzDomainWordSortServiceImpl implements SjzDomainWordSortService {
     }
 
     @Override
-    public int updateObject(SjzDomainWordSort mob) throws PlatformException {
-        return -1;
+    public int updateObject(SjzDomainWordSort sjzDomainWordSort) throws PlatformException {
+        int resultId = -1;
+        SjzDomainWordSort targetObj = getObjectById(sjzDomainWordSort.getId());
+        targetObj = refreshObjectForNotNullVal(targetObj,sjzDomainWordSort);
+        resultId = sjzDomainWordSortMapper.updateByPrimaryKey(targetObj);
+        return resultId;
     }
 
     @Override

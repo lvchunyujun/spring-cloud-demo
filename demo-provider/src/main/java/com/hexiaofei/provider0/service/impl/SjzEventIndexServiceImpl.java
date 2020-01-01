@@ -7,12 +7,15 @@ import com.hexiaofei.provider0.exception.PlatformException;
 import com.hexiaofei.provider0.service.SjzEventIndexService;
 import com.hexiaofei.provider0.service.SjzSpiderWebsiteService;
 import com.hexiaofei.provider0.vo.PageVo;
+import com.hexiaofei.provider0.vo.query.SjzEventIndexQo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Transactional(rollbackFor = Exception.class)
 @Service("sjzEventIndexService")
@@ -36,6 +39,29 @@ public class SjzEventIndexServiceImpl implements SjzEventIndexService {
         return 0;
     }
 
+    @Override
+    public PageVo<SjzEventIndex> getPageVoObjectByAuthorId(Integer authorId, SjzEventIndexQo sjzEventIndexQo, PageVo<SjzEventIndex> pageVo) throws PlatformException {
+        List<SjzEventIndex> list = new ArrayList<>();
+        Map<String,Object> conditionMap = new HashMap<>();
+
+        // step1: 开始位置
+        int offset = pageVo.getCurrentPage()-1<1?0:pageVo.getCurrentPage()-1;
+        conditionMap.put("offset",pageVo.getPageSize()*offset);
+        conditionMap.put("pageSize",pageVo.getPageSize());
+        conditionMap.put("sjzEventIndexQo",sjzEventIndexQo);
+        // 作者ID
+        conditionMap.put("authorId",authorId);
+
+        // step2: 查询当前总记录条数
+        int recordCount = sjzEventIndexMapper.selectCountByObject(conditionMap);
+        pageVo.setRecordCount(recordCount);
+
+        // step3: 结果集
+        list =  sjzEventIndexMapper.selectPagingListByObject(conditionMap);
+        pageVo.setVoList(list);
+
+        return pageVo;
+    }
 
 
     @Override

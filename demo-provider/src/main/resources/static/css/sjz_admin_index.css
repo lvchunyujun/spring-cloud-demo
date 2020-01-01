@@ -1,0 +1,19 @@
+.sjz_center_top_
+{
+    height: 40px;
+    width: 100%;
+    background-color: #f0f0f0;
+}
+#sjz_center_top_search_
+{
+    height: 100%;
+    float: left;
+    width: 60%;
+    line-height: 40px;
+    margin-left: 5%;
+}
+#sjz_center_top_search_ select,input
+{
+    margin-left: 20px;
+    width:80px;
+}

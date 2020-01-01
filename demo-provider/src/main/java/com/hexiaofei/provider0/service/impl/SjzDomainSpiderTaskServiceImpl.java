@@ -6,20 +6,21 @@ import com.hexiaofei.provider0.domain.SjzDomainWordSort;
 import com.hexiaofei.provider0.exception.PlatformException;
 import com.hexiaofei.provider0.service.SjzDomainSpiderTaskService;
 import com.hexiaofei.provider0.service.SjzDomainWordSortService;
+import com.hexiaofei.provider0.service.base.AbstractService;
 import com.hexiaofei.provider0.vo.PageVo;
+import com.shijianzhou.language.domain.SjzNlRegExp;
 import org.apache.ibatis.cursor.Cursor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Transactional
 @Service("sjzDomainSpiderTaskService")
-public class SjzDomainSpiderTaskServiceImpl implements SjzDomainSpiderTaskService {
+public class SjzDomainSpiderTaskServiceImpl extends AbstractService implements SjzDomainSpiderTaskService {
 
     @Autowired
     private SjzDomainSpiderTaskMapper sjzDomainSpiderTaskMapper;
@@ -38,8 +39,12 @@ public class SjzDomainSpiderTaskServiceImpl implements SjzDomainSpiderTaskServic
     }
 
     @Override
-    public int updateObject(SjzDomainSpiderTask mob) throws PlatformException {
-        return 0;
+    public int updateObject(SjzDomainSpiderTask sjzDomainSpiderTask) throws PlatformException {
+        int resultId = -1;
+        SjzDomainSpiderTask targetObj = getObjectById(sjzDomainSpiderTask.getId());
+        targetObj = refreshObjectForNotNullVal(targetObj,sjzDomainSpiderTask);
+        resultId = sjzDomainSpiderTaskMapper.updateByPrimaryKey(targetObj);
+        return resultId;
     }
 
     @Override

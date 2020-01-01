@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>事件抓取任务管理</title>
+    <link rel="icon" th:href="@{/images/favicon.ico}" type="image/gif" />
+    <link th:href="@{/css/comm.css}" rel="stylesheet" type="text/css" />
+    <script th:src="@{/js/jquery-3.4.1.min.js}" type="text/javascript" />
+    <script th:src="@{/js/utils.js}" type="text/javascript" />
+    <style type="text/css" >
+
+        .sjz_center_ta
+        {
+            width: 95%;
+            min-height: 200px;
+        }
+        .sjz_center_ta_tarea
+        {
+            width: 95%;
+
+        }
+        .sjz_center_ta table
+        {
+            width: 100%;
+        }
+        .sjz_center_ta table .tr1
+        {
+            height:45px;
+        }.sjz_center_ta table .tr2
+        {
+            height:100px;
+        }.sjz_center_ta table .tr3
+        {
+            height:45px;
+        }.sjz_center_ta table .tr4
+        {
+            height:50px;
+        }
+        .sjz_center_t_td
+        {
+            width: 95%;
+        }
+        .sjz_center_ta_submit
+        {
+            width: 60px;
+        }
+        .sjz_center_ta input
+        {
+            text-align: left;
+        }
+        .sjz_center_ta input[name='id']
+        {
+            width: 50px;
+        }
+        .sjz_center_ta input[name='spiderTaskName']
+        {
+            width: 100px;
+        }
+        .sjz_center_ta input[name='wordCode']
+        {
+            width: 80px;
+        }
+        .sjz_center_ta input[name='wordMetaEn']
+         {
+             width: 80px;
+         }
+        .sjz_center_ta input[name='wordMetaZh']
+        {
+            width: 80px;
+        }
+
+
+    </style>
+</head>
+<body>
+<div>
+    <div th:replace="common/sjz_top :: sjz_top"  ></div>
+    <div class="sjz_nvg">
+        当前位置：<a href="/admin/index">首页</a> > <a href="/admin/domainSpiderTask/index">事件抓取任务管理</a> > <strong>修改事件抓取任务</strong>
+    </div>
+    <div class="sjz_c">
+        <!-- 菜单 -->
+        <div th:replace="common/sjz_menu :: sjz_menu"  ></div>
+        <div class="sjz_center">
+            <div>
+                <div></div>
+            </div>
+            <div class="sjz_center_ta">
+                <form action="/admin/domainSpiderTask/update" method="post">
+                    <table>
+                        <thead>
+                        <tr>
+                            <td>编号</td>
+                            <td>任务名称</td>
+                            <td>单词代码</td>
+                            <td>单词英文</td>
+                            <td>单词中文</td>
+                            <td>关联的模板单元名称</td>
+                            <td>任务类型</td>
+                            <td>任务状态</td>
+                            <td>任务描述</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="tr1"  >
+                            <td><input type="text" name="id" th:value="${sjzDomainSpiderTask.id}" readonly="readonly" /></td>
+                            <td><input type="text" name="spiderTaskName" th:value="${sjzDomainSpiderTask.spiderTaskName}" /> </td>
+                            <td><input type="text" name="wordCode" th:value="${sjzDomainSpiderTask.wordCode}"  /><div id="_show_word_list">+</div></td>
+                            <td><input type="text" name="wordMetaEn" th:value="${sjzDomainSpiderTask.wordMetaEn}" /> </td>
+                            <td><input type="text" name="wordMetaZh" th:value="${sjzDomainSpiderTask.wordMetaZh}"  /> </td>
+                            <td><input type="text" name="patternName" th:value="${sjzDomainSpiderTask.patternName}"  /> </td>
+                            <td >
+                                <input type="radio" name="spiderTaskType" value="10" th:checked="${sjzDomainSpiderTask.spiderTaskType==10}" />:事件
+                                <input type="radio" name="spiderTaskType" value="0" th:checked="${sjzDomainSpiderTask.spiderTaskType==0}" />:其他
+                            </td>
+                            <td >
+                                <input type="radio" name="spiderTaskStatus" value="0" th:checked="${sjzDomainSpiderTask.spiderTaskStatus==0}" />:正常
+                                <input type="radio" name="spiderTaskStatus" value="10" th:checked="${sjzDomainSpiderTask.spiderTaskStatus==10}" />:关闭
+                            </td>
+                            <td><textarea name="spiderTaskDescription" rows="2" th:text="${sjzDomainSpiderTask.spiderTaskDescription}" ></textarea></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input class="sjz_center_ta_submit" type="submit" value="确定"/></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="common/sjz_bottom :: sjz_bottom"  ></div>
+</body>
+</html>

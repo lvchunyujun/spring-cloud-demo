@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -32,10 +33,10 @@ public class SjzDomainSpiderTaskController extends AdminBaseController implement
         return STATIC_BASE_URL+"/spiderTaskIndex";
     }
 
-    @RequestMapping(STATIC_BASE_URL+"/toAdd")
+    @RequestMapping(value = STATIC_BASE_URL+"/toAdd")
     @Override
     public String toAdd() {
-        return STATIC_BASE_URL+"/toAddDomainSpiderTask";
+        return STATIC_BASE_URL+"/toAdd";
     }
 
     @RequestMapping(STATIC_BASE_URL+"/add")
@@ -56,16 +57,40 @@ public class SjzDomainSpiderTaskController extends AdminBaseController implement
         }
     }
 
-    @RequestMapping(STATIC_BASE_URL+"/toUpdate")
+    @RequestMapping(value = STATIC_BASE_URL+"/toUpdate/{id}")
     @Override
-    public ModelAndView toUpdate(Integer id) {
-        return null;
+    public ModelAndView toUpdate(@PathVariable("id") Integer id) {
+        ModelAndView modelAndView =
+                new ModelAndView(STATIC_BASE_URL+"/toUpdate");
+        try {
+            SjzDomainSpiderTask sjzDomainSpiderTask = sjzDomainSpiderTaskService.getObjectById(id);
+            if(sjzDomainSpiderTask!=null)
+                modelAndView.addObject("sjzDomainSpiderTask",sjzDomainSpiderTask);
+        }catch (PlatformException e){
+            logger.error("查询异常！",e);
+        }
+
+        return modelAndView;
     }
 
-    @RequestMapping(STATIC_BASE_URL+"/update")
+    @RequestMapping(value = STATIC_BASE_URL+"/update",method = RequestMethod.POST)
     @Override
     public ModelAndView update(SjzDomainSpiderTask sjzDomainSpiderTask) {
-        return null;
+        ModelAndView modelAndView = new ModelAndView(STATIC_BASE_URL+"/toUpdate");
+        int resultId = -1;
+        try {
+
+            resultId = sjzDomainSpiderTaskService.updateObject(sjzDomainSpiderTask);
+            sjzDomainSpiderTask = sjzDomainSpiderTaskService.getObjectById(sjzDomainSpiderTask.getId());
+            if(sjzDomainSpiderTask!=null)
+                modelAndView.addObject(sjzDomainSpiderTask);
+            modelAndView.addObject("resultCode","0");
+            modelAndView.addObject("resultMsg","修改成功！");
+        }catch (PlatformException e){
+
+        }
+
+        return modelAndView;
     }
 
     @RequestMapping(value = STATIC_BASE_URL+"/list/{currentPage}_{pageSize}")

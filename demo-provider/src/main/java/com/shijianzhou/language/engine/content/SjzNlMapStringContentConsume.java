@@ -88,7 +88,7 @@ public class SjzNlMapStringContentConsume implements SjzNlContentConsume<Map<Str
 
             SjzNlRelatePatternUnit rpu = rpuList.get(j);
 
-
+            // 1. 根据表达式进行匹配
             if(checkMatchByRegExp( targetStr, rpu)){
                 if(j == 0){
                     eventDate = JsoupDocumentParser.splitDateStr(targetStr).get(0);
@@ -106,9 +106,8 @@ public class SjzNlMapStringContentConsume implements SjzNlContentConsume<Map<Str
                 // 不匹配： 判断顺序号=1 不保存；否则保存到 事件缓存列表中去
                 if(j>0){
                     addEventIndexTemp(eventDate,url,targetStr,rpu);
-                }else{
-                    break;
                 }
+                break;
             }
         }
 

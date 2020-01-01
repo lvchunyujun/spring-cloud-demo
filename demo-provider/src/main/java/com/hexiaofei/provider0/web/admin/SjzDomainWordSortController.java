@@ -1,7 +1,6 @@
 package com.hexiaofei.provider0.web.admin;
 
 import com.hexiaofei.provider0.domain.SjzDomainWordSort;
-import com.hexiaofei.provider0.domain.SjzEventIndexTemp;
 import com.hexiaofei.provider0.exception.PlatformException;
 import com.hexiaofei.provider0.service.SjzDomainWordSortService;
 import com.hexiaofei.provider0.vo.PageVo;
@@ -9,9 +8,11 @@ import com.hexiaofei.provider0.web.BaseController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Date;
@@ -57,16 +58,40 @@ public class SjzDomainWordSortController extends AdminBaseController implements 
         }
     }
 
-    @RequestMapping("domainWordSort/toUpdate")
+    @RequestMapping(value = STATIC_BASE_URL+"/toUpdate/{id}")
     @Override
-    public ModelAndView toUpdate(Integer id) {
-        return null;
+    public ModelAndView toUpdate(@PathVariable("id") Integer id) {
+        ModelAndView modelAndView =
+                new ModelAndView(STATIC_BASE_URL+"/toUpdate");
+        try {
+            SjzDomainWordSort sjzDomainWordSort = sjzDomainWordSortService.getObjectById(id);
+            if(sjzDomainWordSort!=null)
+                modelAndView.addObject("sjzDomainWordSort",sjzDomainWordSort);
+        }catch (PlatformException e){
+            logger.error("查询异常！",e);
+        }
+
+        return modelAndView;
     }
 
-    @RequestMapping("domainWordSort/update")
+    @RequestMapping(value = STATIC_BASE_URL+"/update")
     @Override
     public ModelAndView update(SjzDomainWordSort sjzDomainWordSort) {
-        return null;
+        ModelAndView modelAndView = new ModelAndView(STATIC_BASE_URL+"/toUpdate");
+        int resultId = -1;
+        try {
+
+            resultId = sjzDomainWordSortService.updateObject(sjzDomainWordSort);
+            sjzDomainWordSort = sjzDomainWordSortService.getObjectById(sjzDomainWordSort.getId());
+            if(sjzDomainWordSort!=null)
+                modelAndView.addObject("sjzDomainWordSort",sjzDomainWordSort);
+            modelAndView.addObject("resultCode","0");
+            modelAndView.addObject("resultMsg","修改成功！");
+        }catch (PlatformException e){
+
+        }
+
+        return modelAndView;
     }
 
     @RequestMapping(value = "domainWordSort/list/{currentPage}_{pageSize}")

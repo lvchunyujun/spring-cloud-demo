@@ -50,7 +50,7 @@
 <div>
     <div th:replace="common/sjz_top :: sjz_top"  ></div>
     <div class="sjz_nvg">
-        当前位置：<a href="/admin/index">首页</a> > <a href="/admin/eventIndex">事件管理</a> > 修改事件
+        当前位置：<a href="/admin/index">首页</a> > <a href="/admin/eventIndex">事件管理</a> > <strong>修改事件</strong>
     </div>
     <div class="sjz_c">
         <!-- 菜单 -->
@@ -114,9 +114,15 @@
                                 </label>
                                 &nbsp;
                                 <label>
-                                    <input name="eventState" th:checked="${sjzEventIndex.eventState==30}" type="radio" value="30" />审核禁止
+                                    <input name="eventState" th:checked="${sjzEventIndex.eventState==30}" type="radio" value="30" />审核失败
                                 </label>
                             </td>
+                        </tr>
+                        <tr>
+                            <td>记录日期：</td>
+                            <td th:text="${sjzEventIndex.recordCreateTime}
+                                                  ? ${#dates.format(sjzEventIndex.recordCreateTime,'yyyy-MM-dd HH:mm:ss')}
+                                                  : ''"></td>
                         </tr>
                         <tr class="tr4">
                             <td><input class="sjz_center_ta_submit" type="submit" value="确定"/></td>

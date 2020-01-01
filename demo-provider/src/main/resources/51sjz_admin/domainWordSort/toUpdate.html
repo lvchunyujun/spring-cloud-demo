@@ -14,11 +14,7 @@
             width: 95%;
             min-height: 200px;
         }
-        .sjz_center_ta_tarea
-        {
-            width: 95%;
 
-        }
         .sjz_center_ta table
         {
             width: 100%;
@@ -26,23 +22,16 @@
         .sjz_center_ta table .tr1
         {
             height:45px;
-        }.sjz_center_ta table .tr2
-        {
-            height:100px;
-        }.sjz_center_ta table .tr3
-        {
-            height:45px;
-        }.sjz_center_ta table .tr4
-        {
-            height:50px;
         }
-        .sjz_center_t_td
-        {
-            width: 95%;
-        }
+
         .sjz_center_ta_submit
         {
             width: 60px;
+        }
+        .sjz_center_ta input[name='id']
+        {
+            width: 60px;
+            text-align: right;
         }
     </style>
 </head>
@@ -50,7 +39,7 @@
 <div>
     <div th:replace="common/sjz_top :: sjz_top"  ></div>
     <div class="sjz_nvg">
-        当前位置：<a href="/admin/index">首页</a> > <a href="/admin/domainWordSort/index">域名单词分类管理</a> > 添加域名单词分类
+        当前位置：<a href="/admin/index">首页</a> > <a href="/admin/domainWordSort/index">域名单词分类管理</a> > <strong>添加域名单词分类</strong>
     </div>
     <div class="sjz_c">
         <!-- 菜单 -->
@@ -60,7 +49,7 @@
                 <div></div>
             </div>
             <div class="sjz_center_ta">
-                <form action="/admin/domainWordSort/upadte" method="post">
+                <form action="/admin/domainWordSort/update" method="post">
                     <table>
                         <thead>
                         <tr>
@@ -87,20 +76,20 @@
                         </thead>
                         <tbody>
                         <tr class="tr1"  >
-                            <td><input type="text" th:name="domainName" /> </td>
+                            <td><input type="text" th:name="id" th:value="${sjzDomainWordSort.id}" readonly="readonly" /></td>
+                            <td><input type="text" th:name="domainName" th:value="${sjzDomainWordSort.domainName}" /> </td>
                             <td >
-                                <input type="text" th:name="domainUrl"  />&nbsp;&nbsp;
+                                <input type="text" th:name="domainUrl" th:value="${sjzDomainWordSort.domainUrl}" />&nbsp;&nbsp;
                             </td>
-                            <td >
-                                <input type="text"  th:name="wordMetaCode"  />&nbsp;&nbsp;
+                            <td>
+                                <input type="text"  th:name="wordMetaCode" th:value="${sjzDomainWordSort.wordMetaCode}"  />&nbsp;&nbsp;
                             </td>
-                            <td><input th:name="wordMetaEn"   /></td>
-                            <td><input th:name="wordMetaZh"  /></td>
-                            <td><textarea th:name="description" rows="2"  ></textarea></td>
+                            <td><input th:name="wordMetaEn"  th:value="${sjzDomainWordSort.wordMetaEn}" /></td>
+                            <td><input th:name="wordMetaZh"  th:value="${sjzDomainWordSort.wordMetaZh}" /></td>
+                            <td><textarea th:name="description" rows="2" th:text="${sjzDomainWordSort.description}" ></textarea></td>
                         </tr>
                         <tr>
-                            <td><a href="#" onclick="javascript:addForm();" style="margin: 0 20px;" ><img th:src="@{/images/common/a.png}" /></a>
-                                <a href="#" onclick="javascript:deleteForm();" style="margin: 0 20px;"><img th:src="@{/images/common/d.png}" /></a></td>
+                            <td></td>
                             <td><input class="sjz_center_ta_submit" type="submit" value="确定"/></td>
                         </tr>
                         </tbody>
