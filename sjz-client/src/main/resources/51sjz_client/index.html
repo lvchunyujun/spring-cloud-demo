@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
@@ -38,7 +37,7 @@
 </head>
 <body>
      <div style="" class="lsz_top_">
-         <div class="lsz_top_titale_">历史轴 <!--| 读史使人明智--></div>
+         <div class="lsz_top_titale_">历史轴 | 读史使人明智</div>
          <div class="lsz_top_my_">
              <!--<a href="/my/eventIndex/index?currentPage=1&amp;pageSize=10">贡献一条</a>
              <a href="/toLogin">登录</a>-->
@@ -49,7 +48,6 @@
          <div class="lsz_content" >
              <!--/*@thymesVar id="eil" type="java.util.List" */-->
              <div class="ei_count_main_cell" th:each="eventIndex:${eil}">
-                 <!--/*@thymesVar id="eventIndex.eventTime" type="java.util.Date" */-->
                  <div class="ei_count_main_time" th:text="${eventIndex.eventTime} ? ${#dates.format(eventIndex.eventTime,'yyyy-MM-dd')} : ''"></div>
                  <div class="ei_count_main_content" th:text="${eventIndex.eventContent} "></div>
              </div>
