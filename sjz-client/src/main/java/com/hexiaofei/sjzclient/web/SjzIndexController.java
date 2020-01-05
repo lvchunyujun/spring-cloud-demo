@@ -1,5 +1,6 @@
 package com.hexiaofei.sjzclient.web;
 
+import com.hexiaofei.sjzclient.common.SjzEventStateEnum;
 import com.hexiaofei.sjzclient.domain.SjzEventIndex;
 import com.hexiaofei.sjzclient.service.SjzEventIndexService;
 import com.hexiaofei.sjzclient.vo.PageVo;
@@ -42,8 +43,16 @@ public class SjzIndexController {
         }
 
         try {
-            pageVo = sjzEventIndexService.getPageVoObject(pageVo);
+            // 已经发布状态的列表
+            sjzEventIndex = new SjzEventIndex();
+            sjzEventIndex.setEventState(SjzEventStateEnum.RELEASE.getStatus());
+
+            pageVo = sjzEventIndexService.getPageVoObjectBySjzEventIndex(sjzEventIndex,pageVo);
             modelAndView.addObject("eil",pageVo.getVoList());
+            modelAndView.addObject("pages",pageVo.getPageIndex().getPages());
+            modelAndView.addObject("currentPage",pageVo);
+            modelAndView.addObject("pageCount",pageVo.getPageCount());
+            modelAndView.addObject("pageVo",pageVo);
         } catch (Exception e) {
             logger.error("查询异常！",e);
         }

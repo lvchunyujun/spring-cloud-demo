@@ -12,7 +12,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Transactional(rollbackFor = Exception.class)
 @Service("sjzEventIndexService")
@@ -39,15 +41,47 @@ public class SjzEventIndexServiceImpl implements SjzEventIndexService {
     @Override
     public PageVo<SjzEventIndex> getPageVoObjectBySjzEventIndex(SjzEventIndex eventIndex, PageVo<SjzEventIndex> pageVo) throws PlatformException {
         List<SjzEventIndex> list = new ArrayList<>();
+        Map<String,Object> conditionMap = new HashMap<>();
 
-        // step1: 查询当前总记录条数
-        int recordCount = sjzEventIndexMapper.selectCountByAll();
+
+
+        // step1: 开始位置
+        int offset = pageVo.getCurrentPage()-1<1?0:pageVo.getCurrentPage()-1;
+
+        conditionMap.put("offset",pageVo.getPageSize()*offset);
+        conditionMap.put("pageSize",pageVo.getPageSize());
+        conditionMap.put("sjzEventIndex",eventIndex);
+
+        // step2: 查询当前总记录条数
+        int recordCount = sjzEventIndexMapper.selectCountByObject(conditionMap);
         pageVo.setRecordCount(recordCount);
 
-        // step2: 开始位置
-        int offset = pageVo.getCurrentPage()-1<1?0:pageVo.getCurrentPage()-1;
         // step3: 结果集
-        list = sjzEventIndexMapper.selectListByPaging(pageVo.getPageSize()*offset,pageVo.getPageSize());
+        list =  sjzEventIndexMapper.selectPagingListByObject(conditionMap);
+        pageVo.setVoList(list);
+
+        return pageVo;
+    }
+
+    @Override
+    public PageVo<SjzEventIndex> getPageVoObjectByAuthorId(Integer authorId, SjzEventIndex eventIndex, PageVo<SjzEventIndex> pageVo) throws PlatformException {
+        List<SjzEventIndex> list = new ArrayList<>();
+        Map<String,Object> conditionMap = new HashMap<>();
+
+        // step1: 开始位置
+        int offset = pageVo.getCurrentPage()-1<1?0:pageVo.getCurrentPage()-1;
+        conditionMap.put("offset",pageVo.getPageSize()*offset);
+        conditionMap.put("pageSize",pageVo.getPageSize());
+        conditionMap.put("sjzEventIndex",eventIndex);
+        // 作者ID
+        conditionMap.put("authorId",authorId);
+
+        // step2: 查询当前总记录条数
+        int recordCount = sjzEventIndexMapper.selectCountByObject(conditionMap);
+        pageVo.setRecordCount(recordCount);
+
+        // step3: 结果集
+        list =  sjzEventIndexMapper.selectPagingListByObject(conditionMap);
         pageVo.setVoList(list);
 
         return pageVo;

@@ -1,6 +1,8 @@
 package com.hexiaofei.sjzclient.web.my;
 
 import com.hexiaofei.sjzclient.domain.SjzEventIndex;
+import com.hexiaofei.sjzclient.domain.UserInfo;
+import com.hexiaofei.sjzclient.exception.PlatformException;
 import com.hexiaofei.sjzclient.service.SjzEventIndexService;
 import com.hexiaofei.sjzclient.vo.PageVo;
 import com.hexiaofei.sjzclient.web.BaseController;
@@ -13,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 
 @Controller
 public class SjzEventIndexController extends MyBaseController implements BaseController<SjzEventIndex> {
@@ -54,9 +59,10 @@ public class SjzEventIndexController extends MyBaseController implements BaseCon
         return null;
     }
 
+    @RequestMapping(value = STATIC_BASE_URL+"/toAdd")
     @Override
     public String toAdd() {
-        return null;
+        return "my/"+STATIC_BASE_URL+"/toAdd";
     }
 
     /**
@@ -64,25 +70,74 @@ public class SjzEventIndexController extends MyBaseController implements BaseCon
      * @param sjzEventIndex
      * @return
      */
-    @RequestMapping(value = STATIC_BASE_URL+"/addDomainInfo",method = RequestMethod.POST)
+    @RequestMapping(value = STATIC_BASE_URL+"/add",method = RequestMethod.POST)
     @Override
     public String add(SjzEventIndex sjzEventIndex) {
-        return null;
+        int resultId = -1;
+        try {
+            // 1. 添加事件
+            sjzEventIndex.setEventState((byte)0);
+            sjzEventIndex.setRecordCreateTime(new Date());
+            resultId = sjzEventIndexService.addObject(sjzEventIndex);
+
+            // 2.添加作者
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultId = -99;
+        }
+        if(resultId>0){
+            return ADD_SUCCESS_URL;
+        }else{
+            return ADD_FAIL_URL;
+        }
     }
 
+    @RequestMapping(value = STATIC_BASE_URL+"/toUpdate/{id}")
     @Override
-    public ModelAndView toUpdate(Integer id) {
-        return null;
+    public ModelAndView toUpdate(@PathVariable Integer id) {
+        ModelAndView modelAndView =
+                new ModelAndView("my/"+STATIC_BASE_URL+"/toUpdate");
+        try {
+            SjzEventIndex sjzEventIndex = sjzEventIndexService.getObjectById(id);
+            if(sjzEventIndex!=null)
+                modelAndView.addObject(sjzEventIndex);
+        }catch (PlatformException e){
+
+        }
+
+        return modelAndView;
     }
 
+    @RequestMapping(value = STATIC_BASE_URL+"/upadte",method = RequestMethod.POST)
     @Override
     public ModelAndView update(SjzEventIndex sjzEventIndex) {
+        ModelAndView modelAndView = new ModelAndView("my/"+STATIC_BASE_URL+"/toUpdate");
+        int resultId = -1;
+        try {
+
+            resultId = sjzEventIndexService.updateObject(sjzEventIndex);
+            sjzEventIndex = sjzEventIndexService.getObjectById(sjzEventIndex.getId());
+            if(sjzEventIndex!=null)
+                modelAndView.addObject(sjzEventIndex);
+            modelAndView.addObject("resultCode","0");
+            modelAndView.addObject("resultMsg","修改成功！");
+        }catch (PlatformException e){
+
+        }
+
+        return modelAndView;
+    }
+
+    @Override
+    public String listEventIndex(SjzEventIndex sjzEventIndex, int currentPage, int pageSize) {
         return null;
     }
 
     @RequestMapping(value = STATIC_BASE_URL+"/list/{currentPage}_{pageSize}")
     @ResponseBody
-    public String listEventIndex(SjzEventIndex sjzEventIndex, @PathVariable int currentPage,@PathVariable int pageSize) {
+    public String listEventIndex(HttpServletRequest request, SjzEventIndex sjzEventIndex, @PathVariable int currentPage, @PathVariable int pageSize) {
         ResultEntity re = getResultEntity();
 
         PageVo pageVo = new PageVo<SjzEventIndex>();
@@ -95,7 +150,10 @@ public class SjzEventIndexController extends MyBaseController implements BaseCon
             pageVo.setPageSize(pageSize);
         }
         try {
-            pageVo = sjzEventIndexService.getPageVoObject(pageVo);
+
+            UserInfo userInfo = getLoginUserInfo(request);
+
+            pageVo = sjzEventIndexService.getPageVoObjectByAuthorId(userInfo.getId(),null,pageVo);
             re.setData(pageVo);
             re.setResultCode("0000");
             re.setResultMsg("success");
@@ -109,8 +167,22 @@ public class SjzEventIndexController extends MyBaseController implements BaseCon
         return re.toString();
     }
 
+    @RequestMapping(value = STATIC_BASE_URL+"/delete/{id}")
+    @ResponseBody
     @Override
     public String delete(Integer id) {
-        return null;
+        ResultEntity re = getResultEntity();
+        try {
+            int resultId = sjzEventIndexService.deleteObjectById(id);
+            if(resultId > 0){
+                re.setResultCode("0000");
+                re.setResultMsg("success");
+            }
+        } catch (PlatformException e) {
+            re.setResultCode("9999");
+            re.setResultMsg("网络异常，稍后重试！");
+            logger.error("查询异常！",e);
+        }
+        return re.toString();
     }
 }

@@ -12,4 +12,14 @@ public interface SjzEventIndexService extends IBaseService<SjzEventIndex> {
      int addEventIndexAndUser(SjzEventIndex sjzEventIndex, SjzSpiderWebsite sjzSpiderWebsite) throws PlatformException;
 
      PageVo<SjzEventIndex> getPageVoObjectBySjzEventIndex(SjzEventIndex eventIndex, PageVo<SjzEventIndex> pageVo)throws PlatformException;
+
+     /**
+      * 分页查询事件列表
+      * @param authorId  作者ID
+      * @param eventIndex 事件索引
+      * @param pageVo 分页
+      * @return
+      * @throws PlatformException
+      */
+     PageVo<SjzEventIndex> getPageVoObjectByAuthorId(Integer authorId,SjzEventIndex eventIndex, PageVo<SjzEventIndex> pageVo)throws PlatformException;
 }

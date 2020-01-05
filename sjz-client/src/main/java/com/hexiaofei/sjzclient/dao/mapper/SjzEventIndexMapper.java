@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
 
 import java.util.List;
+import java.util.Map;
 
 public interface SjzEventIndexMapper {
     /**
@@ -166,9 +167,8 @@ public interface SjzEventIndexMapper {
     })
     List<SjzEventIndex> selectListByPaging(@Param("offset") int offset, @Param("pagesize") int pageSize);
 
-
-    @Select("select count(*) from sjz_event_index ")
-    int selectCountByObject(SjzEventIndex sjzEventIndex);
+    @SelectProvider(type=SjzEventIndexSqlProvider.class, method="selectCountByObject")
+    int selectCountByObject(Map<String,Object> map);
 
     @SelectProvider(type=SjzEventIndexSqlProvider.class, method="selectPagingListByObject")
     @Results({
@@ -179,7 +179,8 @@ public interface SjzEventIndexMapper {
             @Result(column="eventState", property="eventState", jdbcType=JdbcType.TINYINT),
             @Result(column="recordCreateTime", property="recordCreateTime", jdbcType=JdbcType.TIMESTAMP)
     })
-    List<SjzEventIndex> selectPagingListByObject(SjzEventIndex sjzEventIndex);
+    List<SjzEventIndex> selectPagingListByObject(Map<String,Object> map);
+
 
 
 }

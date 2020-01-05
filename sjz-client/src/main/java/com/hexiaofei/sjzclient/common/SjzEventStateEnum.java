@@ -6,20 +6,20 @@ package com.hexiaofei.sjzclient.common;
 public enum SjzEventStateEnum {
 
 
-    RELEASE((short)0,"发布"),
-    CHECK((short)10,"待审核"),
-    CHECK_SUCCESS((short)20,"审核通过"),
-    CHECK_FAIL((short)30,"审核失败");
+    RELEASE((byte)0,"发布"),
+    CHECK((byte)10,"待审核"),
+    CHECK_SUCCESS((byte)20,"审核通过"),
+    CHECK_FAIL((byte)30,"审核失败");
 
-    private short status;
+    private byte status;
     private String description;
 
-    SjzEventStateEnum(short status, String description) {
+    SjzEventStateEnum(byte status, String description) {
         this.status = status;
         this.description = description;
     }
 
-    public short getStatus() {
+    public byte getStatus() {
         return status;
     }
 
