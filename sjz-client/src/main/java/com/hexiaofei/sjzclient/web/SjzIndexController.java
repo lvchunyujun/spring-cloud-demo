@@ -29,7 +29,7 @@ public class SjzIndexController {
 
     @RequestMapping(value = "/index")
     public ModelAndView index(SjzEventIndex sjzEventIndex,Integer currentPage,Integer pageSize){
-        ModelAndView modelAndView = new ModelAndView("/index");
+        ModelAndView modelAndView = new ModelAndView("index");
         PageVo pageVo = new PageVo<SjzEventIndex>();
         if(currentPage != null && currentPage > 0){
             pageVo.setCurrentPage(currentPage);
