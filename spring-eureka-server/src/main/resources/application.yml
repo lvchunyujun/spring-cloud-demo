@@ -19,5 +19,10 @@ eureka:
 
 
 spring:
+  profiles:
+    active: dev
   zipkin:
     base-url: http://localhost:4000
+
+logging:
+  config: classpath:log4j2.yml
