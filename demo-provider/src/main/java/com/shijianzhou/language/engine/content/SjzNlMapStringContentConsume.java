@@ -162,9 +162,4 @@ public class SjzNlMapStringContentConsume implements SjzNlContentConsume<Map<Str
         }
     }
 
-    public static void main(String[] args) {
-
-       String[] ss =  JsoupDocumentParser.splitTextByDefLanguageType("2016年8月22日上线国内知名交易平台比特币交易网");
-        System.out.println(ss);
-    }
 }

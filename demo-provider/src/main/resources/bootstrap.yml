@@ -4,7 +4,7 @@ eureka:
   client:
     register-with-eureka: true
     serviceUrl:
-      defaultZone: http://hn-demo1:8686/eureka/
+      defaultZone: http://eureka-server:8686/eureka/
     healthcheck:
       enabled: true
   instance:
@@ -13,14 +13,12 @@ eureka:
     lease-renewal-interval-in-seconds: 20
     instance-id: ${spring.cloud.client.ipAddress}:${server.port}
 
-
-
-
 # curl -X POST host:port/shutdown
 endpoints:
   shutdown:
     enabled: true                                            # 启用shutdown
     sensitive: false
 
-
+logging:
+  config: classpath:log4j2.yml
 

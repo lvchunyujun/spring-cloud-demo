@@ -7,8 +7,9 @@ import org.apache.commons.lang.StringUtils;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
-import java.text.ParseException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -97,8 +98,9 @@ public class JsoupDocumentParser implements Parser{
         String flag = "";
 
         switch (languageType){
-            case SystemConsts.LANGUAGE_EN: flag = PERIOD_EN;
-            case SystemConsts.LANGUAGE_ZH: flag = PERIOD_ZH;
+            case SystemConsts.LANGUAGE_EN: flag = PERIOD_EN; break;
+            case SystemConsts.LANGUAGE_ZH: flag = PERIOD_ZH; break;
+            default:flag = PERIOD_ZH;break;
         }
 
         if(StringUtils.isBlank(flag)){

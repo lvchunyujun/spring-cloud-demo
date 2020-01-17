@@ -2,53 +2,65 @@ package com.hexiaofei.provider0.common;
 
 import java.io.*;
 import java.net.InetAddress;
-import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.nio.ByteBuffer;
-import java.nio.channels.Channel;
-import java.nio.channels.ServerSocketChannel;
-import java.nio.channels.SocketChannel;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 public class SocketUtils {
 
-    public static void serverBIO() throws IOException, InterruptedException {
-        ServerSocket ss = new ServerSocket(8989);
-        Socket socket ;
+    public static void serverBIO() {
+        ServerSocket ss = null;
         InputStream inputStream = null;
-        ExecutorService es1 = Executors.newFixedThreadPool(5);
-        while((socket= ss.accept())!=null) {
-            System.out.println("client coming……");
-            inputStream = socket.getInputStream();
-            BufferedReader bf = new BufferedReader(new InputStreamReader(inputStream));
 
-            System.out.println("wait read!");
+        try {
+            ss = new ServerSocket(8989);
+            Socket socket ;
+
+            ExecutorService es1 = Executors.newFixedThreadPool(5);
+            while((socket= ss.accept())!=null) {
+                System.out.println("client coming……");
+                inputStream = socket.getInputStream();
+                final BufferedReader  bf = new BufferedReader(new InputStreamReader(inputStream));
+
+                System.out.println("wait read!");
 
 
-            es1.execute(new Runnable() {
-                @Override
-                public void run() {
-                    String s = null;
-                    try {
-                        while ((s = bf.readLine()) != null) {
-                            System.out.println("start reading ……");
-                            TimeUnit.SECONDS.sleep(10);
-                            System.out.println(s);
+                es1.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        String s = null;
+                        try {
+                            while ((s = bf.readLine()) != null) {
+                                System.out.println("start reading ……");
+                                TimeUnit.SECONDS.sleep(10);
+                                System.out.println(s);
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
-                    } catch (Exception e) {
-                        e.printStackTrace();
                     }
+                });
+                if(bf!=null){
+                    bf.close();
                 }
-            });
+            }
 
-            if(false)
-            bf.close();
+            inputStream.close();
+            socket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if(inputStream!=null){
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
-        inputStream.close();
-        socket.close();
+
     }
 
     public static void serverBIO1() throws IOException, InterruptedException {
