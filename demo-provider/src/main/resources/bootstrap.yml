@@ -4,7 +4,7 @@ eureka:
   client:
     register-with-eureka: true
     serviceUrl:
-      defaultZone: http://eureka-server:8686/eureka/
+      defaultZone: http://lishizhou-eureka:8686/eureka/
     healthcheck:
       enabled: true
   instance:
