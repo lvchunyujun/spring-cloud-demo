@@ -1,5 +1,4 @@
 #  基础服务端口< 6000
-
 server:
   port: 8686
   tomcat:
