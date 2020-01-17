@@ -7,7 +7,7 @@ eureka:
   client:
     register-with-eureka: true
     serviceUrl:
-      defaultZone: http://hn-demo1:8686/eureka/
+      defaultZone: http://lishizhou-eureka:8686/eureka/
     healthcheck:
       enabled: true
   instance:
@@ -25,5 +25,7 @@ endpoints:
     enabled: true                                            # 启用shutdown
     sensitive: false
 
-
+# log4j2 config
+logging:
+  config: classpath:log4j2.yml
 

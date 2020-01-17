@@ -4,7 +4,8 @@ import cn.b2m.eucp.sdkhttp.Mo;
 import cn.b2m.eucp.sdkhttp.SDKServiceBindingStub;
 import cn.b2m.eucp.sdkhttp.SDKServiceLocator;
 import cn.b2m.eucp.sdkhttp.StatusReport;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.rmi.RemoteException;
 import java.util.Arrays;
@@ -12,7 +13,7 @@ import java.util.List;
 
 public class Client {
 	
-	private Logger logger = Logger.getLogger(Client.class);
+	private static Logger LOGGER = LoggerFactory.getLogger(Client.class);
 	private String softwareSerialNo;
 	private String key;
 	
@@ -95,7 +96,7 @@ public class Client {
 			throws RemoteException {
 		int value=-1;
 		value=binding.registEx(softwareSerialNo, key, password);
-		logger.info(softwareSerialNo+"  "+key+"   短信网关完成注册！");
+		LOGGER.info(softwareSerialNo+"  "+key+"   短信网关完成注册！");
 		return value;
 	}
 

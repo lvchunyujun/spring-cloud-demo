@@ -1,6 +1,8 @@
 package com.hexiaofei.sjzclient.utils.security;
 
-import org.apache.log4j.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -11,7 +13,7 @@ import java.security.NoSuchAlgorithmException;
  *
  */
 public class MD5 {
-	private static Logger logger = Logger.getLogger(MD5.class);
+	private static Logger LOGGER = LoggerFactory.getLogger(MD5.class);
     
     //加的盐
     private static final String SALT = "hBVYmUaNf4QMvzkl5Wj97sd68St";
@@ -26,7 +28,7 @@ public class MD5 {
 	          }
 	          return digestHexStr.toString();
 		} catch (NoSuchAlgorithmException e) {
-			logger.error(e);
+            LOGGER.error("加密异常！",e);
 		}
     	return null;
     	
