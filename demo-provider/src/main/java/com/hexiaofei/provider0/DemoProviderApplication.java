@@ -9,11 +9,13 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 // mybatis配置 在启动类中添加对mapper包扫描@MapperScan
 
-
-@ComponentScan(basePackages = {"com.hexiaofei.provider0","com.shijianzhou.language"})
+/**
+ * 注解顺序不能打乱，否则会出现加载异常：NullPinterException
+ */
 @EnableTransactionManagement                       // 事物管理
 @MapperScan(basePackages = {"com.hexiaofei.provider0.dao.mapper","com.shijianzhou.language.dao.mapper"})
 @EnableScheduling                                 // 定时任务
+@ComponentScan(basePackages = {"com.hexiaofei.provider0","com.shijianzhou.language"})
 @SpringBootApplication
 public class DemoProviderApplication {
 
