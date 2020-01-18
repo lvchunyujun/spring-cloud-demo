@@ -211,7 +211,7 @@
 						<!-- Manifest specific configuration -->
 						<manifest>
 							<!-- 主函数 -->
-							<mainClass>com.lcyj.servicedemo.ServiceDemoApplication</mainClass>
+							<mainClass>com.hexiaofei.provider0.DemoProviderApplication</mainClass>
 							<!--是否要把第三方jar放到manifest的classpath中-->
 							<addClasspath>true</addClasspath>
 							<!-- 第三方jar放到lib目录 -->
