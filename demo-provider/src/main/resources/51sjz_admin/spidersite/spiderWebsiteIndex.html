@@ -66,13 +66,13 @@
 
 </head>
 <body>
-    <div th:replace="common/sjz_top :: sjz_top"  ></div>
+    <div th:replace="/common/sjz_top :: sjz_top"  ></div>
     <div class="sjz_nvg">
         当前位置：<a href="/admin/index">首页</a> > 网址信息管理
     </div>
     <div class="sjz_c">
         <!-- 菜单 -->
-        <div th:replace="common/sjz_menu :: sjz_menu"  ></div>
+        <div th:replace="/common/sjz_menu :: sjz_menu"  ></div>
         <div class="sjz_center">
             <div class="sjz_center_top_">
                 <div id="sjz_center_top_search_">
@@ -116,6 +116,6 @@
         </div>
     </div>
 
-    <div th:replace="common/sjz_bottom :: sjz_bottom"  ></div>
+    <div th:replace="/common/sjz_bottom :: sjz_bottom"  ></div>
 </body>
 </html>

@@ -4,11 +4,9 @@ import com.hexiaofei.provider0.exception.PlatformException;
 import com.hexiaofei.provider0.vo.PageVo;
 import com.hexiaofei.provider0.web.BaseController;
 import com.hexiaofei.provider0.web.admin.AdminBaseController;
-import com.shijianzhou.language.domain.SjzNlRegExp;
 import com.shijianzhou.language.domain.SjzNlRelatePatternUnit;
 import com.shijianzhou.language.service.SjzNlRelatePatternUnitService;
 import com.shijianzhou.language.vo.SjzNlRelatePatternUnitVo;
-import org.aspectj.weaver.ast.Var;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,26 +25,26 @@ import java.util.Map;
 @Controller
 public class SjzNlRelatePatternUnitController extends AdminBaseController implements BaseController<SjzNlRelatePatternUnit> {
 
-    private final static String STATIC_BASE_URL = "nl/relatePatternUnit";
+    private final static String STATIC_BASE_URL = "/nl/relatePatternUnit";
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SjzNlRelatePatternUnitController.class);
 
     @Autowired
     private SjzNlRelatePatternUnitService sjzNlRelatePatternUnitService;
 
-    @RequestMapping("rpu/index")
+    @RequestMapping("/rpu/index")
     @Override
     public String index() {
         return STATIC_BASE_URL+"/rpuIndex";
     }
 
-    @RequestMapping("rpu/toAdd")
+    @RequestMapping("/rpu/toAdd")
     @Override
     public String toAdd() {
         return STATIC_BASE_URL+"/toAddRpu";
     }
 
-    @RequestMapping("rpu/add")
+    @RequestMapping("/rpu/add")
     @Override
     public String add(SjzNlRelatePatternUnit sjzNlRelatePatternUnit) {
         int resultId = -1;
@@ -71,7 +69,7 @@ public class SjzNlRelatePatternUnitController extends AdminBaseController implem
         }
     }
 
-    @RequestMapping(value = "rpu/delete/{id}",method = RequestMethod.POST)
+    @RequestMapping(value = "/rpu/delete/{id}",method = RequestMethod.POST)
     @ResponseBody
     public String deleteById(@PathVariable Integer id){
         ResultEntity re = getResultEntity();
@@ -89,7 +87,7 @@ public class SjzNlRelatePatternUnitController extends AdminBaseController implem
         return re.toString();
     }
 
-    @RequestMapping("rpu/toUpdate")
+    @RequestMapping("/rpu/toUpdate")
     @Override
     public ModelAndView toUpdate(Integer id) {
         ModelAndView modelAndView =
@@ -105,7 +103,7 @@ public class SjzNlRelatePatternUnitController extends AdminBaseController implem
         return modelAndView;
     }
 
-    @RequestMapping("rpu/toUpdateUnit/{patternName}")
+    @RequestMapping("/rpu/toUpdateUnit/{patternName}")
     public ModelAndView toUpdate(@PathVariable String patternName) {
         ModelAndView modelAndView = new ModelAndView(STATIC_BASE_URL+"/toUpdateRpu");
         try {
@@ -124,7 +122,7 @@ public class SjzNlRelatePatternUnitController extends AdminBaseController implem
         return modelAndView;
     }
 
-    @RequestMapping("rpu/update")
+    @RequestMapping("/rpu/update")
     @Override
     public ModelAndView update(SjzNlRelatePatternUnit volist) {
 
@@ -132,7 +130,7 @@ public class SjzNlRelatePatternUnitController extends AdminBaseController implem
         return null;
     }
 
-    @RequestMapping("rpu/updateList")
+    @RequestMapping("/rpu/updateList")
     public ModelAndView update(SjzNlRelatePatternUnitVo volist) {
 
         ModelAndView modelAndView = new ModelAndView();
@@ -155,7 +153,7 @@ public class SjzNlRelatePatternUnitController extends AdminBaseController implem
         return modelAndView;
     }
 
-    @RequestMapping(value = "rpu/list/{currentPage}_{pageSize}")
+    @RequestMapping(value = "/rpu/list/{currentPage}_{pageSize}")
     @ResponseBody
     @Override
     public String listEventIndex(SjzNlRelatePatternUnit sjzNlRelatePatternUnit, @PathVariable int currentPage,@PathVariable int pageSize) {

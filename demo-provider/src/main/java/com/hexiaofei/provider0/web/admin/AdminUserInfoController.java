@@ -26,7 +26,7 @@ public class AdminUserInfoController extends AdminBaseController implements Base
 
     private final static Logger LOGGER = LoggerFactory.getLogger(AdminUserInfoController.class);
 
-    private final static String BASE_URL = "userInfo";
+    private final static String BASE_URL = "/userInfo";
 
     @Autowired
     private UserInfoService userInfoService;

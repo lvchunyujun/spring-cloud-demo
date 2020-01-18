@@ -31,7 +31,7 @@ public class SjzEventSpiderTask extends AbstractWebSpider {
      * 抓取页面
      */
 
-    @Scheduled(cron="00 36 21 * * ?")
+    @Scheduled(cron="00 20 00 * * ?")
     public void crawlWebPage(){
         Spider spider = initSpider();
 

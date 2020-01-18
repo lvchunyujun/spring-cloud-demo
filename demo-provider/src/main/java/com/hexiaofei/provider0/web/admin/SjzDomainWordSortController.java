@@ -22,25 +22,25 @@ public class SjzDomainWordSortController extends AdminBaseController implements 
 
     public static Logger logger = LoggerFactory.getLogger(SjzDomainWordSortController.class);
 
-    private final static String STATIC_BASE_URL = "domainWordSort";
+    private final static String STATIC_BASE_URL = "/domainWordSort";
 
 
     @Autowired
     private SjzDomainWordSortService sjzDomainWordSortService;
 
-    @RequestMapping("domainWordSort/index")
+    @RequestMapping("/domainWordSort/index")
     @Override
     public String index() {
         return STATIC_BASE_URL+"/domainWordSortIndex";
     }
 
-    @RequestMapping("domainWordSort/toAdd")
+    @RequestMapping("/domainWordSort/toAdd")
     @Override
     public String toAdd() {
         return STATIC_BASE_URL+"/toAddDomainWordSort";
     }
 
-    @RequestMapping(value ="domainWordSort/add",method = RequestMethod.POST)
+    @RequestMapping(value ="/domainWordSort/add",method = RequestMethod.POST)
     @Override
     public String add(SjzDomainWordSort sjzDomainWordSort) {
         int resultId = -1;
@@ -94,7 +94,7 @@ public class SjzDomainWordSortController extends AdminBaseController implements 
         return modelAndView;
     }
 
-    @RequestMapping(value = "domainWordSort/list/{currentPage}_{pageSize}")
+    @RequestMapping(value = "/domainWordSort/list/{currentPage}_{pageSize}")
     @ResponseBody
     @Override
     public String listEventIndex(SjzDomainWordSort sjzDomainWordSort, @PathVariable int currentPage,@PathVariable int pageSize) {
@@ -124,7 +124,7 @@ public class SjzDomainWordSortController extends AdminBaseController implements 
         return re.toString();
     }
 
-    @RequestMapping(value = "domainWordSort/delete/{id}")
+    @RequestMapping(value = "/domainWordSort/delete/{id}")
     @ResponseBody
     @Override
     public String delete(@PathVariable Integer id) {

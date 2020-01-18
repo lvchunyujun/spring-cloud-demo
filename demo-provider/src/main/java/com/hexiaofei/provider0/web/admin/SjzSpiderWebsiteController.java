@@ -19,12 +19,12 @@ public class SjzSpiderWebsiteController extends AdminBaseController implements B
 
     public static Logger logger = LoggerFactory.getLogger(SjzSpiderWebsiteController.class);
 
-    private final static String STATIC_BASE_URL = "spidersite";
+    private final static String STATIC_BASE_URL = "/spidersite";
 
     @Autowired
     private SjzSpiderWebsiteService sjzSpiderWebsiteService;
 
-    @RequestMapping("spiderWebsite/index")
+    @RequestMapping("/spiderWebsite/index")
     @Override
     public String index() {
         return STATIC_BASE_URL+"/spiderWebsiteIndex";
@@ -50,7 +50,7 @@ public class SjzSpiderWebsiteController extends AdminBaseController implements B
         return null;
     }
 
-    @RequestMapping(value = "spiderWebsite/list/{currentPage}_{pageSize}")
+    @RequestMapping(value = "/spiderWebsite/list/{currentPage}_{pageSize}")
     @Override
     @ResponseBody
     public String listEventIndex(SjzSpiderWebsite sjzSpiderWebsite, @PathVariable int currentPage,@PathVariable  int pageSize) {
@@ -80,7 +80,7 @@ public class SjzSpiderWebsiteController extends AdminBaseController implements B
         return re.toString();
     }
 
-    @RequestMapping(value = "spiderWebsite/delete/{id}")
+    @RequestMapping(value = "/spiderWebsite/delete/{id}")
     @ResponseBody
     @Override
     public String delete(@PathVariable Integer id) {

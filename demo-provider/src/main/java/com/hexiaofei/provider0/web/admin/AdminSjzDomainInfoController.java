@@ -21,7 +21,7 @@ public class AdminSjzDomainInfoController extends AdminBaseController implements
 
     public static Logger logger = LoggerFactory.getLogger(SjzEventIndexController.class);
 
-    private final static String STATIC_BASE_URL = "domainInfo";
+    private final static String STATIC_BASE_URL = "/domainInfo";
 
     @Autowired
     private SjzDomainInfoService sjzDomainInfoService;

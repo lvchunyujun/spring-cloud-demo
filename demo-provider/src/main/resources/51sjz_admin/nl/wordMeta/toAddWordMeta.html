@@ -34,13 +34,13 @@
 </head>
 <body>
 <div>
-    <div th:replace="common/sjz_top :: sjz_top"  ></div>
+    <div th:replace="/common/sjz_top :: sjz_top"  ></div>
     <div class="sjz_nvg">
         当前位置：<a href="/admin/index">首页</a> > <a href="/admin/nlRegExp/index">表达式模板管理</a> > 添加表达式模板
     </div>
     <div class="sjz_c">
         <!-- 菜单 -->
-        <div th:replace="common/sjz_menu :: sjz_menu"  ></div>
+        <div th:replace="/common/sjz_menu :: sjz_menu"  ></div>
         <div class="sjz_center">
             <div class="sjz_center_ta">
                 <form action="/admin/nlWordMeta/add" method="post">
@@ -136,7 +136,7 @@
         </div>
     </div>
 </div>
-<div th:replace="common/sjz_bottom :: sjz_bottom"></div>
+<div th:replace="/common/sjz_bottom :: sjz_bottom"></div>
 <!-- 遮罩层 -->
 <div id="_sjz_word_meta_div">
     <div class="box" >

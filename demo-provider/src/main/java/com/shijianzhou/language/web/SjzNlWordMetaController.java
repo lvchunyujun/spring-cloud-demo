@@ -24,7 +24,7 @@ public class SjzNlWordMetaController extends AdminBaseController implements Base
 
     public static Logger LOGGER = LoggerFactory.getLogger(SjzNlWordMetaController.class);
 
-    private final static String STATIC_BASE_URL = "nl/wordMeta";
+    private final static String STATIC_BASE_URL = "/nl/wordMeta";
 
     @Autowired
     private SjzNlWordMetaService sjzNlWordMetaService;

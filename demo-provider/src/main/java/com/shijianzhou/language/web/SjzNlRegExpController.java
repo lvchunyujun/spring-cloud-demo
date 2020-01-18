@@ -23,7 +23,7 @@ public class SjzNlRegExpController extends AdminBaseController implements BaseCo
 
     public static Logger logger = LoggerFactory.getLogger(SjzNlRegExpController.class);
 
-    private final static String STATIC_BASE_URL = "nl/regexp";
+    private final static String STATIC_BASE_URL = "/nl/regexp";
 
     @Autowired
     private SjzNlRegExpService sjzNlRegExpService;

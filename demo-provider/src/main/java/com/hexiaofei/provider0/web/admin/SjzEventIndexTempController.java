@@ -1,7 +1,5 @@
 package com.hexiaofei.provider0.web.admin;
 
-import com.hexiaofei.provider0.domain.SjzDomainInfo;
-import com.hexiaofei.provider0.domain.SjzEventIndex;
 import com.hexiaofei.provider0.domain.SjzEventIndexTemp;
 import com.hexiaofei.provider0.exception.PlatformException;
 import com.hexiaofei.provider0.service.SjzEventIndexTempService;
@@ -23,7 +21,7 @@ public class SjzEventIndexTempController extends AdminBaseController implements 
 
     public static Logger logger = LoggerFactory.getLogger(SjzEventIndexController.class);
 
-    private final static String STATIC_BASE_URL = "eventIndexTemp";
+    private final static String STATIC_BASE_URL = "/eventIndexTemp";
 
     @Autowired
     private SjzEventIndexTempService sjzEventIndexTempService;

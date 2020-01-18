@@ -13,6 +13,7 @@ import us.codecraft.webmagic.model.HttpRequestBody;
 import java.util.Date;
 import java.util.Map;
 
+//@DependsOn("springContextHolder")
 @Component
 public class SjzHttpSpiderListener implements SpiderListener {
 
@@ -22,6 +23,7 @@ public class SjzHttpSpiderListener implements SpiderListener {
 
     @Autowired
     private SjzDomainInfoService sjzDomainInfoService;
+
     public SjzHttpSpiderListener(){
         sjzDomainInfoService = SpringContextUtil.getBean("sjzDomainInfoService");
     }

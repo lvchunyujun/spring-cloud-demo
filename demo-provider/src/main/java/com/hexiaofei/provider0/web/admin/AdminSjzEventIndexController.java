@@ -24,12 +24,12 @@ public class AdminSjzEventIndexController extends AdminBaseController implements
     @Autowired
     public SjzEventIndexService sjzEventIndexService;
 
-    private final static String STATIC_BASE_URL = "eventIndex";
+    private final static String STATIC_BASE_URL = "/eventIndex";
 
     @RequestMapping("/eventIndex")
     public String index(){
 
-        return "event/eventIndex";
+        return "/event/eventIndex";
     }
 
     /**
@@ -38,7 +38,7 @@ public class AdminSjzEventIndexController extends AdminBaseController implements
      */
     @RequestMapping(value = "/toAddEventIndex")
     public String toAdd(){
-        return "event/toAddEventIndex";
+        return "/event/toAddEventIndex";
     }
 
     /**
@@ -71,7 +71,7 @@ public class AdminSjzEventIndexController extends AdminBaseController implements
     @RequestMapping(value = "/event/toUpdate/{id}")
     public ModelAndView toUpdate(@PathVariable Integer id){
         ModelAndView modelAndView =
-                new ModelAndView("event/toUpdateEventIndex");
+                new ModelAndView("/event/toUpdateEventIndex");
         try {
             SjzEventIndex sjzEventIndex = sjzEventIndexService.getObjectById(id);
             if(sjzEventIndex!=null)
@@ -90,7 +90,7 @@ public class AdminSjzEventIndexController extends AdminBaseController implements
     @RequestMapping(value = "/event/upadte",method = RequestMethod.POST)
     public ModelAndView update(SjzEventIndex sjzEventIndex){
 
-        ModelAndView modelAndView = new ModelAndView("event/toUpdateEventIndex");
+        ModelAndView modelAndView = new ModelAndView("/event/toUpdateEventIndex");
         int resultId = -1;
         try {
 
@@ -126,7 +126,7 @@ public class AdminSjzEventIndexController extends AdminBaseController implements
      * @param sjzEventIndexQo
      * @return
      */
-    @RequestMapping(value = "eventIndex/list",method = {RequestMethod.POST})
+    @RequestMapping(value = "/eventIndex/list",method = {RequestMethod.POST})
     @ResponseBody
     public String listEventIndex(@RequestBody SjzEventIndexQo sjzEventIndexQo){
         ResultEntity re = getResultEntity();

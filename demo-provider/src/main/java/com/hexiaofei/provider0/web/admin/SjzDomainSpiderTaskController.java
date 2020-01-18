@@ -22,7 +22,7 @@ public class SjzDomainSpiderTaskController extends AdminBaseController implement
 
     public static Logger logger = LoggerFactory.getLogger(SjzDomainSpiderTaskController.class);
 
-    private final static String STATIC_BASE_URL = "domainSpiderTask";
+    private final static String STATIC_BASE_URL = "/domainSpiderTask";
 
     @Autowired
     private SjzDomainSpiderTaskService sjzDomainSpiderTaskService;

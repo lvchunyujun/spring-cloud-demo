@@ -9,7 +9,7 @@ public class AdminIndexController extends AdminBaseController {
 
     @RequestMapping(value = "/index")
     public String index(ModelMap model){
-        return "index";
+        return "/index";
     }
 
 }
