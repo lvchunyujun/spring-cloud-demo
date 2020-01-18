@@ -23,6 +23,7 @@ Configuration:
       level: INFO
       AppenderRef:
         - ref: CONSOLE
+        - ref: ROLLING_FILE #复数加上-
     Logger: #单独设置某些包的输出级别
       - name: com.hexiaofei.provider0 #这个名称一定要是你项目中所存在的包名
         additivity: false #去除重复的log

@@ -1,10 +1,7 @@
 package com.hexiaofei.provider0.task;
 
 import com.hexiaofei.provider0.common.SpringContextUtil;
-import com.hexiaofei.provider0.domain.SjzDomainInfo;
 import com.hexiaofei.provider0.service.SjzDomainInfoService;
-import org.apache.http.Header;
-import org.apache.http.HttpResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

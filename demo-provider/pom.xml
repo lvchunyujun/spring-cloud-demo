@@ -219,9 +219,9 @@
 						</manifest>
 					</archive>
 					<!--过滤掉不希望包含在jar中的文件-->
-					<excludes>
+					<!--<excludes>
 						<exclude>**.yml</exclude>
-					</excludes>
+					</excludes>-->
 				</configuration>
 			</plugin>
 
