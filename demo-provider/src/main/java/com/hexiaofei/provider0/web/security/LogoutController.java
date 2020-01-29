@@ -1,7 +1,6 @@
 package com.hexiaofei.provider0.web.security;
 
 import com.hexiaofei.provider0.common.WebSystemConsts;
-import com.hexiaofei.provider0.domain.UserInfo;
 import com.hexiaofei.provider0.web.AbstractBaseController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +20,7 @@ public class LogoutController extends AbstractBaseController {
 
     @RequestMapping(value = "/logout")
     public ModelAndView logout(HttpServletRequest request,HttpServletResponse response){
-        ModelAndView modelAndView = new ModelAndView("common/login");
+        ModelAndView modelAndView = new ModelAndView("/common/login");
         try {
             request.getSession().removeAttribute(WebSystemConsts.COOKIE_USER);
             request.getSession().invalidate();
