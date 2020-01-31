@@ -133,7 +133,7 @@ public class JsoupDocumentParser implements Parser{
         List<Date> dateList = new ArrayList<>();
 
         for(String s : ss){
-            Date date = DateUtils.strToDate(s);
+            Date date = DateUtils.resolveStrToDate(s);
            if( date!= null){
                dateList.add(date);
            }
@@ -144,12 +144,11 @@ public class JsoupDocumentParser implements Parser{
 
     public static void main(String[] args) throws PlatformException {
 
-        String ts = "2016/8/22日上线国内知名交易平台比特币交易网2019-09-23，以太坊前期通过预售收到31531个比特币，售出超过6000万";
+        String ts = "1776年7月4日，在费城召开了第二次大陆会议，组成“大陆军”，由乔治·华盛顿任总司令，通过了《独";
 
         for(Date date : splitDateStr(ts)){
             System.out.println(date);
         }
-
     }
 
 }

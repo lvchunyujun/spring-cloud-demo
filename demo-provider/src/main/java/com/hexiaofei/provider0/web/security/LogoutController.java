@@ -16,8 +16,6 @@ public class LogoutController extends AbstractBaseController {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(LogoutController.class);
 
-    private final static String LOGIN_URL = "/common/logout";
-
     @RequestMapping(value = "/logout")
     public ModelAndView logout(HttpServletRequest request,HttpServletResponse response){
         ModelAndView modelAndView = new ModelAndView("/common/login");

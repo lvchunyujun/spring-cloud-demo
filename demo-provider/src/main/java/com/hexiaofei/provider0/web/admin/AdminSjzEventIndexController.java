@@ -1,10 +1,12 @@
 package com.hexiaofei.provider0.web.admin;
 
+import com.hexiaofei.provider0.common.consts.SjzEventStateEnum;
 import com.hexiaofei.provider0.domain.SjzEventIndex;
 import com.hexiaofei.provider0.exception.PlatformException;
 import com.hexiaofei.provider0.service.SjzEventIndexService;
+import com.hexiaofei.provider0.utils.DateUtils;
 import com.hexiaofei.provider0.vo.PageVo;
-import com.hexiaofei.provider0.vo.query.SjzEventIndexQo;
+import com.hexiaofei.provider0.vo.SjzEventIndexVo;
 import com.hexiaofei.provider0.web.BaseController;
 import com.hexiaofei.provider0.web.SjzEventIndexController;
 import org.slf4j.Logger;
@@ -14,12 +16,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.text.ParseException;
 import java.util.Date;
 
 @Controller
 public class AdminSjzEventIndexController extends AdminBaseController implements BaseController<SjzEventIndex> {
 
-    public static Logger logger = LoggerFactory.getLogger(SjzEventIndexController.class);
+    public static Logger LOGGER = LoggerFactory.getLogger(SjzEventIndexController.class);
 
     @Autowired
     public SjzEventIndexService sjzEventIndexService;
@@ -41,16 +44,23 @@ public class AdminSjzEventIndexController extends AdminBaseController implements
         return "/event/toAddEventIndex";
     }
 
+    @Override
+    public String add(SjzEventIndex sjzEventIndex) {
+        return null;
+    }
+
     /**
      * 添加事件
-     * @param sjzEventIndex
+     * @param sjzEventIndexVo
      * @return
      */
     @RequestMapping(value = "/addEventIndex",method = RequestMethod.POST)
-    public String add(SjzEventIndex sjzEventIndex){
+    public String add(SjzEventIndexVo sjzEventIndexVo){
         int resultId = -1;
         try {
-            sjzEventIndex.setEventState((byte)0);
+            SjzEventIndex sjzEventIndex = resolveVoToBo(sjzEventIndexVo);
+
+            sjzEventIndex.setEventState(SjzEventStateEnum.CHECK.getStatus());
             sjzEventIndex.setRecordCreateTime(new Date());
             resultId = sjzEventIndexService.addObject(sjzEventIndex);
         } catch (Exception e) {
@@ -83,16 +93,23 @@ public class AdminSjzEventIndexController extends AdminBaseController implements
         return modelAndView;
     }
 
+    @Override
+    public ModelAndView update(SjzEventIndex sjzEventIndex) {
+        return null;
+    }
+
     /**
      * 更新事件
      * @return
      */
     @RequestMapping(value = "/event/upadte",method = RequestMethod.POST)
-    public ModelAndView update(SjzEventIndex sjzEventIndex){
+    public ModelAndView update(SjzEventIndexVo sjzEventIndexVo){
 
         ModelAndView modelAndView = new ModelAndView("/event/toUpdateEventIndex");
         int resultId = -1;
         try {
+
+            SjzEventIndex sjzEventIndex = resolveVoToBo(sjzEventIndexVo);
 
             resultId = sjzEventIndexService.updateObject(sjzEventIndex);
             sjzEventIndex = sjzEventIndexService.getObjectById(sjzEventIndex.getId());
@@ -123,16 +140,16 @@ public class AdminSjzEventIndexController extends AdminBaseController implements
     /**
      * 分页查询事件列表
      *
-     * @param sjzEventIndexQo
+     * @param sjzEventIndexVo
      * @return
      */
     @RequestMapping(value = "/eventIndex/list",method = {RequestMethod.POST})
     @ResponseBody
-    public String listEventIndex(@RequestBody SjzEventIndexQo sjzEventIndexQo){
+    public String listEventIndex(@RequestBody SjzEventIndexVo sjzEventIndexVo){
         ResultEntity re = getResultEntity();
 
-        int currentPage = sjzEventIndexQo.getPageVo().getCurrentPage();
-        int pageSize = sjzEventIndexQo.getPageVo().getPageSize();
+        int currentPage = sjzEventIndexVo.getPageVo().getCurrentPage();
+        int pageSize = sjzEventIndexVo.getPageVo().getPageSize();
 
         PageVo pageVo = new PageVo<SjzEventIndex>();
         if(currentPage>0){
@@ -144,7 +161,7 @@ public class AdminSjzEventIndexController extends AdminBaseController implements
             pageVo.setPageSize(pageSize);
         }
         try {
-            pageVo = sjzEventIndexService.getPageVoObjectByAuthorId(null,sjzEventIndexQo,pageVo);
+            pageVo = sjzEventIndexService.getPageVoObjectByAuthorId(null,sjzEventIndexVo,pageVo);
 
             re.setData(pageVo);
             re.setResultCode("0000");
@@ -153,7 +170,7 @@ public class AdminSjzEventIndexController extends AdminBaseController implements
             re.setResultCode("9999");
             re.setResultMsg("网络异常，稍后重试！");
             re.setData(new PageVo());
-            logger.error("查询异常！",e);
+            LOGGER.error("查询异常！",e);
         }
 
 
@@ -174,10 +191,28 @@ public class AdminSjzEventIndexController extends AdminBaseController implements
         } catch (PlatformException e) {
             re.setResultCode("9999");
             re.setResultMsg("网络异常，稍后重试！");
-            logger.error("查询异常！",e);
+            LOGGER.error("查询异常！",e);
         }
         return re.toString();
     }
 
+
+    private SjzEventIndex resolveVoToBo(SjzEventIndexVo sjzEventIndexVo) throws PlatformException {
+
+        SjzEventIndex sjzEventIndex = new SjzEventIndex();
+        sjzEventIndex.setId(sjzEventIndexVo.getId());
+        try {
+            Date eventTime = DateUtils.strToDate(sjzEventIndexVo.getEventTime());
+            sjzEventIndex.setEventTime(eventTime);
+        } catch (ParseException e) {
+            LOGGER.error("时间日期格式错误！",e);
+            throw new PlatformException("时间日期格式错误！");
+        }
+        sjzEventIndex.setEventType(sjzEventIndexVo.getEventType());
+        sjzEventIndex.setEventContent(sjzEventIndexVo.getEventContent());
+        sjzEventIndex.setEventState(sjzEventIndexVo.getEventState());
+        sjzEventIndex.setRecordCreateTime(sjzEventIndexVo.getRecordCreateTime());
+        return sjzEventIndex;
+    }
 
 }

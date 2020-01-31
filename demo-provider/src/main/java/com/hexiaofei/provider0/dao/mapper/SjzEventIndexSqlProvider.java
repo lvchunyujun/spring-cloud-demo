@@ -4,7 +4,7 @@ import com.hexiaofei.provider0.domain.SjzEventIndex;
 import com.hexiaofei.provider0.domain.SjzEventIndexExample;
 import com.hexiaofei.provider0.domain.SjzEventIndexExample.Criteria;
 import com.hexiaofei.provider0.domain.SjzEventIndexExample.Criterion;
-import com.hexiaofei.provider0.vo.query.SjzEventIndexQo;
+import com.hexiaofei.provider0.vo.SjzEventIndexVo;
 
 import java.util.List;
 import java.util.Map;
@@ -16,24 +16,24 @@ public class SjzEventIndexSqlProvider {
     public String selectCountByObject(Map<String,Object>  map){
         StringBuilder sql = new StringBuilder();
 
-        SjzEventIndexQo sjzEventIndexQo = (SjzEventIndexQo)map.get("sjzEventIndexQo");
+        SjzEventIndexVo sjzEventIndexVo = (SjzEventIndexVo)map.get("sjzEventIndexVo");
 
         Integer authorId = (Integer)map.get("authorId");
 
         sql.append(" select count(*) from sjz_event_index sei ");
         sql.append(" where 1=1 ");
 
-        if(sjzEventIndexQo != null && sjzEventIndexQo.getId() !=null && sjzEventIndexQo.getId() > -1){
-            sql.append(" and sei.id = #{sjzEventIndexQo.id,jdbcType=TINYINT} ");
+        if(sjzEventIndexVo != null && sjzEventIndexVo.getId() !=null && sjzEventIndexVo.getId() > -1){
+            sql.append(" and sei.id = #{sjzEventIndexVo.id,jdbcType=TINYINT} ");
         }
-        if(sjzEventIndexQo != null && sjzEventIndexQo.getStartDate() != null){
-            sql.append(" and sei.eventTime >= #{sjzEventIndexQo.startDate,jdbcType=TIMESTAMP} ");
+        if(sjzEventIndexVo != null && sjzEventIndexVo.getStartDate() != null){
+            sql.append(" and sei.eventTime >= #{sjzEventIndexVo.startDate,jdbcType=TIMESTAMP} ");
         }
-        if(sjzEventIndexQo != null && sjzEventIndexQo.getEndDate() != null){
-            sql.append(" and sei.eventTime <= #{sjzEventIndexQo.endDate,jdbcType=TIMESTAMP} ");
+        if(sjzEventIndexVo != null && sjzEventIndexVo.getEndDate() != null){
+            sql.append(" and sei.eventTime <= #{sjzEventIndexVo.endDate,jdbcType=TIMESTAMP} ");
         }
-        if(sjzEventIndexQo!=null && sjzEventIndexQo.getEventState() != null && !(sjzEventIndexQo.getEventState() < 0)){
-            sql.append(" and sei.eventState = #{sjzEventIndexQo.eventState,jdbcType=TINYINT} ");
+        if(sjzEventIndexVo!=null && sjzEventIndexVo.getEventState() != null && !(sjzEventIndexVo.getEventState() < 0)){
+            sql.append(" and sei.eventState = #{sjzEventIndexVo.eventState,jdbcType=TINYINT} ");
         }
         if(authorId!=null){
             sql.append(" and exists (select 1 from sjz_event_author sea where sea.userId = #{authorId,jdbcType=INTEGER} and sea.eventIndexId= sei.id)");
@@ -50,24 +50,24 @@ public class SjzEventIndexSqlProvider {
     public String selectPagingListByObject(Map<String,Object>  map){
         StringBuilder sql = new StringBuilder();
 
-        SjzEventIndexQo sjzEventIndexQo = (SjzEventIndexQo)map.get("sjzEventIndexQo");
+        SjzEventIndexVo sjzEventIndexVo = (SjzEventIndexVo)map.get("sjzEventIndexVo");
 
         // 作者ID
         Integer authorId = (Integer)map.get("authorId");
 
         sql.append(" select sei.* from sjz_event_index sei ");
         sql.append(" where 1=1 ");
-        if(sjzEventIndexQo != null && sjzEventIndexQo.getId() !=null && sjzEventIndexQo.getId() > -1){
-            sql.append(" and sei.id = #{sjzEventIndexQo.id,jdbcType=TINYINT} ");
+        if(sjzEventIndexVo != null && sjzEventIndexVo.getId() !=null && sjzEventIndexVo.getId() > -1){
+            sql.append(" and sei.id = #{sjzEventIndexVo.id,jdbcType=TINYINT} ");
         }
-        if(sjzEventIndexQo != null && sjzEventIndexQo.getStartDate() != null){
-            sql.append(" and sei.eventTime >= #{sjzEventIndexQo.startDate,jdbcType=TIMESTAMP} ");
+        if(sjzEventIndexVo != null && sjzEventIndexVo.getStartDate() != null){
+            sql.append(" and sei.eventTime >= #{sjzEventIndexVo.startDate,jdbcType=TIMESTAMP} ");
         }
-        if(sjzEventIndexQo != null && sjzEventIndexQo.getEndDate() != null){
-            sql.append(" and sei.eventTime <= #{sjzEventIndexQo.endDate,jdbcType=TIMESTAMP} ");
+        if(sjzEventIndexVo != null && sjzEventIndexVo.getEndDate() != null){
+            sql.append(" and sei.eventTime <= #{sjzEventIndexVo.endDate,jdbcType=TIMESTAMP} ");
         }
-        if(sjzEventIndexQo!=null && sjzEventIndexQo.getEventState() != null && !(sjzEventIndexQo.getEventState() < 0)){
-            sql.append(" and sei.eventState = #{sjzEventIndexQo.eventState,jdbcType=TINYINT} ");
+        if(sjzEventIndexVo!=null && sjzEventIndexVo.getEventState() != null && !(sjzEventIndexVo.getEventState() < 0)){
+            sql.append(" and sei.eventState = #{sjzEventIndexVo.eventState,jdbcType=TINYINT} ");
         }
         if(authorId!=null){
             sql.append(" and exists (select 1 from sjz_event_author sea where sea.userId = #{authorId,jdbcType=INTEGER} and sea.eventIndexId= sei.id)");

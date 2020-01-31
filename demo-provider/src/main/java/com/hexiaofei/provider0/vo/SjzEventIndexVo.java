@@ -1,20 +1,22 @@
-package com.hexiaofei.provider0.domain;
+package com.hexiaofei.provider0.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
-public class SjzEventIndex {
+public class SjzEventIndexVo {
+
     /**
      *
      */
     private Integer id;
 
     /**
-     *事件发生事件
+     *事件发生事件:<br/>
+     * 注意：为防止1900-1-1日之前日期JodaTime转换不一致问题，使用字符串
      */
-    @DateTimeFormat(pattern = "yyyy-MM-dd",iso = DateTimeFormat.ISO.DATE)
-    private Date eventTime;
+    private String eventTime;
 
     /**
      *主页显示文章索引内容
@@ -36,6 +38,18 @@ public class SjzEventIndex {
      */
     private Date recordCreateTime;
 
+    /** 开始时间 */
+    @DateTimeFormat(pattern = "yyyy-MM-dd",iso = DateTimeFormat.ISO.DATE)
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+    private Date startDate;
+
+    /** 结束时间 */
+    @DateTimeFormat(pattern = "yyyy-MM-dd",iso = DateTimeFormat.ISO.DATE)
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+    private Date endDate;
+
+    private PageVo pageVo;
+
     /**
      *
      */
@@ -53,14 +67,14 @@ public class SjzEventIndex {
     /**
      *事件发生事件
      */
-    public Date getEventTime() {
+    public String getEventTime() {
         return eventTime;
     }
 
     /**
      *事件发生事件
      */
-    public void setEventTime(Date eventTime) {
+    public void setEventTime(String eventTime) {
         this.eventTime = eventTime;
     }
 
@@ -118,5 +132,29 @@ public class SjzEventIndex {
      */
     public void setRecordCreateTime(Date recordCreateTime) {
         this.recordCreateTime = recordCreateTime;
+    }
+
+    public PageVo getPageVo() {
+        return pageVo;
+    }
+
+    public void setPageVo(PageVo pageVo) {
+        this.pageVo = pageVo;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 }

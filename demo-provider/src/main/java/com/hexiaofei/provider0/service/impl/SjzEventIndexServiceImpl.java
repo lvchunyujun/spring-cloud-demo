@@ -7,7 +7,7 @@ import com.hexiaofei.provider0.exception.PlatformException;
 import com.hexiaofei.provider0.service.SjzEventIndexService;
 import com.hexiaofei.provider0.service.SjzSpiderWebsiteService;
 import com.hexiaofei.provider0.vo.PageVo;
-import com.hexiaofei.provider0.vo.query.SjzEventIndexQo;
+import com.hexiaofei.provider0.vo.SjzEventIndexVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,7 +40,7 @@ public class SjzEventIndexServiceImpl implements SjzEventIndexService {
     }
 
     @Override
-    public PageVo<SjzEventIndex> getPageVoObjectByAuthorId(Integer authorId, SjzEventIndexQo sjzEventIndexQo, PageVo<SjzEventIndex> pageVo) throws PlatformException {
+    public PageVo<SjzEventIndex> getPageVoObjectByAuthorId(Integer authorId, SjzEventIndexVo sjzEventIndexVo, PageVo<SjzEventIndex> pageVo) throws PlatformException {
         List<SjzEventIndex> list = new ArrayList<>();
         Map<String,Object> conditionMap = new HashMap<>();
 
@@ -48,7 +48,7 @@ public class SjzEventIndexServiceImpl implements SjzEventIndexService {
         int offset = pageVo.getCurrentPage()-1<1?0:pageVo.getCurrentPage()-1;
         conditionMap.put("offset",pageVo.getPageSize()*offset);
         conditionMap.put("pageSize",pageVo.getPageSize());
-        conditionMap.put("sjzEventIndexQo",sjzEventIndexQo);
+        conditionMap.put("sjzEventIndexVo",sjzEventIndexVo);
         // 作者ID
         conditionMap.put("authorId",authorId);
 
