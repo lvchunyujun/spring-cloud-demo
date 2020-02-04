@@ -3,6 +3,7 @@ package com.hexiaofei.provider0;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -20,7 +21,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class DemoProviderApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DemoProviderApplication.class, args);
+		ApplicationContext applicationContext = SpringApplication.run(DemoProviderApplication.class, args);
+
 	}
 
 }

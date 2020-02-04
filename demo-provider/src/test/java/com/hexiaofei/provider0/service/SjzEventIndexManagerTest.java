@@ -38,7 +38,9 @@ public class SjzEventIndexManagerTest extends BaseTest{
     public void testAdd() throws PlatformException {
         SjzEventIndex sjzEventIndex = new SjzEventIndex();
         sjzEventIndex.setEventContent("hello world!");
-        sjzEventIndex.setEventTime(new Date());
+
+
+//        sjzEventIndex.setEventTime(new Date());
         sjzEventIndex.setEventType((byte)1);
         sjzEventIndex.setEventState((byte)10);
         sjzEventIndex.setRecordCreateTime(new Date());
@@ -51,7 +53,7 @@ public class SjzEventIndexManagerTest extends BaseTest{
     public void testAdd2() throws PlatformException {
         SjzEventIndex sjzEventIndex = new SjzEventIndex();
         sjzEventIndex.setEventContent("hello world!");
-        sjzEventIndex.setEventTime(new Date());
+//        sjzEventIndex.setEventTime(new Date());
         sjzEventIndex.setEventType((byte)1);
         sjzEventIndex.setEventState((byte)10);
         sjzEventIndex.setRecordCreateTime(new Date());

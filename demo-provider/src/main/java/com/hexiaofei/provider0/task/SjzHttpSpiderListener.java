@@ -5,6 +5,7 @@ import com.hexiaofei.provider0.service.SjzDomainInfoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.Request;
 import us.codecraft.webmagic.SpiderListener;
@@ -13,8 +14,9 @@ import us.codecraft.webmagic.model.HttpRequestBody;
 import java.util.Date;
 import java.util.Map;
 
-//@DependsOn("springContextHolder")
+
 @Component
+@DependsOn("springContextUtil")
 public class SjzHttpSpiderListener implements SpiderListener {
 
     private static Logger LOGGER = LoggerFactory.getLogger(WebSpiderTask.class);

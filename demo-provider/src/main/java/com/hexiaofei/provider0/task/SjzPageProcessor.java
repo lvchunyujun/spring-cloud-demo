@@ -20,6 +20,7 @@ import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Request;
@@ -30,10 +31,10 @@ import us.codecraft.webmagic.utils.UrlUtils;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+
 
 @Component
+@DependsOn("springContextUtil")
 public class SjzPageProcessor implements PageProcessor {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(SjzPageProcessor.class);
