@@ -4,7 +4,7 @@
 #  prod：生产环境
 spring:
   profiles:
-    active: test
+    active: dev
 eureka:
   client:
     register-with-eureka: true
