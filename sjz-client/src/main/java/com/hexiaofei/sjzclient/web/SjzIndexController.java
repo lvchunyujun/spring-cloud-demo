@@ -27,7 +27,7 @@ public class SjzIndexController {
     @Autowired
     private SjzEventIndexService sjzEventIndexService;
 
-    @RequestMapping(value = "/index")
+    @RequestMapping(value={"","/index"})
     public ModelAndView index(SjzEventIndex sjzEventIndex,Integer currentPage,Integer pageSize){
         ModelAndView modelAndView = new ModelAndView("index");
         PageVo pageVo = new PageVo<SjzEventIndex>();
