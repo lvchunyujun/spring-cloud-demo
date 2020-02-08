@@ -1,0 +1,46 @@
+server:
+  port: 6010
+spring:
+  application:
+    name: demo-provider
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://lishizhou-mysql:3306/shijianzhou?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: 'lcyj'
+    password: '000000'
+    druid:
+      initial-size: 1
+      max-active: 20
+      min-idle: 3
+      max-wait: 60000
+      pool-prepared-statements: false
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 30000
+      max-pool-prepared-statement-per-connection-size: 20
+  jpa:
+    show-sql: true
+  thymeleaf:
+    mode: HTML5
+    prefix: classpath:/51sjz_admin
+    suffix: .html
+    encoding: utf-8
+    content-type: text/html
+    cache: false
+
+
+
+## Mybatis 配置
+mybatis:
+  type-aliases-package: com.hexiaofei.provider0.domain,com.shijianzhou.language.domain        # 指定POJO扫描包来让mybatis自动扫描到自定义POJO
+  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml
+
+
+#showSql
+logging:
+  level:
+    com.hexiaofei.provider0.dao.mapper : INFO
+
+
+
