@@ -22,7 +22,7 @@
     <script type="text/javascript">
 
         var pageVo =
-            {   bUrl:"/admin/nlWordMeta/list/",
+            {   bUrl:"/admin/nl/wordMeta/list/",
                 sBUrl:"_",
                 dPageNo:1,
                 dPageSize:20,
@@ -45,10 +45,7 @@
                     wordMetaZh:{
                         tagType:"text"
                     },
-                    simpleWordMetaEn:{
-                        tagType:"text"
-                    },
-                    simpleWordMetaZh:{
+                    level:{
                         tagType:"text"
                     },
                     parentWordMetaCode:{
@@ -60,9 +57,9 @@
                     u_d_operation:{
                         tagType:"a_operation",
                         indexName:"id",
-                        updateHref:"/admin/nlWordMeta/toUpdate/",
+                        updateHref:"/admin/nl/wordMeta/toUpdate/",
                         updateTxt:"修改",
-                        deleteHref:"/admin/nlWordMeta/delete/",
+                        deleteHref:"/admin/nl/wordMeta/delete/",
                         deleteTxt:"删除"
                     }
                 },
@@ -85,7 +82,7 @@
         <div class="sjz_center">
             <div class="sjz_center_top_">
                 <div id="sjz_center_top_search_">
-                    <form action="/admin/eventIndex/list/">
+                    <form action="/admin/nl/wordMeta/list/">
                         <input type="text" th:name="id"  />
                         <input type="text" th:name="startDate"  />-<input type="text" th:name="endDate" style="margin-left:0px" />
 
@@ -100,7 +97,7 @@
                         <input type="button" value="查询" />
                     </form>
                 </div>
-                <div class="sjz_center_ad"><a href="/admin/nlWordMeta/toAdd">添加</a></div>
+                <div class="sjz_center_ad"><a href="/admin/nl/wordMeta/toAdd">添加</a></div>
             </div>
             <table class="sjz_center_content">
                 <thead>
@@ -109,8 +106,7 @@
                        <th style="width: 8%;"> 编码 </th>
                        <th style="width: 10%" >词类英文名称</th>
                        <th style="width: 10%">词类名称中文</th>
-                       <th style="width: 8%;"> 英文名称缩写 </th>
-                       <th style="width: 8%;"> 中文名称缩写 </th>
+                       <th style="width: 8%;"> 词类级别 </th>
                        <th style="width: 8%;"> 父类编码 </th>
                        <th > 描述 </th>
                        <th style="width: 8%;"> 操作 </th>

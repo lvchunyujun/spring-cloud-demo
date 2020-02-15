@@ -30,19 +30,19 @@ public class SjzNlWordMetaController extends AdminBaseController implements Base
     private SjzNlWordMetaService sjzNlWordMetaService;
 
     @Override
-    @RequestMapping("/nlWordMeta/index")
+    @RequestMapping(STATIC_BASE_URL+"/index")
     public String index() {
         return STATIC_BASE_URL+"/wordMetaIndex";
     }
 
     @Override
-    @RequestMapping(value = "/nlWordMeta/toAdd")
+    @RequestMapping(value = STATIC_BASE_URL+"/toAdd")
     public String toAdd() {
         return STATIC_BASE_URL+"/toAddWordMeta";
     }
 
     @Override
-    @RequestMapping(value = "/nlWordMeta/add",method = RequestMethod.POST)
+    @RequestMapping(value = STATIC_BASE_URL+"/add",method = RequestMethod.POST)
     public String add(SjzNlWordMeta sjzNlWordMeta) {
 
         int resultId = -1;
@@ -62,7 +62,7 @@ public class SjzNlWordMetaController extends AdminBaseController implements Base
 
 
     @Override
-    @RequestMapping(value = "/nlWordMeta/toUpdate/{id}")
+    @RequestMapping(value = STATIC_BASE_URL+"/toUpdate/{id}")
     public ModelAndView toUpdate(@PathVariable Integer id) {
         ModelAndView modelAndView =
                 new ModelAndView(STATIC_BASE_URL+"/toUpdateWordMeta");
@@ -79,7 +79,7 @@ public class SjzNlWordMetaController extends AdminBaseController implements Base
 
 
     @Override
-    @RequestMapping(value = "/nlWordMeta/updata",method = RequestMethod.POST)
+    @RequestMapping(value = STATIC_BASE_URL+"/updata",method = RequestMethod.POST)
     public ModelAndView update(SjzNlWordMeta sjzNlWordMeta) {
         ModelAndView modelAndView = new ModelAndView(STATIC_BASE_URL+"/toUpdateWordMeta");
         int resultId = -1;
@@ -98,7 +98,7 @@ public class SjzNlWordMetaController extends AdminBaseController implements Base
         return modelAndView;
     }
 
-    @RequestMapping(value = "/nlWordMeta/list/{currentPage}_{pageSize}")
+    @RequestMapping(value = STATIC_BASE_URL+"/list/{currentPage}_{pageSize}")
     @Override
     @ResponseBody
     public String listEventIndex(SjzNlWordMeta sjzNlWordMeta,@PathVariable int currentPage,@PathVariable int pageSize) {
@@ -155,7 +155,7 @@ public class SjzNlWordMetaController extends AdminBaseController implements Base
         List<SjzNlWordMeta> list ;
 
         try {
-            list = sjzNlWordMetaService.getListByParentWordMetaCode(parentWordMetaCode);
+            list = sjzNlWordMetaService.getNextListWordMetaByWordMetaCode(parentWordMetaCode);
             re.setData(list);
             re.setResultCode("0000");
             re.setResultMsg("success！");

@@ -1,23 +1,30 @@
 package com.hexiaofei.provider0.service.impl;
 
+import com.hexiaofei.provider0.common.consts.SjzEventStateEnum;
 import com.hexiaofei.provider0.dao.mapper.SjzEventIndexTempMapper;
 import com.hexiaofei.provider0.domain.SjzEventIndex;
 import com.hexiaofei.provider0.domain.SjzEventIndexTemp;
 import com.hexiaofei.provider0.exception.PlatformException;
+import com.hexiaofei.provider0.service.SjzEventIndexService;
 import com.hexiaofei.provider0.service.SjzEventIndexTempService;
+import com.hexiaofei.provider0.service.base.AbstractService;
 import com.hexiaofei.provider0.vo.PageVo;
-import com.shijianzhou.language.domain.SjzNlRelatePatternUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Transactional
 @Service("sjzEventIndexTemp")
-public class SjzEventIndexTempServiceImpl implements SjzEventIndexTempService {
+public class SjzEventIndexTempServiceImpl extends AbstractService implements SjzEventIndexTempService {
 
     @Autowired
     private SjzEventIndexTempMapper sjzEventIndexTempMapper ;
+
+    @Autowired
+    private SjzEventIndexService sjzEventIndexService;
 
     @Override
     public int addObject(SjzEventIndexTemp sjzEventIndexTemp) throws PlatformException {
@@ -31,22 +38,23 @@ public class SjzEventIndexTempServiceImpl implements SjzEventIndexTempService {
 
     @Override
     public int updateObject(SjzEventIndexTemp sjzEventIndexTemp) throws PlatformException {
-        SjzEventIndexTemp old = getObjectById(sjzEventIndexTemp.getId());
+        SjzEventIndexTemp targetObj = getObjectById(sjzEventIndexTemp.getId());
+        // step1: 更新对象
+        targetObj = refreshObjectForNotNullVal(targetObj,sjzEventIndexTemp);
 
-        if(sjzEventIndexTemp.getEventContent()!=null){
-            old.setEventContent(sjzEventIndexTemp.getEventContent());
-        }
-        if(sjzEventIndexTemp.getEventState()!=null){
-            old.setEventState(sjzEventIndexTemp.getEventState());
-        }
-        if(sjzEventIndexTemp.getEventTime()!=null){
-            old.setEventTime(sjzEventIndexTemp.getEventTime());
-        }
-        if(sjzEventIndexTemp.getEventType()!=null){
-            old.setEventType(sjzEventIndexTemp.getEventType());
-        }
+        int resultId = sjzEventIndexTempMapper.updateByPrimaryKey(targetObj);
 
-        int resultId = sjzEventIndexTempMapper.updateByPrimaryKey(old);
+        // step2: 判断审核状态:审核通过需要增加一条事件记录。
+        byte state = targetObj.getEventState();
+        if(SjzEventStateEnum.CHECK_SUCCESS.getStatus() == state){
+            SjzEventIndex sjzEventIndex = new SjzEventIndex();
+            sjzEventIndex.setEventType(targetObj.getEventType());
+            sjzEventIndex.setEventTime(targetObj.getEventTime());
+            sjzEventIndex.setEventContent(targetObj.getEventContent());
+            sjzEventIndex.setRecordCreateTime(targetObj.getCreateTime());
+            sjzEventIndex.setEventState(state);
+            sjzEventIndexService.addObject(sjzEventIndex);
+        }
         return resultId;
     }
 

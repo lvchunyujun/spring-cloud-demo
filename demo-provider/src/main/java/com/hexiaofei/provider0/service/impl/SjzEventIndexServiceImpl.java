@@ -69,7 +69,6 @@ public class SjzEventIndexServiceImpl implements SjzEventIndexService {
         int resultId = -1;
         if(mob!=null){
             resultId = sjzEventIndexMapper.insert(mob);
-//            throw new PlatformException("测试事物传播");
         }
         return resultId;
     }

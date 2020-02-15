@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>表达式模板管理</title>
+    <title>词类元数据管理</title>
     <link rel="icon" th:href="@{/images/favicon.ico}" type="image/gif" />
     <link th:href="@{/css/comm.css}" rel="stylesheet" type="text/css" />
     <link th:href="@{/css/wordMeta.css}" rel="stylesheet" type="text/css" />
@@ -36,65 +36,14 @@
 <div>
     <div th:replace="/common/sjz_top :: sjz_top"  ></div>
     <div class="sjz_nvg">
-        当前位置：<a href="/admin/index">首页</a> > <a href="/admin/nlRegExp/index">表达式模板管理</a> > 添加表达式模板
+        当前位置：<a href="/admin/index">首页</a> > <a href="/admin/nl/wordMeta/index">词类元数据管理</a> > 添加表达式模板
     </div>
     <div class="sjz_c">
         <!-- 菜单 -->
         <div th:replace="/common/sjz_menu :: sjz_menu"  ></div>
         <div class="sjz_center">
             <div class="sjz_center_ta">
-                <form action="/admin/nlWordMeta/add" method="post">
-                    <!--
-                    <table class="_from_table">
-                        <tbody>
-                        <tr class="tr1">
-                            <td class="_sjz_from_table_name">代码：</td>
-                            <td class="_sjz_from_table_input"><input type="text" name="wordMetaCode" value=""/></td>
-                            <td class="_sjz_from_table_name">英文名称：</td>
-                            <td class="_sjz_from_table_input"><input type="text" name="wordMetaEn" value=""/></td>
-                            <td class="_sjz_from_table_name">英文名称缩写：</td>
-                            <td class="_sjz_from_table_input"><input type="text"  name="simpleWordMetaEn"  /></td>
-                            <td class="_sjz_from_table_name">第几级词类：</td>
-                            <td class="_sjz_from_table_input"><input type="text"  name="level" /></td>
-                        </tr>
-                        <tr class="tr1">
-                            <td class="_sjz_from_table_name" >父类代码：</td>
-                            <td class="_sjz_from_table_input"><input type="text" name="parentWordMetaCode" style="width: 85%;" /> <div id="_show_word_list">+</div></td>
-                            <td class="_sjz_from_table_name">名称中文：</td>
-                            <td class="_sjz_from_table_input"><input type="text"  name="wordMetaZh" /></td>
-                            <td class="_sjz_from_table_name">中文名称缩写：</td>
-                            <td class="_sjz_from_table_input"><input type="text"  name="simpleWordMetaZh"  /></td>
-                            <td class="_sjz_from_table_name">所属语言ID：</td>
-                            <td class="_sjz_from_table_input"><input type="text"   name="languageId" /></td>
-                        </tr>
-                        <tr class="tr1">
-                            <td></td>
-                            <td colspan="6" class="_sjz_parentWmdc">
-                                <p ></p>
-                            </td>
-                        </tr>
-                        <tr class="tr1">
-                            <td class="_sjz_from_table_name">描述：</td>
-                            <td class="_sjz_from_table_input" colspan="3"><textarea name="description"  ></textarea></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-
-                        <tr class="tr1">
-                            <td></td>
-                            <td><input class="sjz_center_ta_submit" type="submit" value="确定"/></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    -->
-
+                <form action="/admin/nl/wordMeta/add" method="post">
                     <table class="_from_table">
                         <tbody>
                         <tr class="tr1">

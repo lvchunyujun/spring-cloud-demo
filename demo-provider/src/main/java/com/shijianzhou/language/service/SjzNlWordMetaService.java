@@ -51,9 +51,33 @@ public interface SjzNlWordMetaService extends IBaseService<SjzNlWordMeta> {
     SjzNlWordMeta getSjzNlWordMetaByWordMetaCode(Integer wordMetaCode)throws PlatformException;
 
     /**
-     * 查询包含的所有子类型词类
-     * @return parentWordMetaCode
+     * 查询父类单词根据给定单词编码
+     * @return wordMetaCode
      * @throws PlatformException
      */
-    List<SjzNlWordMeta> getListByParentWordMetaCode(Integer parentWordMetaCode)throws PlatformException;
+    SjzNlWordMeta getParentWordMetaByWordMetaCode(Integer wordMetaCode)throws PlatformException;
+
+    /**
+     * 查询下一级词类列表根据给定单词编码
+     * @param wordMetaCode
+     * @return
+     * @throws PlatformException
+     */
+    List<SjzNlWordMeta> getNextListWordMetaByWordMetaCode(Integer wordMetaCode)throws PlatformException;
+
+    /**
+     * 获取同级中最小编码的单词
+     * @param wordMetaCode
+     * @return
+     * @throws PlatformException
+     */
+    int getMinSameLevelWordMetaCodeByParentWordMetaCode(Integer wordMetaCode)throws PlatformException;
+
+    /**
+     * 获取同级中最大编码的单词
+     * @param wordMetaCode
+     * @return
+     * @throws PlatformException
+     */
+    int getMaxSameLevelWordMetaCodeByParentWordMetaCode(Integer wordMetaCode)throws PlatformException;
 }

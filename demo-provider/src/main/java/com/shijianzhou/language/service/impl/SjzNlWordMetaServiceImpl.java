@@ -3,8 +3,8 @@ package com.shijianzhou.language.service.impl;
 import com.hexiaofei.provider0.exception.PlatformException;
 import com.hexiaofei.provider0.service.base.AbstractService;
 import com.hexiaofei.provider0.vo.PageVo;
+import com.shijianzhou.language.common.consts.NlWordMetaConsts;
 import com.shijianzhou.language.dao.mapper.SjzNlWordMetaMapper;
-import com.shijianzhou.language.domain.SjzNlRegExp;
 import com.shijianzhou.language.domain.SjzNlWordMeta;
 import com.shijianzhou.language.service.SjzNlWordMetaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,18 +47,90 @@ public class SjzNlWordMetaServiceImpl extends AbstractService implements SjzNlWo
     }
 
     @Override
-    public List<SjzNlWordMeta> getListByParentWordMetaCode(Integer parentWordMetaCode) throws PlatformException {
-        return sjzNlWordMetaMapper.selectListByParentWordMetaCode(parentWordMetaCode);
+    public SjzNlWordMeta getParentWordMetaByWordMetaCode(Integer wordMetaCode) throws PlatformException {
+        return null;
     }
 
     @Override
-    public int addObject(SjzNlWordMeta mob) throws PlatformException {
+    public List<SjzNlWordMeta> getNextListWordMetaByWordMetaCode(Integer wordMetaCode) throws PlatformException {
+        return sjzNlWordMetaMapper.selectNextListWordMetaByWordMetaCode(wordMetaCode);
+    }
 
-        if(mob.getWordMetaCode() == null|| mob.getWordMetaCode() < 0 ){
-            mob.setWordMetaCode(0);
+    @Override
+    public int getMinSameLevelWordMetaCodeByParentWordMetaCode(Integer wordMetaCode) throws PlatformException {
+        return sjzNlWordMetaMapper.selectMinSameLevelWordMetaCodeByParentWordMetaCode(wordMetaCode);
+    }
+
+    @Override
+    public int getMaxSameLevelWordMetaCodeByParentWordMetaCode(Integer wordMetaCode) throws PlatformException {
+        return sjzNlWordMetaMapper.selectMaxSameLevelWordMetaCodeByParentWordMetaCode(wordMetaCode);
+    }
+
+    @Override
+    public int addObject(SjzNlWordMeta sjzNlWordMeta) throws PlatformException {
+
+        Integer thisWordMetaCode = null;
+        SjzNlWordMeta parentWordMeta = null;
+
+        if(sjzNlWordMeta.getWordMetaCode() == null || sjzNlWordMeta.getWordMetaCode() < 0 ){
+            sjzNlWordMeta.setWordMetaCode(0);
         }
 
-        return sjzNlWordMetaMapper.insert(mob);
+        // step1: 父类编码设置，当为空是默认为一级词
+        if(sjzNlWordMeta.getParentWordMetaCode() == null || sjzNlWordMeta.getParentWordMetaCode() == NlWordMetaConsts.ORIGINAL_WORD_META_CODE){
+            sjzNlWordMeta.setParentWordMetaCode(NlWordMetaConsts.ORIGINAL_WORD_META_CODE);
+        }else if((parentWordMeta = getSjzNlWordMetaByWordMetaCode(sjzNlWordMeta.getParentWordMetaCode())) == null){
+            throw new PlatformException("所属父类单词编码不存在！");
+        }
+
+        // step2: 设置当前单词的级别
+        int parentWordMetaCode = sjzNlWordMeta.getParentWordMetaCode();
+        if(parentWordMeta==null){
+            sjzNlWordMeta.setLevel((short)1);
+        }else{
+            sjzNlWordMeta.setLevel((short)(parentWordMeta.getLevel()+1));
+        }
+
+        // step3: 设置当前单词的编码： 不存在同级单词
+        List<SjzNlWordMeta> nextList = getNextListWordMetaByWordMetaCode(parentWordMetaCode);
+        if(nextList == null || nextList.size() == 0){
+            // 不存在同级，不存父类
+            if(parentWordMetaCode == NlWordMetaConsts.ORIGINAL_WORD_META_CODE){
+                thisWordMetaCode = NlWordMetaConsts.FIRST_LEVEL_START_WORD_META_CODE;
+            }else{
+            /*
+            *  不存在同级，存在父类。例如：pCode=600000,mincode=null,maxcode=null
+            *                        1.  600000     6位
+            *                        2.  thiscode = 10000=10^(6-2)
+            *                        3.  thiscode = 600000 + thiscode;
+            *                        4.  thiscode = 610000
+            */
+                String strCode = String.valueOf(parentWordMetaCode);
+                int codeLen = strCode.length();
+                if((codeLen -= sjzNlWordMeta.getLevel()) < 0){
+                    throw new PlatformException("不能再增加单词的下一级！");
+                }
+                double wmCode = Math.pow(NlWordMetaConsts.LEVEL_COUNT,codeLen);
+                thisWordMetaCode = sjzNlWordMeta.getParentWordMetaCode();
+                thisWordMetaCode += (int)wmCode;
+            }
+        }else {
+        /*
+         *存在同级单词,例如： pcode=600000, mincode=610000，maxcode=620000;
+         *                1. thiscode = 610000-600000;
+         *                2. thiscode = 620000+thiscode;
+         *                3. thiscode = 630000;
+        */
+            int maxCode = getMaxSameLevelWordMetaCodeByParentWordMetaCode(parentWordMetaCode);
+            int minCode = getMinSameLevelWordMetaCodeByParentWordMetaCode(parentWordMetaCode);
+            thisWordMetaCode = minCode - parentWordMetaCode;
+            thisWordMetaCode = maxCode + thisWordMetaCode;
+
+        }
+        sjzNlWordMeta.setWordMetaCode(thisWordMetaCode);
+
+
+        return sjzNlWordMetaMapper.insert(sjzNlWordMeta);
     }
 
     @Override
