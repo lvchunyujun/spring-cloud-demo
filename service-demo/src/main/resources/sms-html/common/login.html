@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>历史轴管理</title>
+    <link rel="icon" th:href="@{/images/favicon.ico}" type="image/gif"/>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <link th:href="@{/css/sjz_login.css}" rel="stylesheet" type="text/css"/>
+    <style>@media print {
+        #ghostery-purple-box {
+            display: none !important
+        }
+    }</style>
+</head>
+
+<body>
+
+<img class="bgone" th:src="@{/images/common/login/1.jpg}"/>
+<img class="pic" th:src="@{/images/login_360.png}"/>
+
+<div class="table">
+    <div class="wel">51时间轴系统后台登录</div>
+    <div class="wel1">51SHIJIANZHOU XI TONG HUO TAI DENG LU</div>
+    <form method="post" action="/login">
+
+        <div class="login_msg" th:if="${LOGIN_MSG != null &amp;&amp; LOGIN_MSG != '0000'} ">
+            用户名或密码错误！
+        </div>
+        <div class="user">
+            <div id="yonghu">
+                <img th:src="@{/images/common/login/yhm.png}" />
+            </div>
+            <input type="text" th:name="userName" value="" placeholder="用户名" />
+        </div>
+        <div class="password">
+            <div id="mima">
+                <img th:src="@{/images/common/login/mm.png}"/>
+            </div>
+            <input type="password" th:name="password" value="" placeholder="●●●●●●"/>
+        </div>
+        <input class="btn" type="submit" value="登录" />
+    </form>
+
+</div>
+
+
+</body>
+</html>

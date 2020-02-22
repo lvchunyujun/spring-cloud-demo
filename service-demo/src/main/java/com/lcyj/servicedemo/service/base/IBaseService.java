@@ -1,10 +1,12 @@
 package com.lcyj.servicedemo.service.base;
 
 
+import com.lcyj.common.vo.PageVo;
 import com.lcyj.servicedemo.exception.PlatformException;
-import com.lcyj.servicedemo.vo.PageVo;
+import org.apache.ibatis.cursor.Cursor;
 
 import java.util.List;
+import java.util.Map;
 
 
 public interface IBaseService<T> {
@@ -15,9 +17,17 @@ public interface IBaseService<T> {
 	
 	int updateObject(T mob)throws PlatformException;
 	
-	T getObjectById(int id)throws PlatformException;
+	T getObjectById(int id);
 	
-	PageVo<T> getPageVoObject(PageVo<T> pageVo)throws PlatformException;
+	PageVo<T> getPageVoObject(PageVo<T> pageVo);
+
+	PageVo<T> getPageVoByObject(PageVo<T> pageVo,T mob);
+
+	PageVo<T> getPageVoByMap(PageVo<T> pageVo,Map<String,Object> map);
 	
-	List<T> getAllObject()throws PlatformException;
+	List<T> getAllObject();
+
+	Cursor<T> getCursorByObject(T mob);
+
+	Cursor<T> getCursorByMap(Map<String,Object> map);
 }

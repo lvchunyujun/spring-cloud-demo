@@ -12,7 +12,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.8.RELEASE</version>
+        <version>1.5.9.RELEASE</version>
         <relativePath/>
     </parent>
     <properties>
@@ -21,18 +21,31 @@
         <mybatis.version>2.1.1</mybatis.version>
         <druid.version>1.0.2</druid.version>
         <mysql-connector.version>5.1.38</mysql-connector.version>
+        <swagger2.version>2.9.2</swagger2.version>
     </properties>
 
     <dependencies>
+        <!-- eureka client -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-eureka</artifactId>
         </dependency>
+        <!-- eureka client -->
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
+        <!-- lcyj-common -->
+        <dependency>
+            <groupId>com.lcyj</groupId>
+            <artifactId>lcyj-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <!-- lcyj-common -->
+
+        <!-- 单元测试 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -55,12 +68,14 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
+        <!-- 单元测试 -->
+
+        <!-- -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-autoconfigure</artifactId>
             <scope>compile</scope>
         </dependency>
-
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
@@ -76,6 +91,23 @@
             <artifactId>druid</artifactId>
             <version>${druid.version}</version>
         </dependency>
+        <!-- swagger2 API生成器 -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${swagger2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${swagger2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>20.0</version>
+        </dependency>
+        <!-- -->
     </dependencies>
 
     <dependencyManagement>

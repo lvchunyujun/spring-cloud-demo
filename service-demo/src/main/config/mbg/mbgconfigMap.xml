@@ -45,7 +45,7 @@
 		</javaClientGenerator>
 
 
-		<table tableName="user_register_temp" domainObjectName="UserRegisterTemp">
+		<table tableName="sms_userinfo" domainObjectName="SmsUserinfo">
 			<property name="useActualColumnNames" value="true"/>
 		</table>
 	</context>
