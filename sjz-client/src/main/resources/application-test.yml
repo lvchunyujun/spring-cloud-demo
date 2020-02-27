@@ -1,7 +1,20 @@
 server:
   port: 80
+  connection-timeout: 5000                              # 连接超时
   tomcat:
     uri-encoding: utf-8
+    max-threads: 100                                    # 最大线程数
+    accesslog:
+      enabled: true                                     # 开启日志
+      directory: /usr/local/lishizhou-client/logs/tomcat-lsz-cli                    # 日志目录
+      buffered: true                                   # 缓冲输出，使其只定期刷新。
+      rotate: true                                     # Enable access log rotation.指定是否启用日志轮转。默认为true。这个参数决定是否需要切换切换日志文件，如果被设置为false，则日志文件不会切换，即所有文件打到同一个日志文件中，并且file-date-format参数也会被忽略
+      file-date-format: .yyyy-MM-dd                    # 要放在日志文件名中的日期格式。rotate为false的时候，这个也就不生效了。
+      pattern: common                                  # 定义access日志的格式,可以自定义，也可以用Access log内置了两个日志格式模板，
+      rename-on-rotate: false                          # Defer inclusion of the date stamp in the file name until rotate time.
+      request-attributes-enabled: false                # Set request attributes for IP address, Hostname, protocol and port used for the request.
+      prefix: access_log                               # Log file name prefix.
+      suffix: .log                                     # Log file name suffix.
 spring:
   datasource:
      driver-class-name: com.mysql.jdbc.Driver
