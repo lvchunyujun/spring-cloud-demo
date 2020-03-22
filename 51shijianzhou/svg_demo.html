@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var ch = $("#svg_1").children();
+            var cx1 = $("#circle_1").attr("cx");
+
+            $("#svg_1").click(function(){
+                var posX = 0, posY = 0;
+                var event = event || window.event;
+                if (event.pageX || event.pageY) {
+                    posX = event.pageX;
+                    posY = event.pageY;
+                } else if (event.clientX || event.clientY) {
+                    posX = event.clientX + document.documentElement.scrollLeft + document.body.scrollLeft;
+                    posY = event.clientY + document.documentElement.scrollTop + document.body.scrollTop;
+                }
+               // alert(posX+"  "+posY);
+
+                // $("#circle_1").attr("cx",200);
+                // var xml = $.parseXML("<circle  xmlns='http://www.w3.org/2000/svg\\'  cx='40' cy='150' r='40' stroke='black' stroke-width='1' fill='#fff'/>");
+                // $("#svg_1").append(xml.documentElement);
+
+                var xml = jQuery.parseXML('<circle xmlns="http://www.w3.org/2000/svg" cx="'+posX+'" cy="'+posY+'" r="40" stroke="black" stroke-width="1" fill="#fff"/>');
+                $("svg").append(xml.documentElement);
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <svg id="svg_1" xmlns="http://www.w3.org/2000/svg" height="210" width="500" version="1.1">
+
+        <line x1="0" y1="0" x2="2" y2="2" style="stroke:rgb(255,0,0);stroke-width:2"/>
+        <polygon points="200,10 250,190 160,210" style="fill:lime;stroke:purple;stroke-width:1"/>
+    </svg>
+
+</body>
+</html>
