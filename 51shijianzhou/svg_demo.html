@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
-    <title>Title</title>
+    <title>绘图</title>
     <script type="text/javascript" src="jquery-3.4.1.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function(){
@@ -19,25 +19,97 @@
                     posX = event.clientX + document.documentElement.scrollLeft + document.body.scrollLeft;
                     posY = event.clientY + document.documentElement.scrollTop + document.body.scrollTop;
                 }
-               // alert(posX+"  "+posY);
 
-                // $("#circle_1").attr("cx",200);
-                // var xml = $.parseXML("<circle  xmlns='http://www.w3.org/2000/svg\\'  cx='40' cy='150' r='40' stroke='black' stroke-width='1' fill='#fff'/>");
-                // $("#svg_1").append(xml.documentElement);
 
-                var xml = jQuery.parseXML('<circle xmlns="http://www.w3.org/2000/svg" cx="'+posX+'" cy="'+posY+'" r="40" stroke="black" stroke-width="1" fill="#fff"/>');
-                $("svg").append(xml.documentElement);
+
+                drawSVG("circle");
+                drawSVG("rect");
+                drawSVG("line");
+                drawSVG("polygon");
+
             });
 
+
+
+
+            m();
+
         });
+        
+        function m() {
+            $(document).mousemove(function(event){
+                $("#msg").children("span").text(event.pageX + ", " + event.pageY);
+            });
+        }
+
+        function drawSVG(graphName){
+            var gn = "";
+
+            if(graphName == 'circle'){
+                gn = draw_circle(event.pageX,event.pageY);
+            }else if(graphName == 'rect'){
+                gn = draw_rect(event.pageX,event.pageY);
+            }else if(graphName == 'line'){
+                gn = draw_line(30,40,event.pageX,event.pageY);
+            }else if(graphName == 'polygon'){
+                gn = draw_polygon(event.pageX,event.pageY);
+            }
+            createSVG(jQuery.parseXML(gn));
+        }
+
+        function draw_circle(cx,cy) {
+            return '<circle xmlns="http://www.w3.org/2000/svg" cx="'+cx+'" cy="'+cy+'" r="40" stroke="black" stroke-width="1" fill="transparent"/>';
+        }
+
+        function draw_rect(cx,cy){
+            return '<rect xmlns="http://www.w3.org/2000/svg" width="300" height="100" style="fill:rgb(0,0,255);stroke-width:1;stroke:rgb(0,0,0)" />';
+        }
+
+        function draw_line(x1,y1,x2,y2){
+            return '<line xmlns="http://www.w3.org/2000/svg" x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'"  style="stroke:rgb(255,0,0);stroke-width:2;"/>';
+        }
+
+        function draw_polygon(cx,cy){
+            return '<polygon xmlns="http://www.w3.org/2000/svg" points="200,10 250,190 160,210"  style="fill:lime;stroke:purple;stroke-width:1;"/>';
+        }
+
+        function createSVG(circle_node){
+            $("svg").append(circle_node.documentElement);
+        }
     </script>
+    <style type="text/css">
+        body
+        {
+            border: 0px;
+            margin: 0px;
+        }
+        #draw_svg
+        {
+            margin: 5px auto;
+            width: 98%;
+        }
+        #svg_1
+        {
+            background-color: #fff;
+            border: 2px solid #bbb;
+            margin: 0 auto;
+            width: 100%;
+            height: 460px;
+        }
+    </style>
 </head>
-<body>
-    <svg id="svg_1" xmlns="http://www.w3.org/2000/svg" height="210" width="500" version="1.1">
-
-        <line x1="0" y1="0" x2="2" y2="2" style="stroke:rgb(255,0,0);stroke-width:2"/>
-        <polygon points="200,10 250,190 160,210" style="fill:lime;stroke:purple;stroke-width:1"/>
-    </svg>
-
+<body style="background-color: #eee">
+    <div id="draw_svg" >
+        <svg id="svg_1" xmlns="http://www.w3.org/2000/svg" height="210" width="500" version="1.1">
+            <g stroke="#64a9c4" fill="#b1d1f7" stroke-width="4">
+                <circle r="50" cx="80" cy="80" stroke-dasharray="15,10"/>
+            </g>
+            <line x1="0" y1="0" x2="2" y2="2" style="stroke:rgb(255,0,0);stroke-width:2"/>
+            <polygon points="200,10 250,190 160,210" style="fill:lime;stroke:purple;stroke-width:1"/>
+        </svg>
+    </div>
+    <div id="msg">
+        <span></span>
+    </div>
 </body>
 </html>
