@@ -96,26 +96,88 @@
             width: 100%;
             height: 460px;
         }
+        #svg_button
+        {
+            margin: 0 auto;
+            width: 98%;
+
+        }
+
+        #svg_button input[type=radio]{
+            　　content:'';
+            　　display: none;
+            　　width:34px;
+            　　height:35px;
+               background:url('./svg_button/circle.png') no-repeat;
+            　　background-position:-474px -180px;
+            　　vertical-align: middle;
+            　　position:absolute;
+            　　left:0;
+            　　top:0;
+        }
+
+        /*让原有的复选框图案隐藏*/
+        #svg_button input[type=radio]{
+            display: none;
+        }
+        #svg_button input[type=radio] + span
+        {
+            display:-moz-box;
+            display:-webkit-box;
+            display:box;
+            float:left;
+            height: 40px;
+            width: 40px;
+            line-height: 20px;/*不设行高文字垂直方向不居中*/
+            text-indent: 30px;/*使文字缩进：文字和图片都在label里面，不缩进文字和图片叠加在一起*/
+            background-size: 20px 20px;/*设置背景图片大小*/
+            background-color: #fff;
+            border: 1px solid #aaa;
+            margin: 2px;
+        }
+        /*图片和文字都放在label里面*/
+        #svg_button input[type=radio][value=circle] + span{
+            background:url(./svg_button/circle.png) no-repeat center 50%;/*背景图片*/
+            background-color: #fff;
+        }
+        #svg_button input[type=radio][value=line] + span{
+            background:url(./svg_button/line.png) no-repeat center 50%;/*背景图片*/
+            background-color: #fff;
+        }
+        #svg_button input[type=radio][value=rect] + span{
+            background:url(./svg_button/rect.png) no-repeat center 50%;/*背景图片*/
+            background-color: #fff;
+        }
+        #svg_button input[type=radio][value=polygon] + span{
+            background:url(./svg_button/polygon.png) no-repeat center 50%;/*背景图片*/
+            background-color: #fff;
+        }
     </style>
 </head>
 <body style="background-color: #eee">
-    <div>
-        <input type="button" value="长方形" />
-        <input type="button" value="圆" />
-        <input type="button" value="线" />
-        <input type="button" value="多边形" />
+    <div id="svg_button">
+        <from>
+            <label>
+                <input name="svg_button" value="circle" type="radio"  />
+                <span></span>
+            </label>
+            <label>
+                <input name="svg_button" value="line" type="radio" value="1" />
+                <span></span>
+            </label>
+            <label>
+                <input name="svg_button" value="rect" type="radio" value="1" />
+                <span></span>
+            </label>
+            <label>
+                <input name="svg_button" value="polygon" type="radio" value="1" />
+                <span></span>
+            </label>
+        </from>
     </div>
     <div id="draw_svg" >
         <svg id="svg_1" xmlns="http://www.w3.org/2000/svg" height="210" width="500" version="1.1">
-            <g stroke="#64a9c4" fill="#b1d1f7" stroke-width="4">
-                <circle r="50" cx="80" cy="80" stroke-dasharray="15,10"/>
-            </g>
-            <line x1="0" y1="0" x2="2" y2="2" style="stroke:rgb(255,0,0);stroke-width:2"/>
-            <polygon points="200,10 250,190 160,210" style="fill:lime;stroke:purple;stroke-width:1"/>
         </svg>
-    </div>
-    <div id="msg">
-        <span></span>
     </div>
 </body>
 </html>
