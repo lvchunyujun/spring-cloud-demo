@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>历史轴登录</title>
+    <link rel="icon" th:href="@{/images/favicon.ico}" type="image/gif"/>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <link th:href="@{/css/sjz_login.css}" rel="stylesheet" type="text/css"/>
+    <style>@media print {
+        #ghostery-purple-box {
+            display: none !important
+        } }
+    .register
+    {
+        position: absolute;
+        top: 22rem;
+        right: 3.9rem;
+        border: none;
+        color: #fff;
+        width: 373px;
+        text-align: center;
+        background-color: #1692ef;
+        text-indent: 0rem;
+        border-radius: 25px;
+        font-size: 18px;
+        height: 50px;
+        line-height: 50px;
+        text-decoration: none;
+    }
+
+    </style>
+</head>
+
+<body>
+
+<img class="bgone" th:src="@{/images/common/login/1.jpg}"/>
+<img class="pic" th:src="@{/images/login_360.png}"/>
+
+<div class="table">
+    <div class="wel">历史轴用户密码登录</div>
+    <div class="wel1">51SHIJIANZHOU XI TONG HUO TAI DENG LU</div>
+    <form method="post" action="/login">
+
+        <div class="login_msg" th:if="${LOGIN_MSG != null &amp;&amp; LOGIN_MSG != '0000'} ">
+            用户名或密码错误！
+        </div>
+        <div class="user">
+            <div id="yonghu">
+                <img th:src="@{/images/common/login/yhm.png}" />
+            </div>
+            <input type="text" th:name="userName" placeholder="请输入邮箱" />
+        </div>
+        <div class="password">
+            <div id="mima">
+                <img th:src="@{/images/common/login/mm.png}"/>
+            </div>
+            <input type="password" th:name="password" placeholder="请输入密码"/>
+        </div>
+        <input class="btn" type="submit" value="登录" />
+    </form>
+    <!--<input class="register" type="button" value="免费注册" onclick="javascript:to_register();" />-->
+    <a class="register"  href="/toRegistor">免费注册</a>
+</div>
+
+
+</body>
+</html>

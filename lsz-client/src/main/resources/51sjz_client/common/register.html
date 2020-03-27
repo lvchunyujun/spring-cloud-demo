@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>历史轴注册</title>
+    <link rel="icon" th:href="@{/images/favicon.ico}" type="image/gif"/>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <link th:href="@{/css/sjz_login.css}" rel="stylesheet" type="text/css"/>
+    <script th:src="@{/js/jquery-3.4.1.min.js}" type="text/javascript" />
+    <style>@media print {
+        #ghostery-purple-box {
+            display: none !important
+        } }
+    .register
+    {
+        position: absolute;
+        top: 22rem;
+        right: 3.9rem;
+        border: none;
+        color: #fff;
+        width: 373px;
+        text-align: center;
+        background-color: #1592ef;
+        text-indent: 0rem;
+        border-radius: 10px;
+        text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.2);
+        box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.2);
+        font-size: 20px;
+        height: 50px;
+    }
+    :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+        color: #dedede;
+        opacity:1;
+        font-size: 14px;
+    }
+    ::-moz-placeholder { /* Mozilla Firefox 19+ */
+        color: #dedede;
+        opacity:1;
+        font-size: 14px;
+    }
+    /* 以上两个属性分别针对火狐浏览器不同版本 */
+
+    input:-ms-input-placeholder { /* IE */
+        color: #dedede;
+        opacity:1;
+        font-size: 14px;
+    }
+
+    input::-webkit-input-placeholder{/* webkit内核的浏览器，如谷歌，edge */
+        color: #dedede;
+        opacity:1;
+        font-size: 14px;
+    }
+
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#lsz_b_vc").bind('click',function(){
+                var email = $("#lsz_input_email").val();
+                $.ajax({
+                    type: "post",
+                    url: "/sendCheckCode",
+                    data:{email:email},
+                    dataType:'json',
+                    success:function(data){
+                        var resultCode = data.resultCode;
+                        if(resultCode=='0000'){
+                            alert("发送成功！");
+                        }
+
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown){
+                        alert(textStatus+"  "+XMLHttpRequest.state());
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+
+<body>
+
+<img class="bgone" th:src="@{/images/common/login/1.jpg}"/>
+<img class="pic" th:src="@{/images/login_360.png}"/>
+
+<div class="table">
+    <div class="wel">历史轴 欢迎注册</div>
+    <div class="wel1">51SHIJIANZHOU XI TONG HUO TAI DENG LU</div>
+    <form method="post" action="/registor">
+
+        <div class="login_msg" th:if="${LOGIN_MSG != null &amp;&amp; LOGIN_MSG != '0000'} ">
+            用户名或密码错误！
+        </div>
+        <div class="user">
+            <div id="yonghu">
+                <img th:src="@{/images/common/login/yhm.png}" />
+            </div>
+            <input type="text" id="lsz_input_email" th:name="email" placeholder="请输入邮箱" />
+        </div>
+        <div class="password">
+            <div id="mima">
+                <img th:src="@{/images/common/login/mm.png}"/>
+            </div>
+            <input type="password" th:name="password" placeholder="请输入密码"/>
+        </div>
+        <div class="verifyCode">
+            <div id="jym">
+                <img th:src="@{/images/common/login/verified_72.png}"/>
+            </div>
+            <input type="text" th:name="verifyCode" placeholder="请输入验证码"/>
+            <input type="button" id="lsz_b_vc" th:value="获取验证码"/>
+        </div>
+        <input class="btn" type="submit" value="免费注册" />
+    </form>
+
+</div>
+
+
+</body>
+</html>

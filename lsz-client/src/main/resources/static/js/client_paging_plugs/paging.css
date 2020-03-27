@@ -1,0 +1,19 @@
+.lsz_paging_
+{
+    margin: auto;
+    text-align: center;
+    color: #1683a8;
+    background-color: #fff;
+}
+.lsz_paging_ a
+{
+    color: #1683a8;
+    text-decoration: none;
+    font-size: 16px;
+}
+.bg_card
+{
+    background-color: #ffffff;
+    -moz-box-shadow: 10px 10px 5px #888888; /* 老的 Firefox */
+    box-shadow: 0 10px 30px #888888;
+}

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>添加域名单词分类</title>
+    <link rel="icon" th:href="@{/images/favicon.ico}" type="image/gif" />
+    <link th:href="@{/css/comm.css}" rel="stylesheet" type="text/css" />
+    <script th:src="@{/js/jquery-3.4.1.min.js}" type="text/javascript" />
+    <script th:src="@{/js/utils.js}" type="text/javascript" />
+
+    <!-- 单词选择遮罩层 -->
+    <link th:href="@{/js/sjzPlugs/wordCheck.css}" rel="stylesheet" type="text/css" />
+    <script th:src="@{/js/sjzPlugs/wordCheck.js}" type="text/javascript" />
+
+    <style type="text/css" >
+
+        .sjz_center_ta
+        {
+            width: 95%;
+            min-height: 200px;
+        }
+
+        .sjz_center_ta table
+        {
+            width: 100%;
+        }
+        .sjz_center_ta table .tr1
+        {
+            height:45px;
+        }
+        .sjz_center_ta table thead tr
+        {
+            text-align: center;
+            font-weight: bold;
+        }
+        .sjz_center_ta table input[name='wordMetaCode']
+        {
+            width: 70%;
+            float: left;
+        }
+        .sjz_center_ta_submit
+        {
+            width: 60px;
+        }
+
+        #_show_word_list
+        {
+            width: 10%;
+            float: left;
+            text-align: center;
+            cursor:pointer;
+            color: #55f;
+            font-weight: bold;
+        }
+    </style>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#_show_word_list").bind("click",startDialogOpen);
+        });
+        workCheck = {
+            checkType:"radio",
+            checkedFun:function(obj){
+                $(" input[ name='wordMetaCode' ]").val(obj.wordMetaCode);
+                $(" input[ name='wordMetaEn' ]").val(obj.wordMetaEn);
+                $(" input[ name='wordMetaZh' ]").val(obj.wordMetaZh);
+            },
+            uncheckedFun:function(obj){
+                $(" input[ name='wordMetaCode' ]").val("");
+                $(" input[ name='wordMetaEn' ]").val("");
+                $(" input[ name='wordMetaZh' ]").val("");
+            }
+        }
+    </script>
+</head>
+<body>
+<div>
+    <div th:replace="common/sjz_top :: sjz_top"  ></div>
+    <div class="sjz_nvg">
+        当前位置：<a href="/admin/index">首页</a> > <a href="/admin/domainWordSort/index">域名单词分类管理</a> > 添加域名单词分类
+    </div>
+    <div class="sjz_c">
+        <!-- 菜单 -->
+        <div th:replace="common/sjz_menu :: sjz_menu"  ></div>
+        <div class="sjz_center">
+            <div>
+                <div></div>
+            </div>
+            <div class="sjz_center_ta">
+                <form action="/admin/domainWordSort/add" method="post">
+                    <table>
+                        <thead>
+                        <tr>
+                            <td>编号</td>
+                            <td>
+                                域名
+                            </td>
+                            <td>
+                                域名URL
+                            </td>
+                            <td>
+                                单词代码
+                            </td>
+                            <td>
+                                单词英文
+                            </td>
+                            <td>
+                                单词中文
+                            </td>
+                            <td>
+                                描述
+                            </td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="tr1"  >
+                            <td> </td>
+                            <td><input type="text" name="domainName" /> </td>
+                            <td>
+                                <input type="text" name="domainUrl"  />&nbsp;&nbsp;
+                            </td>
+                            <td >
+                                <input type="text" name="wordMetaCode"  /><div id="_show_word_list">+</div>
+                            </td>
+                            <td><input  type="text" name="wordMetaEn"   /></td>
+                            <td><input  type="text" name="wordMetaZh"  /></td>
+                            <td><textarea name="description" rows="2"  ></textarea></td>
+                        </tr>
+                        <tr>
+                            <td><a href="#" onclick="javascript:addForm();" style="margin: 0 20px;" ><img th:src="@{/images/common/a.png}" /></a>
+                                <a href="#" onclick="javascript:deleteForm();" style="margin: 0 20px;"><img th:src="@{/images/common/d.png}" /></a></td>
+                            <td><input class="sjz_center_ta_submit" type="submit" value="确定"/></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div th:replace="common/sjz_bottom :: sjz_bottom"  ></div>
+<!-- 遮罩层 -->
+<div id="_sjz_word_meta_div">
+    <div class="box" >
+        <div id="dialog" >
+            <div id="_dialog_close" >X关闭</div>
+            <div id="_sjz_word_meta_c">
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
