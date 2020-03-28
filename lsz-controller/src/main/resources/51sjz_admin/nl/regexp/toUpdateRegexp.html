@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>表达式模板管理</title>
+    <link rel="icon" th:href="@{/images/favicon.ico}" type="image/gif" />
+    <link th:href="@{/css/comm.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/regexp.css}" rel="stylesheet" type="text/css" />
+    <script th:src="@{/js/jquery-3.4.1.min.js}" type="text/javascript" />
+    <script th:src="@{/js/utils.js}" type="text/javascript" />
+    <script th:src="@{/js/regexp.js}" type="text/javascript" />
+    <style type="text/css" >
+
+        .sjz_center_ta table .tr1
+        {
+            height:45px;
+        }.sjz_center_ta table .tr2
+        {
+            height:100px;
+        }.sjz_center_ta table .tr3
+        {
+            height:45px;
+        }.sjz_center_ta table .tr4
+        {
+            height:50px;
+        }
+        .sjz_center_t_td
+        {
+            width: 95%;
+        }
+        .sjz_center_ta_submit
+        {
+            width: 60px;
+        }
+
+
+
+
+    </style>
+
+
+</head>
+<body>
+<div>
+    <div th:replace="/common/sjz_top :: sjz_top"  ></div>
+    <div class="sjz_nvg">
+        当前位置：<a href="/admin/index">首页</a> > <a href="/admin/nlRegExp/index">表达式模板管理</a> > <strong>修改事件</strong>
+    </div>
+    <div class="sjz_c">
+        <!-- 菜单 -->
+        <div th:replace="/common/sjz_menu :: sjz_menu"  ></div>
+        <div class="sjz_center">
+            <div>
+                <div></div>
+            </div>
+            <div class="sjz_center_ta">
+                <form action="/admin/nlRegExp/updata" method="post">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td style="width: 10%;"></td>
+                                <td></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="tr1">
+                            <td>编号：</td>
+                            <td class="sjz_center_t_td">
+                                <input type="text" name="id" th:value="${sjzNlRegExp.id}" class="input_readonly" readonly="readonly" />&nbsp;&nbsp;
+                            </td>
+                        </tr>
+                        <tr class="tr2">
+                            <td>模板：</td>
+                            <td class="sjz_center_t_td">
+                                <input type="text" name="regExpPattern" class="regexp" th:value="${sjzNlRegExp.regExpPattern}"/>&nbsp;&nbsp;
+                            </td>
+                        </tr>
+                        <tr class="tr1">
+                            <td>模板代码：</td>
+                            <td class="sjz_center_t_td">
+                                <input type="text" name="regExpCode" th:value="${sjzNlRegExp.regExpCode}"/>&nbsp;&nbsp;
+                            </td>
+                        </tr>
+                        <tr class="tr3">
+                            <td>实例：</td>
+                            <td><textarea name="regExpDemo" rows="7" class="sjz_center_ta_tarea" th:text="${sjzNlRegExp.regExpDemo}"></textarea></td>
+                        </tr>
+                        <tr class="tr4">
+                            <td>组合类型：</td>
+                            <td>
+                                <label>
+                                    <input name="patternType" th:checked="${sjzNlRegExp.patternType==0}" type="radio" value="0" />边界类型
+                                </label>
+                                <label>
+                                    <input name="patternType" th:checked="${sjzNlRegExp.patternType==10}" type="radio" value="10" />前置类型
+                                </label>
+                                <label>
+                                    <input name="patternType" th:checked="${sjzNlRegExp.patternType==20}" type="radio" value="20" />后置类型
+                                </label>
+                                <label>
+                                    <input name="patternType" th:checked="${sjzNlRegExp.patternType==30}" type="radio" value="30" />环绕类型
+                                </label>
+                            </td>
+                        </tr>
+                        <tr class="tr5">
+                            <td>匹配类型：</td>
+                            <td>
+                                <label>
+                                    <input name="matchType" th:checked="${sjzNlRegExp.matchType==0}" type="radio" value="0" />名词
+                                </label>
+                                <label>
+                                    <input name="matchType" th:checked="${sjzNlRegExp.matchType==100}" type="radio" value="100" />动词
+                                </label>
+                                <label>
+                                    <input name="matchType" th:checked="${sjzNlRegExp.matchType==200}" type="radio" value="200" />形容词
+                                </label>
+                                <label>
+                                    <input name="matchType" th:checked="${sjzNlRegExp.matchType==300}" type="radio" value="300" />数词
+                                </label>
+                            </td>
+                        </tr>
+                        <tr class="tr6">
+                            <td>检查状态：</td>
+                            <td class="sjz_center_t_td">
+                                <div class="check_label_div">
+                                    <label>
+                                        <input name="checkStatus" th:checked="${sjzNlRegExp.checkStatus==0}"  type="radio" value="0" />未校验
+                                    </label>
+                                    <label>
+                                        <input name="checkStatus" th:checked="${sjzNlRegExp.checkStatus==10}"  type="radio" value="10" />已校验
+                                    </label>
+                                    <label>
+                                        <input name="checkStatus" th:checked="${sjzNlRegExp.checkStatus==20}"  type="radio" value="20" />禁用
+                                    </label>
+                                </div>
+                                <div class="check_img_div">
+                                    <img src="" class="check_img_msg"/>
+                                </div>
+                                <div class="check_a_div">
+                                    <a class="check_a" href="javascript:void(0);"  onclick="javascript:regExp_checked();" >验证</a>
+
+                                </div>
+                                <!--<input type="button"  onclick="regExp_checked();" value="检查" />-->
+                            </td>
+                        </tr>
+                        <tr class="tr7">
+                            <td>描述：</td>
+                            <td><textarea name="descr" rows="7" th:text="${sjzNlRegExp.descr}"></textarea></td>
+                        </tr>
+                        <tr class="tr8">
+                            <td><input class="sjz_center_ta_submit" type="submit" value="确定"/></td>
+                            <td></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div th:replace="/common/sjz_bottom :: sjz_bottom"  ></div>
+</div>
+</body>
+</html>

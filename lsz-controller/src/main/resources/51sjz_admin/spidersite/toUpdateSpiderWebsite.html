@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>事件管理</title>
+    <link rel="icon" th:href="@{/images/favicon.ico}" type="image/gif" />
+    <link th:href="@{/css/comm.css}" rel="stylesheet" type="text/css" />
+    <script th:src="@{/js/jquery-3.4.1.min.js}" type="text/javascript" />
+    <script th:src="@{/js/utils.js}" type="text/javascript" />
+    <style type="text/css" >
+
+        .sjz_center_ta
+        {
+            width: 95%;
+            min-height: 200px;
+        }
+        .sjz_center_ta_tarea
+        {
+            width: 95%;
+
+        }
+        .sjz_center_ta table
+        {
+            width: 100%;
+        }
+        .sjz_center_ta table .tr1
+        {
+            height:45px;
+        }.sjz_center_ta table .tr2
+        {
+            height:100px;
+        }.sjz_center_ta table .tr3
+        {
+            height:45px;
+        }.sjz_center_ta table .tr4
+        {
+            height:50px;
+        }
+        .sjz_center_t_td
+        {
+            width: 95%;
+        }
+        .sjz_center_ta_submit
+        {
+            width: 60px;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <div th:replace="/common/sjz_top :: sjz_top"  ></div>
+    <div class="sjz_nvg">
+        当前位置：<a href="/admin/index">首页</a> > <a href="/admin/eventIndex">事件管理</a> > 修改事件
+    </div>
+    <div class="sjz_c">
+        <!-- 菜单 -->
+        <div th:replace="/common/sjz_menu :: sjz_menu"  ></div>
+        <div class="sjz_center">
+            <div>
+                <div></div>
+            </div>
+            <div class="sjz_center_ta">
+                <form action="/admin/event/upadte" method="post">
+                    <table>
+                        <thead>
+
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>编号：</td><td><div th:text="${sjzEventIndex.id}"></div></td>
+                        </tr>
+                        <tr class="tr1">
+                            <td>时间：</td>
+                            <td class="sjz_center_t_td">
+                                <input type="hidden" name="id" th:value="${sjzEventIndex.id}" />
+                                <input type="text" name="eventTime"
+                                       th:value="${sjzEventIndex.eventTime}
+                                                  ? ${#dates.format(sjzEventIndex.eventTime,'yyyy-MM-dd')}
+                                                  : ''"/>&nbsp;&nbsp;
+
+                            </td>
+                        </tr>
+                        <tr class="tr2">
+                            <td>内容：</td>
+                            <td>
+                                <textarea name="eventContent" rows="7"
+                                          class="sjz_center_ta_tarea"
+                                          th:text="${sjzEventIndex.eventContent}"></textarea>
+                            </td>
+                        </tr>
+                        <tr class="tr3">
+                            <td>类型：</td>
+                            <td><select name="eventType"
+                                        th:field="${sjzEventIndex.eventType}"
+                                        th:switch="${sjzEventIndex.eventType}">
+                                <option value="" >-请选择-</option>
+                                <option th:selected="${sjzEventIndex.eventType=='0'}" value="0">文本</option>
+                                <option th:selected="${sjzEventIndex.eventType=='10'}" value="10">超链接</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td>状态：</td>
+                            <td>
+                                <label>
+                                    <input name="eventState" th:checked="${sjzEventIndex.eventState==0}" type="radio" value="0" />:发布
+                                </label>
+                                &nbsp;
+                                <label>
+                                    <input name="eventState" th:checked="${sjzEventIndex.eventState==10}" type="radio" value="10" />:待审核
+                                </label>
+                                &nbsp;
+                                <label>
+                                    <input name="eventState" th:checked="${sjzEventIndex.eventState==20}" type="radio" value="20" />:审核通过
+                                </label>
+                                &nbsp;
+                                <label>
+                                    <input name="eventState" th:checked="${sjzEventIndex.eventState==30}" type="radio" value="30" />:审核禁止
+                                </label>
+                            </td>
+                        </tr>
+                        <tr class="tr4">
+                            <td><input class="sjz_center_ta_submit" type="submit" value="确定"/></td>
+                            <td></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="/common/sjz_bottom :: sjz_bottom"  ></div>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>关联模式单元管理</title>
+    <link rel="icon" th:href="@{/images/favicon.ico}" type="image/gif" />
+    <link th:href="@{/css/comm.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/regexp.css}" rel="stylesheet" type="text/css" />
+    <script th:src="@{/js/jquery-3.4.1.min.js}" type="text/javascript" />
+    <script th:src="@{/js/utils.js}" type="text/javascript" />
+    <script th:src="@{/js/regexp.js}" type="text/javascript" />
+
+    <style type="text/css" >
+
+
+        .sjz_center_ta
+        {
+            width: 95%;
+            min-height: 200px;
+        }
+
+        .sjz_center_ta table .tr1
+        {
+            height:45px;
+        }.sjz_center_ta table .tr2
+        {
+            height:100px;
+        }.sjz_center_ta table .tr3
+        {
+            height:45px;
+        }
+
+        .sjz_center_t_td
+        {
+            width: 95%;
+        }
+        .sjz_center_ta_submit
+        {
+            width: 60px;
+        }
+
+        .sjz_center .sjz_center_top_add li
+        {
+            display: inline;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <div th:replace="/common/sjz_top :: sjz_top"  ></div>
+    <div class="sjz_nvg">
+        当前位置：<a href="/admin/index">首页</a> > <a href="/admin/nlRegExp/index">表达式模板管理</a> > 添加表达式模板
+    </div>
+    <div class="sjz_c">
+        <!-- 菜单 -->
+        <div th:replace="/common/sjz_menu :: sjz_menu"  ></div>
+        <div class="sjz_center">
+            <div  >
+            </div>
+            <div class="sjz_center_ta">
+                <form action="/admin/rpu/add" method="post">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td style="width: 10%;"></td>
+                                <td></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="tr1">
+                            <td>匹配模板名称：</td>
+                            <td class="sjz_center_t_td">
+                                <input type="text" name="patternName" value=""/>&nbsp;&nbsp;
+                            </td>
+                        </tr>
+                        <tr class="tr1">
+                            <td>顺序号：</td>
+                            <td class="sjz_center_t_td">
+                                <input type="text" name="unitSerialNo" value=""/>&nbsp;&nbsp;
+                            </td>
+                        </tr>
+                        <tr class="tr2">
+                            <td>正则表达式代码：</td>
+                            <td><input name="regExpCode" /></td>
+                        </tr>
+                        <tr class="tr2">
+                            <td>正则表达式：</td>
+                            <td><input name="regExpPattern" /></td>
+                        </tr>
+                        <tr class="tr3">
+                            <td>关联类型：</td>
+                            <td>
+                                <label>
+                                    <input name="relateType"  type="radio" value="0" />包含
+                                </label>
+                                <label>
+                                    <input name="relateType"  type="radio" value="10" />排除
+                                </label>
+                            </td>
+                        </tr>
+
+                        <tr class="tr5">
+                            <td>使用状态：</td>
+                            <td class="sjz_center_t_td">
+                                <div class="check_label_div">
+                                    <label>
+                                        <input name="useStatus" type="radio" value="0" />开启
+                                    </label>
+                                    <label>
+                                        <input name="useStatus" type="radio" value="10" />关闭
+                                    </label>
+                                </div>
+                                <div class="check_img_div">
+                                    <img src="" class="check_img_msg"/>
+                                </div>
+                                <div class="check_a_div">
+                                    <a class="check_a" href="javascript:void(0);"  onclick="javascript:regExp_checked();" >验证</a>
+
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="tr6">
+                            <td>描述：</td>
+                            <td><textarea name="descript" rows="7" ></textarea></td>
+                        </tr>
+                        <tr class="tr7">
+                            <td><input class="sjz_center_ta_submit" type="submit" value="确定"/></td>
+                            <td></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div th:replace="/common/sjz_bottom :: sjz_bottom"></div>
+</body>
+</html>

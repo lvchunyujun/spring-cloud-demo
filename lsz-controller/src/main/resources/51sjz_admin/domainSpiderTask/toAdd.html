@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>添加域名抓取任务</title>
+    <link rel="icon" th:href="@{/images/favicon.ico}" type="image/gif" />
+    <link th:href="@{/css/comm.css}" rel="stylesheet" type="text/css" />
+    <script th:src="@{/js/jquery-3.4.1.min.js}" type="text/javascript" />
+    <script th:src="@{/js/utils.js}" type="text/javascript" />
+
+
+    <!-- 单词选择遮罩层 -->
+    <link th:href="@{/js/sjzPlugs/wordCheck.css}" rel="stylesheet" type="text/css" />
+    <script th:src="@{/js/sjzPlugs/wordCheck.js}" type="text/javascript" />
+
+    <style type="text/css" >
+
+        .sjz_center_ta table input[name='wordCode']
+        {
+            width: 85%;
+            float: left;
+        }
+        #_show_word_list
+        {
+            width: 10%;
+            float: left;
+            text-align: center;
+            cursor:pointer;
+            color: #55f;
+            font-weight: bold;
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#_show_word_list").bind("click",startDialogOpen);
+        });
+        workCheck = {
+            checkType:"radio",
+            checkedFun:function(obj){
+                $(" input[ name='wordCode' ]").val(obj.wordMetaCode);
+                $(" input[ name='wordMetaEn' ]").val(obj.wordMetaEn);
+                $(" input[ name='wordMetaZh' ]").val(obj.wordMetaZh);
+            },
+            uncheckedFun:function(obj){
+                $(" input[ name='wordMetaCode' ]").val("");
+                $(" input[ name='wordMetaEn' ]").val("");
+                $(" input[ name='wordMetaZh' ]").val("");
+            }
+        }
+    </script>
+</head>
+<body>
+<div>
+    <div th:replace="/common/sjz_top :: sjz_top"  ></div>
+    <div class="sjz_nvg">
+        当前位置：<a href="/admin/index">首页</a> > <a href="/admin/domainSpiderTask/index">事件管理</a> > 添加域名抓取任务
+    </div>
+    <div class="sjz_c">
+        <!-- 菜单 -->
+        <div th:replace="/common/sjz_menu :: sjz_menu"  ></div>
+        <div class="sjz_center">
+            <div>
+                <div></div>
+            </div>
+            <div class="sjz_center_ta">
+                <form action="/admin/domainSpiderTask/add" method="post">
+                    <table>
+                        <thead>
+                        <tr>
+                            <td>编号</td>
+                            <td>任务名称</td>
+                            <td>单词代码</td>
+                            <td>单词英文</td>
+                            <td>单词中文</td>
+                            <td>关联的模板单元名称</td>
+                            <td>任务类型</td>
+                            <td>任务状态</td>
+                            <td>任务描述</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="tr1"  >
+                            <td> </td>
+                            <td><input type="text" name="spiderTaskName" /> </td>
+                            <td><input type="text" name="wordCode" /><div id="_show_word_list">+</div></td>
+                            <td><input type="text" name="wordMetaEn" /> </td>
+                            <td><input type="text" name="wordMetaZh" /> </td>
+                            <td><input type="text" name="patternName" /> </td>
+                            <td >
+                                <input type="radio" name="spiderTaskType" value="10" checked="checked" />:事件
+                                <input type="radio" name="spiderTaskType" value="0" />:其他
+                            </td>
+                            <td >
+                                <input type="radio" name="spiderTaskStatus" value="0" checked="checked" />:正常
+                                <input type="radio" name="spiderTaskStatus" value="10" />:关闭
+                            </td>
+                            <td><textarea name="spiderTaskDescription" rows="2"  ></textarea></td>
+                        </tr>
+                        <tr>
+                            <td><a href="#" onclick="javascript:addForm();"  ><img th:src="@{/images/common/a.png}" /></a>
+                                <a href="#" onclick="javascript:deleteForm();" ><img th:src="@{/images/common/d.png}" /></a></td>
+                            <td><input class="sjz_center_ta_submit" type="submit" value="确定"/></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div th:replace="/common/sjz_bottom :: sjz_bottom"  ></div>
+<!-- 遮罩层 -->
+<div id="_sjz_word_meta_div">
+    <div class="box" >
+        <div id="dialog" >
+            <div id="_dialog_close" >X关闭</div>
+            <div id="_sjz_word_meta_c">
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

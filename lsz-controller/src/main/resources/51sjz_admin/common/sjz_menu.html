@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <link th:href="@{/css/comm.css}" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+<!-- 菜单 -->
+<div class="_sjz_menu" th:fragment="sjz_menu">
+    <img class="menu_img_ctl_left" src="/images/common/left_go.png" />
+    <img class="menu_img_ctl_right" src="/images/common/right_go.png" />
+<div class="sjz_menu" >
+    <ul>
+        <li>历史轴管理</li>
+        <li><a href="/admin/eventIndex" >事件管理</a></li>
+        <li><a href="/admin/eventIndexTemp/index" >事件缓存管理</a></li>
+        <li><a href="/admin/eventIndex" >事件变更记录</a></li>
+        <li>网站管理</li>
+        <li><a href="/admin/domainInfo/index" >域名地址管理</a></li>
+        <li><a href="/admin/spiderWebsite/index" >网站基本信息管理</a></li>
+        <li><a href="/admin/domainSpiderTask/index" >网站抓取任务管理</a></li>
+        <li><a href="/admin/domainWordSort/index" >域名单词分类管理</a></li>
+        <li>语言引擎管理</li>
+        <li><a href="/admin/nlRegExp/index" >表达式模板管理</a></li>
+        <!--<li><a href="/admin/" >关联模式任务管理</a></li>-->
+        <li><a href="/admin/rpu/index" >关联模式单元管理</a></li>
+        <li><a href="/admin/nl/wordMeta/index" >词类元数据管理</a></li>
+        <!--<li><a href="/admin/" >分词管理</a></li>-->
+        <li>任务管理</li>
+        <li><a href="/admin/" >定时任务管理</a></li>
+        <li>SMS管理</li>
+        <li><a href="/admin/sms/email/index" >smsEmail信息管理</a></li>
+        <li><a href="/admin/sms/index" >sms平台管理</a></li>
+        <li><a href="/admin/sms/index" >sms平台Email管理</a></li>
+        <li><a href="/admin/sms/index" >sms用户管理</a></li>
+        <li><a href="/admin/sms/index" >smsEmail服务配置管理</a></li>
+        <li><a href="/admin/sms/index" >smsEmail白名单管理</a></li>
+        <li><a href="/admin/sms/index" >smsEmail黑名单管理</a></li>
+        <li>系统管理</li>
+        <li><a href="/admin/userInfo/index" >用户管理(来源客户端)</a></li>
+        <li><a href="/admin/" >通知管理(来源客户端)</a></li>
+        <li><a href="/admin/" >客户端管理(来源客户端)</a></li>
+        <li><a href="/admin/" >菜单管理(来源客户端)</a></li>
+        <li><a href="/admin/" >权限管理(来源客户端)</a></li>
+        <li><a href="/admin/" >角色管理(来源客户端)</a></li>
+        <li><a href="/admin/" >系统设置管理(来源客户端)</a></li>
+    </ul>
+</div>
+</div>
+</body>
+</html>

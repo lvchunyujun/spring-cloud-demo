@@ -1,0 +1,69 @@
+#_sjz_word_meta_div{
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    display: none;
+}
+#dialog{
+    border-radius: 8px;
+    text-align: center;
+    width: 95%;
+    height: 90%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    background-color: white;
+    z-index: 999;
+
+}
+.box{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,0.3);
+    z-index: 999;
+}
+.box ul
+{
+    width: 110px;
+    text-align: right;
+    float: left;
+    padding: 0px;
+}
+.box ul li
+{
+    border-radius: 3px;
+    margin: 2px 3px;
+    color: #fff;
+    padding: 0px 4px;
+    height: 20px;
+}
+.box ul img
+{
+    cursor: pointer;
+    width: 20px;
+    float: left;
+}
+.box ul li p
+{
+    margin: 0px;
+    float: right;
+    width: 75%;
+    background-color: #07ce16;
+    border-radius: 2px;
+    cursor: pointer;
+}
+#_dialog_close
+{
+    width: 60px;
+    float: right;
+    height: 30px;
+    cursor: pointer;
+    line-height: 30px;
+    color: #ff3f3f;
+}
