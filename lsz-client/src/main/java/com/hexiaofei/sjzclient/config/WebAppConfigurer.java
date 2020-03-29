@@ -58,13 +58,15 @@ public class WebAppConfigurer implements WebMvcConfigurer {
         InterceptorRegistration registration =
                 registry.addInterceptor(loginInterceptor);      //拦截的对象会进入这个类中进行判断
         registration.addPathPatterns("/**");                    //所有路径都被拦截
-        registration.excludePathPatterns("/",                   //添加不拦截路径
-                WebSystemConsts.LOGIN_URL,
+        registration.excludePathPatterns("/",
+                WebSystemConsts.INDEX_URL,                      // 首页索引
                 WebSystemConsts.TO_LOGIN_URL,
+                WebSystemConsts.TO_SIGN_IN,
+                WebSystemConsts.LOGIN_URL,
                 WebSystemConsts.LOGOUT_URL,
+                WebSystemConsts.SEND_CHECK_CODE,
                 WebSystemConsts.ERROR_URL,
-                WebSystemConsts.STATIC_URL,
-                WebSystemConsts.INDEX_URL);
+                WebSystemConsts.STATIC_URL);                 //添加不拦截路径
 //        super.addInterceptors(registry);
 
 
