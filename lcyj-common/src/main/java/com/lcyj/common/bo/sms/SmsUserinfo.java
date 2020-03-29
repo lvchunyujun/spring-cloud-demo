@@ -1,4 +1,4 @@
-package com.lcyj.servicedemo.model;
+package com.lcyj.common.bo.sms;
 
 import java.util.Date;
 
@@ -7,6 +7,11 @@ public class SmsUserinfo {
      *ID
      */
     private Integer id;
+
+    /**
+     *
+     */
+    private String smsUserId;
 
     /**
      *用户ID
@@ -70,6 +75,20 @@ public class SmsUserinfo {
      */
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    /**
+     *
+     */
+    public String getSmsUserId() {
+        return smsUserId;
+    }
+
+    /**
+     *
+     */
+    public void setSmsUserId(String smsUserId) {
+        this.smsUserId = smsUserId == null ? null : smsUserId.trim();
     }
 
     /**
