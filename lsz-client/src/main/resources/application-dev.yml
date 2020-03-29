@@ -6,7 +6,7 @@ server:
     max-threads: 100                                    # 最大线程数
     accesslog:
       enabled: true                                     # 开启日志
-      directory: /Users/hexiaofei/Desktop/logs/tomcat   # 日志目录
+      directory: /Users/hexiaofei/Desktop/logs/lsz-client/tomcat   # 日志目录
       buffered: true                                    # 缓冲输出，使其只定期刷新。
       rotate: true                                      # Enable access log rotation.指定是否启用日志轮转。默认为true。这个参数决定是否需要切换切换日志文件，如果被设置为false，则日志文件不会切换，即所有文件打到同一个日志文件中，并且file-date-format参数也会被忽略
       file-date-format: .yyyy-MM-dd                     # 要放在日志文件名中的日期格式。rotate为false的时候，这个也就不生效了。

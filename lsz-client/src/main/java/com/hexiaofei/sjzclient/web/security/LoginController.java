@@ -5,6 +5,7 @@ import com.hexiaofei.sjzclient.domain.UserInfo;
 import com.hexiaofei.sjzclient.exception.PlatformException;
 import com.hexiaofei.sjzclient.service.UserInfoService;
 import com.hexiaofei.sjzclient.web.AbstractBaseController;
+import com.lcyj.common.web.WebCommonConstant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +45,7 @@ public class LoginController extends AbstractBaseController {
             if(login_user!=null){
                 session = request.getSession();
                 session.setAttribute(WebSystemConsts.COOKIE_USER,login_user);
-                session.setMaxInactiveInterval(WebSystemConsts.COOKIE_OUTTIME);
+                session.setMaxInactiveInterval(WebCommonConstant.COOKIE_LOGIN_IN_OUTTIME);
                 modelAndView.addObject("LOGIN_MSG","0000");
             }else{
                 modelAndView.setViewName("/common/login");

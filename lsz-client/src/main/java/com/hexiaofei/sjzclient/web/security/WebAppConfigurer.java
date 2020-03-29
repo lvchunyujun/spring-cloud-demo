@@ -1,9 +1,7 @@
-package com.hexiaofei.sjzclient.config;
+package com.hexiaofei.sjzclient.web.security;
 
 
 import com.hexiaofei.sjzclient.common.WebSystemConsts;
-import com.hexiaofei.sjzclient.web.security.LoginInterceptor;
-import com.hexiaofei.sjzclient.web.security.RightsInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
@@ -60,14 +58,15 @@ public class WebAppConfigurer implements WebMvcConfigurer {
         registration.addPathPatterns("/**");                    //所有路径都被拦截
         registration.excludePathPatterns("/",
                 WebSystemConsts.INDEX_URL,                      // 首页索引
-                WebSystemConsts.TO_LOGIN_URL,
-                WebSystemConsts.TO_SIGN_IN,
-                WebSystemConsts.LOGIN_URL,
-                WebSystemConsts.LOGOUT_URL,
-                WebSystemConsts.SEND_CHECK_CODE,
+                WebSystemConsts.TO_LOGIN_URL,                   // 登录
+                WebSystemConsts.TO_SIGN_IN,                     // 注册
+                WebSystemConsts.SIGN_IN,                     // 注册
+                WebSystemConsts.LOGIN_URL,                      // 登录
+                WebSystemConsts.LOGOUT_URL,                     // 退出登录
+                WebSystemConsts.SEND_CHECK_CODE,                // 发送注册验证码
                 WebSystemConsts.ERROR_URL,
-                WebSystemConsts.STATIC_URL);                 //添加不拦截路径
-//        super.addInterceptors(registry);
+                WebSystemConsts.STATIC_URL);                    //添加不拦截路径
+
 
 
         //权限拦截的管理器

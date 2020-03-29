@@ -50,12 +50,42 @@
         opacity:1;
         font-size: 14px;
     }
+    #sign_in_msg
+    {
+        position: absolute;
+        top: 17rem;
+        right: 16rem;
+    }
+    #sign_in_msg span
+    {
+        font-size:12px;
+    }
+    .check_allowed
+    {
+        background: #fff;
+        cursor: pointer;
+    }
+    .check_allowed:hover {
+        color: #1692ef;
+        background: #fff;
+        border: 1px solid #1692ef;
+
+    }
+    .not_allowed
+    {
+        background-color: #dedede;
+        cursor: not-allowed;
+    }
 
     </style>
     <script type="text/javascript">
         $(document).ready(function(){
-            $("#lsz_b_vc").bind('click',function(){
+            $("#lsz_b_vc").bind('click',sendCheckCode);
+        });
+
+        function sendCheckCode(){
                 var email = $("#lsz_input_email").val();
+                auto_task_timing(120);
                 $.ajax({
                     type: "post",
                     url: "/sendCheckCode",
@@ -63,17 +93,44 @@
                     dataType:'json',
                     success:function(data){
                         var resultCode = data.resultCode;
+                        var resultMsg = data.resultMsg;
+                        $("#sign_in_msg span").text(resultMsg);
                         if(resultCode=='0000'){
-                            alert("发送成功！");
-                        }
+                            $("#sign_in_msg span").css("color","green");
 
+                        }else{
+                            $("#sign_in_msg span").css("color","red");
+                        }
                     },
                     error: function(XMLHttpRequest, textStatus, errorThrown){
-                        alert(textStatus+"  "+XMLHttpRequest.state());
+                        $("#sign_in_msg span").text("网络异常，请稍后再试！");
+                        $("#sign_in_msg span").css("color","red");
                     }
                 });
-            });
-        });
+        }
+
+        function check_not_allow(laterTime){
+            $("#lsz_b_vc")
+                .unbind("click")
+                .attr("class","not_allowed")
+                .val(laterTime+"S后，重新发送")
+        }
+
+        function check_allow(){
+            $("#lsz_b_vc")
+                .bind('click',sendCheckCode)
+                .attr("class","check_allowed")
+                .val("获取验证码");
+        }
+
+        function auto_task_timing(laterTime){
+            if(laterTime-- > 0){
+                check_not_allow(laterTime);
+                setTimeout(function () { auto_task_timing(laterTime); },1000);
+            }else{
+                check_allow();
+            }
+        }
     </script>
 </head>
 
@@ -87,9 +144,7 @@
     <div class="wel1">51SHIJIANZHOU XI TONG HUO TAI DENG LU</div>
     <form method="post" action="/registor">
 
-        <div class="login_msg" th:if="${LOGIN_MSG != null &amp;&amp; LOGIN_MSG != '0000'} ">
-            用户名或密码错误！
-        </div>
+
         <div class="user">
             <div id="yonghu">
                 <img th:src="@{/images/common/login/yhm.png}" />
@@ -107,7 +162,10 @@
                 <img th:src="@{/images/common/login/verified_72.png}"/>
             </div>
             <input type="text" th:name="verifyCode" placeholder="请输入验证码"/>
-            <input type="button" id="lsz_b_vc" th:value="获取验证码"/>
+            <input type="button" class="check_allowed" id="lsz_b_vc" th:value="获取验证码"/>
+        </div>
+        <div id="sign_in_msg">
+            <span></span>
         </div>
         <input class="btn" type="submit" value="免费注册" />
     </form>
