@@ -28,7 +28,9 @@
 
 .lsz_content
 {
-    padding-top: 30px;
+    padding-top: 10px;
+    margin: 0 auto;
+    width: 70%;
 }
 .sjz_zj
 {
@@ -59,28 +61,25 @@
 /** 事件盒子 日期、内容 **/
 .ei_count_main_cell
 {
-    margin: auto;
+    margin: 30px auto;
     width: 850px;
-    min-height: 100px;
-
+    display: table;
 }
 
 /** 日期 **/
 .ei_count_main_time
 {
-    float:left;
-    width: 150px;
-    line-height: 85px;
+    width: 120px;
     text-align: center;
     color: #23a6d2;
+    display: table-cell;
+    vertical-align: middle;
 }
 /** 日期 **/
 
 /** 事件内容 **/
 .ei_count_main_content
 {
-    float: left;
-    min-height: 40px;
     width: 680px;
     padding: 10px 5px;
     text-indent: 30px;
@@ -88,6 +87,7 @@
     border: 1px solid #d8d8d85e;
     background-color: #fffdf7;
     border-radius: 8px;
+    display: table-cell;
 }
 /** 事件内容 **/
 
