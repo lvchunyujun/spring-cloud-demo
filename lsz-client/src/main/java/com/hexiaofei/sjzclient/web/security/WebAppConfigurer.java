@@ -65,6 +65,7 @@ public class WebAppConfigurer implements WebMvcConfigurer {
                 WebSystemConsts.LOGOUT_URL,                     // 退出登录
                 WebSystemConsts.SEND_CHECK_CODE,                // 发送注册验证码
                 WebSystemConsts.ERROR_URL,
+                WebSystemConsts.IMG_VERIFY_CODE,
                 WebSystemConsts.STATIC_URL);                    //添加不拦截路径
 
 

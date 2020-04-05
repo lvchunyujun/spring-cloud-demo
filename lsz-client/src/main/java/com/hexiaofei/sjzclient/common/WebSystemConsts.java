@@ -30,8 +30,9 @@ public interface WebSystemConsts {
     String ERROR_URL   = "/error";
     /** URL: 静态资源*/
     String STATIC_URL  = "/static/**";
-    /** URL: 发送注册码*/
+    /** URL: 发送注册码 */
     String SEND_CHECK_CODE = "/sendCheckCode";
-
+    /** URL: 图片验证码 */
+    String IMG_VERIFY_CODE = "/verifyImg";
 
 }

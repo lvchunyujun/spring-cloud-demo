@@ -120,6 +120,13 @@
 			<version>1.2.40</version>
 		</dependency>
 
+		<!-- git绘图 -->
+		<dependency>
+			<groupId>com.madgag</groupId>
+			<artifactId>animated-gif-lib</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<!-- -->
 	</dependencies>
 
 	<dependencyManagement>

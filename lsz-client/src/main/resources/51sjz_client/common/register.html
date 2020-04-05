@@ -97,7 +97,6 @@
                         $("#sign_in_msg span").text(resultMsg);
                         if(resultCode=='0000'){
                             $("#sign_in_msg span").css("color","green");
-
                         }else{
                             $("#sign_in_msg span").css("color","red");
                         }
@@ -107,6 +106,30 @@
                         $("#sign_in_msg span").css("color","red");
                     }
                 });
+        }
+
+        function register(){
+
+            $.ajax({
+                type: "post",
+                url: "/registor",
+                data:{email:email},
+                dataType:'json',
+                success:function(data){
+                    var resultCode = data.resultCode;
+                    var resultMsg = data.resultMsg;
+                    $("#sign_in_msg span").text(resultMsg);
+                    if(resultCode=='0000'){
+                        $("#sign_in_msg span").css("color","green");
+                    }else{
+                        $("#sign_in_msg span").css("color","red");
+                    }
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown){
+                    $("#sign_in_msg span").text("网络异常，请稍后再试！");
+                    $("#sign_in_msg span").css("color","red");
+                }
+            });
         }
 
         function check_not_allow(laterTime){

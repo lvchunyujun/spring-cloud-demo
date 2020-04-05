@@ -5,6 +5,7 @@
     <link rel="icon" th:href="@{/images/favicon.ico}" type="image/gif"/>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
     <link th:href="@{/css/sjz_login.css}" rel="stylesheet" type="text/css"/>
+    <script th:src="@{/js/jquery-3.4.1.min.js}" type="text/javascript" />
     <style>@media print {
         #ghostery-purple-box {
             display: none !important
@@ -26,8 +27,43 @@
         line-height: 50px;
         text-decoration: none;
     }
-
     </style>
+
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+            $(".btn").bind("click",function(){
+                login();
+            });
+        });
+
+        function login(){
+            var userName = $("#lsz_login_from_ input[name='userName']").val();
+            var password = $("#lsz_login_from_ input[name='password']").val();
+            var verifyCode = $("#lsz_login_from_ input[name='verifyCode']").val();
+            $.ajax({
+                    url:"/login",
+                    type: "POST",
+                    data:{"userName":userName,
+                          "password":password,
+                          "verifyCode":verifyCode},
+                    success:function(data){
+                        var code = data.resultCode;
+                        if(code == "0000"){
+                            var myIndex = data.resultMsg;
+                            window.open(myIndex,"_parent");
+                        }else{
+                            $(".login_msg").text(data.resultMsg);
+                        }
+                    },
+                    error:function(){
+                        $(".login_msg").text("网络异常稍后再试！");
+                    }
+                });
+        }
+
+
+    </script>
 </head>
 
 <body>
@@ -38,24 +74,32 @@
 <div class="table">
     <div class="wel">历史轴用户密码登录</div>
     <div class="wel1">51SHIJIANZHOU XI TONG HUO TAI DENG LU</div>
-    <form method="post" action="/login">
+    <form id="lsz_login_from_">
 
-        <div class="login_msg" th:if="${LOGIN_MSG != null &amp;&amp; LOGIN_MSG != '0000'} ">
-            用户名或密码错误！
+        <div class="login_msg" >
+
         </div>
         <div class="user">
             <div id="yonghu">
                 <img th:src="@{/images/common/login/yhm.png}" />
             </div>
-            <input type="text" th:name="userName" placeholder="请输入邮箱" />
+            <input type="text" th:name="userName" value="lvchunyujun@163.com" placeholder="请输入邮箱" />
         </div>
         <div class="password">
             <div id="mima">
                 <img th:src="@{/images/common/login/mm.png}"/>
             </div>
-            <input type="password" th:name="password" placeholder="请输入密码"/>
+            <input type="password" th:name="password" value="000000" placeholder="请输入密码"/>
         </div>
-        <input class="btn" type="submit" value="登录" />
+        <div class="verifyImg">
+            <div id="jym" style="margin-right: 20px;">
+                <img src="/images/common/login/mm.png"/>
+                <input type="text" placeholder="请输入验证码" name="verifyCode" style="width: 166px;text-align: center;"/>
+                <img th:src="@{/verifyImg}" style="right: 20px;position:relative;height:33px;margin-left: 40px;width: 90px;"/>
+            </div>
+            <a src="javascript:void(0);" style="line-height: 55px;font-size: 10px;width: 50px;" >换一张</a>
+        </div>
+        <input class="btn" type="button" value="登录" />
     </form>
     <!--<input class="register" type="button" value="免费注册" onclick="javascript:to_register();" />-->
     <a class="register"  href="/toRegistor">免费注册</a>

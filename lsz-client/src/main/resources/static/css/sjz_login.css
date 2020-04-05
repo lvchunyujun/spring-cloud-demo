@@ -45,6 +45,12 @@
      right: 4rem;
      display: flex;
 }
+.verifyImg{
+    top: 14rem;
+    position: absolute;
+    right: 4rem;
+    display: flex;
+}
 .btn{
     position: absolute;
     top: 18.5rem;
@@ -108,15 +114,17 @@ input{
     -moz-border-radius: 4px;
     border-radius: 4px;
     font-family: Arial,"宋体";
+    font-size: 14px;
 }
 .login_msg
 {
     position: absolute;
-    top: 5.8rem;
-    right: 19rem;
+    top: 4.5rem;
+    right: 4rem;
     display: flex;
-    color: #f00;
+    color: #ce430f;
     font-size: 14px;
+    width: 373px;
 }
 
 
