@@ -50,6 +50,14 @@
             <artifactId>fastjson</artifactId>
             <version>${fastjson.version}</version>
         </dependency>
+
+        <!-- git绘图 -->
+        <dependency>
+            <groupId>com.madgag</groupId>
+            <artifactId>animated-gif-lib</artifactId>
+            <version>1.2</version>
+        </dependency>
+        <!-- -->
     </dependencies>
 
 
