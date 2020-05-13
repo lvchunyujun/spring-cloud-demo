@@ -16,8 +16,6 @@ server:
       prefix: access_log                               # Log file name prefix.
       suffix: .log                                     # Log file name suffix.
 spring:
-  application:
-    name: lsz-controller
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
