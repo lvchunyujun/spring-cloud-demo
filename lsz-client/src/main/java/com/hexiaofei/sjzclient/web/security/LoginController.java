@@ -41,7 +41,7 @@ public class LoginController extends AbstractBaseController {
      * @param userName
      * @param password
      * @param verifyCode
-     * @deprecated 废弃
+     * @Deprecated
      * @return
      */
 //    @RequestMapping(value = WebSystemConsts.LOGIN_URL,method = RequestMethod.POST)
@@ -98,7 +98,7 @@ public class LoginController extends AbstractBaseController {
                     // step3: 设置session登录信息
                     setSessionForLogin(request,loginUser);
                     resultVo.setResultCode("0000");
-                    resultVo.setResultMsg("/my/eventIndex/index");
+                    resultVo.setResultMsg("/my/welcome");
                 }else{
                     resultVo.setResultCode("9999");
                     resultVo.setResultMsg("用户邮箱或密码错误！");
@@ -189,7 +189,7 @@ public class LoginController extends AbstractBaseController {
         // 设置之前的 session失效
         session.invalidate();
         session = request.getSession();
-        session.setAttribute(WebSystemConsts.COOKIE_USER,userInfo.getUserName());
+        session.setAttribute(WebSystemConsts.COOKIE_USER,userInfo);
         session.setMaxInactiveInterval(WebCommonConstant.COOKIE_LOGIN_IN_OUTTIME);
     }
 

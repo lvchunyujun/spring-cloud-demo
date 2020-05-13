@@ -1,7 +1,7 @@
 package com.hexiaofei.sjzclient.service;
 
 import com.hexiaofei.AbstractTest;
-import com.hexiaofei.sjzclient.common.SjzEventStateEnum;
+import com.hexiaofei.sjzclient.common.EnumSjzEventState;
 import com.hexiaofei.sjzclient.domain.SjzEventIndex;
 import com.hexiaofei.sjzclient.exception.PlatformException;
 import com.hexiaofei.sjzclient.vo.PageVo;
@@ -24,7 +24,7 @@ public class SjzEventIndexServiceImplTest extends AbstractTest {
     public void getPageVoObjectBySjzEventIndex() throws PlatformException {
 
         SjzEventIndex sjzEventIndex = new SjzEventIndex();
-        sjzEventIndex.setEventState(SjzEventStateEnum.RELEASE.getStatus());
+        sjzEventIndex.setEventState(EnumSjzEventState.RELEASE.getStatus());
 
         PageVo<SjzEventIndex> pageVo = new PageVo();
         pageVo.setCurrentPage(1);

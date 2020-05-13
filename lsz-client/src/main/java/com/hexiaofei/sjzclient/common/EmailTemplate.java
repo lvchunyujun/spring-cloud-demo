@@ -7,9 +7,9 @@ public class EmailTemplate {
      */
     public static final String REG_CHECK_CODE = "<div style='color:#333333;'>"
             + "<p>亲爱的"+PlatformConstant.PLATFORM_NAME+"用户：您好！</p>"
-            + "<p>感谢您注册"+PlatformConstant.SERVER_WEBSITE+"，这是您的注册验证码【%s】。</p>"
+            + "<p>感谢您注册<a href='http://"+PlatformConstant.SERVER_WEBSITE+"'>"+PlatformConstant.SERVER_NAME+"</a>，这是您的注册验证码【%s】。</p>"
             + "<br />"
-            + "<p style='color:#333333;'>感谢您对历史轴网站的支持！</p>"
+            + "<p style='color:#333333;'>请完成您的注册，感谢您对历史轴网站的关注支持！</p>"
             + "<br />"
             + "<p>---------------------------------- </p>"
             + "<p style='color:#333333;'>注：此邮件由"+PlatformConstant.SERVER_NAME+"系统自动发送，请勿回复 </p>"

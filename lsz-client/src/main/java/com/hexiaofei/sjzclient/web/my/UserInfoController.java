@@ -5,6 +5,7 @@ import com.hexiaofei.sjzclient.exception.PlatformException;
 import com.hexiaofei.sjzclient.service.UserInfoService;
 import com.hexiaofei.sjzclient.vo.PageVo;
 import com.hexiaofei.sjzclient.web.BaseController;
+import com.lcyj.common.vo.ResultVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -30,6 +32,13 @@ public class UserInfoController extends MyBaseController implements BaseControll
 
     @Autowired
     private UserInfoService userInfoService;
+
+    // 欢迎页面
+    @RequestMapping("/welcome")
+    public String welcome(){
+
+        return "/my/index";
+    }
 
     @RequestMapping(BASE_URL+"/{id}")
     @ResponseBody
@@ -92,6 +101,11 @@ public class UserInfoController extends MyBaseController implements BaseControll
         }else{
             return ADD_FAIL_URL;
         }
+    }
+
+    @Override
+    public ResultVo<UserInfo> add(HttpServletRequest request, UserInfo userInfo) {
+        return null;
     }
 
     @RequestMapping(value = BASE_URL+"/toUpdate/{id}")
@@ -169,6 +183,26 @@ public class UserInfoController extends MyBaseController implements BaseControll
             LOGGER.error("查询异常！",e);
         }
 
+        return modelAndView;
+    }
+
+    @RequestMapping(value = BASE_URL+"/record")
+    public ModelAndView recordInfo(HttpServletRequest request){
+        LOGGER.info("【查看个人信息】--> ");
+        ModelAndView modelAndView = new ModelAndView("/my/"+BASE_URL+"/recordInfo");
+        UserInfo userInfo = getLoginUserInfo(request);
+
+        try {
+            UserInfo recordInof = userInfoService.getObjectById(userInfo.getId());
+            modelAndView.addObject("nickName",recordInof.getNickName());
+            modelAndView.addObject("userName",recordInof.getUserName());
+            modelAndView.addObject("email",recordInof.getEmail());
+            modelAndView.addObject("phone",recordInof.getPhone());
+        } catch (PlatformException e) {
+            LOGGER.error("【查看个人信息】 异常！",e);
+        }
+
+        LOGGER.info("【查看个人信息】<-- ");
         return modelAndView;
     }
 }

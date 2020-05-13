@@ -64,18 +64,18 @@
                     eventContent:{
                         tagType:"text"
                     },
-                    eventType:{
-                        tagType:"text_type",
-                        typeMap:{
-                            0:"文本",
-                            20:"连接"
-                        }
-                    },
+                    // eventType:{
+                    //     tagType:"text_type",
+                    //     typeMap:{
+                    //         0:"文本",
+                    //         20:"连接"
+                    //     }
+                    // },
                     eventState:{
                         tagType:"text_type",
                         typeMap:{
-                            0:"待审核",
-                            10:"发布",
+                            0:"发布",
+                            10:"待审核",
                             20:"审核通过",
                             30:"审核禁止"
                         }
@@ -126,11 +126,11 @@
 
                 </tbody>
             </table>
-        </div>
-        <div class="ger_center_ ger_text_">
-            <div id="sjz_page_info"></div>
-            <a id="previous_page" href="javascript:void(0);" style="color: #1683a8;text-decoration:none">上一页</a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a id="next_page" href="javascript:void(0);" style="color: #1683a8;text-decoration:none" >下一页</a>
+            <div class="ger_center_ ger_text_">
+                <div id="sjz_page_info"></div>
+                <a id="previous_page" href="javascript:void(0);" style="color: #1683a8;text-decoration:none">上一页</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                <a id="next_page" href="javascript:void(0);" style="color: #1683a8;text-decoration:none" >下一页</a>
+            </div>
         </div>
     </div>
     <div th:replace="common/sjz_bottom :: sjz_bottom"  ></div>

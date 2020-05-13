@@ -103,7 +103,9 @@ public class RegisterController {
         String sessionVerifyCode = (String)session.getAttribute(WebCommonConstant.REGISTER_CHECK_CODE);
         String session_email = (String)session.getAttribute(WebCommonConstant.REGISTER_CHECK_EMAIL);
 
-        if(checkEmail(email,resultVo)&&email.equals(session_email)&&verifyCode.equals(sessionVerifyCode)){
+        if(checkEmail(email,resultVo)&&
+            email.equals(session_email)&&
+            verifyCode.equals(sessionVerifyCode)){
             // 1. 注册用户
             try {
                 int resultId = userInfoService.register(email,password);
@@ -129,7 +131,7 @@ public class RegisterController {
         if(WebCommonConstant.OK.equals(result)){
             return "/common/register_ok";
         }else{
-            return "/common/addFail";
+            return "/common/register";
         }
     }
 

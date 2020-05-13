@@ -1,9 +1,11 @@
 package com.hexiaofei.sjzclient.service.impl;
 
 import com.hexiaofei.sjzclient.dao.mapper.SjzEventIndexMapper;
+import com.hexiaofei.sjzclient.domain.SjzEventAuthor;
 import com.hexiaofei.sjzclient.domain.SjzEventIndex;
 import com.hexiaofei.sjzclient.domain.SjzSpiderWebsite;
 import com.hexiaofei.sjzclient.exception.PlatformException;
+import com.hexiaofei.sjzclient.service.SjzEventAuthorService;
 import com.hexiaofei.sjzclient.service.SjzEventIndexService;
 import com.hexiaofei.sjzclient.service.SjzSpiderWebsiteService;
 import com.hexiaofei.sjzclient.vo.PageVo;
@@ -26,16 +28,39 @@ public class SjzEventIndexServiceImpl implements SjzEventIndexService {
     @Autowired
     private SjzSpiderWebsiteService sjzSpiderWebsiteService;
 
+    @Autowired
+    private SjzEventAuthorService sjzEventAuthorService;
+
     @Transactional(rollbackFor = Exception.class) 
     @Override
     public int addEventIndexAndUser(SjzEventIndex sjzEventIndex, SjzSpiderWebsite sjzSpiderWebsite) throws PlatformException {
 
+        // step1: 添加网站来源
         sjzSpiderWebsiteService.addObject(sjzSpiderWebsite);
 
+        // step2: 添加历史事件
         addObject(sjzEventIndex);
-        if(true)
-         throw new PlatformException("测试事物传播");
+
         return 0;
+    }
+
+    @Override
+    public int addObject(SjzEventIndex sjzEventIndex, SjzSpiderWebsite sjzSpiderWebsite, SjzEventAuthor sjzEventAuthor) throws PlatformException {
+
+        // step1: 添加事件索引
+        int resultId = addObject(sjzEventIndex);
+        // step2: 添加事件来源网站
+        if(resultId > 0 &&sjzSpiderWebsite!=null) {
+            sjzSpiderWebsiteService.addObject(sjzSpiderWebsite);
+        }
+
+        // step3: 添加作者信息
+        if(sjzEventAuthor!=null){
+            sjzEventAuthor.setEventIndexId(sjzEventIndex.getId());
+            sjzEventAuthorService.addObject(sjzEventAuthor);
+        }
+
+        return resultId;
     }
 
     @Override
@@ -93,7 +118,6 @@ public class SjzEventIndexServiceImpl implements SjzEventIndexService {
         int resultId = -1;
         if(mob!=null){
             resultId = sjzEventIndexMapper.insert(mob);
-//            throw new PlatformException("测试事物传播");
         }
         return resultId;
     }
@@ -120,9 +144,7 @@ public class SjzEventIndexServiceImpl implements SjzEventIndexService {
         if(sjzEventIndex.getEventType()!=null){
             old.setEventType(sjzEventIndex.getEventType());
         }
-
-        int resultId = sjzEventIndexMapper.updateByPrimaryKey(old);
-        return 0;
+        return sjzEventIndexMapper.updateByPrimaryKey(old);
     }
 
     @Override

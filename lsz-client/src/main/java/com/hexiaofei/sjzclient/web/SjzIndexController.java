@@ -1,6 +1,6 @@
 package com.hexiaofei.sjzclient.web;
 
-import com.hexiaofei.sjzclient.common.SjzEventStateEnum;
+import com.hexiaofei.sjzclient.common.EnumSjzEventState;
 import com.hexiaofei.sjzclient.domain.SjzEventIndex;
 import com.hexiaofei.sjzclient.service.SjzEventIndexService;
 import com.hexiaofei.sjzclient.vo.PageVo;
@@ -45,7 +45,7 @@ public class SjzIndexController {
         try {
             // 已经发布状态的列表
             sjzEventIndex = new SjzEventIndex();
-            sjzEventIndex.setEventState(SjzEventStateEnum.RELEASE.getStatus());
+            sjzEventIndex.setEventState(EnumSjzEventState.RELEASE.getStatus());
 
             pageVo = sjzEventIndexService.getPageVoObjectBySjzEventIndex(sjzEventIndex,pageVo);
             modelAndView.addObject("eil",pageVo.getVoList());

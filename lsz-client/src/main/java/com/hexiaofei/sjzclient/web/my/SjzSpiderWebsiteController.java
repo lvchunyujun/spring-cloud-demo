@@ -5,6 +5,7 @@ import com.hexiaofei.sjzclient.exception.PlatformException;
 import com.hexiaofei.sjzclient.service.SjzSpiderWebsiteService;
 import com.hexiaofei.sjzclient.vo.PageVo;
 import com.hexiaofei.sjzclient.web.BaseController;
+import com.lcyj.common.vo.ResultVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class SjzSpiderWebsiteController extends MyBaseController implements BaseController<SjzSpiderWebsite> {
@@ -37,6 +40,11 @@ public class SjzSpiderWebsiteController extends MyBaseController implements Base
 
     @Override
     public String add(SjzSpiderWebsite sjzSpiderWebsite) {
+        return null;
+    }
+
+    @Override
+    public ResultVo<SjzSpiderWebsite> add(HttpServletRequest request, SjzSpiderWebsite sjzSpiderWebsite) {
         return null;
     }
 

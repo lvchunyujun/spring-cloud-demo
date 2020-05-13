@@ -7,14 +7,8 @@
     <link th:href="@{/css/common.css}" rel="stylesheet" type="text/css" />
     <script th:src="@{/js/jquery-3.4.1.min.js}" type="text/javascript" />
     <script th:src="@{/js/utils.js}" type="text/javascript" />
-    <script type="text/javascript">
-
-
-
-    </script>
+    <script th:src="@{/js/lcyj-fromVerify_1.0.js}" type="text/javascript" />
     <style type="text/css" >
-
-
         .sjz_center_ad
         {
             float: right;
@@ -57,6 +51,15 @@
             width: 60px;
         }
     </style>
+    <script type="text/javascript">
+        $(document).ready(function(){
+
+            $(".sjz_center_ta_submit").click(function(){
+                ProcessFrom.submitFrom("from","/my/eventIndex/add");
+            });
+        });
+
+    </script>
 </head>
 <body>
 <div>
@@ -72,7 +75,7 @@
                 <div></div>
             </div>
             <div class="sjz_center_ta">
-                <form action="/my/addEventIndex" method="post">
+                <form id="from" method="post">
                     <table>
                         <thead>
 
@@ -80,23 +83,27 @@
                         <tbody>
                         <tr class="tr1">
                             <td>时间：</td>
-                            <td class="sjz_center_t_td"><input type="text" name="eventTime" value=""/>&nbsp;&nbsp;
-                                日期格式:yyyy-MM-dd
+                            <td class="sjz_center_t_td">
+                                <input type="text" name="eventTime" value=""/>
+                                &nbsp;&nbsp;日期格式:yyyy-MM-dd
                             </td>
                         </tr>
                         <tr class="tr2">
                             <td>内容：</td>
-                            <td><textarea name="eventContent" rows="7" class="sjz_center_ta_tarea"></textarea></td>
+                            <td><textarea name="eventContent" rows="7" class="sjz_center_ta_tarea"></textarea>
+                            </td>
                         </tr>
                         <tr class="tr3">
                             <td>类型：</td>
-                            <td><select name="eventType" >
-                                <option value="0">文本</option>
-                                <option value="10">超链接</option>
-                            </select></td>
+                            <td>
+                                <select name="eventType" >
+                                    <option value="0">文本</option>
+                                    <option value="10">超链接</option>
+                                </select>
+                            </td>
                         </tr>
                         <tr class="tr4">
-                            <td><input class="sjz_center_ta_submit" type="submit" value="确定"/></td>
+                            <td><input class="sjz_center_ta_submit" type="button" value="确定"/></td>
                             <td></td>
                         </tr>
                         </tbody>

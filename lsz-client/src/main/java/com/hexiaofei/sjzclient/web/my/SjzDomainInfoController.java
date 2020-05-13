@@ -5,6 +5,7 @@ import com.hexiaofei.sjzclient.exception.PlatformException;
 import com.hexiaofei.sjzclient.service.SjzDomainInfoService;
 import com.hexiaofei.sjzclient.vo.PageVo;
 import com.hexiaofei.sjzclient.web.BaseController;
+import com.lcyj.common.vo.ResultVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class SjzDomainInfoController extends MyBaseController implements BaseController<SjzDomainInfo> {
@@ -60,6 +63,11 @@ public class SjzDomainInfoController extends MyBaseController implements BaseCon
         }else{
             return ADD_FAIL_URL;
         }
+    }
+
+    @Override
+    public ResultVo<SjzDomainInfo> add(HttpServletRequest request, SjzDomainInfo sjzDomainInfo) {
+        return null;
     }
 
     /**

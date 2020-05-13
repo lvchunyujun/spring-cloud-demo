@@ -1,7 +1,10 @@
 package com.hexiaofei.sjzclient.web;
 
+import com.lcyj.common.vo.ResultVo;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
 
 public interface BaseController<T> {
 
@@ -10,6 +13,8 @@ public interface BaseController<T> {
      String toAdd();
 
      String add(T t);
+
+     ResultVo<T> add(HttpServletRequest request,T t);
 
      ModelAndView toUpdate(@PathVariable Integer id);
 

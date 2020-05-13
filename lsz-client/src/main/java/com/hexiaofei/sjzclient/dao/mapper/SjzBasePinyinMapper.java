@@ -52,6 +52,7 @@ public interface SjzBasePinyinMapper {
         "values (#{id,jdbcType=INTEGER}, #{pinYin,jdbcType=VARCHAR}, ",
         "#{pyCode,jdbcType=INTEGER})"
     })
+    @Options(useGeneratedKeys=true, keyProperty="id")
     int insert(SjzBasePinyin record);
 
     /**

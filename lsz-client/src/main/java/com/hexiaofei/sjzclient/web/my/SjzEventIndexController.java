@@ -1,19 +1,21 @@
 package com.hexiaofei.sjzclient.web.my;
 
+import com.hexiaofei.sjzclient.common.EnumSjzEventState;
+import com.hexiaofei.sjzclient.domain.SjzEventAuthor;
 import com.hexiaofei.sjzclient.domain.SjzEventIndex;
+import com.hexiaofei.sjzclient.domain.SjzSpiderWebsite;
 import com.hexiaofei.sjzclient.domain.UserInfo;
 import com.hexiaofei.sjzclient.exception.PlatformException;
 import com.hexiaofei.sjzclient.service.SjzEventIndexService;
 import com.hexiaofei.sjzclient.vo.PageVo;
 import com.hexiaofei.sjzclient.web.BaseController;
+import com.lcyj.common.vo.ResultVo;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +24,7 @@ import java.util.Date;
 @Controller
 public class SjzEventIndexController extends MyBaseController implements BaseController<SjzEventIndex> {
 
-    public static Logger logger = LoggerFactory.getLogger(SjzDomainInfoController.class);
+    public static Logger LOGGER = LoggerFactory.getLogger(SjzDomainInfoController.class);
 
     private final static String STATIC_BASE_URL = "eventIndex";
 
@@ -48,7 +50,7 @@ public class SjzEventIndexController extends MyBaseController implements BaseCon
             pageVo = sjzEventIndexService.getPageVoObject(pageVo);
             modelAndView.addObject("eil",pageVo.getVoList());
         } catch (Exception e) {
-            logger.error("查询异常！",e);
+            LOGGER.error("查询异常！",e);
         }
 
         return modelAndView;
@@ -65,33 +67,66 @@ public class SjzEventIndexController extends MyBaseController implements BaseCon
         return "my/"+STATIC_BASE_URL+"/toAdd";
     }
 
+    @Override
+    public String add(SjzEventIndex sjzEventIndex) {
+        return null;
+    }
+
     /**
      * 添加事件
      * @param sjzEventIndex
      * @return
      */
     @RequestMapping(value = STATIC_BASE_URL+"/add",method = RequestMethod.POST)
-    @Override
-    public String add(SjzEventIndex sjzEventIndex) {
+    @ResponseBody
+    public ResultVo<SjzEventIndex> add(HttpServletRequest request,@RequestBody SjzEventIndex sjzEventIndex) {
+        LOGGER.info("【增加事件】-->");
+
         int resultId = -1;
+        SjzEventAuthor sjzEventAuthor = null;
+        SjzSpiderWebsite sjzSpiderWebsite = null;
+        ResultVo<SjzEventIndex> resultVo = new ResultVo<SjzEventIndex>("9999");
+
         try {
-            // 1. 添加事件
-            sjzEventIndex.setEventState((byte)0);
+
+            resultVo.setData(sjzEventIndex);
+            if(sjzEventIndex.getEventTime() == null){
+                resultVo.setResultMsg("事件日期不能为空！");
+
+                return resultVo;
+            }
+
+            if(StringUtils.isBlank(sjzEventIndex.getEventContent())){
+                resultVo.setResultMsg("事件内容不能为空！");
+                return resultVo;
+            }
+
+            if(sjzEventIndex.getEventContent().length() > 500){
+                resultVo.setResultMsg("事件内容不能超过500个字符！");
+                return resultVo;
+            }
+
+            // 1. 添加事件: 待审核状态
+            sjzEventIndex.setEventState((byte)EnumSjzEventState.CHECK.getStatus());
             sjzEventIndex.setRecordCreateTime(new Date());
-            resultId = sjzEventIndexService.addObject(sjzEventIndex);
 
-            // 2.添加作者
+            // 2. 作者
+            UserInfo userInfo = getLoginUserInfo(request);
+            sjzEventAuthor = new SjzEventAuthor();
+            sjzEventAuthor.setUserId(userInfo.getId());
+            sjzEventAuthor.setCreateTime(new Date());
+            sjzEventAuthor.setNickName(userInfo.getNickName());
 
-
+            resultId = sjzEventIndexService.addObject(sjzEventIndex,sjzSpiderWebsite,sjzEventAuthor);
+            resultVo.setResultCode("0000");
+            resultVo.setResultMsg("添加事件成功！");
+            LOGGER.info("【增加事件】<--  success:");
         } catch (Exception e) {
-            e.printStackTrace();
-            resultId = -99;
+            LOGGER.error("添加事件出现异常!",e);
+            resultVo.setResultMsg("出现异常，稍后再试！");
         }
-        if(resultId>0){
-            return ADD_SUCCESS_URL;
-        }else{
-            return ADD_FAIL_URL;
-        }
+
+        return resultVo;
     }
 
     @RequestMapping(value = STATIC_BASE_URL+"/toUpdate/{id}")
@@ -160,7 +195,7 @@ public class SjzEventIndexController extends MyBaseController implements BaseCon
         } catch (Exception e) {
             re.setResultCode("9999");
             re.setResultMsg("网络异常，稍后重试！");
-            logger.error("查询异常！",e);
+            LOGGER.error("查询异常！",e);
         }
 
 
@@ -170,7 +205,7 @@ public class SjzEventIndexController extends MyBaseController implements BaseCon
     @RequestMapping(value = STATIC_BASE_URL+"/delete/{id}")
     @ResponseBody
     @Override
-    public String delete(Integer id) {
+    public String delete(@PathVariable("id") Integer id) {
         ResultEntity re = getResultEntity();
         try {
             int resultId = sjzEventIndexService.deleteObjectById(id);
@@ -181,7 +216,7 @@ public class SjzEventIndexController extends MyBaseController implements BaseCon
         } catch (PlatformException e) {
             re.setResultCode("9999");
             re.setResultMsg("网络异常，稍后重试！");
-            logger.error("查询异常！",e);
+            LOGGER.error("查询异常！",e);
         }
         return re.toString();
     }

@@ -23,10 +23,10 @@ public abstract class MyBaseController extends AbstractBaseController {
 
         UserInfo userInfo = null;
 
-        Object userName =   request.getSession().getAttribute(WebSystemConsts.COOKIE_USER);
+        Object loginUser = request.getSession().getAttribute(WebSystemConsts.COOKIE_USER);
 
-        if(userName != null){
-            userInfo = (UserInfo) userInfoService.getUserInfoByEmail((String)userName);
+        if(loginUser != null){
+            userInfo = (UserInfo)loginUser;
         }
 
         return userInfo;

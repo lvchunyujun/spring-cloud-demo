@@ -3,7 +3,7 @@ package com.hexiaofei.sjzclient.common;
 /**
  * 事件审核状态
  */
-public enum SjzEventStateEnum {
+public enum EnumSjzEventState {
 
 
     RELEASE((byte)0,"发布"),
@@ -14,7 +14,7 @@ public enum SjzEventStateEnum {
     private byte status;
     private String description;
 
-    SjzEventStateEnum(byte status, String description) {
+    EnumSjzEventState(byte status, String description) {
         this.status = status;
         this.description = description;
     }
