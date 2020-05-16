@@ -5,17 +5,8 @@
  *
  */
 /*<![CDATA[*/
-
-
 var ProcessFrom =
 {
-    // 检查是否为数字
-    isNumVerify:function (str) {
-
-    },
-    ifDate:function(str){
-
-    },
     /**
      * 插入 From表单
      */
@@ -95,28 +86,42 @@ var ProcessFrom =
     },
     /*是否带有小数*/
     isDecimal:function(strValue){
-        var  objRegExp = new RegExp("/^\d+\.\d+$/");
+        var  objRegExp = new RegExp("^\d+\.\d+$");
         return  objRegExp.test(strValue);
     },
     /*校验是否中文名称组成 */
     ischina:function(str){
-        var reg = new RegExp("/^[\u4E00-\u9FA5]{2,4}$/");   /*定义验证表达式*/
+        var reg = new RegExp("^[\u4E00-\u9FA5]{2,4}$");   /*定义验证表达式*/
         return reg.test(str);     /*进行验证*/
     },
     /*校验是否全由8位数字组成 */
-    isStudentNo:function(str){
-        var reg = new RegExp("/^[0-9]{8}$/");   /*定义验证表达式*/
+    isNumLength:function(str,strLen){
+        var reg = new RegExp("^[0-9]{"+strLen+"}$");   /*定义验证表达式*/
+        return reg.test(str);     /*进行验证*/
+    },
+    isCharLength:function(str,strLen){
+        var reg = new RegExp("^[a-zA-Z0-9]{"+strLen+"}$");   /*定义验证表达式*/
         return reg.test(str);     /*进行验证*/
     },
     /*校验电话码格式 */
     isTelCode:function(str) {
-        var reg= new RegExp("/^((0\d{2,3}-\d{7,8})|(1[3584]\d{9}))$/");
+        var reg= new RegExp("^((0\d{2,3}-\d{7,8})|(1[3584]\d{9}))$");
         return reg.test(str);
     },
     /*校验邮件地址是否合法 */
     isEmail:function(str) {
         var reg= new RegExp("^([\\w-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([\\w-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$");
         return reg.test(str);
+    },
+    isLength:function(targetLength){
+        if(typeof obj !== 'undefined' &&
+            obj !== null &&
+            obj.trim().length == targetLength ){
+            return true;
+        }else{
+            return false;
+        }
+        return true;
     },
     checkLength:function(str){
         var reg = new RegExp("^[A-Za-z0-9]{5,18}$");
@@ -125,6 +130,14 @@ var ProcessFrom =
     checkPasswd:function(str){
         var reg= new RegExp("[A-Za-z]+[0-9]");
         return reg.test(str);
+    },
+    // 检查是否为数字
+    isNumVerify:function (str) {
+        var reg = new RegExp("[0-9]");
+        return reg.test(str);
+    },
+    ifDate:function(str){
+
     }
 }
 

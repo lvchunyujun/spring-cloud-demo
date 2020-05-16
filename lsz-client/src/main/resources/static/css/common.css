@@ -19,6 +19,33 @@ ul{
     color: #aaa;
     text-align: center;
 }
+/* input placeholder 提示输入字体颜色 */
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #dedede;
+    opacity:1;
+    font-size: 14px;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #dedede;
+    opacity:1;
+    font-size: 14px;
+}
+/* 以上两个属性分别针对火狐浏览器不同版本 */
+
+input:-ms-input-placeholder { /* IE */
+    color: #dedede;
+    opacity:1;
+    font-size: 14px;
+}
+
+input::-webkit-input-placeholder{/* webkit内核的浏览器，如谷歌，edge */
+    color: #dedede;
+    opacity:1;
+    font-size: 14px;
+}
+/* input placeholder 提示输入字体颜色  */
+
+
 /* 页面标题 */
 .sjz_title
 {
@@ -174,5 +201,6 @@ ul{
     margin: 10px auto;
 }
 /* 页面底部 */
+
 
 

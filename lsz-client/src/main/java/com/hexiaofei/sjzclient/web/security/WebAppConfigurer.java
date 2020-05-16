@@ -59,8 +59,9 @@ public class WebAppConfigurer implements WebMvcConfigurer {
         registration.excludePathPatterns("/",
                 WebSystemConsts.INDEX_URL,                      // 首页索引
                 WebSystemConsts.TO_LOGIN_URL,                   // 登录
-                WebSystemConsts.TO_SIGN_IN,                     // 注册
-                WebSystemConsts.SIGN_IN,                     // 注册
+                WebSystemConsts.TO_SIGN_IN,                     // 跳转注册
+                WebSystemConsts.SIGN_IN,                        // 注册
+                WebSystemConsts.SIGN_IN_OK,                     // 注册成功
                 WebSystemConsts.LOGIN_URL,                      // 登录
                 WebSystemConsts.LOGOUT_URL,                     // 退出登录
                 WebSystemConsts.SEND_CHECK_CODE,                // 发送注册验证码

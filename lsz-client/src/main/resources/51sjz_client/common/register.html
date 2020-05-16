@@ -4,6 +4,7 @@
     <title>历史轴注册</title>
     <link rel="icon" th:href="@{/images/favicon.ico}" type="image/gif"/>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <link th:href="@{/css/common.css}" rel="stylesheet" type="text/css"/>
     <link th:href="@{/css/sjz_login.css}" rel="stylesheet" type="text/css"/>
     <script th:src="@{/js/jquery-3.4.1.min.js}" type="text/javascript" />
     <script th:src="@{/js/lcyj-fromVerify_1.0.js}" type="text/javascript" />
@@ -80,32 +81,27 @@
 
     </style>
     <script type="text/javascript">
+        /*<![CDATA[*/
         $(document).ready(function(){
             $("#lsz_b_vc").bind('click',sendCheckCode);
-        });
 
+            $("#LSZ_R_SUBMIT").bind("click",register);
+
+            $("#lsz_input_email").change(verifyEmail);
+            $("#lsz_input_passwd").change(verifyPasswd);
+            $("#lsz_input_vc").change(verifyCheckCode);
+        });
+        // 取消按钮定时事件ID
         var s_tt;
+
+        // & 发送验证码
         function sendCheckCode(){
             var email = $("#lsz_input_email").val();
-            var password = $("#lsz_input_passwd").val();
-                // step1: 检查输入
-            if(ProcessFrom.isBlank(email)){
-                show_msg("邮箱不能为空！","red");
-                return ;
-            }
-            if(!ProcessFrom.isEmail(email)){
-                show_msg("邮箱格式不正确！","red");
-                return ;
-            }
-            if(ProcessFrom.isBlank(password) || !ProcessFrom.checkLength(password)){
-                 show_msg("密码必须合法:6~18位的数字或字母","red");
-                 return ;
-            }
-            <!---->
+             // step1: 检查输入
+            if(verifyEmail()){
                 // step2: 发送验证码
-
-            auto_task_timing(10);
-            $.ajax({
+                auto_task_timing(60);
+                $.ajax({
                     type: "post",
                     url: "/sendCheckCode",
                     data:{email:email},
@@ -117,45 +113,118 @@
                             show_msg(data.resultMsg,"red");
                             clearTimeout(s_tt);
                             check_allow();
+                            unbindSumit();
                         }
                     },
                     error: function(XMLHttpRequest, textStatus, errorThrown){
                         $("#sign_in_msg span").text("网络异常，请稍后再试！");
                         $("#sign_in_msg span").css("color","red");
                     }
-            });
+                });
+            }
+        }
+
+        // & 检查参数合法性
+        function verifyEmail(){
+            var email = $("#lsz_input_email").val();
+            if(ProcessFrom.isBlank(email)){
+                show_msg("邮箱不能为空！","red");
+                return false;
+            }
+            if(!ProcessFrom.isEmail(email)){
+                show_msg("邮箱格式不正确！","red");
+                return false;
+            }
+            $("#sign_in_msg span").empty();
+            return true;
+        }
+
+        function verifyPasswd(){
+            var password = $("#lsz_input_passwd").val();
+            if(ProcessFrom.isBlank(password) || !ProcessFrom.checkLength(password)){
+                show_msg("密码必须合法:6~18位的数字或字母","red");
+                return false;
+            }
+            $("#sign_in_msg span").empty();
+            return true;
+        }
+        function verifyCheckCode(){
+            var checkCode = $("#lsz_input_vc").val();
+            var len = 4;
+            if(!ProcessFrom.isNumLength(checkCode,len)){
+                show_msg("验证码必须是"+len+"位数字","red");
+                return false;
+            }
+            $("#sign_in_msg span").empty();
+           return true;
         }
 
         function show_msg(msgTxt,msgColor){
             $("#sign_in_msg span").text(msgTxt).css("color",msgColor)
         }
 
+        // & 判断注册按钮
+        function hsb(){
+            if(verifyEmail()&&
+               verifyPasswd()&&
+               verifyCheckCode()
+            ){
 
-        function register(){
-
-            $.ajax({
-                type: "post",
-                url: "/registor",
-                data:{email:email,password:password,verifyCode:verifyCode},
-                dataType:'json',
-                success:function(data){
-                    var resultCode = data.resultCode;
-                    var resultMsg = data.resultMsg;
-                    $("#sign_in_msg span").text(resultMsg);
-                    if(resultCode=='0000'){
-                        $("#sign_in_msg span").css("color","green");
-                    }else{
-                        $("#sign_in_msg span").css("color","red");
-                    }
-
-                },
-                error: function(XMLHttpRequest, textStatus, errorThrown){
-                    $("#sign_in_msg span").text("网络异常，请稍后再试！");
-                    $("#sign_in_msg span").css("color","red");
-                }
-            });
+                bindSumit();
+            }else{
+                unbindSumit();
+            }
         }
 
+        // & 绑定事件
+        function bindSumit() {
+            var $button = $("#LSZ_R_SUBMIT");
+            var $events = $button.data("events");
+            if(!$events || !$events["click"]){
+                $button.css("background-color","#1592ef").css("cursor","pointer");
+            }
+
+        }
+        // & 解绑事件
+        function unbindSumit(){
+            var $button = $("#LSZ_R_SUBMIT");
+            var $events = $button.data("events");
+            if( $events && $events["click"]) {
+                $button.css("background-color", "#a5d9ff").css("cursor", "pointer");
+            }
+        }
+
+        function register(){
+            var email = $("#lsz_input_email").val();
+            var password = $("#lsz_input_passwd").val();
+            var verifyCode = $("#lsz_input_vc").val();
+            if( verifyEmail()&&
+                verifyPasswd()&&
+                verifyCheckCode()){
+                $.ajax({
+                    type: "post",
+                    url: "/registor",
+                    data:{email:email,password:password,verifyCode:verifyCode},
+                    dataType:'json',
+                    success:function(data){
+                        var resultCode = data.resultCode;
+                        if(resultCode=='0000'){
+                            $("#sign_in_msg span").css("color","green");
+                            var targetUrl = data.resultMsg;
+                            window.open(targetUrl,"_parent");
+                        }else{
+                            $("#sign_in_msg span").text(data.resultMsg).css("color","red");
+                        }
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown){
+                        $("#sign_in_msg span").text("网络异常，请稍后再试！");
+                        $("#sign_in_msg span").css("color","red");
+                    }
+                });
+            }
+        }
+
+        // & 发送按钮置灰
         function check_not_allow(laterTime){
             $("#lsz_b_vc")
                 .unbind("click")
@@ -163,6 +232,7 @@
                 .val(laterTime+"S后，重新发送")
         }
 
+        // & 发送按钮恢复
         function check_allow(){
             $("#lsz_b_vc")
                 .bind('click',sendCheckCode)
@@ -170,6 +240,7 @@
                 .val("获取验证码");
         }
 
+        // & 发送按钮置灰倒计时
         function auto_task_timing(laterTime){
             if(laterTime-- > 0){
                 check_not_allow(laterTime);
@@ -178,6 +249,7 @@
                 check_allow();
             }
         }
+        /*]]>*/
     </script>
 </head>
 
@@ -189,9 +261,10 @@
 <div class="table">
     <div class="wel">历史轴 欢迎注册</div>
     <div class="wel1">51SHIJIANZHOU XI TONG HUO TAI DENG LU</div>
-    <form method="post" action="/registor">
-
-
+    <form >
+        <div class="login">
+            已有账号？<a href="/toLogin">登录</a>
+        </div>
         <div class="user">
             <div id="yonghu">
                 <img th:src="@{/images/common/login/yhm.png}" />
@@ -208,13 +281,13 @@
             <div id="jym">
                 <img th:src="@{/images/common/login/verified_72.png}"/>
             </div>
-            <input type="text" th:name="verifyCode" placeholder="请输入验证码"/>
+            <input type="text" id="lsz_input_vc" th:name="verifyCode" placeholder="请输入验证码"/>
             <input type="button" class="check_allowed" id="lsz_b_vc" th:value="获取验证码"/>
         </div>
         <div id="sign_in_msg">
             <span></span>
         </div>
-        <input class="btn" type="submit" value="免费注册" />
+        <input id="LSZ_R_SUBMIT" class="btn" value="注册" />
     </form>
 
 </div>

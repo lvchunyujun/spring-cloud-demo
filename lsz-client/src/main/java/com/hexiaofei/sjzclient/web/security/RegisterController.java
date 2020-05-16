@@ -46,6 +46,7 @@ public class RegisterController {
         return "/common/register";
     }
 
+
     @RequestMapping(value = "/sendCheckCode")
     @ResponseBody
     public ResultVo sendCheckCode(HttpServletRequest request, String email){
@@ -96,7 +97,9 @@ public class RegisterController {
     }
 
     @RequestMapping(value = "/registor")
-    public String registor(HttpServletRequest request,String email,String password,String verifyCode){
+    @ResponseBody
+    public ResultVo registor(HttpServletRequest request,String email,String password,String verifyCode){
+        LOGGER.info("【用户注册】-->   [email="+email+"]");
         ResultVo resultVo = new ResultVo();
         String result = "fail";
         HttpSession session = request.getSession();
@@ -111,8 +114,8 @@ public class RegisterController {
                 int resultId = userInfoService.register(email,password);
                 if(resultId > 0){
                     resultVo.setResultCode("0000");
-                    resultVo.setResultMsg("注册成功！");
-                    result = WebCommonConstant.OK;
+                    resultVo.setResultMsg("registor_ok");
+                    LOGGER.info("【用户注册】注册成功    [email="+email+"]");
                 }else{
                     resultVo.setResultCode("9999");
                     resultVo.setResultMsg("注册失败！");
@@ -127,21 +130,23 @@ public class RegisterController {
             resultVo.setResultCode("9999");
             resultVo.setResultMsg("验证码无效请重新获取！");
         }
-
-        if(WebCommonConstant.OK.equals(result)){
-            return "/common/register_ok";
-        }else{
-            return "/common/register";
-        }
+        LOGGER.info("【用户注册】<-- [email="+email+"]");
+        return resultVo;
     }
 
+    @RequestMapping(value = "/registor_ok")
+    public String registorOk(){
+
+
+        return "/common/register_ok";
+    }
     /**
      * HttpSession缓存一个注册校验码
      * @param session
      * @return
      */
     private String generateCheckCode(HttpSession session){
-        String checkCode = NumberUtils.genRandomNumberStr(6);
+        String checkCode = NumberUtils.genRandomNumberStr(4);
         session.setAttribute(WebCommonConstant.REGISTER_CHECK_CODE,checkCode);
         session.setMaxInactiveInterval(WebCommonConstant.COOKIE_CHECK_CODE_OUTTIME);
         return checkCode;

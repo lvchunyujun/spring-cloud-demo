@@ -98,9 +98,8 @@ public class LoginController extends AbstractBaseController {
                     // step3: 设置session登录信息
                     setSessionForLogin(request,loginUser);
                     resultVo.setResultCode("0000");
-                    resultVo.setResultMsg("/my/welcome");
+                    resultVo.setResultMsg("/my/index");
                 }else{
-                    resultVo.setResultCode("9999");
                     resultVo.setResultMsg("用户邮箱或密码错误！");
                 }
             }
@@ -112,6 +111,10 @@ public class LoginController extends AbstractBaseController {
             LOGGER.error("登录异常",e);
             resultVo.setResultCode("9999");
             resultVo.setResultMsg("网络异常请稍后再试！");
+        }finally{
+            if(!"0000".equals(resultVo.getResultCode())){
+                session.invalidate();
+            }
         }
         LOGGER.info("【登录】<--   用户:["+userName+"]开始登录!");
         return resultVo;

@@ -2,8 +2,6 @@ package com.hexiaofei.sjzclient.common;
 
 public interface WebSystemConsts {
 
-    // cookie 超时时间
-    int COOKIEAGE = 1800;
 
     String COOKIE_USER = "USERINFO";
 
@@ -22,6 +20,8 @@ public interface WebSystemConsts {
     String TO_SIGN_IN = "/toRegistor";
     /** URL: 注册*/
     String SIGN_IN = "/registor";
+    /** URL: 注册成功 */
+    String SIGN_IN_OK = "/registor_ok";
     /** URL: 登录 */
     String LOGIN_URL   = "/login";
     /** URL: 注销登录 */

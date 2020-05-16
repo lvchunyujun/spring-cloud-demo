@@ -34,7 +34,7 @@ public class UserInfoController extends MyBaseController implements BaseControll
     private UserInfoService userInfoService;
 
     // 欢迎页面
-    @RequestMapping("/welcome")
+    @RequestMapping("/index")
     public String welcome(){
 
         return "/my/index";
