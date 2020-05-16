@@ -141,7 +141,11 @@
 
         function verifyPasswd(){
             var password = $("#lsz_input_passwd").val();
-            if(ProcessFrom.isBlank(password) || !ProcessFrom.checkLength(password)){
+            if(ProcessFrom.isBlank(password)){
+                show_msg("请输入登录密码","red");
+                return false;
+            }
+            if(!ProcessFrom.checkLength(password)){
                 show_msg("密码必须合法:6~18位的数字或字母","red");
                 return false;
             }
@@ -151,6 +155,10 @@
         function verifyCheckCode(){
             var checkCode = $("#lsz_input_vc").val();
             var len = 4;
+            if(ProcessFrom.isBlank(checkCode)){
+                show_msg("请输入验证码","red");
+                return false;
+            }
             if(!ProcessFrom.isNumLength(checkCode,len)){
                 show_msg("验证码必须是"+len+"位数字","red");
                 return false;

@@ -94,7 +94,11 @@
 
         function verifyPasswd(passwdId){
             var password = $("#"+passwdId).val();
-            if(ProcessFrom.isBlank(password) || !ProcessFrom.checkLength(password)){
+            if(ProcessFrom.isBlank(password) ){
+                show_msg("请输入登录密码","red");
+                return false;
+            }
+            if( !ProcessFrom.checkLength(password)){
                 show_msg("密码必须合法:6~18位的数字或字母","red");
                 return false;
             }
@@ -104,6 +108,10 @@
         function verifyCheckCode(vcId){
             var checkCode = $("#"+vcId).val();
             var len = 4;
+            if(ProcessFrom.isBlank(checkCode)){
+                show_msg("请输入验证码","red");
+                return false;
+            }
             if(!ProcessFrom.isCharLength(checkCode,len)){
                 show_msg("验证码必须是"+len+"位数字或字符","red");
                 return false;
@@ -112,7 +120,7 @@
             return true;
         }
         function show_msg(msgTxt,msgColor){
-            $(".login_msg span").text(msgTxt).css("color",msgColor)
+            $(".login_msg span").text(msgTxt).css("color",msgColor).css("font-size","13px");
         }
         /*]]>*/
     </script>
