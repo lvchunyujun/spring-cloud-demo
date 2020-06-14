@@ -1,6 +1,8 @@
 server:
   port: 6010
   connection-timeout: 5000                              # 连接超时
+  session:                                              # session会话超时单位S(秒)，
+    timeout: 1200                                         # springboot2.x server.servlet.session.timeout:PT2H(duration类)
   tomcat:
     uri-encoding: utf-8
     max-threads: 100                                    # 最大线程数

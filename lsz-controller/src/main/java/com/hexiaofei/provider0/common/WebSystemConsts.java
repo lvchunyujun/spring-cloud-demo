@@ -1,13 +1,16 @@
 package com.hexiaofei.provider0.common;
 
+/**
+ * web系统常量配置
+ */
 public interface WebSystemConsts {
 
     /** cookie 超时时间 */
-    int COOKIEAGE = 1800;
+    int COOKIE_OUTTIME = 6000;
+    /** session超时时间单位S(秒) */
+    int SESSION_OUTTIME = 20*60;
     /** */
     String COOKIE_USER = "USERINFO";
-    int COOKIE_OUTTIME = 600;
-
     String DFAULT_PASSWORD = "000000";
 
     /** URL: 跳转登录页面 */

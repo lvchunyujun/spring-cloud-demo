@@ -1,7 +1,6 @@
 package com.hexiaofei.provider0.web.security;
 
 import com.hexiaofei.provider0.common.WebSystemConsts;
-import com.hexiaofei.provider0.domain.SjzEventIndex;
 import com.hexiaofei.provider0.domain.UserInfo;
 import com.hexiaofei.provider0.exception.PlatformException;
 import com.hexiaofei.provider0.service.UserInfoService;
@@ -21,7 +20,6 @@ import javax.servlet.http.HttpSession;
 public class LoginController extends AbstractBaseController {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(LoginController.class);
-
 
     @Autowired
     private UserInfoService userInfoService;
@@ -45,7 +43,8 @@ public class LoginController extends AbstractBaseController {
             if(login_user!=null){
                 session = request.getSession();
                 session.setAttribute(WebSystemConsts.COOKIE_USER,login_user);
-                session.setMaxInactiveInterval(WebSystemConsts.COOKIE_OUTTIME);
+                // 配置文件配置
+                session.setMaxInactiveInterval(WebSystemConsts.SESSION_OUTTIME);
                 modelAndView.addObject("LOGIN_MSG","0000");
             }else{
                 modelAndView.setViewName("/common/login");
