@@ -10,6 +10,11 @@ public interface SmsEmailService {
 
     String BASE_MAPPING_URL = "/sms/email";
 
+    /**
+     *
+     * @param smsEmail
+     * @return OK-成功
+     */
     @PostMapping(value = BASE_MAPPING_URL+"/send")
     String send(@RequestBody SmsEmail smsEmail);
 }

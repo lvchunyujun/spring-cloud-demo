@@ -64,9 +64,18 @@
     right: 4rem;
     display: flex;
 }
+.findPwd{
+    top: 17.5rem;
+    position: absolute;
+    right: 21rem;
+    display: flex;
+}
+.findPwd a{
+    font-size: 10px;
+}
 .btn{
     position: absolute;
-    top: 18.5rem;
+    top: 19rem;
     right: 3.9rem;
     border: none;
     color: #fff;
@@ -79,6 +88,23 @@
     box-shadow:2px 2px 1px rgba(0, 0, 0, 0.2);*/
     font-size:18px ;
     height: 50px;
+}
+.register
+{
+    position: absolute;
+    top: 22.5rem;
+    right: 3.9rem;
+    border: none;
+    color: #fff;
+    width: 373px;
+    text-align: center;
+    background-color: #1692ef;
+    text-indent: 0rem;
+    border-radius: 25px;
+    font-size: 18px;
+    height: 50px;
+    line-height: 50px;
+    text-decoration: none;
 }
 .verifyCode{
     position: absolute;

@@ -51,8 +51,8 @@ input::-webkit-input-placeholder{/* webkit内核的浏览器，如谷歌，edge 
 {
     font-size: 16px;
     margin: 0px;
-    padding: 25px 40px;
-    min-height: 55px;
+    padding: 5px 40px;
+    min-height: 45px;
     background-color: #18468c;
     color: #80acdb;
 }
@@ -68,6 +68,10 @@ input::-webkit-input-placeholder{/* webkit内核的浏览器，如谷歌，edge 
     font-size: 31px;
     float: left;
     padding: 0px 10px;
+}
+.sjz_title h3 a
+{
+    color: #80acdb;
 }
 .a_logout
 {

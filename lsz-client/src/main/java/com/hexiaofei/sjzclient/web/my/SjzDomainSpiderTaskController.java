@@ -2,7 +2,7 @@ package com.hexiaofei.sjzclient.web.my;
 
 import com.hexiaofei.sjzclient.domain.SjzDomainSpiderTask;
 import com.hexiaofei.sjzclient.exception.PlatformException;
-import com.hexiaofei.sjzclient.service.SjzDomainSpiderTaskService;
+import com.hexiaofei.sjzclient.service.ISjzDomainSpiderTaskService;
 import com.hexiaofei.sjzclient.vo.PageVo;
 import com.hexiaofei.sjzclient.web.BaseController;
 import com.lcyj.common.vo.ResultVo;
@@ -26,7 +26,7 @@ public class SjzDomainSpiderTaskController extends MyBaseController implements B
     private final static String STATIC_BASE_URL = "domainSpiderTask";
 
     @Autowired
-    private SjzDomainSpiderTaskService sjzDomainSpiderTaskService;
+    private ISjzDomainSpiderTaskService sjzDomainSpiderTaskService;
 
     @RequestMapping(STATIC_BASE_URL+"/index")
     @Override

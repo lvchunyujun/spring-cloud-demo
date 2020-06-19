@@ -4,8 +4,8 @@ import com.hexiaofei.sjzclient.dao.mapper.SjzDomainWordSortMapper;
 import com.hexiaofei.sjzclient.domain.SjzDomainSpiderTask;
 import com.hexiaofei.sjzclient.domain.SjzDomainWordSort;
 import com.hexiaofei.sjzclient.exception.PlatformException;
-import com.hexiaofei.sjzclient.service.SjzDomainSpiderTaskService;
-import com.hexiaofei.sjzclient.service.SjzDomainWordSortService;
+import com.hexiaofei.sjzclient.service.ISjzDomainSpiderTaskService;
+import com.hexiaofei.sjzclient.service.ISjzDomainWordSortService;
 import com.hexiaofei.sjzclient.vo.PageVo;
 import org.apache.ibatis.cursor.Cursor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +19,13 @@ import java.util.Map;
 
 @Transactional
 @Service("sjzDomainWordSortService")
-public class SjzDomainWordSortServiceImpl implements SjzDomainWordSortService {
+public class SjzDomainWordSortServiceImpl implements ISjzDomainWordSortService {
 
     @Autowired
     private SjzDomainWordSortMapper sjzDomainWordSortMapper;
 
     @Autowired
-    private SjzDomainSpiderTaskService sjzDomainSpiderTaskService;
+    private ISjzDomainSpiderTaskService sjzDomainSpiderTaskService;
 
     @Override
     public int addObject(SjzDomainWordSort mob) throws PlatformException {

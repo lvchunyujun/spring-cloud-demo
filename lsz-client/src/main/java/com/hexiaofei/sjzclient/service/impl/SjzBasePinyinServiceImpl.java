@@ -3,7 +3,7 @@ package com.hexiaofei.sjzclient.service.impl;
 import com.hexiaofei.sjzclient.dao.mapper.SjzBasePinyinMapper;
 import com.hexiaofei.sjzclient.domain.SjzBasePinyin;
 import com.hexiaofei.sjzclient.exception.PlatformException;
-import com.hexiaofei.sjzclient.service.SjzBasePinyinService;
+import com.hexiaofei.sjzclient.service.ISjzBasePinyinService;
 import com.hexiaofei.sjzclient.vo.PageVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ import java.util.List;
 
 @Transactional
 @Service("sjzBasePinyinService")
-public class SjzBasePinyinServiceImpl implements SjzBasePinyinService {
+public class SjzBasePinyinServiceImpl implements ISjzBasePinyinService {
 
     @Autowired
     private SjzBasePinyinMapper sjzBasePinyinMapper;

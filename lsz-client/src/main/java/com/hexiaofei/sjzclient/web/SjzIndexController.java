@@ -2,7 +2,7 @@ package com.hexiaofei.sjzclient.web;
 
 import com.hexiaofei.sjzclient.common.EnumSjzEventState;
 import com.hexiaofei.sjzclient.domain.SjzEventIndex;
-import com.hexiaofei.sjzclient.service.SjzEventIndexService;
+import com.hexiaofei.sjzclient.service.ISjzEventIndexService;
 import com.hexiaofei.sjzclient.vo.PageVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +25,7 @@ public class SjzIndexController {
     private final static int PAGE_SIZE = 10;
 
     @Autowired
-    private SjzEventIndexService sjzEventIndexService;
+    private ISjzEventIndexService sjzEventIndexService;
 
     @RequestMapping(value={"","/index"})
     public ModelAndView index(SjzEventIndex sjzEventIndex,Integer currentPage,Integer pageSize){

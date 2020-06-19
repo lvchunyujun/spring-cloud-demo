@@ -28,10 +28,9 @@ public class ImageController {
      * @param request
      * @param response
      */
-    @RequestMapping(value="/verifyImg",method = RequestMethod.GET)
+    @RequestMapping(value="verifyImg",method = RequestMethod.GET)
     public void getRandomCodes(HttpServletRequest request,HttpServletResponse response) {
-        // 定义文件字节输入流
-        FileInputStream fileIn = null;
+
         // 定义字节输入流
         InputStream is = null;
         // 定义文件对象
@@ -55,8 +54,8 @@ public class ImageController {
                 e.addFrame(src[i]);
             }
             e.finish();
-            fileIn = new FileInputStream(file);
-            is = fileIn;
+            is = new FileInputStream(file);
+
         } catch (Exception e) {
             LOGGER.error("JPG to GIF failed:" + e.getMessage(),e);
         }
@@ -74,8 +73,6 @@ public class ImageController {
             }
             is.close();
             out.close();
-            // 因为返回时InputStream已经关闭，所以不需要关闭文件字节输入流
-            fileIn.close();
             // 删除临时文件
             file.delete();
         } catch (IOException e) {
@@ -89,7 +86,7 @@ public class ImageController {
      * @param request
      * @param response
      */
-    @RequestMapping(value="/verify",method = RequestMethod.GET)
+    @RequestMapping(value="verify",method = RequestMethod.GET)
     public void getRandomCode(HttpServletRequest request,HttpServletResponse response) {
         try {
             BufferedImage img = VerifyCodeUtil.createImageCode();

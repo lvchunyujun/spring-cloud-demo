@@ -2,7 +2,7 @@ package com.hexiaofei.sjzclient.web.my;
 
 import com.hexiaofei.sjzclient.common.WebSystemConsts;
 import com.hexiaofei.sjzclient.domain.UserInfo;
-import com.hexiaofei.sjzclient.service.UserInfoService;
+import com.hexiaofei.sjzclient.service.IUserInfoService;
 import com.hexiaofei.sjzclient.web.AbstractBaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +17,7 @@ public abstract class MyBaseController extends AbstractBaseController {
     protected static final String ADD_FAIL_URL = "common/addFail";
 
     @Autowired
-    private UserInfoService userInfoService;
+    private IUserInfoService userInfoService;
 
     protected UserInfo getLoginUserInfo(HttpServletRequest request){
 

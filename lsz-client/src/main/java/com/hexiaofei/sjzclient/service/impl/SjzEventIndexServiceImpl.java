@@ -5,9 +5,9 @@ import com.hexiaofei.sjzclient.domain.SjzEventAuthor;
 import com.hexiaofei.sjzclient.domain.SjzEventIndex;
 import com.hexiaofei.sjzclient.domain.SjzSpiderWebsite;
 import com.hexiaofei.sjzclient.exception.PlatformException;
-import com.hexiaofei.sjzclient.service.SjzEventAuthorService;
-import com.hexiaofei.sjzclient.service.SjzEventIndexService;
-import com.hexiaofei.sjzclient.service.SjzSpiderWebsiteService;
+import com.hexiaofei.sjzclient.service.ISjzEventAuthorService;
+import com.hexiaofei.sjzclient.service.ISjzEventIndexService;
+import com.hexiaofei.sjzclient.service.ISjzSpiderWebsiteService;
 import com.hexiaofei.sjzclient.vo.PageVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,16 +20,16 @@ import java.util.Map;
 
 @Transactional(rollbackFor = Exception.class)
 @Service("sjzEventIndexService")
-public class SjzEventIndexServiceImpl implements SjzEventIndexService {
+public class SjzEventIndexServiceImpl implements ISjzEventIndexService {
 
     @Autowired
     private SjzEventIndexMapper sjzEventIndexMapper;
 
     @Autowired
-    private SjzSpiderWebsiteService sjzSpiderWebsiteService;
+    private ISjzSpiderWebsiteService sjzSpiderWebsiteService;
 
     @Autowired
-    private SjzEventAuthorService sjzEventAuthorService;
+    private ISjzEventAuthorService sjzEventAuthorService;
 
     @Transactional(rollbackFor = Exception.class) 
     @Override

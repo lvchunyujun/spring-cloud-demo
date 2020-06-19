@@ -242,4 +242,12 @@ public interface UserInfoMapper {
             @Result(column="loginCount", property="loginCount", jdbcType=JdbcType.INTEGER)
     })
     UserInfo selectUserInfoForEmail(@Param("email") String email);
+
+    /**
+     * 根据用户邮箱重置密码
+     * @param email
+     * @param newPassword
+     */
+    @Update("update user_info set password = #{password} where email=#{email} ")
+    public void resetUserPassword(@Param("email")String email,@Param("password") String newPassword);
 }

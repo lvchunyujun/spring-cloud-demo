@@ -5,9 +5,13 @@ package com.hexiaofei.sjzclient.common;
 public enum EmailSendType {
 
     /**
-     * 注册激活_密码找回
+     * 注册验证码
      */
     REG_CODE("REG_PASSWD","注册验证码"),
+    /**
+     * 找回密码
+     */
+    FIND_PASSWORD_CODE("FIND_PASSWORD_CODE","找回密码"),
     /**
      * 其他
      */

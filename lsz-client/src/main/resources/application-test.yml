@@ -26,7 +26,7 @@ spring:
     enabled: false
   thymeleaf:
     mode: HTML5
-    prefix: classpath:/51sjz_client/
+    prefix: classpath:/lsz_client/
     suffix: .html
     encoding: utf-8
     content-type: text/html

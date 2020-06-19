@@ -5,7 +5,7 @@ import com.hexiaofei.sjzclient.common.EmailTemplate;
 import com.hexiaofei.sjzclient.common.PlatformConstant;
 import com.hexiaofei.sjzclient.domain.UserInfo;
 import com.hexiaofei.sjzclient.exception.PlatformException;
-import com.hexiaofei.sjzclient.service.UserInfoService;
+import com.hexiaofei.sjzclient.service.IUserInfoService;
 import com.hexiaofei.sjzclient.service.sms.SmsEmailService;
 import com.hexiaofei.sjzclient.service.sms.SmsUserinfoService;
 import com.lcyj.common.bo.sms.SmsEmail;
@@ -38,16 +38,16 @@ public class RegisterController {
     private SmsEmailService smsEmailService;
 
     @Autowired
-    private UserInfoService userInfoService;
+    private IUserInfoService userInfoService;
 
-    @RequestMapping(value = "/toRegistor")
+    @RequestMapping(value = "toRegistor")
     public String toRegistor(){
 
-        return "/common/register";
+        return "common/register";
     }
 
 
-    @RequestMapping(value = "/sendCheckCode")
+    @RequestMapping(value = "sendCheckCode")
     @ResponseBody
     public ResultVo sendCheckCode(HttpServletRequest request, String email){
         ResultVo resultVo = new ResultVo();
@@ -96,7 +96,7 @@ public class RegisterController {
         return resultVo;
     }
 
-    @RequestMapping(value = "/registor")
+    @RequestMapping(value = "registor")
     @ResponseBody
     public ResultVo registor(HttpServletRequest request,String email,String password,String verifyCode){
         LOGGER.info("【用户注册】-->   [email="+email+"]");
@@ -134,11 +134,11 @@ public class RegisterController {
         return resultVo;
     }
 
-    @RequestMapping(value = "/registor_ok")
+    @RequestMapping(value = "registor_ok")
     public String registorOk(){
 
 
-        return "/common/register_ok";
+        return "common/register_ok";
     }
     /**
      * HttpSession缓存一个注册校验码

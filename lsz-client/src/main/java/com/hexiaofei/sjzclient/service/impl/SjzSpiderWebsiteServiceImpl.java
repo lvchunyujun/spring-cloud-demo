@@ -3,7 +3,7 @@ package com.hexiaofei.sjzclient.service.impl;
 import com.hexiaofei.sjzclient.dao.mapper.SjzSpiderWebsiteMapper;
 import com.hexiaofei.sjzclient.domain.SjzSpiderWebsite;
 import com.hexiaofei.sjzclient.exception.PlatformException;
-import com.hexiaofei.sjzclient.service.SjzSpiderWebsiteService;
+import com.hexiaofei.sjzclient.service.ISjzSpiderWebsiteService;
 import com.hexiaofei.sjzclient.vo.PageVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ import java.util.List;
 
 @Transactional
 @Service("sjzSpiderWebsiteService")
-public class SjzSpiderWebsiteServiceImpl implements SjzSpiderWebsiteService {
+public class SjzSpiderWebsiteServiceImpl implements ISjzSpiderWebsiteService {
 
     @Autowired
     private SjzSpiderWebsiteMapper sjzSpiderWebsiteMapper;

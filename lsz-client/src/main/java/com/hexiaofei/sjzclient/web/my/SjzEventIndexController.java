@@ -6,7 +6,7 @@ import com.hexiaofei.sjzclient.domain.SjzEventIndex;
 import com.hexiaofei.sjzclient.domain.SjzSpiderWebsite;
 import com.hexiaofei.sjzclient.domain.UserInfo;
 import com.hexiaofei.sjzclient.exception.PlatformException;
-import com.hexiaofei.sjzclient.service.SjzEventIndexService;
+import com.hexiaofei.sjzclient.service.ISjzEventIndexService;
 import com.hexiaofei.sjzclient.vo.PageVo;
 import com.hexiaofei.sjzclient.web.BaseController;
 import com.lcyj.common.vo.ResultVo;
@@ -29,11 +29,11 @@ public class SjzEventIndexController extends MyBaseController implements BaseCon
     private final static String STATIC_BASE_URL = "eventIndex";
 
     @Autowired
-    private SjzEventIndexService sjzEventIndexService;
+    private ISjzEventIndexService sjzEventIndexService;
 
     @RequestMapping(value = STATIC_BASE_URL+"/index")
     public ModelAndView index(SjzEventIndex sjzEventIndex,Integer currentPage,Integer pageSize){
-        ModelAndView modelAndView = new ModelAndView("/my/"+STATIC_BASE_URL+"/index");
+        ModelAndView modelAndView = new ModelAndView("my/"+STATIC_BASE_URL+"/index");
         PageVo pageVo = new PageVo<SjzEventIndex>();
         if(currentPage != null && currentPage > 0){
             pageVo.setCurrentPage(currentPage);

@@ -2,7 +2,7 @@ package com.hexiaofei.sjzclient.web.my;
 
 import com.hexiaofei.sjzclient.domain.SjzSpiderWebsite;
 import com.hexiaofei.sjzclient.exception.PlatformException;
-import com.hexiaofei.sjzclient.service.SjzSpiderWebsiteService;
+import com.hexiaofei.sjzclient.service.ISjzSpiderWebsiteService;
 import com.hexiaofei.sjzclient.vo.PageVo;
 import com.hexiaofei.sjzclient.web.BaseController;
 import com.lcyj.common.vo.ResultVo;
@@ -25,7 +25,7 @@ public class SjzSpiderWebsiteController extends MyBaseController implements Base
     private final static String STATIC_BASE_URL = "spidersite";
 
     @Autowired
-    private SjzSpiderWebsiteService sjzSpiderWebsiteService;
+    private ISjzSpiderWebsiteService sjzSpiderWebsiteService;
 
     @RequestMapping("spiderWebsite/index")
     @Override

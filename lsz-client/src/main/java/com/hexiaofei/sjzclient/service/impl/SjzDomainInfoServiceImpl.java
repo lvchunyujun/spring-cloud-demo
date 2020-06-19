@@ -3,7 +3,7 @@ package com.hexiaofei.sjzclient.service.impl;
 import com.hexiaofei.sjzclient.dao.mapper.SjzDomainInfoMapper;
 import com.hexiaofei.sjzclient.domain.SjzDomainInfo;
 import com.hexiaofei.sjzclient.exception.PlatformException;
-import com.hexiaofei.sjzclient.service.SjzDomainInfoService;
+import com.hexiaofei.sjzclient.service.ISjzDomainInfoService;
 import com.hexiaofei.sjzclient.service.base.AbstractService;
 import com.hexiaofei.sjzclient.vo.PageVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import java.util.List;
 
 @Transactional
 @Service("sjzDomainInfoService")
-public class SjzDomainInfoServiceImpl extends AbstractService implements SjzDomainInfoService {
+public class SjzDomainInfoServiceImpl extends AbstractService implements ISjzDomainInfoService {
 
     @Autowired
     private SjzDomainInfoMapper sjzDomainInfoMapper;

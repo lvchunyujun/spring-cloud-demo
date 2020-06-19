@@ -2,7 +2,7 @@ package com.hexiaofei.sjzclient.web.my;
 
 import com.hexiaofei.sjzclient.domain.SjzDomainWordSort;
 import com.hexiaofei.sjzclient.exception.PlatformException;
-import com.hexiaofei.sjzclient.service.SjzDomainWordSortService;
+import com.hexiaofei.sjzclient.service.ISjzDomainWordSortService;
 import com.hexiaofei.sjzclient.vo.PageVo;
 import com.hexiaofei.sjzclient.web.BaseController;
 import com.lcyj.common.vo.ResultVo;
@@ -28,7 +28,7 @@ public class SjzDomainWordSortController extends MyBaseController implements Bas
 
 
     @Autowired
-    private SjzDomainWordSortService sjzDomainWordSortService;
+    private ISjzDomainWordSortService sjzDomainWordSortService;
 
     @RequestMapping("domainWordSort/index")
     @Override

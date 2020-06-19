@@ -2,7 +2,7 @@ package com.hexiaofei.sjzclient.web.my;
 
 import com.hexiaofei.sjzclient.domain.UserInfo;
 import com.hexiaofei.sjzclient.exception.PlatformException;
-import com.hexiaofei.sjzclient.service.UserInfoService;
+import com.hexiaofei.sjzclient.service.IUserInfoService;
 import com.hexiaofei.sjzclient.vo.PageVo;
 import com.hexiaofei.sjzclient.web.BaseController;
 import com.lcyj.common.vo.ResultVo;
@@ -31,13 +31,13 @@ public class UserInfoController extends MyBaseController implements BaseControll
     private final static String BASE_URL = "userInfo";
 
     @Autowired
-    private UserInfoService userInfoService;
+    private IUserInfoService userInfoService;
 
     // 欢迎页面
     @RequestMapping("/index")
     public String welcome(){
 
-        return "/my/index";
+        return "my/index";
     }
 
     @RequestMapping(BASE_URL+"/{id}")
@@ -189,7 +189,7 @@ public class UserInfoController extends MyBaseController implements BaseControll
     @RequestMapping(value = BASE_URL+"/record")
     public ModelAndView recordInfo(HttpServletRequest request){
         LOGGER.info("【查看个人信息】--> ");
-        ModelAndView modelAndView = new ModelAndView("/my/"+BASE_URL+"/recordInfo");
+        ModelAndView modelAndView = new ModelAndView("my/"+BASE_URL+"/recordInfo");
         UserInfo userInfo = getLoginUserInfo(request);
 
         try {

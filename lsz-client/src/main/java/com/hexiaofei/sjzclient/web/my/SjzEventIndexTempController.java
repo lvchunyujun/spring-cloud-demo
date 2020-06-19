@@ -2,7 +2,7 @@ package com.hexiaofei.sjzclient.web.my;
 
 import com.hexiaofei.sjzclient.domain.SjzEventIndexTemp;
 import com.hexiaofei.sjzclient.exception.PlatformException;
-import com.hexiaofei.sjzclient.service.SjzEventIndexTempService;
+import com.hexiaofei.sjzclient.service.ISjzEventIndexTempService;
 import com.hexiaofei.sjzclient.vo.PageVo;
 import com.hexiaofei.sjzclient.web.BaseController;
 import com.lcyj.common.vo.ResultVo;
@@ -26,7 +26,7 @@ public class SjzEventIndexTempController extends MyBaseController implements Bas
     private final static String STATIC_BASE_URL = "eventIndexTemp";
 
     @Autowired
-    private SjzEventIndexTempService sjzEventIndexTempService;
+    private ISjzEventIndexTempService sjzEventIndexTempService;
 
     @RequestMapping(STATIC_BASE_URL+"/index")
     @Override

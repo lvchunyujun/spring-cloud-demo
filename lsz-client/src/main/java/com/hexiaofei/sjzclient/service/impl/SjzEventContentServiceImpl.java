@@ -2,7 +2,7 @@ package com.hexiaofei.sjzclient.service.impl;
 
 import com.hexiaofei.sjzclient.domain.SjzEventContent;
 import com.hexiaofei.sjzclient.exception.PlatformException;
-import com.hexiaofei.sjzclient.service.SjzEventContentService;
+import com.hexiaofei.sjzclient.service.ISjzEventContentService;
 import com.hexiaofei.sjzclient.vo.PageVo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,7 +11,7 @@ import java.util.List;
 
 @Transactional
 @Service("sjzEventContentService")
-public class SjzEventContentServiceImpl implements SjzEventContentService {
+public class SjzEventContentServiceImpl implements ISjzEventContentService {
 
     @Override
     public int addObject(SjzEventContent mob) throws PlatformException {

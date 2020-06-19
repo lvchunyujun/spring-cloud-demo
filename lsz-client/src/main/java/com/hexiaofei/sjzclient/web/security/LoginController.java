@@ -3,7 +3,7 @@ package com.hexiaofei.sjzclient.web.security;
 import com.hexiaofei.sjzclient.common.WebSystemConsts;
 import com.hexiaofei.sjzclient.domain.UserInfo;
 import com.hexiaofei.sjzclient.exception.PlatformException;
-import com.hexiaofei.sjzclient.service.UserInfoService;
+import com.hexiaofei.sjzclient.service.IUserInfoService;
 import com.hexiaofei.sjzclient.web.AbstractBaseController;
 import com.lcyj.common.utils.RegExpValidator;
 import com.lcyj.common.vo.ResultVo;
@@ -28,11 +28,11 @@ public class LoginController extends AbstractBaseController {
 
 
     @Autowired
-    private UserInfoService userInfoService;
+    private IUserInfoService userInfoService;
 
     @RequestMapping(value = WebSystemConsts.TO_LOGIN_URL)
     public String toLogin(){
-        return "/common/login";
+        return "common/login";
     }
 
     /**
@@ -64,7 +64,7 @@ public class LoginController extends AbstractBaseController {
                     session.setMaxInactiveInterval(WebCommonConstant.COOKIE_LOGIN_IN_OUTTIME);
                     modelAndView.addObject("LOGIN_MSG","0000");
                 }else{
-                    modelAndView.setViewName("/common/login");
+                    modelAndView.setViewName("common/login");
                     modelAndView.addObject("LOGIN_MSG","1000");
                 }
             }

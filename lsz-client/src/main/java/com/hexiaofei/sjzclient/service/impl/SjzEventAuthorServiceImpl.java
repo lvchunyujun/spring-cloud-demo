@@ -3,17 +3,19 @@ package com.hexiaofei.sjzclient.service.impl;
 import com.hexiaofei.sjzclient.dao.mapper.SjzEventAuthorMapper;
 import com.hexiaofei.sjzclient.domain.SjzEventAuthor;
 import com.hexiaofei.sjzclient.exception.PlatformException;
-import com.hexiaofei.sjzclient.service.SjzEventAuthorService;
+import com.hexiaofei.sjzclient.service.ISjzEventAuthorService;
 import com.hexiaofei.sjzclient.service.base.AbstractService;
 import com.hexiaofei.sjzclient.vo.PageVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Transactional
 @Service("sjzEventAuthorService")
-public class SjzEventAuthorServiceImpl extends AbstractService implements SjzEventAuthorService {
+public class SjzEventAuthorServiceImpl extends AbstractService implements ISjzEventAuthorService {
 
     @Autowired
     private SjzEventAuthorMapper sjzEventAuthorMapper;

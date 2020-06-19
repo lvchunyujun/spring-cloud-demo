@@ -4,7 +4,7 @@
 #  prod：生产环境
 spring:
   profiles:
-    active: dev
+    active: prod
   application:
     name: lsz-client
 eureka:

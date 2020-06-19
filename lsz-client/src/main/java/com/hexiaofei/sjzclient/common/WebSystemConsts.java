@@ -35,4 +35,18 @@ public interface WebSystemConsts {
     /** URL: 图片验证码 */
     String IMG_VERIFY_CODE = "/verifyImg";
 
+    /** 找回密码 */
+    String FIND_PASSWORD = "/findPasswd/**";
+    /** URL: 找回密码-忘记密码 */
+    String FW_FORGET_PASSWD = "/findPasswd/**";
+    /** URL: 找回密码-核实账号 */
+    String FW_VERIFY_ACCOUNT = "/verifyAccount";
+    /** URL: 找回密码-发送验证码 */
+    String FW_SEND_CHECKCODE = "/sendCheckCode";
+    /** URL: 找回密码-设置密码 */
+    String FW_SET_PASSWD = "/setPasswd";
+    /** URL: 找回密码-修改密码 */
+    String FW_RESET_PASSWD = "/resetPasswd";
+
+
 }

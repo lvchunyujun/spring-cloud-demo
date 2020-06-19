@@ -3,16 +3,18 @@ package com.hexiaofei.sjzclient.service.impl;
 import com.hexiaofei.sjzclient.dao.mapper.SjzEventIndexTempMapper;
 import com.hexiaofei.sjzclient.domain.SjzEventIndexTemp;
 import com.hexiaofei.sjzclient.exception.PlatformException;
-import com.hexiaofei.sjzclient.service.SjzEventIndexTempService;
+import com.hexiaofei.sjzclient.service.ISjzEventIndexTempService;
 import com.hexiaofei.sjzclient.vo.PageVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Transactional
 @Service("sjzEventIndexTemp")
-public class SjzEventIndexTempServiceImpl implements SjzEventIndexTempService {
+public class SjzEventIndexTempServiceImpl implements ISjzEventIndexTempService {
 
     @Autowired
     private SjzEventIndexTempMapper sjzEventIndexTempMapper ;

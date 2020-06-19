@@ -2,7 +2,7 @@ package com.hexiaofei.sjzclient.web.my;
 
 import com.hexiaofei.sjzclient.domain.SjzDomainInfo;
 import com.hexiaofei.sjzclient.exception.PlatformException;
-import com.hexiaofei.sjzclient.service.SjzDomainInfoService;
+import com.hexiaofei.sjzclient.service.ISjzDomainInfoService;
 import com.hexiaofei.sjzclient.vo.PageVo;
 import com.hexiaofei.sjzclient.web.BaseController;
 import com.lcyj.common.vo.ResultVo;
@@ -26,7 +26,7 @@ public class SjzDomainInfoController extends MyBaseController implements BaseCon
     private final static String STATIC_BASE_URL = "domain";
 
     @Autowired
-    private SjzDomainInfoService sjzDomainInfoService;
+    private ISjzDomainInfoService sjzDomainInfoService;
 
     @RequestMapping("domainInfo/index")
     public String index(){
