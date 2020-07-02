@@ -20,7 +20,7 @@
         <spring-cloud.version>Edgware.RELEASE</spring-cloud.version>
         <mybatis.version>2.1.1</mybatis.version>
         <druid.version>1.0.2</druid.version>
-        <mysql-connector.version>5.1.38</mysql-connector.version>
+        <mysql-connector.version>8.0.16</mysql-connector.version>
         <swagger2.version>2.9.2</swagger2.version>
     </properties>
 
