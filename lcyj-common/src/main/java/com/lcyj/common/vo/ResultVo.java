@@ -8,6 +8,19 @@ public class ResultVo<T> {
     private String resultMsg;
     private Object data;
 
+    public ResultVo() {
+    }
+
+    public ResultVo(String resultCode) {
+        this.resultCode = resultCode;
+    }
+
+    public ResultVo(String resultCode, String resultMsg, Object data) {
+        this.resultCode = resultCode;
+        this.resultMsg = resultMsg;
+        this.data = data;
+    }
+
     public String getResultCode() {
         return resultCode;
     }
