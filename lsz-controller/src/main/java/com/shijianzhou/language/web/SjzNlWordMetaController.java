@@ -101,7 +101,7 @@ public class SjzNlWordMetaController extends AdminBaseController implements Base
     @RequestMapping(value = STATIC_BASE_URL+"/list/{currentPage}_{pageSize}")
     @Override
     @ResponseBody
-    public String listEventIndex(SjzNlWordMeta sjzNlWordMeta,@PathVariable int currentPage,@PathVariable int pageSize) {
+    public String list(SjzNlWordMeta sjzNlWordMeta,@PathVariable int currentPage,@PathVariable int pageSize) {
         ResultEntity re = getResultEntity();
 
         PageVo pageVo = new PageVo<SjzNlWordMeta>();

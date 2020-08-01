@@ -100,7 +100,7 @@ public class SjzNlRegExpController extends AdminBaseController implements BaseCo
     @RequestMapping(value = "/nlRegExp/list/{currentPage}_{pageSize}")
     @Override
     @ResponseBody
-    public String listEventIndex(SjzNlRegExp sjzNlRegExp,@PathVariable int currentPage,@PathVariable int pageSize) {
+    public String list(SjzNlRegExp sjzNlRegExp,@PathVariable int currentPage,@PathVariable int pageSize) {
         ResultEntity re = getResultEntity();
 
         PageVo pageVo = new PageVo<SjzNlRegExp>();

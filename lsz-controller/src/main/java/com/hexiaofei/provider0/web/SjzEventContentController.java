@@ -34,7 +34,7 @@ public class SjzEventContentController extends AbstractBaseController implements
     }
 
     @Override
-    public String listEventIndex(SjzEventContent sjzEventContent, int currentPage, int pageSize) {
+    public String list(SjzEventContent sjzEventContent, int currentPage, int pageSize) {
         return null;
     }
 

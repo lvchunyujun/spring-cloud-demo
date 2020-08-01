@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>事件管理</title>
+    <link rel="icon" th:href="@{/images/favicon.ico}" type="image/gif" />
+    <link th:href="@{/css/common.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/common.css}" rel="stylesheet" type="text/css" />
+    <script th:src="@{/js/jquery-3.4.1.min.js}" type="text/javascript" />
+    <script th:src="@{/js/utils.js}" type="text/javascript" />
+    <script th:src="@{/js/lcyj-fromVerify_1.0.js}" type="text/javascript" />
+    <style type="text/css" >
+        .sjz_center_ad
+        {
+            float: right;
+            width: 100px;
+        }
+
+        .sjz_center_ta
+        {
+            width: 95%;
+            min-height: 200px;
+        }
+        .sjz_center_ta_tarea
+        {
+            width: 100%;
+
+        }
+        .sjz_center_ta table
+        {
+            width: 100%;
+        }
+        .sjz_center_ta table .tr1
+        {
+            height:45px;
+        }
+        .sjz_center_ta table .tr2
+        {
+            height:30px;
+        }
+        .sjz_center_ta table .tr3
+        {
+            height:100px;
+        }
+        .sjz_center_ta table .tr4
+        {
+            height:50px;
+        }
+        .sjz_center_t_td
+        {
+            width: 95%;
+        }
+        .sjz_center_ta_submit
+        {
+            width: 60px;
+        }
+        table .title_
+        {
+            text-align: right;
+            width: 20%;
+        }
+        table .content_
+        {
+            width: 60%;
+        }
+        table .msg_
+        {
+            width: 20%;
+        }
+        form span
+        {
+            color:#ce430f;
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function(){
+
+            $(".sjz_center_ta_submit").click(function(){
+                ProcessFrom.submitFrom("form","/my/eventIndex/add");
+            });
+        });
+
+    </script>
+</head>
+<body>
+<div>
+    <div th:replace="common/sjz_top :: sjz_top"  ></div>
+    <div class="sjz_nvg">
+        当前位置：<a href="/admin/index">首页</a> > <a href="/my/eventIndex/index">事件管理</a> > 添加事件
+    </div>
+    <div class="sjz_c">
+        <!-- 菜单 -->
+        <div th:replace="common/sjz_menu :: sjz_menu"  ></div>
+        <div class="sjz_center">
+            <div>
+                <div></div>
+            </div>
+            <div class="sjz_center_ta">
+                <form id="form" method="post">
+                    <table>
+                        <thead>
+
+                        </thead>
+                        <tbody>
+                        <tr class="tr1 event_date_">
+                            <td class="title_">日期：</td>
+                            <td class="sjz_center_t_td content_">
+                                <input type="text" name="eventTime" value=""/>
+                                <span />
+                            </td>
+                            <td class="sjz_center_t_td msg_"></td>
+                        </tr>
+                        <tr class="tr2">
+                            <td ></td>
+                            <td style="color: #bbb;">yyyy-MM-dd、yyyy年MM月dd日、yyyy/MM/dd、yyyyMMdd</td>
+                            <td ></td>
+                        </tr>
+                        <tr class="tr3 event_content_">
+                            <td class="title_">内容：</td>
+                            <td><textarea name="eventContent" rows="7" class="sjz_center_ta_tarea"></textarea>
+                            </td>
+                            <td><span th:text="${resultMsgContent}"></span></td>
+                        </tr>
+                        <tr class="tr4">
+                            <td></td>
+                            <td><input class="sjz_center_ta_submit" type="button" value="确定"/></td>
+                            <td></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div th:replace="common/sjz_bottom :: sjz_bottom"  ></div>
+</body>
+</html>

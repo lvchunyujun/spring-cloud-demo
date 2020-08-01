@@ -1,14 +1,12 @@
 package com.hexiaofei.provider0.service.impl;
 
 import com.hexiaofei.provider0.dao.mapper.SjzSpiderWebsiteMapper;
-import com.hexiaofei.provider0.domain.SjzDomainInfo;
 import com.hexiaofei.provider0.domain.SjzSpiderWebsite;
 import com.hexiaofei.provider0.exception.PlatformException;
 import com.hexiaofei.provider0.service.SjzSpiderWebsiteService;
 import com.hexiaofei.provider0.vo.PageVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
@@ -21,7 +19,7 @@ public class SjzSpiderWebsiteServiceImpl implements SjzSpiderWebsiteService {
     @Autowired
     private SjzSpiderWebsiteMapper sjzSpiderWebsiteMapper;
 
-    @Transactional(rollbackFor = Exception.class,propagation = Propagation.REQUIRES_NEW)
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public int addObject(SjzSpiderWebsite mob) throws PlatformException {
         int result = sjzSpiderWebsiteMapper.insert(mob);

@@ -9,6 +9,29 @@
         #ghostery-purple-box {
             display: none !important
         }
+        :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+            color: #dedede;
+            opacity:1;
+            font-size: 14px;
+        }
+        ::-moz-placeholder { /* Mozilla Firefox 19+ */
+            color: #dedede;
+            opacity:1;
+            font-size: 14px;
+        }
+        /* 以上两个属性分别针对火狐浏览器不同版本 */
+
+        input:-ms-input-placeholder { /* IE */
+            color: #dedede;
+            opacity:1;
+            font-size: 14px;
+        }
+
+        input::-webkit-input-placeholder{/* webkit内核的浏览器，如谷歌，edge */
+            color: #dedede;
+            opacity:1;
+            font-size: 14px;
+        }
     }</style>
 </head>
 
@@ -18,7 +41,7 @@
 <img class="pic" th:src="@{/images/login_360.png}"/>
 
 <div class="table">
-    <div class="wel">51时间轴系统后台登录</div>
+    <div class="wel">历史轴系统后台登录</div>
     <div class="wel1">51SHIJIANZHOU XI TONG HUO TAI DENG LU</div>
     <form method="post" action="/login">
 
@@ -29,13 +52,13 @@
             <div id="yonghu">
                 <img th:src="@{/images/common/login/yhm.png}" />
             </div>
-            <input type="text" th:name="userName" value="" placeholder="用户名" />
+            <input type="text" th:name="userName" value="" placeholder="请输入用户名" />
         </div>
         <div class="password">
             <div id="mima">
                 <img th:src="@{/images/common/login/mm.png}"/>
             </div>
-            <input type="password" th:name="password" value="" placeholder="●●●●●●"/>
+            <input type="password" th:name="password" value="" placeholder="请输入密码"/>
         </div>
         <input class="btn" type="submit" value="登录" />
     </form>

@@ -4,11 +4,11 @@ import com.hexiaofei.provider0.common.consts.SjzEventStateEnum;
 import com.hexiaofei.provider0.domain.SjzEventIndex;
 import com.hexiaofei.provider0.exception.PlatformException;
 import com.hexiaofei.provider0.service.SjzEventIndexService;
-import com.hexiaofei.provider0.utils.DateUtils;
 import com.hexiaofei.provider0.vo.PageVo;
 import com.hexiaofei.provider0.vo.SjzEventIndexVo;
 import com.hexiaofei.provider0.web.BaseController;
 import com.hexiaofei.provider0.web.SjzEventIndexController;
+import com.lcyj.common.utils.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.text.ParseException;
 import java.util.Date;
 
 @Controller
@@ -85,7 +84,7 @@ public class AdminSjzEventIndexController extends AdminBaseController implements
         try {
             SjzEventIndex sjzEventIndex = sjzEventIndexService.getObjectById(id);
             if(sjzEventIndex!=null)
-            modelAndView.addObject(sjzEventIndex);
+            modelAndView.addObject("sjzEventIndex",sjzEventIndex);
         }catch (PlatformException e){
 
         }
@@ -125,7 +124,7 @@ public class AdminSjzEventIndexController extends AdminBaseController implements
     }
 
     @Override
-    public String listEventIndex(SjzEventIndex sjzEventIndex, int currentPage, int pageSize) {
+    public String list(SjzEventIndex sjzEventIndex, int currentPage, int pageSize) {
         return null;
     }
 
@@ -201,13 +200,12 @@ public class AdminSjzEventIndexController extends AdminBaseController implements
 
         SjzEventIndex sjzEventIndex = new SjzEventIndex();
         sjzEventIndex.setId(sjzEventIndexVo.getId());
-        try {
-            Date eventTime = DateUtils.strToDate(sjzEventIndexVo.getEventTime());
-            sjzEventIndex.setEventTime(eventTime);
-        } catch (ParseException e) {
-            LOGGER.error("时间日期格式错误！",e);
+        Date eventTime = null;
+        eventTime = DateUtils.parseStrToDate(sjzEventIndexVo.getEventTime());
+        if(eventTime == null){
             throw new PlatformException("时间日期格式错误！");
         }
+        sjzEventIndex.setEventTime(eventTime);
         sjzEventIndex.setEventType(sjzEventIndexVo.getEventType());
         sjzEventIndex.setEventContent(sjzEventIndexVo.getEventContent());
         sjzEventIndex.setEventState(sjzEventIndexVo.getEventState());

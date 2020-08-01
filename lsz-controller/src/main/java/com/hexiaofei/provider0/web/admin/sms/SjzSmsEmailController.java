@@ -56,13 +56,13 @@ public class SjzSmsEmailController extends AdminBaseController implements BaseCo
     }
 
     @Override
-    public String listEventIndex(SmsEmail smsEmail, int currentPage, int pageSize) {
+    public String list(SmsEmail smsEmail, int currentPage, int pageSize) {
         return null;
     }
 
     @RequestMapping(value = STATIC_BASE_URL+"/list")
     @ResponseBody
-    public String listEventIndex(@RequestBody SmsEmailVo<SmsEmail> smsEmailVo) {
+    public String list(@RequestBody SmsEmailVo<SmsEmail> smsEmailVo) {
         ResultEntity re = getResultEntity();
         ResultVo resultVo = null;
 

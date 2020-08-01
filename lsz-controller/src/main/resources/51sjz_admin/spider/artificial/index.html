@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>手动抓取搜索</title>
+    <link rel="icon" th:href="@{/images/favicon.ico}" type="image/gif" />
+    <link th:href="@{/css/comm.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/sjz_admin_index.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/sjz_paging.css}" rel="stylesheet" type="text/css" />
+    <script th:src="@{/js/jquery-3.4.1.min.js}" type="text/javascript" />
+    <style type="text/css" >
+
+        .sjz_center_content thead
+        {
+            background-color: #eaeaea;
+        }
+
+        #sjz_center_top_search_ select,input[type='text']
+        {
+            /* margin-left: 20px; */
+            width:380px;
+            height: 25px;
+            border-radius: 8px;
+            border:1px solid #dddddd;
+        }
+        #sjz_center_top_search_ select,input[type='button']
+        {
+            /* margin-left: 20px; */
+            margin-left: 20px;
+        }
+        .sjz_center_top_ {
+            height: 85px;
+        }
+        .sjz_center_content iframe
+        {
+            width: 100%;
+            border: none;
+            min-height: 1000px;
+        }
+        iframe:after
+        {
+            clear:both ;
+        }
+    </style>
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+            $("#requestButton").bind("click",loading_url);
+        });
+
+        function request(){
+            var uri = $("input[name='uri']").val();
+            var queue = $("input[name='queue']").val();
+            $.ajax({
+                type: "POST",
+                url: "/admin/spider/artificial/req",
+                data:{
+                    uri:uri,
+                    queue:queue
+                },
+                dataType:'json',
+                success:function(data){
+                    var resultCode = data.resultCode;
+                    alert(resultCode);
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown){
+                    alert(textStatus+"  "+XMLHttpRequest.state());
+                }
+            });
+        }
+
+        function loading_url(){
+            var uri = $("input[name='uri']").val();
+            var queue = $("input[name='queue']").val();
+
+            $(".sjz_center_content iframe").attr("src",uri);
+        }
+    </script>
+</head>
+<body>
+    <div th:replace="/common/sjz_top :: sjz_top"  ></div>
+    <div class="sjz_nvg">
+        当前位置：<a href="/my/index">首页</a> > 手动抓取搜索
+    </div>
+    <div class="sjz_c">
+        <!-- 菜单 -->
+        <div th:replace="/common/sjz_menu :: sjz_menu"  ></div>
+        <div class="sjz_center">
+            <div class="sjz_center_top_">
+                <div id="sjz_center_top_search_">
+                    <form id="queueForm">
+                        <input type="text" th:name="uri"  /><br/>
+                        <input type="text" th:name="queue"  /><input id="requestButton" type="button" value="搜索" />
+                    </form>
+                </div>
+            </div>
+            <div class="sjz_center_content">
+                <iframe src="" ></iframe>
+            </div>
+        </div>
+    </div>
+    <div th:replace="/common/sjz_bottom :: sjz_bottom"  ></div>
+</body>
+</html>

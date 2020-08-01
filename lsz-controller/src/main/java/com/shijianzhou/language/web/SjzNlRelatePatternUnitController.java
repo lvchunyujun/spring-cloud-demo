@@ -156,7 +156,7 @@ public class SjzNlRelatePatternUnitController extends AdminBaseController implem
     @RequestMapping(value = "/rpu/list/{currentPage}_{pageSize}")
     @ResponseBody
     @Override
-    public String listEventIndex(SjzNlRelatePatternUnit sjzNlRelatePatternUnit, @PathVariable int currentPage,@PathVariable int pageSize) {
+    public String list(SjzNlRelatePatternUnit sjzNlRelatePatternUnit, @PathVariable int currentPage,@PathVariable int pageSize) {
         ResultEntity re = getResultEntity();
 
         PageVo pageVo = new PageVo<SjzNlRelatePatternUnit>();

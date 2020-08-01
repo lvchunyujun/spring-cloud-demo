@@ -112,7 +112,7 @@ public class AdminUserInfoController extends AdminBaseController implements Base
     @RequestMapping(value = BASE_URL+"/list/{currentPage}_{pageSize}")
     @Override
     @ResponseBody
-    public String listEventIndex(UserInfo o,@PathVariable int currentPage,@PathVariable int pageSize) {
+    public String list(UserInfo o,@PathVariable int currentPage,@PathVariable int pageSize) {
         ResultEntity re = getResultEntity();
 
         PageVo pageVo = new PageVo<UserInfo>();

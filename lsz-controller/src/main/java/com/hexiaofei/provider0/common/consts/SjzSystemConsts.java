@@ -1,5 +1,8 @@
 package com.hexiaofei.provider0.common.consts;
 
+/**
+ * 系统参数配置
+ */
 public interface SjzSystemConsts {
 
 

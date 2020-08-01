@@ -15,7 +15,7 @@ public interface BaseController<T> {
 
      ModelAndView update(T t);
 
-     String listEventIndex(T t,@PathVariable int currentPage,@PathVariable int pageSize);
+     String list(T t,@PathVariable int currentPage,@PathVariable int pageSize);
 
      String delete(Integer id);
 

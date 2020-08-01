@@ -1,12 +1,12 @@
 package com.shijianzhou.language.engine.content;
 
 import com.hexiaofei.provider0.common.consts.SjzEventStateEnum;
-import com.hexiaofei.provider0.common.consts.SjzSystemConsts;
 import com.hexiaofei.provider0.domain.SjzEventIndex;
 import com.hexiaofei.provider0.domain.SjzEventIndexTemp;
 import com.hexiaofei.provider0.exception.PlatformException;
 import com.hexiaofei.provider0.service.SjzEventIndexService;
 import com.hexiaofei.provider0.service.SjzEventIndexTempService;
+import com.lcyj.common.consts.LszSystemConsts;
 import com.shijianzhou.language.common.consts.RelatePatternUnitUseStatusEnuma;
 import com.shijianzhou.language.domain.SjzNlRelatePatternUnit;
 import com.shijianzhou.language.engine.parse.JsoupDocumentParser;
@@ -67,8 +67,8 @@ public class SjzNlMapStringContentConsume implements SjzNlContentConsume<Map<Str
         SjzNlRelatePatternUnit obj = new SjzNlRelatePatternUnit();
         obj.setPatternName(patternName);
 
-        String targetStr = (String)sourceMap.get(SjzSystemConsts.CONSUME_SOURCE_MAP_TXT);
-        String url = (String)sourceMap.get(SjzSystemConsts.CONSUME_SOURCE_MAP_URL);
+        String targetStr = (String)sourceMap.get(LszSystemConsts.CONSUME_SOURCE_MAP_TXT);
+        String url = (String)sourceMap.get(LszSystemConsts.CONSUME_SOURCE_MAP_URL);
         // step1： 切割目标字符串
         String[] ss =  JsoupDocumentParser.splitTextByDefLanguageType(targetStr);
 
@@ -128,7 +128,7 @@ public class SjzNlMapStringContentConsume implements SjzNlContentConsume<Map<Str
 
     private void addEventIndex(Date date,String eventCount){
         SjzEventIndex sjzEventIndex = new SjzEventIndex();
-        sjzEventIndex.setEventType(SjzSystemConsts.EVENT_TYPE_TXT);
+        sjzEventIndex.setEventType(LszSystemConsts.EVENT_TYPE_TXT);
         sjzEventIndex.setEventState(SjzEventStateEnum.CHECK.getStatus());
         sjzEventIndex.setEventTime(date);
         sjzEventIndex.setEventContent(eventCount);
@@ -149,8 +149,8 @@ public class SjzNlMapStringContentConsume implements SjzNlContentConsume<Map<Str
 
 
         sjzEventIndexTemp.setEventTime(date);
-        sjzEventIndexTemp.setEventState(SjzSystemConsts.EVENT_STATE_SHOW);
-        sjzEventIndexTemp.setEventType(SjzSystemConsts.EVENT_TYPE_TXT);
+        sjzEventIndexTemp.setEventState(LszSystemConsts.EVENT_STATE_SHOW);
+        sjzEventIndexTemp.setEventType(LszSystemConsts.EVENT_TYPE_TXT);
         sjzEventIndexTemp.setPatternName(rpu.getPatternName());
         sjzEventIndexTemp.setUnitSerialNo(rpu.getUnitSerialNo());
         sjzEventIndexTemp.setCreateTime(new Date());

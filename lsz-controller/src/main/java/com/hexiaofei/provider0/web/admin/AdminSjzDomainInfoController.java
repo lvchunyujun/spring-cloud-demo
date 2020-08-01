@@ -123,7 +123,7 @@ public class AdminSjzDomainInfoController extends AdminBaseController implements
      */
     @RequestMapping(value = STATIC_BASE_URL+"/list/{currentPage}_{pageSize}")
     @ResponseBody
-    public String listEventIndex(SjzDomainInfo sjzDomainInfo,@PathVariable int currentPage,@PathVariable int pageSize){
+    public String list(SjzDomainInfo sjzDomainInfo,@PathVariable int currentPage,@PathVariable int pageSize){
 
         ResultEntity re = getResultEntity();
 

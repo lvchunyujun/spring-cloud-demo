@@ -4,7 +4,7 @@ import com.hexiaofei.provider0.common.consts.SpiderTaskStatusEnum;
 import com.hexiaofei.provider0.domain.SjzDomainWordSort;
 import com.hexiaofei.provider0.exception.PlatformException;
 import com.hexiaofei.provider0.service.SjzDomainSpiderTaskService;
-import com.hexiaofei.provider0.task.AbstractWebSpider;
+import com.hexiaofei.provider0.service.impl.spider.AbstractSpiderService;
 import com.hexiaofei.provider0.task.WebSpiderTask;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +19,7 @@ import java.util.List;
 
 @Component
 @EnableAsync
-public class SjzEventSpiderTask extends AbstractWebSpider {
+public class LszEventSpiderTask extends AbstractSpiderService {
 
     private static Logger LOGGER = LoggerFactory.getLogger(WebSpiderTask.class);
 

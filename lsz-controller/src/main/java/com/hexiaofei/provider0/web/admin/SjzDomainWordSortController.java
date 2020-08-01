@@ -97,7 +97,7 @@ public class SjzDomainWordSortController extends AdminBaseController implements 
     @RequestMapping(value = "/domainWordSort/list/{currentPage}_{pageSize}")
     @ResponseBody
     @Override
-    public String listEventIndex(SjzDomainWordSort sjzDomainWordSort, @PathVariable int currentPage,@PathVariable int pageSize) {
+    public String list(SjzDomainWordSort sjzDomainWordSort, @PathVariable int currentPage,@PathVariable int pageSize) {
         ResultEntity re = getResultEntity();
 
         PageVo pageVo = new PageVo<SjzDomainWordSort>();

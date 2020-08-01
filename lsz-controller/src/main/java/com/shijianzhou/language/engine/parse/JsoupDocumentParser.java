@@ -1,7 +1,7 @@
 package com.shijianzhou.language.engine.parse;
 
 import com.hexiaofei.provider0.exception.PlatformException;
-import com.hexiaofei.provider0.utils.DateUtils;
+import com.lcyj.common.utils.DateUtils;
 import com.shijianzhou.language.common.consts.SystemConsts;
 import org.apache.commons.lang.StringUtils;
 import org.jsoup.nodes.Document;
@@ -133,7 +133,7 @@ public class JsoupDocumentParser implements Parser{
         List<Date> dateList = new ArrayList<>();
 
         for(String s : ss){
-            Date date = DateUtils.resolveStrToDate(s);
+            Date date = DateUtils.parseStrToDate(s);
            if( date!= null){
                dateList.add(date);
            }

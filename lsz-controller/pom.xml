@@ -10,7 +10,7 @@
 
 	<name>lsz-controller</name>
 	<description>sz-controller</description>
-
+	
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
@@ -181,6 +181,7 @@
 	</dependencyManagement>
 
 	<build>
+
 		<resources>
 			<resource>
 				<directory>
@@ -229,7 +230,7 @@
 						<!-- Manifest specific configuration -->
 						<manifest>
 							<!-- 主函数 -->
-							<mainClass>com.hexiaofei.provider0.LSZManageApplication</mainClass>
+							<mainClass>com.hexiaofei.provider0.LszControllerApplication</mainClass>
 							<!--是否要把第三方jar放到manifest的classpath中-->
 							<addClasspath>true</addClasspath>
 							<!-- 第三方jar放到lib目录 -->

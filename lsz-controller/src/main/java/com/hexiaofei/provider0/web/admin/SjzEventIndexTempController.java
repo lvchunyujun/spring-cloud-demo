@@ -99,7 +99,7 @@ public class SjzEventIndexTempController extends AdminBaseController implements 
     @RequestMapping(value = STATIC_BASE_URL+"/list/{currentPage}_{pageSize}")
     @ResponseBody
     @Override
-    public String listEventIndex(SjzEventIndexTemp sjzEventIndexTemp, @PathVariable int currentPage,@PathVariable int pageSize) {
+    public String list(SjzEventIndexTemp sjzEventIndexTemp, @PathVariable int currentPage,@PathVariable int pageSize) {
         ResultEntity re = getResultEntity();
 
         PageVo pageVo = new PageVo<SjzEventIndexTemp>();

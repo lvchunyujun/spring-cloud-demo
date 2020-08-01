@@ -5,6 +5,7 @@ import com.hexiaofei.provider0.common.consts.DomainManageStatusEnum;
 import com.hexiaofei.provider0.common.consts.DomainStatusEnum;
 import com.hexiaofei.provider0.common.consts.DomainTypeEnum;
 import com.hexiaofei.provider0.common.consts.SjzSystemConsts;
+import com.hexiaofei.provider0.common.consts.spider.EnumUserAgent;
 import com.hexiaofei.provider0.domain.SjzDomainInfo;
 import com.hexiaofei.provider0.domain.SjzSpiderWebsite;
 import com.hexiaofei.provider0.exception.PlatformException;
@@ -32,17 +33,22 @@ import us.codecraft.webmagic.utils.UrlUtils;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
-
+/**
+ * 页面处理器
+ */
 @Component
 @DependsOn("springContextUtil")
 public class SjzPageProcessor implements PageProcessor {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(SjzPageProcessor.class);
-    // 设置请求头模仿浏览器，避免发生 403问题
+    /**
+     * 设置请求头模仿浏览器，避免发生 403问题
+     */
     private final static Site site = Site.me()
             .setUserAgent("Mozilla/5.0 (Windows NT 10.0; WOW64; rv:56.0) Gecko/20100101 Firefox/56.0")
             .setRetryTimes(1)
             .setSleepTime(5000);
+
 
     /**
      * 缓存已经执行了的URL，避免重复
@@ -58,8 +64,9 @@ public class SjzPageProcessor implements PageProcessor {
     private Long startCrawlTime;
 
     public SjzPageProcessor() {
-
+        EnumUserAgent.MAC_CHROME.getUser_agent();
         sjzSpiderWebsiteService = SpringContextUtil.getBean("sjzSpiderWebsiteService");
+        sjzDomainInfoService = SpringContextUtil.getBean("sjzDomainInfoService");
     }
 
     public SjzPageProcessor(Long startCrawlTime){
@@ -68,30 +75,37 @@ public class SjzPageProcessor implements PageProcessor {
         this.startCrawlTime = startCrawlTime;
     }
 
-
+    /**
+     * 处理页面
+     * @param page
+     */
     @Override
     public void process(Page page) {
-        LOGGER.info("【解析网站页面】--> {}",page.getUrl());
+        LOGGER.info("【解析网站页面】--> url={}",page.getUrl());
+        LOGGER.info("【解析网站页面】--> request.url={}",page.getUrl());
         Map<String, List<String>> header = page.getHeaders();
         List<String> list = new ArrayList<String>();
         list.add(String.valueOf(page.getStatusCode()));
         header.put("statusCode",list);
         String url = page.getUrl().toString();
 
-        // 200：返回成功
+
+        //  step2: response  200：返回成功
         if(page.getStatusCode() == 200){
             Html html = page.getHtml();
+
             Document document = html.getDocument();
             Element headElement = document.head();
+            // step2.1: parseHead
             parseHead(headElement,url,header);
 
-            // parseBody
+            // step2.2: parseBody
             parseBody(page,document.body());
         }else{
             int crawlResultId =  modifySjzDomainInfo(url,header);
             LOGGER.info("【解析网站页面】网站异常{}  statusCode:{}",page.getUrl(),page.getStatusCode());
         }
-        LOGGER.info("【解析网站页面】--> {}",page.getUrl());
+        LOGGER.info("【解析网站页面】<-- {}",page.getUrl());
     }
 
     /**
@@ -99,49 +113,54 @@ public class SjzPageProcessor implements PageProcessor {
      * @param head
      * @param url
      */
-    public void parseHead(Element head,String url,Map<String, List<String>> header){
+    private void parseHead(Element head,String url,Map<String, List<String>> header){
         LOGGER.info("【解析网站页面HEAD】--> [url:{}]",url);
         String title = "";
         String descri = "";
-
-        Elements titleEmt = head.getElementsByTag("title");
-        title = titleEmt.text();
-        LOGGER.info("【解析网站页面HEAD】[url:{}], title:{}",url,(title!=null?title:""));
-        Elements metas = head.getElementsByTag("meta");
-        int metaSize = metas.size();
-        for(int i = 0 ; i < metaSize ; i++){
-            Element meta = metas.get(i);
-            String attrName = meta.attr("name");
-            if("description".equals(attrName)){
-                descri = meta.attr("content");
-                LOGGER.info("【解析网站页面HEAD】[url:{}], description:{}",url,meta.attr("content"));
-            }
-        }
-
-
-        SjzSpiderWebsite ssw = new SjzSpiderWebsite();
-        ssw.setWebsiteUrl(url);
-        ssw.setWebsiteTitle(title);
-        ssw.setWebsiteContent(descri);
-        ssw.setCreateTime(new Date());
-        ssw.setWebsiteDescri(descri);
         try {
-            int pageResultId = sjzSpiderWebsiteService.addObject(ssw);
-            LOGGER.info("【解析网站页面HEAD】 保存页面HEAD成功 ID:{}, [url:{}] ",pageResultId,url);
+            Elements titleEmt = head.getElementsByTag("title");
+            title = titleEmt.text();
+            LOGGER.info("【解析网站页面HEAD】[url:{}], title:{}",url,(title!=null?title:""));
+            Elements metas = head.getElementsByTag("meta");
+            int metaSize = metas.size();
+            for(int i = 0 ; i < metaSize ; i++){
+                Element meta = metas.get(i);
+                String attrName = meta.attr("name");
+                if("description".equals(attrName)){
+                    descri = meta.attr("content");
+                    LOGGER.info("【解析网站页面HEAD】[url:{}], description:{}",url,meta.attr("content"));
+                }
+            }
 
-            modifySjzDomainInfo(url,header);
-        } catch (PlatformException e) {
-            LOGGER.error("【解析网站页面HEAD】保存页面信息异常!",e);
+
+            SjzSpiderWebsite ssw = new SjzSpiderWebsite();
+            ssw.setWebsiteUrl(url);
+            ssw.setWebsiteTitle(title);
+            ssw.setWebsiteContent(descri);
+            ssw.setCreateTime(new Date());
+            ssw.setWebsiteDescri(descri);
+            try {
+                int pageResultId = sjzSpiderWebsiteService.addObject(ssw);
+                LOGGER.info("【解析网站页面HEAD】 保存页面HEAD成功 ID:{}, [url:{}] ",pageResultId,url);
+
+                modifySjzDomainInfo(url,header);
+            } catch (PlatformException e) {
+                LOGGER.error("【解析网站页面HEAD】保存页面信息异常!",e);
+            }
+        }catch (Exception e){
+            LOGGER.error("【解析网站页面HEAD】异常！",e);
         }
+
         LOGGER.info("【解析网站页面HEAD】<-- [url:{}]",url);
     }
 
     /**
      * 解析 HTML BODY part
      */
-    public void parseBody(Page page,Element bodyEls){
+    private void parseBody(Page page,Element bodyEls){
         String url = page.getUrl().toString();
         LOGGER.info("【解析body】--> {}",url);
+        LOGGER.info("【解析body】--> request.ur{}",page.getRequest().getUrl());
         Elements cse = bodyEls.children();
         Iterator<Element> itsEl = cse.iterator();
         Element e;
@@ -162,6 +181,7 @@ public class SjzPageProcessor implements PageProcessor {
                 String text = e.text();
                 LOGGER.info("【解析body】<a> url=[{}],tagName={},href=[{}],text={}",url,tagName,href,text);
                 addNewDomainUrlIfNotExist(href);
+                // step2 : 递归重新加载页面
                 page.addTargetRequest(new Request(href));
             }else if(HtmlTag.TITLE_TAG.equals(tagName)){
 
@@ -208,6 +228,8 @@ public class SjzPageProcessor implements PageProcessor {
             sjzDomainInfoService.addObjectForNotExist(sjzDomainInfo);
         } catch (PlatformException e) {
             LOGGER.error("【保存新域名地址】保存异常",e);
+        } catch (Exception e){
+            LOGGER.error("【保存新域名地址】保存异常",e);
         }
     }
 
@@ -225,16 +247,21 @@ public class SjzPageProcessor implements PageProcessor {
      */
     private void doConsumeContent(Page page,String str){
 
-        if(StringUtils.isNotBlank(str)) {
-            SjzNlContentConsumeFactory contentConsumeFactory = new SjzNlMapStringContentConsumeFactory();
-            SjzNlContentConsume contentConsume = contentConsumeFactory.getContentConsume();
+            try {
+            if(StringUtils.isNotBlank(str)) {
+                SjzNlContentConsumeFactory contentConsumeFactory = new SjzNlMapStringContentConsumeFactory();
+                SjzNlContentConsume contentConsume = contentConsumeFactory.getContentConsume();
 
-            Map<String, Object> sourceMap = new HashMap<>();
-            sourceMap.put(SjzSystemConsts.CONSUME_SOURCE_MAP_URL, page.getUrl().toString());
-            sourceMap.put(SjzSystemConsts.CONSUME_SOURCE_MAP_TXT, str);
+                Map<String, Object> sourceMap = new HashMap<>();
+                sourceMap.put(SjzSystemConsts.CONSUME_SOURCE_MAP_URL, page.getUrl().toString());
+                sourceMap.put(SjzSystemConsts.CONSUME_SOURCE_MAP_TXT, str);
 
-            contentConsume.doProcess(sourceMap);
+                contentConsume.doProcess(sourceMap);
+            }
+        }catch (Exception e){
+            LOGGER.error("【处理页面内容】异常！",e);
         }
+
     }
 
     @Override

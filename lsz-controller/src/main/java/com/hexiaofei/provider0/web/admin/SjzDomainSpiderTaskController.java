@@ -96,7 +96,7 @@ public class SjzDomainSpiderTaskController extends AdminBaseController implement
     @RequestMapping(value = STATIC_BASE_URL+"/list/{currentPage}_{pageSize}")
     @ResponseBody
     @Override
-    public String listEventIndex(SjzDomainSpiderTask sjzDomainSpiderTask,@PathVariable int currentPage,@PathVariable int pageSize) {
+    public String list(SjzDomainSpiderTask sjzDomainSpiderTask,@PathVariable int currentPage,@PathVariable int pageSize) {
         ResultEntity re = getResultEntity();
 
         PageVo pageVo = new PageVo<SjzDomainSpiderTask>();

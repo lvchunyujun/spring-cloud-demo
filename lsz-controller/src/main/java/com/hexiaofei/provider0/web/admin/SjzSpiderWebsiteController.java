@@ -53,7 +53,7 @@ public class SjzSpiderWebsiteController extends AdminBaseController implements B
     @RequestMapping(value = "/spiderWebsite/list/{currentPage}_{pageSize}")
     @Override
     @ResponseBody
-    public String listEventIndex(SjzSpiderWebsite sjzSpiderWebsite, @PathVariable int currentPage,@PathVariable  int pageSize) {
+    public String list(SjzSpiderWebsite sjzSpiderWebsite, @PathVariable int currentPage,@PathVariable  int pageSize) {
         ResultEntity re = getResultEntity();
 
         PageVo pageVo = new PageVo<SjzSpiderWebsite>();
