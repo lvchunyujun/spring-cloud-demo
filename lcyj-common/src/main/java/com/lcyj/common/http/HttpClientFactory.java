@@ -311,7 +311,7 @@ public class HttpClientFactory {
         if (params == null) {
             return;
         }
-        List<NameValuePair> nvps = new ArrayList<>();
+        List<NameValuePair> nvps = new ArrayList<NameValuePair>();
         Set<String> keys = params.keySet();
         for (String key : keys) {
             nvps.add(new BasicNameValuePair(key, params.get(key)));
