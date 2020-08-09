@@ -19,6 +19,7 @@ import us.codecraft.webmagic.Request;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.processor.PageProcessor;
 import us.codecraft.webmagic.selector.Html;
+import us.codecraft.webmagic.selector.Selectable;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -64,6 +65,7 @@ public class ArtificialPageProcessor implements PageProcessor {
         list.add(String.valueOf(page.getStatusCode()));
         header.put("statusCode",list);
 
+        cssSelecterParseBody(page);
 
         // 200：success
         if(page.getStatusCode() == 200){
@@ -75,6 +77,8 @@ public class ArtificialPageProcessor implements PageProcessor {
 
             // parseBody
             parseBody(page,document.body());
+
+
         }else{
             LOGGER.info("【解析网站页面】网站异常{}  statusCode:{}",page.getUrl(),page.getStatusCode());
         }
@@ -118,6 +122,12 @@ public class ArtificialPageProcessor implements PageProcessor {
         LOGGER.info("【解析网站页面HEAD】<-- [url:{}]",url);
     }
 
+    public void cssSelecterParseBody(Page page){
+        Selectable selectable = page.getHtml().css("div .g");
+        List<String> list = selectable.all();
+
+    }
+
     /**
      * 解析 HTML BODY part
      */
@@ -128,7 +138,8 @@ public class ArtificialPageProcessor implements PageProcessor {
         Iterator<Element> itsEl = cse.iterator();
 
         // step1: 消费标签内容
-        doConsumeContent(page,bodyEls);
+//        doConsumeContent(page,bodyEls);
+
 
         // step2: 解析标签内容
         while (itsEl.hasNext()){

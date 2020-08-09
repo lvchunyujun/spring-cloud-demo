@@ -4,6 +4,7 @@ import com.hexiaofei.provider0.service.spider.ISpiderService;
 import com.hexiaofei.provider0.web.BaseController;
 import com.hexiaofei.provider0.web.admin.AdminBaseController;
 import com.lcyj.common.bo.spider.UriBO;
+import com.lcyj.common.utils.cache.LcyjCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,11 +102,12 @@ public class ArtificialSpiderWebsiteController extends AdminBaseController imple
 
         spiderService.downloadUrl(uriBO,false);
 
+        re.setData(LcyjCache.getInstance().get("page"));
+
         re.setResultCode("0000");
         re.setResultMsg("success");
         LOGGER.info("【手动搜索】<--");
         return re;
     }
-
 
 }

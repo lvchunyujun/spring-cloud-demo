@@ -38,4 +38,5 @@ public class SpiderServiceImpl extends AbstractSpiderService implements ISpiderS
         String uri = uriBO.getUri();
         spider.addUrl(uri).thread(SpiderConfig.SPIDER_THREAD_COUNT).run();
     }
+
 }

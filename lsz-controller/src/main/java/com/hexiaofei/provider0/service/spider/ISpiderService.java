@@ -1,4 +1,5 @@
 package com.hexiaofei.provider0.service.spider;
+
 import com.lcyj.common.bo.spider.UriBO;
 
 /**
@@ -17,4 +18,5 @@ public interface ISpiderService {
     void downloadUrl(UriBO lszUriBO);
 
     void downloadUrl(UriBO lszUriBO,boolean recursionFlag);
+
 }

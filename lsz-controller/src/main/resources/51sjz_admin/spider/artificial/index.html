@@ -45,7 +45,7 @@
     <script type="text/javascript">
 
         $(document).ready(function(){
-            $("#requestButton").bind("click",loading_url);
+            $("#requestButton").bind("click",request);
         });
 
         function request(){
@@ -60,8 +60,9 @@
                 },
                 dataType:'json',
                 success:function(data){
-                    var resultCode = data.resultCode;
-                    alert(resultCode);
+                    var data = data.data;
+                    $(".sjz_center_content").empty();
+                    $(".sjz_center_content").text(data);
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown){
                     alert(textStatus+"  "+XMLHttpRequest.state());
@@ -88,14 +89,15 @@
         <div class="sjz_center">
             <div class="sjz_center_top_">
                 <div id="sjz_center_top_search_">
-                    <form id="queueForm">
+                    <form id="queueForm" action="/admin/spider/artificial/req">
                         <input type="text" th:name="uri"  /><br/>
-                        <input type="text" th:name="queue"  /><input id="requestButton" type="button" value="搜索" />
+                        <input type="text" th:name="queue"  />
+                        <input id="requestButton" type="button" value="搜索" />
                     </form>
                 </div>
             </div>
             <div class="sjz_center_content">
-                <iframe src="" ></iframe>
+
             </div>
         </div>
     </div>
