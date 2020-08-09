@@ -1,5 +1,6 @@
 package com.hexiaofei.sjzclient.web.security;
 
+import com.hexiaofei.sjzclient.common.PlatformConstant;
 import com.hexiaofei.sjzclient.domain.UserInfo;
 import com.hexiaofei.sjzclient.service.IUserInfoService;
 import com.hexiaofei.sjzclient.service.sms.SmsEmailService;
@@ -8,6 +9,7 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +34,15 @@ public class FindPasswordController {
     @Autowired
     private IUserInfoService userInfoService;
 
+    @Value("${platform.id}")
+    private String platformId;
+
+    @Value("${platform.serverId}")
+    private String serverId;
+
+    @Value("${platform.serverUrl}")
+    private String serverUrl;
+
     /**
      * 1. 输入账号
      */
@@ -52,7 +63,7 @@ public class FindPasswordController {
             // step1: 检查email合法性。
             if (checkEmail(email, mv)) {
                 // step2: 发送重置邮件验证码。
-                int reusltId = userInfoService.sendFindPasswdVerifyEmail(email);
+                int reusltId = userInfoService.sendFindPasswdVerifyEmail(email,platformId,serverId,serverUrl);
                 if (reusltId == 0) {
                     mv.setViewName("common/" + FIND_PASSWD + "/send_checkcode_ok");
                 } else if (reusltId == -1) {
@@ -151,23 +162,39 @@ public class FindPasswordController {
     public String resetPasswd(String email, String password, String confirmPassword,
                                     Integer mailAuthenId, String newValidCode, String sign,
                                     Model model){
+        ModelAndView mv = new ModelAndView("common/"+FIND_PASSWD+"/verify_account");
         String resultMsg = "";
+        model.addAttribute("password",password);
+        model.addAttribute("confirmPassword",confirmPassword);
+        model.addAttribute("email",email);
+        model.addAttribute("mailAuthenId",mailAuthenId);
+        model.addAttribute("newValidCode",newValidCode);
+        model.addAttribute("sign",sign);
+
         if(StringUtils.isBlank(password)){
             model.addAttribute("resultMsg","密码不能为空！");
-            return "forward:"+FIND_PASSWD+"/verify";
+            return "common/"+FIND_PASSWD+"/reset_password";
         }
 
         if(password.trim().length() != password.length()){
             model.addAttribute("resultMsg","密码不能有空格！");
-            return "forward:"+FIND_PASSWD+"/verify";
+            return "common/"+FIND_PASSWD+"/reset_password";
         }
-        if(password.length() < 8){
-            model.addAttribute("resultMsg","密码必须大于等于8位！");
-            return "forward:"+FIND_PASSWD+"/verify";
+        if(password.length() < PlatformConstant.PASSWORD_MIN_LENGTH || password.length() >PlatformConstant.PASSWORD_MAX_LENGTH){
+            model.addAttribute("resultMsg","密码长度必须6-18位!");
+            return "common/"+FIND_PASSWD+"/reset_password";
+        }
+        if(confirmPassword == null || confirmPassword.length() == 0){
+            model.addAttribute("resultMsg2","确认密码不能为空！");
+            return "common/"+FIND_PASSWD+"/reset_password";
+        }
+        if(confirmPassword.trim().length() != confirmPassword.length()){
+            model.addAttribute("resultMsg2","确认密码不能有空格！");
+            return "common/"+FIND_PASSWD+"/reset_password";
         }
         if(!password.equals(confirmPassword)){
             model.addAttribute("resultMsg2","确认密码与密码不一致！");
-            return "forward:"+FIND_PASSWD+"/verify";
+            return "common/"+FIND_PASSWD+"/reset_password";
         }
 
         int resultCode = userInfoService.updatePasswdForFindPasswd( email, password,newValidCode,  mailAuthenId,sign);
@@ -176,11 +203,8 @@ public class FindPasswordController {
         }else {
             resultMsg = resolveReusltCode(resultCode);
             model.addAttribute("resultMsg",resultMsg);
-            return "common/"+FIND_PASSWD+"/verify_account";
-
-
+            return "common/"+FIND_PASSWD+"/reset_password";
         }
-
     }
 
     private String resolveReusltCode(int resultCode){

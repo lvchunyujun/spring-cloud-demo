@@ -1,0 +1,6 @@
+platform:
+  id: lishizhou
+  name: 历史轴
+  serverId: lishizhou
+  serverName: 历史轴
+  serverUrl: localhost

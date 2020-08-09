@@ -193,16 +193,15 @@ function data_paging(currentPage,pageSize){
 
 
 function delete_record(e){
-
-
     if(confirm("您好，确定要删除["+e.data.id+"]记录！")){
-
         $.ajax({
             type: "post",
             url: e.data.url+e.data.id,
             dataType:'json',
             success:function(data){
-                alert("删除成功！");
+                if(data.resultCode != "0000"){
+                    alert(data.resultMsg);
+                }
                 window.location.reload();
             },
             error: function(XMLHttpRequest, textStatus, errorThrown){

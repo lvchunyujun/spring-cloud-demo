@@ -12,8 +12,13 @@ public class SjzEventIndex {
 
     /**
      *事件发生事件
+     * <p>
+     * @DateTimeFormat:注解可对java.utils.Date、java.util.Calendar、java.long.Long及Joda
+     * 时间类型的属性进行标注。它支持一下几个互斥的属性，具体说明如下。
+     *   iso: 类型为
+     * </p>
      */
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern =  "yyyy-MM-dd",iso = DateTimeFormat.ISO.DATE)
     private Date eventTime;
 
     /**

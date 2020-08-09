@@ -33,6 +33,17 @@
 			<artifactId>spring-cloud-starter-eureka</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-config-server</artifactId>
+			<exclusions>
+				<!-- 切换log4j2日志读取:必须加到当前依赖上 -->
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 			<exclusions>

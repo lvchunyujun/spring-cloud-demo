@@ -4,9 +4,10 @@
 #  prod：生产环境
 spring:
   profiles:
-    active: prod
+    active: dev
   application:
     name: lsz-client
+
 eureka:
   client:
     register-with-eureka: true
@@ -51,4 +52,7 @@ endpoints:
 # log4j2 config
 logging:
   config: classpath:log4j2.yml
+
+
+
 

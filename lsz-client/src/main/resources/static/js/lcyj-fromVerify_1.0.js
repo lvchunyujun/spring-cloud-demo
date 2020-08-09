@@ -11,14 +11,21 @@ var ProcessFrom =
      * 插入 From表单
      */
     submitFrom:function(fromId,url){
-        var eventTime = $("#"+fromId).find("input[name='eventTime']").val();
-        var eventContent = $("#"+fromId).find("textarea[name='eventContent']").val();
-        var eventType = $("#"+fromId).find("select[name='eventType']").val();
+        var $eventId = $("#"+fromId).find("input[name='id']");
+        var $eventTime = $("#"+fromId).find("input[name='eventTime']");
+        var $eventContent = $("#"+fromId).find("textarea[name='eventContent']");
+        var $eventType = $("#"+fromId).find("select[name='eventType']");
+
+        var eventId = $eventId != null ? $eventId.val() : "";
+        var eventContentVal = $eventContent !=null ? $eventContent.val() : "";
+        var eventTimeVal = $eventTime !=null ? $eventTime.val() : "";
+        var eventTypeVal = $eventType !=null ? $eventType.val() : "";
 
         var data = {
-            "eventTime":eventTime,
-            "eventContent":eventContent,
-            "eventType":eventType};
+            "id":eventId,
+            "eventTime": eventTimeVal,
+            "eventContent": eventContentVal,
+            "eventType":eventTypeVal};
 
         var from_data_ = {data:data,url:url};
         this.ajaxPost.call(from_data_);
@@ -31,7 +38,18 @@ var ProcessFrom =
             data:JSON.stringify(this.data),
             dataType:'json',
             success:function(data){
-
+                $("form span").empty();
+                var code = data.resultCode;
+                var msg = data.resultMsg;
+                if(code=='0000'){
+                    window.open(msg,"_parent");
+                }else if(code=='0100' || code=='0110'){
+                    $(".event_date_ span").text(msg);
+                }else if(code=='0200' || code=='0210' || code=='0220'){
+                    $(".event_content_ span").text(msg);
+                }else{
+                    $(".event_date_ span").text(msg);
+                }
             },
             error: function(XMLHttpRequest, textStatus, errorThrown){
 

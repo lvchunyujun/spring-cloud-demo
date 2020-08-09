@@ -35,9 +35,13 @@ public interface IUserInfoService extends IBaseService<UserInfo> {
 
     /**
      * 找回密码- 1.发送email验证链接
+     * @param email      email
+     * @param platformId 平台名称
+     * @param serverId   服务名称
+     * @param serverUrl  服务URL
      * @return
      */
-    int sendFindPasswdVerifyEmail(String email);
+    int sendFindPasswdVerifyEmail(String email,String platformId,String serverId,String serverUrl);
 
 
     /**

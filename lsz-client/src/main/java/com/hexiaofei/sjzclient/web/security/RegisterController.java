@@ -2,7 +2,6 @@ package com.hexiaofei.sjzclient.web.security;
 
 import com.hexiaofei.sjzclient.common.EmailSendType;
 import com.hexiaofei.sjzclient.common.EmailTemplate;
-import com.hexiaofei.sjzclient.common.PlatformConstant;
 import com.hexiaofei.sjzclient.domain.UserInfo;
 import com.hexiaofei.sjzclient.exception.PlatformException;
 import com.hexiaofei.sjzclient.service.IUserInfoService;
@@ -18,6 +17,7 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,6 +25,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class RegisterController {
@@ -40,13 +42,37 @@ public class RegisterController {
     @Autowired
     private IUserInfoService userInfoService;
 
+    @Value("${platform.id}")
+    private String platformId;
+
+    @Value("${platform.name}")
+    private String platformName;
+
+    @Value("${platform.serverId}")
+    private String serverId;
+
+    @Value("${platform.serverName}")
+    private String serverName;
+
+    @Value("${platform.serverUrl}")
+    private String serverUrl;
+
+    /**
+     * step1： 跳转注册页面
+     * @return
+     */
     @RequestMapping(value = "toRegistor")
     public String toRegistor(){
 
         return "common/register";
     }
 
-
+    /**
+     * step2: 发送注册码
+     * @param request
+     * @param email
+     * @return
+     */
     @RequestMapping(value = "sendCheckCode")
     @ResponseBody
     public ResultVo sendCheckCode(HttpServletRequest request, String email){
@@ -65,17 +91,23 @@ public class RegisterController {
                 String checkCode = generateCheckCode(session);
 
                 smsUserinfo.setEmail(email);
-                smsUserinfo.setPlatformId(PlatformConstant.PLATFORM_NAME);
+                smsUserinfo.setPlatformId(platformId);
 
                 SmsEmail smsEmail = new SmsEmail();
-                smsEmail.setPlatformId(PlatformConstant.PLATFORM_ID);
-                smsEmail.setServerId(PlatformConstant.SERVER_ID);
+                smsEmail.setPlatformId(platformId);
+                smsEmail.setServerId(serverId);
                 smsEmail.setToEmail(email);
                 smsEmail.setSubject(EmailSendType.REG_CODE.getDescri());
                 smsEmail.setLastUpdateTime(new Date());
                 smsEmail.setEmailType(EmailSendType.REG_CODE.getType());
                 smsEmail.setCreateTime(new Date());
-                smsEmail.setContent(String.format(EmailTemplate.REG_CHECK_CODE,checkCode));
+
+                Map<String,String> map = new HashMap<>();
+                map.put("PLATFORM_NAME",platformId);
+                map.put("SERVER_NAME",serverName);
+                map.put("SERVER_URL",serverUrl);
+                map.put("CHECK_CODE",checkCode);
+                smsEmail.setContent(paraseParameterMap(EmailTemplate.REG_CHECK_CODE,map));
 
                 String result = smsEmailService.send(smsEmail);
 
@@ -96,6 +128,24 @@ public class RegisterController {
         return resultVo;
     }
 
+    private static String paraseParameterMap(String template,Map<String,String> parasMap){
+
+        template = template.replaceAll("#PLATFORM_NAME#", parasMap.get("PLATFORM_NAME"));
+        template = template.replaceAll("#SERVER_NAME#",  parasMap.get("SERVER_NAME"));
+        template = template.replaceAll("#SERVER_URL#",  parasMap.get("SERVER_URL"));
+        template = template.replaceAll("#CHECK_CODE#", parasMap.get("CHECK_CODE"));
+
+        return template;
+    }
+
+    /**
+     * step3: 注册
+     * @param request
+     * @param email
+     * @param password
+     * @param verifyCode
+     * @return
+     */
     @RequestMapping(value = "registor")
     @ResponseBody
     public ResultVo registor(HttpServletRequest request,String email,String password,String verifyCode){
@@ -106,31 +156,49 @@ public class RegisterController {
         String sessionVerifyCode = (String)session.getAttribute(WebCommonConstant.REGISTER_CHECK_CODE);
         String session_email = (String)session.getAttribute(WebCommonConstant.REGISTER_CHECK_EMAIL);
 
-        if(checkEmail(email,resultVo)&&
-            email.equals(session_email)&&
-            verifyCode.equals(sessionVerifyCode)){
+        if(!checkEmail(email,resultVo)){
+            LOGGER.info("【用户注册】<--  注册失败!   [email="+email+"]");
+            return resultVo;
+        }
+
+        if(session_email == null || sessionVerifyCode == null){
+            LOGGER.info("【用户注册】<--  session中email["+email+"]为空！   <-- [email="+email+"]");
+            resultVo.setResultCode("9999");
+            resultVo.setResultMsg("请先获取验证码！");
+            return resultVo;
+        }
+        if(!email.equals(session_email)){
+            LOGGER.info("【用户注册】<--  session中email["+email+"]不匹配！   <-- [email="+email+"]");
+            resultVo.setResultCode("9999");
+            resultVo.setResultMsg("验证码无效，请获取验证码！");
+            return resultVo;
+        }
+
+        if(verifyCode.equals(sessionVerifyCode)) {
             // 1. 注册用户
             try {
                 int resultId = userInfoService.register(email,password);
                 if(resultId > 0){
                     resultVo.setResultCode("0000");
                     resultVo.setResultMsg("registor_ok");
-                    LOGGER.info("【用户注册】注册成功    [email="+email+"]");
+                    LOGGER.info("【用户注册】<--   注册成功!    [email="+email+"]");
                 }else{
+                    LOGGER.info("【用户注册】<-- 注 email["+email+"]保存信息失败！");
                     resultVo.setResultCode("9999");
-                    resultVo.setResultMsg("注册失败！");
+                    resultVo.setResultMsg("系统出错，请重试！");
                 }
             } catch (PlatformException e) {
-                LOGGER.error("注册失败发证异常！",e);
+                LOGGER.error("【用户注册】<--  email["+email+"]失败发证异常！",e);
+                resultVo.setResultCode("9999");
+                resultVo.setResultMsg("系统出错，请重试！");
             }
             // 2. 保存客户端类型
-
-
-        }else {
+        }else{
+            LOGGER.info("【用户注册】<--  session中email["+email+"]验证码错误！  ");
             resultVo.setResultCode("9999");
-            resultVo.setResultMsg("验证码无效请重新获取！");
+            resultVo.setResultMsg("验证码错误！");
         }
-        LOGGER.info("【用户注册】<-- [email="+email+"]");
+
         return resultVo;
     }
 
@@ -154,17 +222,20 @@ public class RegisterController {
 
     private boolean checkEmail(String email,ResultVo resultVo){
         if(StringUtils.isBlank(email)){
+            LOGGER.info("【用户注册】  邮箱不能为空！  [email="+email+"]");
             resultVo.setResultCode("9999");
             resultVo.setResultMsg("邮箱不能为空！");
             return false;
         }
         if(!RegExpValidator.isEmail(email)){
+            LOGGER.info("【用户注册】  邮箱格式错误！  [email="+email+"]");
             resultVo.setResultCode("9999");
             resultVo.setResultMsg("邮箱格式错误！");
             return false;
         }
         UserInfo userInfo = userInfoService.getUserInfoByEmail(email);
         if(userInfo != null){
+            LOGGER.info("【用户注册】  邮箱已经注册！  [email="+email+"]");
             resultVo.setResultCode("9999");
             resultVo.setResultMsg("邮箱已经注册！");
             return false;

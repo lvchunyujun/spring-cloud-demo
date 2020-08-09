@@ -23,4 +23,8 @@ public interface BaseController<T> {
      String listEventIndex(T t, @PathVariable int currentPage, @PathVariable int pageSize);
 
      String delete(Integer id);
+
+     default ResultVo<T> deleteById(Integer id){
+          return new ResultVo<T>();
+     }
 }

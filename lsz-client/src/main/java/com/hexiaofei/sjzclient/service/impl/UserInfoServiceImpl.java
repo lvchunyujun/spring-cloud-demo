@@ -2,7 +2,6 @@ package com.hexiaofei.sjzclient.service.impl;
 
 import com.hexiaofei.sjzclient.common.EmailSendType;
 import com.hexiaofei.sjzclient.common.EmailTemplate;
-import com.hexiaofei.sjzclient.common.PlatformConstant;
 import com.hexiaofei.sjzclient.common.WebSystemConsts;
 import com.hexiaofei.sjzclient.dao.mapper.UserInfoMapper;
 import com.hexiaofei.sjzclient.domain.MailAuthen;
@@ -101,7 +100,7 @@ public class UserInfoServiceImpl extends AbstractService implements IUserInfoSer
      */
     @Transactional
     @Override
-    public int sendFindPasswdVerifyEmail(String email) {
+    public int sendFindPasswdVerifyEmail(String email,String platformId,String serverId,String serverUrl) {
 
         // step1.  email是否存在
         UserInfo userInfo = this.getUserInfoByEmail(email);
@@ -111,7 +110,7 @@ public class UserInfoServiceImpl extends AbstractService implements IUserInfoSer
             authenRecordService.addMailAuthen(mailAuthen);
 
             // step3. 设置email信息
-            SmsEmail smsEmail = setEmailInfo(userInfo,mailAuthen);
+            SmsEmail smsEmail = setEmailInfo(userInfo,mailAuthen, platformId, serverId, serverUrl);
             String result = smsEmailService.send(smsEmail);
 
             if(OK.equals(result)){
@@ -276,20 +275,20 @@ public class UserInfoServiceImpl extends AbstractService implements IUserInfoSer
      * @param tagFlag url=生成url,a=生成a标签
      * @return
      */
-    private String generateLink(UserInfo userInfo,Integer mailAuthenId, String email,String tagFlag)   {
+    private String generateLink(UserInfo userInfo,Integer mailAuthenId, String email,String tagFlag, String serverUrl)   {
         String validCode = MD5.encodeByMd5AndSalt(userInfo.getEmail()+""+userInfo.getPassword());
 
         String signText = getSignTxt( mailAuthenId, email, validCode);
 
         mailAuthenId = mailAuthenId^userInfo.getId().intValue();
         if("a".equals(tagFlag)){
-            String url = "点击该链接<a href=\"http://" + PlatformConstant.SERVER_WEBSITE
+            String url = "点击该链接<a href=\"http://" + serverUrl
                     + "/findPasswd/verify?mailAuthenId=" + mailAuthenId
                     + "&email=" + email + "&newValidCode=" + validCode
                     + "&sign=" + signText + "\"><font color=\"red\">重置密码</font></a>";
             return url;
         }else if("url".equals(tagFlag)){
-            String a = "http://" + PlatformConstant.SERVER_WEBSITE
+            String a = "http://" + serverUrl
                     + "/findPasswd/verify?mailAuthenId=" + mailAuthenId
                     + "&email=" + email + "&newValidCode=" + validCode + "&sign=" + signText;
 
@@ -305,11 +304,11 @@ public class UserInfoServiceImpl extends AbstractService implements IUserInfoSer
      * @param mailAuthen
      * @return
      */
-    private SmsEmail setEmailInfo(UserInfo userInfo,MailAuthen mailAuthen){
+    private SmsEmail setEmailInfo(UserInfo userInfo,MailAuthen mailAuthen,String platformId,String serverId,String serverUrl){
 
         SmsEmail smsEmail = new SmsEmail();
-        smsEmail.setPlatformId(PlatformConstant.PLATFORM_ID);
-        smsEmail.setServerId(PlatformConstant.SERVER_ID);
+        smsEmail.setPlatformId(platformId);
+        smsEmail.setServerId(serverId);
         smsEmail.setToEmail(userInfo.getEmail());
         smsEmail.setEmailType(EmailSendType.FIND_PASSWORD_CODE.getType());
         smsEmail.setSubject(EmailSendType.FIND_PASSWORD_CODE.getDescri());
@@ -319,13 +318,16 @@ public class UserInfoServiceImpl extends AbstractService implements IUserInfoSer
         Map parameterMap = new HashMap();
         parameterMap.put("username",userInfo.getEmail());
         // 生成超链接<a/>标签
-        String a = generateLink(userInfo,mailAuthen.getMailAuthenId(),userInfo.getEmail(),"a");
+        String a = generateLink(userInfo,mailAuthen.getMailAuthenId(),userInfo.getEmail(),"a",serverUrl);
         parameterMap.put("<a/>",a);
         // 提交申请日期
         parameterMap.put("time",DateUtils.dateToStr(mailAuthen.getSendTime(),"yyyy-MM-dd HH:mm:ss"));
         // 生成复制URL
-        String copyLink = generateLink(userInfo,mailAuthen.getMailAuthenId(),userInfo.getEmail(),"url");
+        String copyLink = generateLink(userInfo,mailAuthen.getMailAuthenId(),userInfo.getEmail(),"url",serverUrl);
         parameterMap.put("copyLink",copyLink);
+
+        parameterMap.put("PLATFORM_NAME",platformId);
+        parameterMap.put("SERVER_URL",serverUrl);
 
         smsEmail.setContent(paraseParameterMap(EmailTemplate.FIND_PASSWORD_CODE,parameterMap));
         return smsEmail;
@@ -344,6 +346,8 @@ public class UserInfoServiceImpl extends AbstractService implements IUserInfoSer
         template = template.replaceAll("#url#",  parasMap.get("url"));
         template = template.replaceAll("#time#", parasMap.get("time"));
         template = template.replaceAll("#copyLink#", parasMap.get("copyLink") );
+        template = template.replaceAll("#PLATFORM_NAME#", parasMap.get("PLATFORM_NAME") );
+        template = template.replaceAll("#SERVER_URL#", parasMap.get("SERVER_URL") );
 
 
         return template;

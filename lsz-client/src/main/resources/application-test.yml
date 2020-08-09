@@ -37,4 +37,10 @@ endpoints:
     enabled: true                            # 启用shutdown
     sensitive: false                         # 禁用密码验证
 
+platform:
+  id: lishizhou
+  name: 历史轴
+  serverId: lishizhou
+  serverName: 历史轴
+  serverUrl: localhost
 

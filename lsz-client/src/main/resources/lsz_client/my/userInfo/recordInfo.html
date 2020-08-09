@@ -17,9 +17,11 @@
         .sjz_center_content
         {
             width: 60%;
-            border: 1px solid #f1f1f1;
+            border: none;
             background-color: #fff;
             margin: 0 auto;
+            position: relative;
+            top: 25px;
         }
         #sjz_center_content_tbody .tag_
         {
@@ -28,6 +30,10 @@
         #sjz_center_content_tbody .val_
         {
             text-align: left;
+        }
+        input
+        {
+            border: none;
         }
     </style>
 
@@ -39,7 +45,7 @@
 <body>
     <div th:replace="common/sjz_top :: sjz_top"  ></div>
     <div class="sjz_nvg">
-        当前位置：<a href="/admin/index">首页</a> > 个人中心
+        当前位置：<a href="/my/index">首页</a> > 个人中心
     </div>
     <div class="sjz_c">
         <!-- 菜单 -->
