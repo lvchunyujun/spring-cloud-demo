@@ -97,7 +97,7 @@
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
-			<version>4.5.2</version>
+			<version>4.5.13</version>
 		</dependency>
 		<!-- 防止fastjson版本冲突报错： SEVERE: Missing dependency for field: javax.ws.rs.core.UriInfo com.alibaba.fastjson.support.jaxrs.FastJsonProvider.uriInfo -->
 		<dependency>
@@ -110,7 +110,7 @@
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
-			<version>4.5.2</version>
+			<version>4.5.13</version>
 		</dependency>
 		<dependency>
 			<groupId>us.codecraft</groupId>
