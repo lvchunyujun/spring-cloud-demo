@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: EurekaServer
+
+server:
+  port: 8081
+
+eureka:
+  instance:
+    hostname: eka2.com
+  client:
+    serviceUrl:
+      defaultZone: http://eka1.com:8080/eureka/,http://eka3.com:8082/eureka/
