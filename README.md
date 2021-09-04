@@ -1,6 +1,6 @@
 # spring-cloud Framework功能实例
    1. Eureka(注册中心)：
-      Eureka-server: 高可用的eureka服务注册中心，使用3个节点两两互相注册；
+      eureka-server: 高可用的eureka服务注册中心，使用3个节点两两互相注册使用最简单的配置；
    3. Feign
    4. zuul
    5. zipkin
